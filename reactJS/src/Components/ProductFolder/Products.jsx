@@ -6,23 +6,32 @@ import ProductsMouse from "./ProductsMouse";
 import ProductsSpeaker from "./ProductsSpeaker";
 import ProductsCharger from "./ProductsCharger";
 import ProductsChargerBackup from "./ProductsChargerBackup";
-import Slideshow from "../Slideshow/Slideshow";
+// import Slideshow from "../Slideshow/Slideshow";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Alert from 'react-bootstrap/Alert';
+
 
 function Products() {
     const [active, setActive] = useState("ProductsHeadphone");
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div>
-            {/* <div className="mainPage_banner"> */}
-                <Slideshow/>
-            {/* </div> */}
-
+            <Breadcrumb>
+                <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+                <Breadcrumb.Item active>Sản phẩm</Breadcrumb.Item>
+            </Breadcrumb>
             <div className="container__products">
-                <div className="container-left">
+                {/* <div className="container-left">
                     <div className="container__products-nav">
                         <p>DANH MỤC</p>
-                        <button onClick={() => setActive("ProductsHeadphone")}>Tai nghe</button>
-                        <button onClick={() => setActive("ProductsKeyboard")}>Bàn phím</button>
-                        <button onClick={() => setActive("ProductsMouse")}>Chuột</button>
+                        <button onClick={() => setActive("ProductsHeadphone")}>Áo</button>
+                        <button onClick={() => setActive("ProductsKeyboard")}>Quần</button>
+                        <button onClick={() => setActive("ProductsMouse")}>Phụ kiện</button>
                         <button onClick={() => setActive("ProductsCharger")}>Sạc / Cáp</button>
                         <button onClick={() => setActive("ProductsChargerBackup")}>Sạc dự phòng</button>
                         <button onClick={() => setActive("ProductsSpeaker")}>Loa</button>
@@ -30,20 +39,20 @@ function Products() {
                     <div className="find-product-price">
                         <p>Lọc giá sản phẩm</p>
                         <input type="radio" name="price" id="" />
-                        <label> Dưới 1.000.000 đ</label>
+                        <label> Dưới 100.000 đ</label>
                         <br></br>
                         <input type="radio" name="price" id="" />
-                        <label> 1.000.000 đ - 2.000.000 đ</label>
+                        <label> 100.000 đ - 300.000 đ</label>
                         <br></br>
                         <input type="radio" name="price" id="" />
-                        <label> 2.000.000 đ - 5.000.000 đ</label>
+                        <label> 300.000 đ - 500.000 đ</label>
                         <br></br>
                         <input type="radio" name="price" id="" />
-                        <label> Trên 5.000.000 đ</label>
+                        <label> Trên 500.000 đ</label>
                         <br></br>
                     </div>
-                </div>
-
+                </div> */}
+                
                 <div className="container-right">
                     <div className="sort-product">
                         <select name="" id="">

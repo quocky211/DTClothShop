@@ -11,6 +11,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import {connect} from "react-redux"
 import {Off_Noti} from '../../actions';
+import { FakeData } from "../fakedata";
 const Alert = React.forwardRef(function Alert(
     props,
     ref,
@@ -54,8 +55,7 @@ function MainPage({noti,Off_Noti}) {
                   </Alert>
                 </Snackbar>
                 <Slider {...settings}>
-
-                {list.map((item,index)=> item.loai==="keyboard" &&<ContainerItem price={item.price} name={item.name} img={item.hinh} maSp={item.maSp}/>)}
+                {FakeData.map((item,index)=>item.type==="ao"&&<ContainerItem price={item.price} name={item.name} img={item.image}/>)}
                 </Slider>
                    
                 </div>
@@ -66,8 +66,8 @@ function MainPage({noti,Off_Noti}) {
                 <h3 className="bestSeller_name title-name">Bán chạy</h3>
                 <div className="bestSeller_product product">
                 <Slider {...settings}>
-                    {list.map((item,index)=> item.loai==="loa"
-                    &&<ContainerItem price={item.price} name={item.name} img={item.hinh} maSp={item.maSp}/>)} 
+                    {FakeData.map((item,index)=> item.type==="quan"
+                    &&<ContainerItem price={item.price} name={item.name} img={item.image} maSp={item.maSp}/>)} 
                 </Slider>
 
                 </div>
@@ -78,8 +78,8 @@ function MainPage({noti,Off_Noti}) {
                 <div className="onSale_product product">
                 <Slider {...settings}>
 
-                    {list.map((item,index)=> item.loai==="sacDp"
-                    &&<ContainerItem price={item.price} name={item.name} img={item.hinh} maSp={item.maSp}/>)}  
+                    {FakeData.map((item,index)=> item.type==="non"
+                    &&<ContainerItem price={item.price} name={item.name} img={item.image} maSp={item.maSp}/>)}  
                 </Slider>
 
                 </div>

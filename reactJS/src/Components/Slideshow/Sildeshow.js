@@ -1,7 +1,7 @@
-import banner1 from "../Images/banner/banner_1.jpg";
-import banner2 from "../Images/banner/banner2.webp";
-import banner3 from "../Images/banner/banner3.webp";
-import banner4 from "../Images/banner/banner4.jpg";
+import banner1 from "../Images/banner/slider1.png";
+import banner2 from "../Images/banner/slider2.jpg";
+import banner3 from "../Images/banner/slider3.jpg";
+import banner4 from "../Images/banner/slider4.jpg";
 
 export const sliderData=[
   {image: banner1},

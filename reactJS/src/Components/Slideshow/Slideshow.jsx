@@ -8,7 +8,7 @@ function Slideshow() {
         const slideLength=sliderData.length;
 
         let intervalSlide;
-        let intervalTime=4000;
+        let intervalTime=10000;
 
         const nextSlide = () => {
             setCurrentSlide(currentSlide === slideLength -1 ? 0 : currentSlide + 1);

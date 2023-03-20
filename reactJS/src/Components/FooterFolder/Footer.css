@@ -80,3 +80,15 @@
     padding: 4px 24px;
 
 }
+
+.social-icon{
+    display: inline-flex;
+    padding: 24px;
+    justify-content: space-between;
+}
+.social-icon img{
+    width: 30px;
+    height: 30px;
+    margin-right: 30px;
+
+}

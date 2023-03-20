@@ -1,6 +1,10 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../Images/logo.webp";
+import fb from "../Images/icon/fb.png";
+import ins from "../Images/icon/ins.png";
+import yt from "../Images/icon/yt.png";
+import tiktok from "../Images/icon/tiktok.png";
 import {NavLink as Link} from "react-router-dom";
 
 
@@ -9,11 +13,11 @@ function Header() {
     <div className="footer">
         <div className="footer_infor">
             <div className="footer__infor-introduce">
-                <div className="footer__infor-introduce-name name">Giới thiệu</div>
+                <div className="footer__infor-introduce-name name">Về chúng tôi </div>
                 <div className="footer__infor-introduce-infor infor">TechieShop&reg; 
                     là trang mua sắm của thương hiệu TechieShop&reg;, 
-                    chuyên cung cấp các phụ kiện công nghệ tiện lợi và chất lượng, 
-                    giúp bạn tận hưởng và đơn giản hóa cuộc sống thường nhật!</div>
+                    chuyên các sản phẩm thời trang đẹp, thời thượng
+                    giúp bạn tận hưởng cuộc sống thường nhật!</div>
             </div>
 
             <div className="footer__infor-link">
@@ -48,6 +52,12 @@ function Header() {
                     <input type="Email" placeholder="Nhập Email của bạn"/>
                     <button>Đăng ký</button>
                 </form>
+                <div className="social-icon">
+                    <a href=""> <img src={fb} alt="fb" /> </a>
+                    <a href=""><img src={ins} alt="fb" /></a>
+                    <a href=""><img src={yt} alt="fb" /></a>
+                    <a href=""><img src={tiktok} alt="fb" /></a>
+                </div>
             </div>
         </div>
 
