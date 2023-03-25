@@ -1,31 +1,24 @@
-import { Component } from "react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Header.css";
-import logo from "../Images/logo.webp";
 import shoppingIcon from "../Images/shopping-icon.png";
-import { NavLink as Link, NavLink } from "react-router-dom";
 import Searchbar from "../Search/Searchbar";
 import { Log_out } from "../../actions";
 import { useNavigate } from "react-router-dom";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../LoginFolder/Login";
+import { FakeData } from "../fakedata";
+import ListTypeProduct from "../ListTypeProduct/ListTypeProduct";
 import { connect } from "react-redux";
-
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-// import { colors } from "react-select/dist/declarations/src/theme";
 
 function Header(props) {
   let navigate = useNavigate();
-  var linkCart = "/Login";
+  var loveList = "/Login"
   var loginButtonText = "Đăng nhập";
   if (props.isLoggedin) {
-    linkCart = "/ShoppingCart";
+    loveList = "/LoveProducts"
     loginButtonText = "Đăng xuất";
   }
   function LoginclickHandler() {
@@ -37,41 +30,6 @@ function Header(props) {
     }
   }
   return (
-    // <div className="header">
-    //   <div className="header-left">
-    //     <Link to="/">
-    //       <img src={logo} alt="logo" />
-    //       <h2>TechieShop</h2>
-    //     </Link>
-    //   </div>
-
-    //   <div className="header-nav_menu">
-    //     <button>
-    //       <NavLink to="/MainPage">Trang chủ</NavLink>
-    //     </button>
-    //     <button>
-    //       <NavLink to="/Products">Sản phẩm</NavLink>
-    //     </button>
-    //     <button>
-    //       <NavLink to="/AboutUs">Giới thiệu</NavLink>
-    //     </button>
-    //   </div>
-
-    //   <Searchbar />
-
-    //   <div className="header-right">
-    //     <div className="header-right_item">
-    //       <Link to={linkCart}>
-    //         <img src={shoppingIcon} alt="cart" />
-    //         <span>{props.numberCart}</span>
-    //       </Link>
-    //       <button onClick={LoginclickHandler} className="logIn-btn">
-            // {loginButtonText}
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
-
     <Navbar bg="light" expand="lg" fixed="top">
       <Container fluid>
       <Navbar.Brand href="/">Shop quần áo</Navbar.Brand>
@@ -82,63 +40,17 @@ function Header(props) {
           style={{ maxHeight: '100px'}}
         >
           <Nav.Link href="/">Trang chủ</Nav.Link>
-          {/* <NavDropdown title="Sản phẩm" id="navbarScrollingDropdown" className="product-nav">
-            <NavDropdown title="Áo" className="product-nav-list">
-              <NavDropdown.Item>Áo thun</NavDropdown.Item>
-              <NavDropdown.Item>Áo khoác</NavDropdown.Item>
-              <NavDropdown.Item>Áo polo</NavDropdown.Item>
-              <NavDropdown.Item>Áo sơ mi</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Quần" href="#action4" className="product-nav-list">
-              <NavDropdown.Item>Váy</NavDropdown.Item>
-              <NavDropdown.Item>Quần ngắn</NavDropdown.Item>
-              <NavDropdown.Item>Quần jean</NavDropdown.Item>
-              <NavDropdown.Item>Quần kaki</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title="Phụ kiện" href="#action5" className="product-nav-list">
-              <NavDropdown.Item>Túi xách</NavDropdown.Item>
-              <NavDropdown.Item>Nón</NavDropdown.Item>
-              <NavDropdown.Item>Balo</NavDropdown.Item>
-              <NavDropdown.Item>Thắt lưng</NavDropdown.Item>
-              <NavDropdown.Item>Ví </NavDropdown.Item>
-              <NavDropdown.Item>Vớ</NavDropdown.Item>
-            </NavDropdown>
-          </NavDropdown> */}
             <div className="product-header">
               <Nav.Link href="/Products" >Sản phẩm</Nav.Link>
               <ul className="type-product">
-                <li className="each-type-product">
-                      Áo
-                  <ul className="detail-product">
-                    <li>Áo thun</li>
-                    <li>Áo khoác</li>
-                    <li>Áo polo</li>
-                    <li>Áo sơ mi</li>
-                  </ul>
-                </li>
-                <li className="each-type-product">
-                  Quần
-                  <ul className="detail-product">
-                    <li>Váy</li>
-                    <li>Quần ngắn</li>
-                    <li>Quần jean</li>
-                    <li>Quần kaki</li>
-                  </ul>
-                </li>
-                <li className="each-type-product">
-                  Phụ kiện
-                  <ul className="detail-product">
-                    <li>Nón</li>
-                    <li>Balo</li>
-                    <li>Thắt lưng</li>
-                    <li>Ví</li>
-                  </ul>
-                </li>
+                {
+                  FakeData[2].map( (item) => (<ListTypeProduct matype={item.matype} name={item.name}/>))
+                }
               </ul>
             </div>
-          <Nav.Link href="#action2">Bộ siêu tập</Nav.Link>
+          <Nav.Link href="/Outfits">Bộ phối</Nav.Link>
           <Nav.Link href="/AboutUs">Giới thiệu</Nav.Link>
-          <Nav.Link href="#action2">Blog</Nav.Link>
+          <Nav.Link href="/Blogs">Bài viết</Nav.Link>
         </Nav>
         <Form className="d-flex">
           <Form.Control
@@ -149,7 +61,8 @@ function Header(props) {
           />
           <Button variant="outline-success">Search</Button>
         </Form>
-        <Nav.Link>
+        <Nav.Link href={loveList}> Sản phẩm yêu thích </Nav.Link>
+        <Nav.Link href="/ShoppingCart">
             <img src={shoppingIcon} alt="cart" />
             <span>{props.numberCart}</span>
         </Nav.Link>

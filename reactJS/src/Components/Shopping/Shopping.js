@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { IncreaseQuantity, DecreaseQuantity, DeleteCart } from "../../actions";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -37,7 +39,10 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
   };
   return (
     <div className="main">
-      <h1> GIỎ HÀNG </h1>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+        <Breadcrumb.Item active>Giỏ hàng</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="main-container">
         <div className="products">
           <div className="row">

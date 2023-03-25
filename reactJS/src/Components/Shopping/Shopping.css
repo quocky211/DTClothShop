@@ -8,6 +8,9 @@
 .main-container .underline{
     text-decoration: underline;
 }
+.main{
+    margin-top: 70px;
+}
 .main h1{
     margin: 20px 0;
 }

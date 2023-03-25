@@ -1,5 +1,7 @@
 import "./ShipAddress.css"
 import {NavLink as Link} from "react-router-dom";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+
 import $ from 'jquery'; 
 import axios from "axios";
 
@@ -71,15 +73,12 @@ var printResult = () => {
         }
 }
     return (
-
         <div className="main-container-ship">
-            <div className="nav">
-                <ul>
-                    <Link to="/Shoppingcart"><li>Giỏ hàng</li></Link>&#62;
-                    <li>Thông tin giao hàng </li>&#62;
-                    <li>Phương thức thanh toán </li>
-                </ul>
-            </div>
+            <Breadcrumb>
+                <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+                <Breadcrumb.Item href="/ShoppingCart">Giỏ hàng</Breadcrumb.Item>
+                <Breadcrumb.Item active>Địa chỉ giao hàng</Breadcrumb.Item>
+            </Breadcrumb>
             <h2>Thông tin giao hàng</h2>
             <div className="form-address-container">
                 <form action="/Payment" className="form-address">

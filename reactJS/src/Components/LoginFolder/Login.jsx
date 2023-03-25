@@ -1,7 +1,5 @@
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import FbIcon from "../Images/facebook.ico";
-import GgIcon from "../Images/google.ico";
 import logo from "../Images/logo.webp";
 import { Link } from "react-router-dom";
 import { Log_in } from "../../actions";
@@ -20,20 +18,6 @@ function Login(props) {
     setPassword(event.target.value);
   };
 
-  const fbLogin = () => {
-    window.open(
-      "https://www.facebook.com/login/",
-      "_blank",
-      "toolbar=0,location=0,menubar=0"
-    );
-  };
-  const googleLogin = () => {
-    window.open(
-      "https://accounts.google.com/ServiceLogin",
-      "_blank",
-      "toolbar=0,location=0,menubar=0"
-    );
-  };
   const handleClick = () => {
     if (username !== "" && password !== "") {
       props.Log_in();
@@ -77,17 +61,6 @@ function Login(props) {
         <Link to="/Register">
           <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
         </Link>
-        <p>Hoặc đăng nhập bằng</p>
-        <div className="loginForm-icon">
-          <button onClick={fbLogin}>
-            <img src={FbIcon} alt="facebook icon" />
-            Facebook
-          </button>
-          <button onClick={googleLogin}>
-            <img src={GgIcon} alt="facebook icon" />
-            Google
-          </button>
-        </div>
       </div>
     </div>
   );

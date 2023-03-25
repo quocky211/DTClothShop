@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Products from "./Components/ProductFolder/Products";
 import AboutUs from "./Components/AboutUsFolder/AboutUs";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import MainPage from "./Components/MainPageFolder/MainPage";
 import Shopping from "./Components/Shopping/Shopping";
@@ -12,7 +12,11 @@ import Register from "./Components/Register/Register";
 import ShipAddress from "./Components/ShipAddress/ShipAddress";
 import ErrorPage from "./Components/Error/error-page";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
-
+import OutfitDetail from "./Components/OutfitDetail/OutfitDetail";
+import Outfits from "./Components/Outfits/Outfits";
+import TypeProduct from "./Components/TypeProduct/TypeProduct";
+import TypeProductDetail from "./Components/TypeProductDetail/TypeProductDetail";
+import Blogs from "./Components/Blogs/Blogs";
 import {Provider} from 'react-redux';
 import stores  from './stores'
 import "bootstrap/dist/css/bootstrap.css";
@@ -62,11 +66,28 @@ const router = createBrowserRouter([
         element:<Payment/>,
       },
       {
+        path:"Outfits",
+        element:<Outfits/>,
+      },
+      {
+        path:"Blogs",
+        element:<Blogs/>,
+      },
+      {
         path: "Products/:productID",
-        element: <ProductDetails />,
-        loader: ({ params }) => {
-          return params.productID;
-        },
+        element: <ProductDetails/>,
+      },
+      {
+        path: "Products/Type/:typeID",
+        element: <TypeProduct/>,
+      },
+      {
+        path: "Products/TypeDetail/:typedetailID",
+        element: <TypeProductDetail/>,
+      },
+      {
+        path: "Outfits/:outfitID",
+        element: <OutfitDetail/>,
       },
     ],
   },
@@ -75,10 +96,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={stores}>
   <React.StrictMode>
-    
-      <RouterProvider router={router} />
-    
-    
+      <RouterProvider router={router} /> 
   </React.StrictMode>
   </Provider>
 );

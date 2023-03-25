@@ -41,9 +41,8 @@
 
 .containerItem {
     display: inline-block;
-    width: 260px;
+    width: 320px;
     margin: 8px;
-    border: solid 1px #ccc;
     padding: 8px;
     border-radius: 10px;
 }
@@ -52,8 +51,8 @@
     width: 100%;
 }
 .ContainerItem_image {
-    height: 160px;
-    width: 100%;
+    height: 380px;
+    width: 100%px;
     object-fit: scale-down;
 }
 .containerItem_name {
@@ -61,7 +60,7 @@
     margin: 4px 0;
     font-size: 18px;
     text-align: center;
-    height: 50px;
+    height: 48px;
 
 }
 /* .containeItem_infor {

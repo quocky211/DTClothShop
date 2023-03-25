@@ -1,7 +1,7 @@
 .loginForm {
     background-color: #ccc;
     width: 25%;
-    height: fit-content;
+    height: 20rem;
     display: block;
     border: solid 2px black;
     border-radius: 30px;
@@ -15,7 +15,7 @@
 }
 .loginForm form input {
     display: block;
-    width: 70%;
+    width: 80%;
     margin: auto;
     padding: 12px;
     margin-bottom: 12px;
@@ -52,6 +52,8 @@ margin-bottom: 15px;
     background-color: #ccc;
     height: 70vh;
     align-items: center;
+    margin-top: 70px;
+
 }
 
 .logo {

@@ -7,25 +7,13 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import {connect} from "react-redux"
 import {Off_Noti} from '../../actions';
 import { FakeData } from "../fakedata";
-const Alert = React.forwardRef(function Alert(
-    props,
-    ref,
-  ) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+
+
 function MainPage({noti,Off_Noti}) {
     
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    Off_Noti()
-  };
     const [list, setlist] = useState([]);  
     
     useEffect(() => {
@@ -48,40 +36,28 @@ function MainPage({noti,Off_Noti}) {
                 <div className="newProducts_product product">
                     <button></button>
                 <h3 className="newProducts_name title-name" >Sản phẩm mới</h3>
-
-                <Snackbar open={noti} autoHideDuration={1500} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Thêm vào giỏ hàng thành công!
-                  </Alert>
-                </Snackbar>
                 <Slider {...settings}>
-                {FakeData.map((item,index)=>item.type==="ao"&&<ContainerItem price={item.price} name={item.name} img={item.image}/>)}
+                {FakeData[0].map((item)=>(item.matd==="TD01"||item.matd==="TD02"||item.matd==="TD03"||item.matd==="TD04")
+                &&<ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp}/>)}
                 </Slider>
-                   
                 </div>
             </div>
-            <div className="newProducts_product"></div>
-
             <div className="bestSeller">
                 <h3 className="bestSeller_name title-name">Bán chạy</h3>
                 <div className="bestSeller_product product">
                 <Slider {...settings}>
-                    {FakeData.map((item,index)=> item.type==="quan"
-                    &&<ContainerItem price={item.price} name={item.name} img={item.image} maSp={item.maSp}/>)} 
+                    {FakeData[0].map((item,index)=> (item.matd==="TD05"||item.matd==="TD06"||item.matd==="TD07"||item.matd==="TD08")
+                    &&<ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp}/>)} 
                 </Slider>
-
                 </div>
             </div>
-
             <div className="onSale">
                 <h3 className="onSale_name title-name">Giảm giá</h3>
                 <div className="onSale_product product">
                 <Slider {...settings}>
-
-                    {FakeData.map((item,index)=> item.type==="non"
-                    &&<ContainerItem price={item.price} name={item.name} img={item.image} maSp={item.maSp}/>)}  
+                    {FakeData[0].map((item,index)=> (item.matd==="TD09"||item.matd==="TD010"||item.matd==="TD011"||item.matd==="TD012")
+                    &&<ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp}/>)}  
                 </Slider>
-
                 </div>
             </div>
         </div>

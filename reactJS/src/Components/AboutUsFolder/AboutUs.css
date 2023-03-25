@@ -1,56 +1,65 @@
-.aboutUs {
-    width: 80%;
-    background-color: #ccc;
-    display: flex;
-    padding: 24px 8px;
-    margin: 16px auto;
-    font-size: 18px;
-}
-.aboutUs__nav {
-    flex: 1;
-    padding: 0;
-    padding: 8px;
 
+.about-content{
+    padding: 80px 15px;
 }
-.aboutUs__nav-name {
-    padding-bottom: 12px;
-    border-bottom: solid 1px #000;
-    /* width: 80%; */
-    margin: 24px auto 0;
-    
+.about-content h1{
+    color: #000000;
+    font-family: "FuturaNowHeadline-XLight", Sans-serif;
+    font-size: 32px;
+    font-weight: 100;
+    line-height: 50px;
+    margin-bottom: 26px;
 }
-.aboutUs__nav-main {
-    padding: 12px 4px;
+.about-content h2{
+    font-size: 24px;
+    font-family: "SVN-Futura Medium", sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    text-align: center;
+    font-weight: 400;
 }
-.aboutUs__nav-main button,
-.aboutUs__nav-main a {
-    display: flex;
-    font-size: 20px;
-    padding: 8px 4px;
-    text-align: start;
-    color: #000;
-}
-.aboutUs__nav-main a:hover{
-    text-decoration: none;
-    color: black;
-}
-.aboutUs__main {
-    flex: 3;
-    text-align: start;
-    padding: 8px;
-    text-align: justify;
-    line-height: 1.5;
-}
-/*  */
-/*  */
-.aboutUs__main h4 {
-    font-weight: 500;
-    font-size: 28px;
-    margin: 0;
-}
-.aboutUs__main h5 {
-    font-size: 18px;
-}
-.aboutUs__main h6 {
+.about-content h3{
+    color: #000000;
+    font-family: "FuturaNowHeadline-XLight", Sans-serif;
     font-size: 16px;
+    font-weight: 100;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 23px;
+}
+.about-content p{
+    color: #000000;
+    font-family: "FuturaNowHeadline-XLight", Sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 23px;
+    text-align: justify;
+    padding: 0 50px;
+}
+
+.about-content img{
+    margin: 50px 0;
+}
+.main-about-content{
+    max-width: 167rem;
+}
+.main-about-content img{
+    max-width: 100%;
+}
+.main-about-content map{
+    height: 40rem;
+}
+.main-about-content iframe{
+    z-index: 3;
+    height: 40rem;
+    width: 100%;
+    padding: 0px;
+    border-width: 0px;
+    margin: 0px;
+    left: 0px;
+    top: 0px;
+    touch-action: pan-x pan-y;
+    cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur), default;
 }

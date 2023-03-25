@@ -18,15 +18,15 @@ export function ContainerItem(props) {
   });
   const priceVND = vnd.format(props.price);
   const item = {
-    maSp: props.maSp,
+    masp: props.masp,
     price: props.price,
     name: props.name,
-    hinh: props.img,
+    image: props.image,
   };
 
   const [open, setOpen] = React.useState(false);
 
-  var linkProduct = "/Products/" + props.maSp;
+  // var linkProduct = "/Products/" + props.masp;
   var linkCart = "/Login";
   if (props.isLoggedin) {
     linkCart = "/ShoppingCart";
@@ -48,20 +48,20 @@ export function ContainerItem(props) {
   };
   return (
     <div className="containerItem">
-      <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
+      {/* <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Thêm vào giỏ hàng thành công!
         </Alert>
-      </Snackbar>
-      <Link to={linkProduct}>
+      </Snackbar> */}
+      <Link to={"/Products/" + props.masp}>
         <button onClick={() => refresh()}>
-          <img src={props.img} alt="sanpham" className="ContainerItem_image" />
+          <img src={props.image} alt="sanpham" className="ContainerItem_image" />
           <p className="containerItem_name">{props.name}</p>
+          <p className="containerItem_infor-price">{priceVND}</p>
         </button>
       </Link>
       <div className="containerItem_infor">
-        <p className="containerItem_infor-price">{priceVND}</p>
-        <div className="add-buy-btn">
+        {/* <div className="add-buy-btn">
           <Link to={linkCart}>
             <button className="buy-btn" onClick={() => props.AddCart(item)}>
               Mua ngay
@@ -78,7 +78,7 @@ export function ContainerItem(props) {
             {" "}
             <img src={whiteplus} alt="" />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
