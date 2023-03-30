@@ -4,17 +4,17 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Order = new Schema(
     {
-        _id :{type: Number},
-        user_id: { type: Number },
-        address: { type: Text },
-        email: { type: String },
+        _id: { type: Number },
+        user_id: { type: Number, ref: 'user' },
+        address: { type: String },
+        note: { type: String, require: false },
         phone: { type: Number },
-        pay_method: { type: String },
-        status: { type: String },
+        pay_method: { type: Boolean },
+        discount_code: { type: String, ref: 'discount', require: false },
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -23,7 +23,7 @@ const Order = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-Order.plugin(AutoIncrement);
+Order.plugin(AutoIncrement, { id: 'order_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
 module.exports = mongoose.model('Order', Order);

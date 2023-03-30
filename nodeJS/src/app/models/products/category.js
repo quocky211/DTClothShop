@@ -2,23 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // const mongooseDelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
-const ProductCategory = new Schema(
+const Category = new Schema(
     {
-        _id :{type: Number},
+        _id: { type: Number },
         name: { type: String },
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
-// ProductCategory.plugin(mongooseDelete);
-// ProductCategory.plugin(mongooseDelete, {
+// Category.plugin(mongooseDelete);
+// Category.plugin(mongooseDelete, {
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-ProductCategory.plugin(AutoIncrement);
+Category.plugin(AutoIncrement, { id: 'category_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('ProductCategory', ProductCategory);
+module.exports = mongoose.model('category', Category);

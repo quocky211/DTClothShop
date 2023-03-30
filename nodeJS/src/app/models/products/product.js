@@ -4,22 +4,20 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Product = new Schema(
     {
-        _id :{type: Number},
-        brand_id: { type: Number },
-        product_category_id: { type: Number },
+        _id: { type: Number },
+        category_id: { type: Number, ref: 'category' },
+        category_detail_id: { type: Number, ref: 'category_detail' },
         name: { type: String },
         description: { type: String },
-        content: { type: Text },
         price: { type: Number },
-        qty: { type: Number },
         discount: { type: Number },
         weight: { type: Number },
-        featured: { type: Boolean },
-
+        material: { type: String },
+        featured: { type: Boolean, default: false },
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -28,7 +26,7 @@ const Product = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-Product.plugin(AutoIncrement);
+Product.plugin(AutoIncrement, { id: 'product_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('Product', Product);
+module.exports = mongoose.model('product', Product);

@@ -4,17 +4,14 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Blog = new Schema(
     {
-        _id :{type: Number},
-        user_id: { type: Number },
+        _id: { type: Number },
+        user_id: { type: Number, ref: 'user' },
         title: { type: String },
-        image: { type: String },
-        category: { type: String },
-        content: { type: Text }
-        
+        content: { type: String },
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -23,7 +20,7 @@ const Blog = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-Blog.plugin(AutoIncrement);
+Blog.plugin(AutoIncrement, { id: 'blog_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('Blog', Blog);
+module.exports = mongoose.model('blog', Blog);

@@ -1,14 +1,19 @@
-const Brand = require('../models/products/Brand');
+const Brand = require('../models/products/brand');
+const Product = require('../models/products/product');
 
 class SiteController {
     home(req, res, next) {
-        res.send('home page');
+        // res.send('home page');
+        Product.find({}, 'name')
+            .populate('brand_id')
+            .exec()
+            .then((pro) => res.send(pro));
     }
 
     testAddBrand(req, res, next) {
         const brand = new Brand(req.body);
         brand.save().then(() => {
-            res.redirect('http://localhost:3000/');
+            res.send('Thêm thành công');
         });
     }
 }

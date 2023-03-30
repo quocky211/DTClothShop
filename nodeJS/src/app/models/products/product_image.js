@@ -4,14 +4,13 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const ProductImage = new Schema(
     {
-        _id :{type: Number},
-        product_id: { type: Number },
+        _id: { type: Number },
+        product_id: { type: Number, ref: 'product' },
         path: { type: String },
-
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -20,7 +19,7 @@ const ProductImage = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-ProductImage.plugin(AutoIncrement);
+ProductImage.plugin(AutoIncrement, { id: 'product_image_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('ProductImage', ProductImage);
+module.exports = mongoose.model('product_image', ProductImage);

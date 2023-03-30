@@ -4,17 +4,16 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const OrderDetail = new Schema(
     {
-        _id :{type: Number},
-        order_id: { type: Number },
-        product_id: { type: Number },
+        _id: { type: Number },
+        order_id: { type: Number, ref: 'order' },
+        product_id: { type: Number, ref: 'product' },
         amount: { type: Number },
         total: { type: Number },
-        qty: { type: Number }
-
+        qty: { type: Number },
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -23,7 +22,7 @@ const OrderDetail = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-OrderDetail.plugin(AutoIncrement);
+OrderDetail.plugin(AutoIncrement, { id: 'order_detail_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('OrderDetail', OrderDetail);
+module.exports = mongoose.model('order_detail', OrderDetail);

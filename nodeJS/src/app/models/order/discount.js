@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // const mongooseDelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
-const ProductDetail = new Schema(
+const Discount = new Schema(
     {
         _id: { type: Number },
-        product_id: { type: Number, ref: 'product' },
-        color: { type: String },
-        size: { type: String },
-        qty: { type: Number },
+        name: { type: String },
+        code: { type: String },
+        is_used: { type: Boolean, default: false },
+        expired_day: { type: Date },
+        discount: { type: Number },
     },
     {
         _id: false,
@@ -21,7 +22,7 @@ const ProductDetail = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-ProductDetail.plugin(AutoIncrement, { id: 'product_detail_id_counter' });
+Discount.plugin(AutoIncrement, { id: 'discount_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('product_detail', ProductDetail);
+module.exports = mongoose.model('discount', Discount);

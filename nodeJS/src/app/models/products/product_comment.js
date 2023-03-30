@@ -4,18 +4,15 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const ProductComment = new Schema(
     {
-        _id :{type: Number},
-        product_id: { type: Number },
-        user_id: { type: Number },
-        name: { type: String },
-        email: { type: String },
+        _id: { type: Number },
+        user_id: { type: Number, ref: 'user' },
+        product_id: { type: Number, ref: 'product' },
+        star: { type: Number, default: 0 },
         message: { type: String },
-        rating: { type: Number },
-
     },
-    { 
+    {
         _id: false,
-        timestamps: true 
+        timestamps: true,
     },
 );
 
@@ -24,7 +21,7 @@ const ProductComment = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
-ProductComment.plugin(AutoIncrement);
+ProductComment.plugin(AutoIncrement, { id: 'product_cmt_id_counter' });
 
 // mongoose.model('ModelName', mySchema);
-module.exports = mongoose.model('ProductComment', ProductComment);
+module.exports = mongoose.model('product_comment', ProductComment);
