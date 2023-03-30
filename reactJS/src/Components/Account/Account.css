@@ -1,0 +1,54 @@
+.account-info-container{
+    margin-top: 74px;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 18px;
+}
+.account-info-container input{
+    padding: 8px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.account-info table td:first-child {
+    text-align: left;
+    font-weight: bold;
+}
+.account-info {
+    text-align: -webkit-center;
+}
+.account-info-container h3{
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+.account-info button{
+    text-align: center!important;
+    background-color: aqua;
+    width: 40%;
+    padding: 15px 0;
+    margin: 15px auto;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+.buy-history table,
+.buy-history th, 
+.buy-history td{
+    border:1px solid black;
+}
+.buy-history table{
+    border-collapse:collapse;
+    margin-top: 15px;
+}
+.buy-history table th{
+    padding: 5px 15px ;
+}
+.buy-history table td{
+    padding: 5px 15px ;
+
+}
+.buy-history{
+    text-align: -webkit-center;
+}

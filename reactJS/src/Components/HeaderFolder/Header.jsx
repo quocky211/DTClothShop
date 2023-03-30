@@ -12,14 +12,13 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import usericon from '../Images/user-icon.png'
 
 function Header(props) {
   let navigate = useNavigate();
-  var loveList = "/Login"
-  var loginButtonText = "Đăng nhập";
+  var loveList = "/Login";
   if (props.isLoggedin) {
     loveList = "/LoveProducts"
-    loginButtonText = "Đăng xuất";
   }
   function LoginclickHandler() {
     if (props.isLoggedin) {
@@ -66,11 +65,13 @@ function Header(props) {
             <img src={shoppingIcon} alt="cart" />
             <span>{props.numberCart}</span>
         </Nav.Link>
-        <Nav.Link>
-        <button onClick={LoginclickHandler} className="logIn-btn">
-           {loginButtonText}
-         </button>
-        </Nav.Link>
+          <button onClick={LoginclickHandler} className="logIn-btn">
+            <Nav.Link><img src={usericon} alt="User-icon" /> </Nav.Link>
+            <ul className="list-infor-user">
+              <Nav.Link href="/Account"> <li>Thông tin tài khoản</li> </Nav.Link>
+              <Nav.Link href="/Logout"> <li>Đăng xuất</li> </Nav.Link>
+            </ul>
+          </button>
       </Navbar.Collapse>
     </Container>
   </Navbar>

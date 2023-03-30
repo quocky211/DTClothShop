@@ -275,5 +275,18 @@ export const FakeData = [
             matype:'TP03',
             name: "Thắt lưng"
         }
+    ],
+    // user
+    [
+        {
+            matk: "TK01",
+            name: 'Nguyễn Quốc Kỳ',
+            date: '2002-11-02',
+            email: 'quockynguyen02@gmail.com',
+            phone: '0972389257',
+            avatar: ao,
+            address: 'HCM',
+            gender: 'Nam'
+        }
     ]
 ]
