@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import "./Footer.css";
 import logo from "../Images/logo.webp";
 import fb from "../Images/icon/fb.png";
@@ -6,9 +6,26 @@ import ins from "../Images/icon/ins.png";
 import yt from "../Images/icon/yt.png";
 import tiktok from "../Images/icon/tiktok.png";
 import {NavLink as Link} from "react-router-dom";
+import emailjs from '@emailjs/browser';
 
 
 function Header() {
+    const form = useRef();
+    const sendEmail = (e) => {
+        e.preventDefault();
+        if(form.current)
+        {
+            emailjs.sendForm('service_h5odl76', 'template_4054kz9', form.current, 'YGqcQbP5kiXMLa0Qv')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+          e.target.reset();
+        }
+        
+      };
+
   return (
     <div className="footer">
         <div className="footer_infor">
@@ -48,9 +65,9 @@ function Header() {
                         </Link>
                     </div>
                 <div className="name">Đăng ký nhận tin</div>
-                <form action="">
-                    <input type="Email" placeholder="Nhập Email của bạn"/>
-                    <button>Đăng ký</button>
+                <form ref={form} onSubmit={sendEmail}>
+                    <input type="Email" placeholder="Nhập email" name="user_email"/>
+                    <input type="Submit" value="Đăng ký"></input>
                 </form>
                 <div className="social-icon">
                     <a href=""> <img src={fb} alt="fb" /> </a>
