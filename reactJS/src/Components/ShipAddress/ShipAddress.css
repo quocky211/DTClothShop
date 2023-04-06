@@ -2,6 +2,10 @@
     font-size: 18px;
     margin-top: 70px;
 }
+.container-ship{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+}
 .nav ul{
     display: flex;
     list-style-type: none;
@@ -19,7 +23,7 @@
 }
 /* Main */
 .form-address-container{
-    width: 60%;
+    width: 80%;
     margin: auto;
 }
 .form-address input{
@@ -67,4 +71,33 @@ textarea{
     margin: 10px 0;
     border: 2px solid black;
     border-radius: 10px;
+}
+.container-ship-right .voucher{
+    margin: 10px 0;
+    text-align: left;
+    padding: 0 65px;
+}
+.container-ship-right .voucher input{
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+.container-ship-right .voucher button{
+    font-size: 18px;
+    background-color: #6851A8;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: 50px;
+    color: white;
+}
+.container-ship-right .voucher button:hover{
+    background-color: #9f8cd4;
+    cursor: pointer;
+}
+.container-ship-right .price{
+    padding: 0 65px;
+}
+.container-ship-right .price p{
+    text-align: left;
 }

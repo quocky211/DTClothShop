@@ -1,6 +1,5 @@
 import "./Shopping.css";
 import React from "react";
-import ShipAddress from "../ShipAddress/ShipAddress";
 import { NavLink as Link, NavLink } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -119,6 +118,9 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                   </tr>
                 </tbody>
               </table>
+              <NavLink to="/ShipAddress" state={{ data: TotalCart }}>
+                <button className="shopping-buy-btn">Mua hàng</button>
+              </NavLink>
             </div>
           </div>
           <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
@@ -130,38 +132,6 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
               Đã bỏ sản phẩm ra khỏi giỏ hàng!
             </Alert>
           </Snackbar>
-        </div>
-        <div className="cal-money" style={{ margin: "0 -40px 0 20px" }}>
-          <div className="discount">
-            <h2>Mã giảm giá</h2>
-            <div className="enter-voucher">
-              <input type="text" placeholder="Nhập mã giảm giá" />
-              <button>Sử dụng</button>
-            </div>
-          </div>
-          <div className="money">
-            <div className="sum-cost-products">
-              <p>
-                Tạm tính: {Number(TotalCart).toLocaleString("vi-VN")}{" "}
-                <span className="underline">đ</span>
-              </p>
-            </div>
-            <div className="ship-cost">
-              <p>
-                Phí vận chuyển: 30.000 <span className="underline">đ</span>
-              </p>
-            </div>
-            <hr />
-            <div className="sum-cost">
-              <p>
-                Tổng: {Number(TotalCart + 30000).toLocaleString("vi-VN")}{" "}
-                <span className="underline">đ</span>
-              </p>
-            </div>
-          </div>
-          <NavLink to="/ShipAddress">
-            <button className="shopping-buy-btn">Mua hàng</button>
-          </NavLink>
         </div>
       </div>
     </div>
