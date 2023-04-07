@@ -123,37 +123,71 @@ function ShipAddress() {
                             </div>
                             <input type="text" placeholder="Địa chỉ" required />
                             <textarea placeholder="Ghi chú" rows="4"></textarea>
-                            <button type="submit" name="submit" className="btn-Submit">Tiếp tục</button>
                         </form>
                     </div>
                 </div>
                 <div className="container-ship-right">
-                    <h2>Mã giảm giá</h2>
-                    <div className="voucher">
-                        <input type="text" placeholder="Nhập mã giảm giá" />
-                        <button>Sử dụng</button>
+                    <div>
+                        <h2>Mã giảm giá</h2>
+                        <div className="voucher">
+                            <input type="text" placeholder="Nhập mã giảm giá" />
+                            <button>Sử dụng</button>
+                        </div>
+                        <div className="price">
+                            <div className="">
+                                <p>
+                                    Tạm tính: <span>{Number(data).toLocaleString("vi-VN")}{" "}</span>
+                                    <span className="underline">đ</span>
+                                </p>
+                            </div>
+                            <div className="">
+                                <p >Phí vận chuyển: <span>{Number(shipcost).toLocaleString("vi-VN")}{" "}</span>
+                                    <span className="underline">đ</span>
+                                </p>
+                            </div>
+                            <hr />
+                            <div className="">
+                                <p>
+                                    Tổng: <span>{Number(data + shipcost).toLocaleString("vi-VN")}{" "}</span>
+                                    <span className="underline">đ</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="price">
-                        <div className="">
-                            <p>
-                                Tạm tính: <span>{Number(data).toLocaleString("vi-VN")}{" "}</span>
-                                <span className="underline">đ</span>
-                            </p>
-                        </div>
-                        <div className="">
-                            <p >Phí vận chuyển: <span>{Number(shipcost).toLocaleString("vi-VN")}{" "}</span>
-                                <span className="underline">đ</span>
-                            </p>
-                        </div>
-                        <hr />
-                        <div className="">
-                            <p>
-                                Tổng: <span>{Number(data + shipcost).toLocaleString("vi-VN")}{" "}</span> 
-                                <span className="underline">đ</span>
-                            </p>
+                    <div>
+                        <h2>Phương thức thanh toán</h2>
+                        <div className="payment-mothods">
+                            <div class="the-payment-mothod">
+                                <label>
+                                    <input type="radio" readonly="" name="payment-method" value="cod" />
+                                    <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-cod.svg" width="32" height="32" alt="icon" />
+                                    <span>Thanh toán tiền mặt khi nhận hàng</span>
+                                </label>
+                            </div>
+                            <div class="the-payment-mothod">
+                                <label>
+                                    <input type="radio" readonly="" name="payment-method" value="momo" />
+                                    <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-momo.svg" width="32" height="32" alt="icon" />
+                                    <span>Thanh toán bằng ví MOMO</span>
+                                </label>
+                            </div>
+                            <div class="the-payment-mothod">
+                                <label>
+                                    <input type="radio" readonly="" name="payment-method" value="vnpay" />
+                                    <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-vnpay.png" width="32" height="32" alt="icon" />
+                                    <span>Thanh toán bằng ví VNPay</span>
+                                </label>
+                            </div>
+                            <div class="the-payment-mothod">
+                                <label>
+                                    <input type="radio" readonly="" name="payment-method" value="atm" />
+                                    <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-atm.svg" width="32" height="32" alt="icon" />
+                                    <span>Thẻ ATM nội địa/ Internet Banking</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-
+                    <button type="submit" name="submit" className="btn-Submit">Tiếp tục</button>
                 </div>
             </div>
         </div>
