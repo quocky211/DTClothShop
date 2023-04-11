@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 // const mongooseDelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
@@ -13,7 +14,7 @@ const Product = new Schema(
         discount: { type: Number },
         weight: { type: Number },
         material: { type: String },
-        featured: { type: Boolean, default: false },
+        featured: { type: Boolean, default: false, require: false },
     },
     {
         _id: false,
@@ -26,6 +27,7 @@ const Product = new Schema(
 //     overrideMethods: 'all',
 //     deletedAt: true,
 // });
+Product.plugin(mongoosePaginate);
 Product.plugin(AutoIncrement, { id: 'product_id_counter' });
 
 // mongoose.model('ModelName', mySchema);

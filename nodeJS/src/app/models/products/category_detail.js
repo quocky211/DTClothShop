@@ -5,7 +5,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const CategoryDetail = new Schema(
     {
         _id: { type: Number },
-        name: { type: string },
+        name: { type: String },
         category_id: { type: Number, ref: 'category' },
     },
     {
