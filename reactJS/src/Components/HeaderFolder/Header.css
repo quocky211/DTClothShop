@@ -1,13 +1,6 @@
 .navbar{
     padding: 0 !important;
 }
-@media (min-width: 992px){
-.navbar-expand-lg .navbar-collapse {
-    display: flex !important;
-    flex-basis: auto;
-    justify-content: space-between;
-}
-}
 .navbar-light .navbar-nav .nav-link {
     color: black !important;
     margin: 15px 15px;
@@ -65,6 +58,9 @@
     background-color: white;
     min-width: 150px;
 }
+.search{
+    display: flex;
+}
 .type-product .detail-product li{
     list-style-type: none;
     min-width:100px;
@@ -85,6 +81,7 @@
 }
 .logIn-btn > .nav-link{
     margin: 15px;
+    background-color: transparent;
 }
 .logIn-btn .list-infor-user li{
     list-style-type: none;
@@ -104,13 +101,210 @@
 .logIn-btn:hover .list-infor-user{
     display: block;
 }
-.logIn-btn .nav-link:hover{
+.logIn-btn .list-infor-user .nav-link:hover{
     background-color: #ccc;
 }
-@media (max-width: 991.98px){
-.navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid, .navbar-expand-lg > .container-sm, .navbar-expand-lg > .container-md, .navbar-expand-lg > .container-lg, .navbar-expand-lg > .container-xl {
-    padding-right: 0;
-    padding-left: 0;
-    height: 70px;
+.cartandlogin{
+    display: flex;
 }
+.cartandlogin .nav-link[href="/ShoppingCart"]
+{
+    padding: 0;
+    line-height: 70px;
+}
+.sidebar-icon
+{
+    display: none;
+}
+.nav_overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    animation: fadeIn linear 0.2s;
+}
+.nav_overlay1 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    animation: fadeIn linear 0.2s;
+}
+.nav-mobile{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 100%;
+    background-color: #fff;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+ul.nav-mobile-list{
+    margin-top: 20px;
+    margin-left: 15px;
+    padding: 0;
+    text-align: left;
+}
+.nav-mobile-list .nav-link{
+    font-size: 1.2em;
+}
+.nav-mobile-close img{
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 28px;
+    height: 28px;
+}
+.nav-mobile-input{
+    display: none;
+}
+.nav-mobile-input:checked ~ .nav_overlay{
+    display: block;
+}
+.nav-mobile-input:checked ~ .nav-mobile{
+    transform: translateX(0);
+    transition: all 0.2s linear;
+    opacity: 1;
+}
+.searchicon{
+    display: none;
+}
+.nav-mobile-search{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background-color: #fff;
+    display: none;
+}
+.mobile-search{
+    margin-top: 20px;
+}
+.search-input{
+    display: none;
+}
+.search-input:checked ~ .nav-mobile-search{
+    display: block;
+}
+.search-input:checked ~ .nav_overlay1{
+    display: block;
+}
+.mobile-search .form-control{
+    width: 70% !important;
+    margin: 0 auto;
+}
+.mobile-search .btn{
+    margin-top: 20px;
+}
+.mobile-product{
+    display: flex;
+    justify-content: space-between;
+}
+.mobile-product img{
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+.type-mobile-product{
+    display: none;
+}
+.product-list-mobile{
+    display: none;
+}
+.product-list-mobile:checked ~ .type-mobile-product
+{
+    display: block;
+}
+
+
+
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+ 
+    .navbar-nav{
+        display: none !important;
+    }
+    .lovelists{
+        display: none !important;
+    }
+    .search{
+        display: none;
+    }
+    .navbar-brand
+    {   
+        width: 125px;
+        margin: 0 !important;
+    }
+    .sidebar-icon {
+        display: flex;
+    }
+    .sidebar-icon img{
+        width: 24px;
+        height: 24px;
+        margin: 0 10px;
+    }
+    .logIn-btn > .nav-link{
+        margin: 0;
+        background-color: transparent;
+    }
+    .searchicon{
+        display: block;
+    }
+
+    
+}
+@keyframes fadeIn{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 46.1875em)
+{
+    .nav-mobile{
+        right: 0;
+        width: 100%;
+    }
+    .navbar-nav{
+        display: none !important;
+    }
+    .lovelists{
+        display: none !important;
+    }
+    .search{
+        display: none;
+    }
+    .navbar-brand
+    {   
+        width: 125px;
+        margin: 0 !important;
+    }
+    .sidebar-icon {
+        display: flex;
+    }
+    .sidebar-icon img{
+        width: 24px;
+        height: 24px;
+        margin: 0 10px;
+    }
+    .logIn-btn > .nav-link{
+        margin: 0;
+        background-color: transparent;
+    }
+    .searchicon{
+        display: block;
+    }
+
 }

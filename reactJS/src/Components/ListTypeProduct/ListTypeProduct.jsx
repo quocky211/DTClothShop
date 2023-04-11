@@ -19,6 +19,7 @@ function ListTypeProduct(props)
                 </ul>
             </li>
         </Link>
+
         
     );
 }
