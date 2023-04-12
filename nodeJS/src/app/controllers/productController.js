@@ -36,6 +36,22 @@ class ProductController {
             .then((product) => res.json(product))
             .catch(next);
     }
+
+    // GET /category/:id
+    Category(req, res, next) {
+        Product.find({ category_id: req.params.id })
+            .exec()
+            .then((product) => res.json(product))
+            .catch(next);
+    }
+
+    // GET /category-detail/:id
+    CategoryDetail(req, res, next) {
+        Product.find({ category_detail_id: req.params.id })
+            .exec()
+            .then((product) => res.json(product))
+            .catch(next);
+    }
 }
 
 module.exports = new ProductController();

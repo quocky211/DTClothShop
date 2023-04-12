@@ -1,0 +1,22 @@
+# trang admin:
+# list sản phẩm GET /admin/product?page=:page(có phân trang)
+GET http://localhost:3001/admin/product
+
+### search header GET /search?name=:name
+GET http://localhost:3001/search
+
+### sản phẩm giảm giá: /product/discount
+GET http://localhost:3001/product/discount
+
+### bán chạy: /product/top-selling
+GET http://localhost:3001/product/top-selling
+
+### sản phẩm mới: /product/new
+GET http://localhost:3001/product/new
+
+### loại sản phẩm: /product/category/:id
+GET http://localhost:3001/product/category/2
+
+### chi tiết loại sản phẩm: /product/category-detail/:id
+GET http://localhost:3001/product/category-detail/13
+
