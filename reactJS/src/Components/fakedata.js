@@ -27,7 +27,7 @@ export const FakeData = [
     [
         {   
             masp: 'SP01',
-            name: 'Ao Thun',
+            name: 'Ao thun đặc biệt giá tốt phù hợp với mọi người ',
             image: ao,
             price: 100000,
             infor: 'AO thun ddac biet',
@@ -45,7 +45,7 @@ export const FakeData = [
         },
         {   
             masp: 'SP03',   
-            name: 'Ao Thun',
+            name: 'Ao thun cao cap den tu dai duong',
             image: ao2,
             price: 100000,
             infor: 'AO thun ddac biet',

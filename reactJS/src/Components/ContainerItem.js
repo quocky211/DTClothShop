@@ -56,12 +56,14 @@ export function ContainerItem(props) {
       <Link to={"/Products/" + props.masp}>
         <button onClick={() => refresh()}>
           <img src={props.image} alt="sanpham" className="ContainerItem_image" />
-          <p className="containerItem_name">{props.name}</p>
-          <p className="containerItem_infor-price">{priceVND}</p>
+          <div className="nameandprice">
+            <p className="containerItem_name">{props.name}</p>
+            <p className="containerItem_infor-price">{priceVND}</p>
+          </div>
         </button>
       </Link>
-      <div className="containerItem_infor">
-        {/* <div className="add-buy-btn">
+      {/* <div className="containerItem_infor">
+        <div className="add-buy-btn">
           <Link to={linkCart}>
             <button className="buy-btn" onClick={() => props.AddCart(item)}>
               Mua ngay
@@ -78,8 +80,8 @@ export function ContainerItem(props) {
             {" "}
             <img src={whiteplus} alt="" />
           </button>
-        </div> */}
-      </div>
+        </div>
+      </div> */}
     </div>
   );
 }

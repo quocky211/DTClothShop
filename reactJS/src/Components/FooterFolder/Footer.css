@@ -11,9 +11,7 @@
     font-weight: 500;
     font-size: 24px;
 }
-/* .infor {
-    
-} */
+
 .footer_infor {
     background-color: rgba(204, 204, 204, 0.5);
     display: grid;
@@ -22,6 +20,7 @@
     padding: 12px 36px;
     text-align:justify;
     line-height: 1.6;
+
 }
 .footer_infor a {
     display: flex;
@@ -33,18 +32,7 @@
     /* color: black; */
     text-decoration: none;
 }
-/* .footer__infor-introduce-name  {
 
-}
-.footer__infor-introduce-infor  {
-
-}
-.footer__infor-link {
-
-}
-.footer__infor-contact {
-
-}*/
 .logo-footer{
     margin-left: 24px;
 }
@@ -91,4 +79,39 @@
     height: 30px;
     margin-right: 30px;
 
+}
+.footer-infor-mobile{
+    display: none;
+}
+.accordion-body{
+    text-align: justify;
+    padding: 0 8px;
+    font-size: 18px;
+} 
+.accordion-item:last-child .accordion-body{
+    text-align: center;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .footer_infor {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer__infor-link{
+        padding: 4px 24px;
+        margin-bottom: 32px;
+    }
+}
+@media only screen and (max-width: 46.1875em)
+{
+    .footer_infor{
+        display: none;
+    }
+    .footer-infor-mobile{
+        display: block;
+    }
+    .footer{
+        margin-top: 20px;
+    }
+    .accordion-header button {
+        font-size: 18px !important;
+    }
 }
