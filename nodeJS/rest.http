@@ -20,3 +20,24 @@ GET http://localhost:3001/product/category/2
 ### chi tiết loại sản phẩm: /product/category-detail/:id
 GET http://localhost:3001/product/category-detail/13
 
+### resgister
+POST  http://localhost:3001/user/register
+Content-Type: application/json
+
+{
+    "email": "louistart0ggy@gmail.com",
+    "password":"123456",
+    "confirmPassword": "123456",
+    "name": "Lê Minh Đại",
+    "avatar": "avatar",
+    "level": true
+}
+
+### login
+POST  http://localhost:3001/user/login
+Content-Type: application/json
+
+{
+    "email": "louistart0ggy@gmail.com",
+    "password":"123456"
+}

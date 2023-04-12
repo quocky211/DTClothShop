@@ -6,11 +6,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const User = new Schema(
     {
         _id: { type: Number },
-        email: { type: String },
-        name: { type: String },
-        password: { type: String },
-        avatar: { type: String },
-        level: { type: Boolean },
+        email: { type: String, unique: true, require: true },
+        name: { type: String, require: true },
+        password: { type: String, require: true },
+        avatar: { type: String, require: false },
+        level: { type: Boolean, require: true, default: false },
     },
     {
         _id: false,
@@ -33,6 +33,12 @@ User.pre('save', function (next) {
         });
     });
 });
+
+User.methods.isCheckPassword = async function (password) {
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {}
+};
 
 // Product.plugin(mongooseDelete);
 // Product.plugin(mongooseDelete, {
