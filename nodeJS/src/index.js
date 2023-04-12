@@ -1,10 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const httpError = require('http-errors');
 const route = require('./routes');
 const db = require('./config/db');
 const app = express();
 const port = 3001;
+require('dotenv').config();
 
 // morgan: bắn ra log khi gửi yêu cầu lên server
 // app.use(morgan('combined'));
@@ -14,6 +16,21 @@ app.use(bodyParser.json());
 route(app);
 
 db.connect();
+
+app.use((req, res, next) => {
+    // const error = new Error('Not found');
+    // error.status = 500;
+    // next(error);
+
+    next(httpError.NotFound('This route does not exists.'));
+});
+
+app.use((err, req, res, next) => {
+    res.json({
+        status: err.status || 500,
+        message: err.message,
+    });
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
