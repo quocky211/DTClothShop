@@ -70,10 +70,10 @@ function Header() {
                         <input type="Submit" value="Đăng ký"></input>
                     </form>
                     <div className="social-icon">
-                        <a href=""> <img src={fb} alt="fb" /> </a>
-                        <a href=""><img src={ins} alt="fb" /></a>
-                        <a href=""><img src={yt} alt="fb" /></a>
-                        <a href=""><img src={tiktok} alt="fb" /></a>
+                        <a href="https://www.facebook.com/noithatfudo"> <img src={fb} alt="fb" /> </a>
+                        <a href="https://www.facebook.com/noithatfudo"><img src={ins} alt="fb" /></a>
+                        <a href="https://www.facebook.com/noithatfudo"><img src={yt} alt="fb" /></a>
+                        <a href="https://www.facebook.com/noithatfudo"><img src={tiktok} alt="fb" /></a>
                     </div>
                 </div>
             </div>
@@ -106,10 +106,10 @@ function Header() {
                                 <input type="Submit" value="Đăng ký"></input>
                             </form>
                             <div className="social-icon">
-                                <a href=""> <img src={fb} alt="fb" /> </a>
-                                <a href=""><img src={ins} alt="fb" /></a>
-                                <a href=""><img src={yt} alt="fb" /></a>
-                                <a href=""><img src={tiktok} alt="fb" /></a>
+                                <a href="https://www.facebook.com/noithatfudo"> <img src={fb} alt="fb" /> </a>
+                                <a href="https://www.facebook.com/noithatfudo"><img src={ins} alt="fb" /></a>
+                                <a href="https://www.facebook.com/noithatfudo"><img src={yt} alt="fb" /></a>
+                                <a href="https://www.facebook.com/noithatfudo"><img src={tiktok} alt="fb" /></a>
                             </div>
                         </Accordion.Body>
                     </Accordion.Item>

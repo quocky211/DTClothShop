@@ -40,8 +40,8 @@ function Header(props) {
             <img src={sidebaricon} alt="sidebaricon" />
           </label>
           <label htmlFor="search-input" className="searchicon">
-          <img src={searchicon} alt="searchicon" />
-        </label>
+            <img src={searchicon} alt="searchicon" />
+          </label>
         </div>
         <input type="checkbox" name="" className="nav-mobile-input" id="nav-mobile-input" />
         <label htmlFor="nav-mobile-input" className="nav_overlay"></label>
@@ -55,8 +55,8 @@ function Header(props) {
             <Nav.Link href="/">Trang chủ</Nav.Link>
             <hr />
             <div className="mobile-product">
-            <Nav.Link href="/Products" >Sản phẩm</Nav.Link>
-            <label htmlFor="product-list-mobile"><img src={arrowbottom} alt="arrowbottom" /></label>
+              <Nav.Link href="/Products" >Sản phẩm</Nav.Link>
+              <label htmlFor="product-list-mobile"><img src={arrowbottom} alt="arrowbottom" /></label>
             </div>
             <input type="checkbox" className="product-list-mobile" id="product-list-mobile" />
             <ul className="type-mobile-product">

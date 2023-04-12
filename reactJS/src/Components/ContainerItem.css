@@ -32,6 +32,7 @@
     text-align: left;
     line-height: 1.5;
     color: #7f7f7f;
+    text-transform: uppercase;
 }
 .containerItem_infor-price{
     font-size: 18px;

@@ -19,6 +19,7 @@
 }
 .container__products-nav label {
     margin: 0 0 8px 16px;
+    font-size: 18px;
 }
 .find-product-price{
     margin-top: -15px;
@@ -31,7 +32,7 @@
 }
 .find-product-price label{
     margin-left: 10px;
-    font-size: 16px;
+    font-size: 18px;
 }
 .container-right{
     flex: 6;
@@ -75,8 +76,15 @@
 .offcanvas-backdrop.show {
     opacity: 0.5;
 }
-.offcanvas-backdrop.fade {
+.offcanvas-title{
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+/* .offcanvas-backdrop.fade {
     opacity: 0;
+} */
+.offcanvas.offcanvas-start{
+    overflow-y: scroll;
 }
 .offcanvas-backdrop {
     position: fixed;
@@ -142,9 +150,6 @@
     padding: 0.25em;
     color: #000;
     background: transparent url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3E%3C/svg%3E) 50%/1em auto no-repeat;
-    /* border: 0;
-    border-radius: 0.375rem;
-    opacity: 0.5; */
 }
 
 .offcanvas-header {
@@ -167,3 +172,53 @@
  .btn{
     font-size: 18px !important;
  }
+ .all-product-store{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 60px;
+    margin-bottom: 72px;
+ }
+ .btn .filter-img{
+    width: 28px;
+    height: 28px;
+ }
+ .btn:focus, 
+ .btn.focus{
+    box-shadow: none !important;
+ }
+ .btn-primary:focus, 
+ .btn-primary.focus{
+    box-shadow: none !important;
+ }
+ .filter-button{
+    text-align: end;
+    margin-right: 20px;
+    margin-bottom: 20px;
+ }
+ .filter-button input[type="button"]{
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 10px 15px;
+ }
+ @media only screen and (min-width: 46.25em) and (max-width: 64em) {
+    .all-product-store{
+        grid-template-columns: 1fr 1fr;
+        row-gap: 50px;
+    }
+ }
+ @media only screen and (max-width: 46.1875em)
+{
+    .all-product-store{
+        grid-template-columns: 1fr 1fr;
+        row-gap: 48px;
+    }
+    .offcanvas.offcanvas-start{
+        right: 0;
+        bottom: 0;
+        top: 0;
+        left: 0;
+    }
+}
