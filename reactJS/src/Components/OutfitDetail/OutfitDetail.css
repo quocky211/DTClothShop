@@ -1,12 +1,22 @@
 .outfit-detail{
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 0 16px 30px 16px;
+}
+.outfit-detail-left{
+    position: relative;
+    display: block;
+    padding-top:100%;
+    height: 0;
+    width: 100%;
 }
 .outfit-detail-left img{
     width: 100%;
-    max-height: 100vh;
-    object-fit: contain;
+    height: 100%;
+    position: absolute;
+    object-fit: scale-down;
+    top:0;
+    left: 0;
 }
 .outfit-detail-right{
     text-align: left;
@@ -15,8 +25,9 @@
     padding: 16px 0;
     font-size: 20px;
 }
-.list-product{
-
+.outfit-detail-right p{
+    font-size: 18px;
+    text-align: justify;
 }
 
 .list-product .list-product-item{
@@ -32,7 +43,7 @@
 }
 
 .list-product .list-product-item h4{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: #7f7f7f;
 }
@@ -42,5 +53,38 @@
     padding: 5px 30px;
     margin-top: 24px;
 }
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
+    .outfit-detail-left{
+        padding-top: 180%;
+    }
+}
+@media only screen and (max-width: 46.1875em)
+{
+    .breadcrumb{
+        display: none !important;
+    }
+    .outfit-detail{
+        display: block;
+    }
+    .outfit-detail-right h2{
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+    .outfit-detail-right p{
+        font-size: 14px;
+    }
+    .outfit-detail-left{
+        padding-top: 180%;
+    }
+    .outfit-detail-left{
+        padding-top: 120%;
+    }
+    .list-product .list-product-item h4{
+        font-size: 14px;
 
+    }
+    .list-product-item .product-item-infor button{
+        font-size: 13px;
+    }
+}
 

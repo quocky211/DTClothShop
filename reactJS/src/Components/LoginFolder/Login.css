@@ -53,9 +53,7 @@ margin-bottom: 15px;
     height: 70vh;
     align-items: center;
     margin-top: 70px;
-
 }
-
 .logo {
     width: 15vw;
     height: 19vw;
@@ -75,4 +73,27 @@ margin-bottom: 15px;
     font-size: 80px;
     margin: 0px;
     color: darkblue;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .loginmain {
+        background-color: #fff;
+        display: block;
+        text-align: -webkit-center;
+        margin: 90px 0 20px 0;
+
+    }
+    .logomain{
+        display: none;
+    }
+    .loginForm{
+        background-color: #fff;
+        width: 60%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 46.1875em){
+    .logomain{
+        display: none;
+    }
 }
