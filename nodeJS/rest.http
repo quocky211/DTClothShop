@@ -25,9 +25,9 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "louistart0ggy@gmail.com",
+    "email": "louis0dadtart0ggy@gmail.com",
     "password":"123456",
-    "confirmPassword": "123456",
+    "confirmPassword": "12456",
     "name": "Lê Minh Đại",
     "avatar": "avatar",
     "level": true

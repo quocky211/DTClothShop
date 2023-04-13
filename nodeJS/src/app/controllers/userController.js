@@ -1,6 +1,7 @@
 const httpError = require('http-errors');
 const User = require('../models/user/user');
-const { userValidate, loginValidate } = require('../../util/validation');
+const { userValidate, loginValidate } = require('../../helpers/validation');
+const { signAccessToken } = require('../../helpers/jwt_service');
 class UserController {
     async Register(req, res, next) {
         try {
@@ -53,7 +54,10 @@ class UserController {
                 throw httpError.Unauthorized();
             }
 
-            res.send(user);
+            const accessToken = await signAccessToken(user._id);
+            res.json({
+                accessToken,
+            });
         } catch (error) {
             next(error);
         }

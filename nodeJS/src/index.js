@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const httpError = require('http-errors');
+require('dotenv').config();
 const route = require('./routes');
 const db = require('./config/db');
 const app = express();
