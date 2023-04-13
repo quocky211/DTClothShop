@@ -1,6 +1,6 @@
 .regisForm-format {
     width: 25%;
-    height: 20rem;
+    height: 65%;
     display: block;
     border: solid 2px black;
     border-radius: 30px;
@@ -52,9 +52,55 @@
     height: auto;
     justify-content: center;
 }
-@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
+    .regismain {
+        background-color: #fff;
+        display: block;
+        text-align: -webkit-center;
+        margin: 90px 0 20px 0;
+        height: auto;
+    }
+    .logomain{
+        display: none;
+    }
+    .regisForm-format{
+        background-color: #fff;
+        width: 60%;
+        height: 100%;
+    }
+    .regisForm-format form input{
+        border-bottom:1px solid #ccc ;
+    }
+    .regisForm-format p:last-child{
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
 }
 
 @media only screen and (max-width: 46.1875em){
-
+    .regismain {
+        background-color: #fff;
+        display: block;
+        text-align: -webkit-center;
+        margin: 90px 0 20px 0;
+        height: auto;
+    }
+    .logomain{
+        display: none;
+    }
+    .regisForm-format{
+        background-color: #fff;
+        width: 70%;
+        height: 100%;
+    }
+    .regisForm-format h3{
+        font-size: 20px;
+    }
+    .regisForm-format form input{
+        border-bottom:1px solid #ccc ;
+    }
+    .regisForm-format p:last-child{
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
 }

@@ -18,9 +18,16 @@ function MainPage({ noti, Off_Noti }) {
     const [list, setlist] = useState([]);
 
     useEffect(() => {
-        axios.get('http://demoapiiii.somee.com/api/ServiceController/GetAllSP')
-            .then(res => { setlist(res.data); console.log(res.data) })
-        Off_Noti()
+        axios.get('http://localhost:3001/search?name=jean')
+            .then(res => { 
+                setlist(res.data); 
+                console.log(res.data) })
+            .catch(()=>{
+                console.log("hekk")
+            }
+            )
+            
+        // Off_Noti()
     }, []);
 
     let settings = {

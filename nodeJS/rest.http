@@ -3,7 +3,7 @@
 GET http://localhost:3001/admin/product
 
 ### search header GET /search?name=:name
-GET http://localhost:3001/search
+GET http://localhost:3001/search?name=jean
 
 ### sản phẩm giảm giá: /product/discount
 GET http://localhost:3001/product/discount
@@ -38,7 +38,7 @@ POST  http://localhost:3001/user/login
 Content-Type: application/json
 
 {
-    "email": "louistart0ggy@gmail.com",
+    "email": "louistart0gg@gmail.com",
     "password":"123456"
 }
 
