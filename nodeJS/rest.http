@@ -41,3 +41,7 @@ Content-Type: application/json
     "email": "louistart0ggy@gmail.com",
     "password":"123456"
 }
+
+###
+GET   http://localhost:3001/user/test-get-list-user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0LCJpYXQiOjE2ODEzNzY2MTgsImV4cCI6MTY4MTQ2MzAxOH0.Yu7ax78stSjDe1Pl4pkmgLoH7wneOPKrVimuCEts_98

@@ -1,7 +1,7 @@
 const httpError = require('http-errors');
 const User = require('../models/user/user');
 const { userValidate, loginValidate } = require('../../helpers/validation');
-const { signAccessToken } = require('../../helpers/jwt_service');
+const { signAccessToken, signRefreshToken } = require('../../helpers/jwt_service');
 class UserController {
     async Register(req, res, next) {
         try {
@@ -55,14 +55,30 @@ class UserController {
             }
 
             const accessToken = await signAccessToken(user._id);
+            const refreshToken = await signRefreshToken(user._id);
             res.json({
                 accessToken,
+                refreshToken,
             });
         } catch (error) {
             next(error);
         }
     }
     Logout(req, res, next) {}
+
+    TestGetListUser(req, res, next) {
+        console.log(req.headers);
+        const list = [
+            {
+                email: 'aaaaa@gmail.com',
+            },
+            {
+                email: 'aa565dadasdaaa@gmail.com',
+            },
+        ];
+
+        res.json(list);
+    }
 }
 
 module.exports = new UserController();

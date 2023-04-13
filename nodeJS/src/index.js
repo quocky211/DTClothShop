@@ -8,6 +8,7 @@ const db = require('./config/db');
 const app = express();
 const port = 3001;
 require('dotenv').config();
+require('./helpers/connection_redis');
 
 // morgan: bắn ra log khi gửi yêu cầu lên server
 // app.use(morgan('combined'));
