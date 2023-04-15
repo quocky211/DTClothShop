@@ -69,8 +69,8 @@ class ProductController {
                 query.price = { $gt: 500000 };
             }
         }
-        if (req.query.category_id) {
-            query.category_id = req.query.category_id; // màu sắc phù hợp với màu được truyền từ giao diện
+        if (req.query.category_detail_id) {
+            query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
         }
         Product.find( query )
             .exec()
@@ -78,6 +78,24 @@ class ProductController {
             .catch(next);
     }
 }
+//đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
+// function sortProducts(sortOrder) {
+//     axios.get('/products', {
+//         params: {
+//           sortBy: 'price',
+//           sortOrder: sortOrder
+//         }
+//       })
+//       .then((response) => {
+//         console.log(response.data);
+//         // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm đã sắp xếp
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+// }
+
+
 
 module.exports = new ProductController();
 // export default SiteController;
