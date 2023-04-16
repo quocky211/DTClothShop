@@ -8,4 +8,10 @@ client.ping((err, pong) => {
     console.log(pong);
 });
 
+client.on('error', (err) => console.log('Redis Client Error', err));
+
+client.on('connect', (err) => console.log('Redis Client connected'));
+
+client.on('ready', (err) => console.log('Redis Client ready'));
+
 module.exports = client;

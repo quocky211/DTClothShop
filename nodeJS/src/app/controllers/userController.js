@@ -1,7 +1,8 @@
 const httpError = require('http-errors');
 const User = require('../models/user/user');
 const { userValidate, loginValidate } = require('../../helpers/validation');
-const { signAccessToken, signRefreshToken } = require('../../helpers/jwt_service');
+const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../helpers/jwt_service');
+const client = require('../../helpers/connection_redis');
 class UserController {
     async Register(req, res, next) {
         try {
@@ -35,7 +36,24 @@ class UserController {
         }
     }
 
-    RefreshToken(req, res, next) {}
+    async RefreshToken(req, res, next) {
+        try {
+            const { refreshToken } = req.body;
+            if (!refreshToken) throw httpError.BadRequest();
+
+            // verify token
+            const { userId } = await verifyRefreshToken(refreshToken);
+            const accessToken = await signAccessToken(userId);
+            const refToken = await signRefreshToken(userId);
+
+            res.json({
+                accessToken,
+                refreshToken: refToken,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 
     async Login(req, res, next) {
         try {
@@ -64,7 +82,23 @@ class UserController {
             next(error);
         }
     }
-    Logout(req, res, next) {}
+    async Logout(req, res, next) {
+        try {
+            const { refreshToken } = req.body;
+            if (!refreshToken) throw httpError.BadRequest();
+
+            const { userId } = await verifyRefreshToken(refreshToken);
+            client.del(userId.toString(), (err, reply) => {
+                if (err) throw httpError.InternalServerError();
+
+                res.json({
+                    message: 'Logout',
+                });
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 
     TestGetListUser(req, res, next) {
         console.log(req.headers);

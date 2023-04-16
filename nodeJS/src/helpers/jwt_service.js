@@ -1,5 +1,6 @@
 const JWT = require('jsonwebtoken');
 const httpError = require('http-errors');
+const client = require('../helpers/connection_redis');
 const signAccessToken = async (userId) => {
     return new Promise((resolve, reject) => {
         const payload = {
@@ -29,7 +30,11 @@ const signRefreshToken = async (userId) => {
 
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve(token);
+            client.set(userId.toString(), token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
+                if (err) return reject(httpError.InternalServerError());
+
+                resolve(token);
+            });
         });
     });
 };
@@ -46,7 +51,10 @@ const verifyAccessToken = (req, res, next) => {
     // start verify token
     JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
         if (err) {
-            return next(httpError.Unauthorized());
+            if (err.name === 'JsonWebTokenError') {
+                return next(httpError.Unauthorized());
+            }
+            return next(httpError.Unauthorized(err.message));
         }
 
         req.payload = payload;
@@ -54,8 +62,24 @@ const verifyAccessToken = (req, res, next) => {
     });
 };
 
+const verifyRefreshToken = async (refreshToken) => {
+    return new Promise((resolve, reject) => {
+        JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, payload) => {
+            if (err) return reject(err);
+            client.get(payload.userId, (err, reply) => {
+                if (err) return reject(httpError.InternalServerError());
+
+                if (refreshToken === reply) return resolve(payload);
+
+                return reject(httpError.Unauthorized());
+            });
+        });
+    });
+};
+
 module.exports = {
     signAccessToken,
     signRefreshToken,
     verifyAccessToken,
+    verifyRefreshToken,
 };
