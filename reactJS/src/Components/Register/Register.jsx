@@ -3,32 +3,49 @@ import React, { useState } from "react";
 import logo from "../Images/logo.webp";
 import { useNavigate } from "react-router-dom";
 import { NavLink as Link } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
   let navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: "",
-    fullname: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
-  });
-  const { username, fullname, email, password, confirmpassword} = user;
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
 
-  const registerHandle = () => {
-    if (
-      user.email !== "" &&
-      user.fullname !== "" &&
-      user.password !== "" &&
-      user.username !== "" &&
-      user.confirmpassword !== ""
-    ) {
-      navigate("/Login");
-    }
+  const registerHandle = async(e) => {
+      e.preventDefault();
+      let newUser = 
+      { 
+        email:email,
+        password: password, 
+        confirmPassword: confirmPassword,
+        name: name, 
+        avatar: "avatar",
+        level: true
+      }
+      let config = {
+        headers:{
+          "Content-Type": "application/json",
+        }
+      };
+      await axios.post('http://localhost:3001/user/register', newUser, config)
+      .then((res)=>{
+        console.log(res);
+        if(res.data.status === "successfully")
+        {
+          navigate("/Login");
+          alert("Đăng ký thành công")
+        }
+        else{
+          alert(res.data.message);
+        }
+      })
+      .catch(
+        (err)=>{
+          console.log("Error" + err);
+      }
+      )
   };
 
   return (
@@ -40,46 +57,23 @@ function Register() {
 
       <div className="regisForm-format">
         <h3>Đăng ký</h3>
-        <form>
-          <input
-            type="text"
-            name="username"
-            placeholder="Tên đăng nhập"
-            value={username}
-            onChange={(e) => handleChange(e)}
+        <form autoComplete="on">
+        <input
+            type="email" name="email" placeholder="Email" value={email}
+            onChange={(e) => setEmail(e.target.value)} required
+          />
+          <input    
+            type="text" name="fullname" placeholder="Họ và tên" value={name}
+            onChange={(e) => setName(e.target.value)} required
+          />
+          
+          <input type="password" name="password" placeholder="Mật khẩu" value={password}
+            onChange={(e) => setPassword(e.target.value)} pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" 
+            title="Mật khẩu tối thiểu 6 kí tự"
             required
           />
-          <input
-            type="text"
-            name="fullname"
-            placeholder="Họ và tên"
-            value={fullname}
-            onChange={(e) => handleChange(e)}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => handleChange(e)}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Mật khẩu"
-            value={password}
-            onChange={(e) => handleChange(e)}
-            required
-          />
-          <input
-            type="password"
-            name="confirmpassword"
-            placeholder="Nhập lại mật khẩu"
-            value={password}
-            onChange={(e) => handleChange(e)}
-            required
+          <input type="password" name="confirmpassword" placeholder="Nhập lại mật khẩu" value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)} required
           />
           <button onClick={registerHandle} type="submit" name="submit">
             Đăng ký

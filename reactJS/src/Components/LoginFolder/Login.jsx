@@ -7,25 +7,31 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import fb from "../Images/fb.png";
 import gg from "../Images/gg.png";
+import axios from "axios";
 
 function Login(props) {
-  const [username, setUsername] = useState("");
+  const [useremail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
-  const usernamechange = (event) => {
-    setUsername(event.target.value);
-  };
-  const passwordchange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleClick = () => {
-    if (username !== "" && password !== "") {
-      props.Log_in();
-      navigate("/MainPage");
-      console.log(props.isLoggedin);
-    }
+  const handleClick = async(e) => {
+      e.preventDefault();
+      let user = {
+        email: useremail,
+        password: password
+      }
+      let config = {
+        headers:{
+          "Content-Type": "application/json",
+        }
+      };
+      await axios.post('http://localhost:3001/user/login', user, config)
+      .then((res)=>{
+        props.Log_in();
+        navigate("/MainPage");
+        console.log(props.isLoggedin);
+      })
+      .catch((err) => {console.log("Error" + err);})
   };
   return (
     <div className="loginmain">
@@ -38,22 +44,13 @@ function Login(props) {
         <h3>Đăng nhập</h3>
         <form action="">
           <input
-            value={username}
-            onChange={usernamechange}
-            type="text"
-            name="username"
-            id=""
-            placeholder="Email hoặc số điện thoại"
+            value={useremail} onChange={(e)=>setEmail(e.target.value)} type="text"
+            name="username" placeholder="Email"
             required
           />
           <input
-            onChange={passwordchange}
-            type="password"
-            value={password}
-            name="password"
-            id=""
-            placeholder="Mật khẩu"
-            required
+            onChange={(e) => setPassword(e.target.value)} type="password" value={password}
+            name="password" placeholder="Mật khẩu" required
           />
           <button name="submit" type="submit" onClick={() => handleClick()}>
             Đăng nhập
