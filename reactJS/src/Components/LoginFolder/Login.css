@@ -87,6 +87,7 @@ margin-bottom: 15px;
 }
 .loginForm p{
     margin: 16px 0;
+    font-weight: 600;
 }
 @media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
     .loginmain {

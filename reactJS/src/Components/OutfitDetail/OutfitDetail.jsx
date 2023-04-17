@@ -88,6 +88,9 @@ function OutfitDetail()
                     </div>
                 </div>
             </div>
+            <div className="add_all_to_cart">
+                <button>Thêm tất cả vào giỏ hàng</button>
+            </div>
         </div>
     );
 }

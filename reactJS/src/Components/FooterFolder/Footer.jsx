@@ -53,7 +53,7 @@ function Header() {
                     <div className="footer__infor-introduce-infor infor">
                         Trường Đại học Công nghệ Thông tin- ĐHQG TPHCM<br />
                         <b>Số điện thoại:</b> 0799684120<br />
-                        <b>Email:</b> TechieShop.Corner@gmail.com
+                        <b>Email:</b> DTClothe23@gmail.com
                     </div>
                 </div>
 
@@ -93,8 +93,8 @@ function Header() {
                         <Accordion.Header>Thông tin liên hệ</Accordion.Header>
                         <Accordion.Body>
                             Trường Đại học Công nghệ Thông tin- ĐHQG TPHCM<br />
-                            <b>Số điện thoại:</b> 0799684120<br />
-                            <b>Email:</b> TechieShop.Corner@gmail.com
+                            <b>Số điện thoại: </b>0799684120<br />
+                            <b>Email: </b>DTClothe23@gmail.com
                         </Accordion.Body>
                     </Accordion.Item>
                     <hr />
