@@ -1,7 +1,7 @@
 .loginForm {
     background-color: #ccc;
     width: 25%;
-    height: 20rem;
+    height: auto;
     display: block;
     border: solid 2px black;
     border-radius: 30px;
@@ -53,9 +53,7 @@ margin-bottom: 15px;
     height: 70vh;
     align-items: center;
     margin-top: 70px;
-
 }
-
 .logo {
     width: 15vw;
     height: 19vw;
@@ -75,4 +73,71 @@ margin-bottom: 15px;
     font-size: 80px;
     margin: 0px;
     color: darkblue;
+}
+.fb-and-gg{
+    display: inline-flex;
+}
+.fb-and-gg img{
+    width: 60px;
+    height: 60px;
+    margin: 0 24px;
+}
+.fb-and-gg img:hover{
+    cursor: pointer;
+}
+.loginForm p{
+    margin: 16px 0;
+    font-weight: 600;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
+    .loginmain {
+        background-color: #fff;
+        display: block;
+        text-align: -webkit-center;
+        margin: 90px 0 20px 0;
+        height: auto;
+    }
+    .logomain{
+        display: none;
+    }
+    .loginForm{
+        background-color: #fff;
+        width: 60%;
+        height: 100%;
+    }
+    .loginForm form input{
+        border-bottom:1px solid #ccc ;
+    }
+    .loginForm p:last-child{
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 46.1875em){
+    .loginmain {
+        background-color: #fff;
+        display: block;
+        text-align: -webkit-center;
+        margin: 90px 0 20px 0;
+        height: auto;
+    }
+    .logomain{
+        display: none;
+    }
+    .loginForm{
+        background-color: #fff;
+        width: 70%;
+        height: 100%;
+    }
+    .loginForm h3{
+        font-size: 20px;
+    }
+    .loginForm form input{
+        border-bottom:1px solid #ccc ;
+    }
+    .loginForm p:last-child{
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
 }

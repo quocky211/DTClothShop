@@ -11,8 +11,9 @@ function Register() {
     fullname: "",
     email: "",
     password: "",
+    confirmpassword: "",
   });
-  const { username, fullname, email, password } = user;
+  const { username, fullname, email, password, confirmpassword} = user;
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -23,7 +24,8 @@ function Register() {
       user.email !== "" &&
       user.fullname !== "" &&
       user.password !== "" &&
-      user.username !== ""
+      user.username !== "" &&
+      user.confirmpassword !== ""
     ) {
       navigate("/Login");
     }
@@ -67,6 +69,14 @@ function Register() {
             type="password"
             name="password"
             placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <input
+            type="password"
+            name="confirmpassword"
+            placeholder="Nhập lại mật khẩu"
             value={password}
             onChange={(e) => handleChange(e)}
             required

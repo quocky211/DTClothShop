@@ -52,7 +52,50 @@ class ProductController {
             .then((product) => res.json(product))
             .catch(next);
     }
+    // GET /
+    ProductShow(req, res, next) {
+        const query = {};
+        if (req.query.price) {
+            if (req.query.price == 1) {
+                query.price = { $lt: 100000 };
+            } // giá nhỏ hơn giá được truyền từ giao diện
+            if (req.query.price == 2) {
+                query.price = { $lt: 300000, $gt: 100000 };
+            }
+            if (req.query.price == 3) {
+                query.price = { $lt: 500000, $gt: 300000 };
+            }
+            if (req.query.price == 4) {
+                query.price = { $gt: 500000 };
+            }
+        }
+        if (req.query.category_detail_id) {
+            query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
+        }
+        Product.find( query )
+            .exec()
+            .then((product) => res.json(product))
+            .catch(next);
+    }
 }
+//đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
+// function sortProducts(sortOrder) {
+//     axios.get('/products', {
+//         params: {
+//           sortBy: 'price',
+//           sortOrder: sortOrder
+//         }
+//       })
+//       .then((response) => {
+//         console.log(response.data);
+//         // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm đã sắp xếp
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+// }
+
+
 
 module.exports = new ProductController();
 // export default SiteController;

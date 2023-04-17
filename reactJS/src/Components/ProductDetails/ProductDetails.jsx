@@ -29,11 +29,19 @@ export function ProductDetails(props) {
       return item.matype = typedetail.matype;
     }
   )
+  
   let settings = {
     arrows: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 4,
+    slidesToScroll: 1,
+  };
+  let settingsmobile = {
+    arrows: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 2,
     slidesToScroll: 1,
   };
   var vnd = Intl.NumberFormat("vi-VN", {
@@ -79,6 +87,7 @@ export function ProductDetails(props) {
                 {product.infor}
               </Accordion.Body>
             </Accordion.Item>
+            <hr />
             <Accordion.Item eventKey="1">
               <Accordion.Header>Bảng size</Accordion.Header>
               <Accordion.Body>
@@ -90,6 +99,7 @@ export function ProductDetails(props) {
                 <img src={size} alt="size" />
               </Accordion.Body>
             </Accordion.Item>
+            <hr />
             <Accordion.Item eventKey="2">
               <Accordion.Header>Quy định đổi trả</Accordion.Header>
               <Accordion.Body>
@@ -114,7 +124,8 @@ export function ProductDetails(props) {
       <br></br>
       <hr />
       <div className="related-product">
-        <p>Có thể bạn sẽ thích</p>
+        <h3>Có thể bạn sẽ thích</h3>
+        <div className="non-mobile-related">
         <Slider {...settings}>
           {FakeData[0].map((item) =>
             productID !== item.masp
@@ -123,6 +134,17 @@ export function ProductDetails(props) {
             &&
             <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
         </Slider>
+        </div>
+        <div className="mobile-related">
+        <Slider {...settingsmobile}>
+          {FakeData[0].map((item) =>
+            productID !== item.masp
+            &&
+            item.type === product.type
+            &&
+            <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+        </Slider>
+        </div>
       </div>
     </div>
   );

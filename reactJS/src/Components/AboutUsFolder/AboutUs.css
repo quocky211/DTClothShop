@@ -48,18 +48,68 @@
 .main-about-content img{
     max-width: 100%;
 }
-.main-about-content map{
+/* .main-about-content map{
     height: 40rem;
+} */
+.contact{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    justify-content: space-evenly;
 }
-.main-about-content iframe{
+.contact .map iframe{
     z-index: 3;
-    height: 40rem;
+    height: 50vh;
     width: 100%;
     padding: 0px;
     border-width: 0px;
     margin: 0px;
-    left: 0px;
-    top: 0px;
     touch-action: pan-x pan-y;
     cursor: url(https://maps.gstatic.com/mapfiles/openhand_8_8.cur), default;
+}
+.contact_info{
+    font-size: 1.2rem;
+    font-style: normal;
+}
+.contact_address ul.list_info li:first-child{
+    list-style-type: none;
+    text-align: left;
+}
+.contact_address ul.list_info li{
+    list-style-type: square;
+    text-align: left;
+}
+.contact_time ul.list_info li{
+    list-style-type: square;
+    text-align: left;
+}
+.main-about-content iframe{
+    
+}
+@media only screen and (max-width: 46.1875em) {
+    .about-content h2{
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    .about-content h1{
+        font-size: 24px;
+    }
+    .about-content h3{
+        font-size: 16px;
+    }
+    .about-content p{
+        padding: 0;
+    }
+    .about-content{
+        padding: 80px 16px 0px 16px;
+    }
+    /* .main-about-content iframe{
+        height: 70%;
+    } */
+    .contact{
+        grid-template-columns: auto;
+        grid-template-rows: 1fr 1.2fr;
+    }
+    .contact_info{
+        font-size: 1rem;
+    }
 }

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Log_in } from "../../actions";
 import { connect } from "react-redux";
 import { useState } from "react";
+import fb from "../Images/fb.png";
+import gg from "../Images/gg.png";
 
 function Login(props) {
   const [username, setUsername] = useState("");
@@ -57,6 +59,11 @@ function Login(props) {
             Đăng nhập
           </button>
         </form>
+        <p>Hoặc</p>
+        <div className="fb-and-gg">
+          <img src={fb} alt="fb" />
+          <img src={gg} alt="fb" />
+        </div>
         <br></br>
         <Link to="/Register">
           <p>Bạn chưa có tài khoản? Đăng ký ngay</p>

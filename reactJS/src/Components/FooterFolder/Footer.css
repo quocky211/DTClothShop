@@ -87,12 +87,12 @@
     display: none;
 }
 .accordion-body{
-    text-align: justify;
+    text-align: center;
     padding: 0 8px;
     font-size: 18px;
 } 
-.accordion-item:last-child .accordion-body{
-    text-align: center;
+.accordion-item:first-child .accordion-body{
+    text-align: justify;
 }
 @media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
     .footer_infor {

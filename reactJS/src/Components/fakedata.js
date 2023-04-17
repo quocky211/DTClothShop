@@ -153,7 +153,7 @@ export const FakeData = [
     [
         {
             maoutfit: "OF1",
-            name:"Outfit Doraemon cat tee",
+            name:"Outfit Doraemon cat tee de mat bao dep bao de thuong",
             content:"Bộ phối được kết hợp từ áo thun Streetwear đến từ Bộ sưu tập đặc biệt DORAEMON và một chiếc váy jean form dáng chữ A. Đây có lẽ là một outfit nữ cực kì năng động dành cho các nàng ưa chuộng gu thời trang của Levents",
             image:outfit1,
             maao:"SP01",
