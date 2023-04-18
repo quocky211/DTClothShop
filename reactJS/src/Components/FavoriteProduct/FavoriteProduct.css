@@ -1,0 +1,37 @@
+.main-container {
+  width: 80%;
+  padding: 24px 8px;
+  margin: 16px auto;
+  display: flex;
+  text-align: justify;
+}
+.main-container .underline {
+  text-decoration: underline;
+}
+.main {
+  margin-top: 70px;
+}
+.main h1 {
+  margin: 20px 0;
+}
+.row {
+  text-align: center;
+}
+
+.products {
+  flex: 3;
+}
+
+.shopping-buy-btn {
+  text-align: center!;
+  font-size: 18px;
+  background-color: #6851a8;
+  /* width: fit-content; */
+  color: white;
+  padding: 15px;
+  border: #0b3296 2px solid;
+  border-radius: 10px;
+}
+.shopping-buy-btn:hover {
+  background-color: #5a82e7;
+}
