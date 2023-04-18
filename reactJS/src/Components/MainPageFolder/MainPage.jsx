@@ -11,7 +11,8 @@ import { connect } from "react-redux"
 import { Off_Noti } from '../../actions';
 import { FakeData } from "../fakedata";
 import imgmobile from "../Images/banner/img-mobile.png"
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 
 function MainPage({ noti, Off_Noti }) {
 
@@ -39,6 +40,7 @@ function MainPage({ noti, Off_Noti }) {
     };
     return (
         <div className="mainPage">
+            <Header/>
             <Slideshow />
             <div className="img-mobile">
                 <img src={imgmobile} alt="imgmobile" />
@@ -88,6 +90,7 @@ function MainPage({ noti, Off_Noti }) {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

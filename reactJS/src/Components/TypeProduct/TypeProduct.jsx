@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { FakeData } from "../fakedata";
 import ContainerItem from '../ContainerItem';
 import "./TypeProduct.css";
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function TypeProduct() {
     const { typeID } = useParams();
 
@@ -18,6 +20,7 @@ function TypeProduct() {
     );
     return (
         <div className="type-product-container">
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
@@ -31,6 +34,7 @@ function TypeProduct() {
                     )
                 )}
             </div>
+            <Footer/>
         </div>
     );
 }

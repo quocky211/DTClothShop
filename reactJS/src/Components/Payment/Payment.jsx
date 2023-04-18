@@ -1,6 +1,7 @@
 import "./Payment.css"
 import React from "react";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function Payment({ DeleteTorage }) {
 
     localStorage.removeItem('gio')
@@ -12,6 +13,7 @@ function Payment({ DeleteTorage }) {
 
     return (
         <div className="main-container-payment">
+            <Header/>
             <div className="form-payment-container">
                 {/* <div className="form-payment">
                     <input type="radio" name="payment" value="cod" id="payment_cod" onClick={() => setVisible(false)}/>Thanh toán khi nhận hàng (COD)
@@ -30,6 +32,7 @@ function Payment({ DeleteTorage }) {
                 </div>} */}
                
             </div>
+            <Footer/>
         </div>
     )
 }

@@ -4,7 +4,8 @@ import logo from "../Images/logo.webp";
 import { useNavigate } from "react-router-dom";
 import { NavLink as Link } from "react-router-dom";
 import axios from "axios";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function Register() {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -50,6 +51,7 @@ function Register() {
 
   return (
     <div className="regismain">
+      <Header/>
       <div className="logomain">
         <img className="logo" src={logo} alt="logo"></img>
         <p>TechieShop</p>
@@ -83,6 +85,7 @@ function Register() {
           <p>Bạn đã có tài khoản? Đăng nhập ngay </p>
         </Link>
       </div>
+      <Footer/>
     </div>
   );
 }

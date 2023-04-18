@@ -2,7 +2,8 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { Link, useParams } from "react-router-dom";
 import { FakeData } from "../fakedata";
 import "./OutfitDetail.css";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 
 function OutfitDetail()
 {   
@@ -34,6 +35,7 @@ function OutfitDetail()
 
     return (
         <div className="outfit-detail-container">
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/Outfits">Bộ phối</Breadcrumb.Item>
@@ -91,6 +93,7 @@ function OutfitDetail()
             <div className="add_all_to_cart">
                 <button>Thêm tất cả vào giỏ hàng</button>
             </div>
+            <Footer/>
         </div>
     );
 }

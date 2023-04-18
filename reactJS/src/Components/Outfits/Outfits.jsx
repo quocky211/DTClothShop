@@ -2,10 +2,12 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { FakeData } from "../fakedata";
 import { Link } from "react-router-dom";
 import "./Outfits.css";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function Outfits() {
     return (
         <div className="outfits-container">
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item active>Bộ phối</Breadcrumb.Item>
@@ -24,6 +26,7 @@ function Outfits() {
 
                 }
             </div>
+            <Footer/>
         </div>
     );
 }

@@ -3,7 +3,8 @@ import { NavLink as Link } from "react-router-dom";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function ShipAddress() {
     const location = useLocation();
     const data = location.state?.data;
@@ -79,6 +80,7 @@ function ShipAddress() {
 
     return (
         <div className="main-container-ship">
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/ShoppingCart">Giỏ hàng</Breadcrumb.Item>
@@ -190,6 +192,7 @@ function ShipAddress() {
                     <button type="submit" name="submit" className="btn-Submit">Tiếp tục</button>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

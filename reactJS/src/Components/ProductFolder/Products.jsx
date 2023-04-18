@@ -6,6 +6,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FakeData } from "../fakedata";
 import ContainerItem from "../ContainerItem";
 import filtericon from "../Images/filter-icon.png";
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function Products() {
     const [show, setShow] = useState(false);
 
@@ -14,6 +16,7 @@ function Products() {
 
     return (
         <div>
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item active>Sản phẩm</Breadcrumb.Item>
@@ -106,6 +109,7 @@ function Products() {
             <div className="all-product-store">
                 {FakeData[0].map((item, index) => <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
             </div>
+            <Footer/>
         </div>
     );
 }

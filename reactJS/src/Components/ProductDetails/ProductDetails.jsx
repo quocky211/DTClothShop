@@ -10,7 +10,8 @@ import size from "../Images/size.jpg";
 import Slider from "react-slick";
 import ContainerItem from "../ContainerItem";
 import likeicon from "../Images/likeicon.png";
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 
 export function ProductDetails(props) {
   const { productID } = useParams();
@@ -50,6 +51,7 @@ export function ProductDetails(props) {
   });
   return (
     <div className="product-detail-container">
+      <Header/>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
         <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
@@ -146,6 +148,7 @@ export function ProductDetails(props) {
         </Slider>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

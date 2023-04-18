@@ -8,6 +8,8 @@ import { useState } from "react";
 import fb from "../Images/fb.png";
 import gg from "../Images/gg.png";
 import axios from "axios";
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 
 function Login(props) {
   const [useremail, setEmail] = useState("");
@@ -34,7 +36,10 @@ function Login(props) {
       .catch((err) => {console.log("Error" + err);})
   };
   return (
-    <div className="loginmain">
+    <div className="">
+            <Header/>
+<div className="loginmain">
+
       <div className="logomain">
         <img className="logo" alt="" src={logo}></img>
         <p>TechieShop</p>
@@ -66,7 +71,11 @@ function Login(props) {
           <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
         </Link>
       </div>
+
     </div>
+    <Footer/>
+    </div>
+    
   );
 }
 

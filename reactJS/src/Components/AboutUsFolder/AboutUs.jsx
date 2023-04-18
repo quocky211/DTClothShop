@@ -4,9 +4,12 @@ import "./AboutUs.css";
 import about1 from "../Images/about/about1.jpg";
 import about2 from "../Images/about/about2.jpg";
 import about3 from "../Images/about/about3.png";
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function About() {
   return (
     <div className="">
+      <Header/>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
         <Breadcrumb.Item active>Giới thiệu</Breadcrumb.Item>
@@ -58,6 +61,7 @@ function About() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
