@@ -101,7 +101,7 @@ class UserController {
     }
 
     TestGetListUser(req, res, next) {
-        console.log(req.headers);
+        // console.log(req.headers);
         const list = [
             {
                 email: 'aaaaa@gmail.com',

@@ -52,7 +52,7 @@ class ProductController {
             .then((product) => res.json(product))
             .catch(next);
     }
-    // GET /
+    // GET /product/
     ProductShow(req, res, next) {
         const query = {};
         if (req.query.price) {
@@ -72,7 +72,7 @@ class ProductController {
         if (req.query.category_detail_id) {
             query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
         }
-        Product.find( query )
+        Product.find(query)
             .exec()
             .then((product) => res.json(product))
             .catch(next);
@@ -94,8 +94,6 @@ class ProductController {
 //         console.log(error);
 //       });
 // }
-
-
 
 module.exports = new ProductController();
 // export default SiteController;
