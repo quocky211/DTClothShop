@@ -101,9 +101,15 @@ const router = createBrowserRouter([
         element: <OutfitDetail />,
       },
       {
+
         path: "Dashboard",
         element: <Dashboard />,
       },
+
+        path: "Admin",
+        element: <Dashboard/>
+      }
+
     ],
   },
 ]);

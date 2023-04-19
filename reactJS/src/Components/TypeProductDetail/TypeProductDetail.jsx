@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { FakeData } from "../fakedata";
 import ContainerItem from '../ContainerItem';
 import "./TypeProductDetail.css"
-
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 function TypeProductDetail() {
     const { typedetailID } = useParams();
     var typedetail = FakeData[3].find(
@@ -13,6 +14,7 @@ function TypeProductDetail() {
     );
     return (
         <div className="type-product-container">
+            <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
@@ -24,6 +26,7 @@ function TypeProductDetail() {
                     <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />
                 )}
             </div>
+            <Footer/>
         </div>
     );
 }

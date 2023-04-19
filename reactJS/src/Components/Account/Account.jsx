@@ -1,4 +1,6 @@
 import "./Account.css";
+import Header from "../HeaderFolder/Header";
+import Footer from "../FooterFolder/Footer";
 import { FakeData } from "../fakedata";
 
 
@@ -11,7 +13,9 @@ function Account()
     )
 
     return(
-        <div className="account-info-container">
+        <div className="">
+            <Header/>
+            <div className="account-info-container">
             <div className="account-info">
                 <h3>Thông tin cá nhân</h3>
                 <table cellSpacing={20}>
@@ -70,6 +74,10 @@ function Account()
                 </table>
             </div>
         </div>
+        <Footer/>
+
+        </div>
+        
     );
 }
 export default Account;
