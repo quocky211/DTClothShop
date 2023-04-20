@@ -18,7 +18,13 @@ import TypeProduct from "./Components/TypeProduct/TypeProduct";
 import TypeProductDetail from "./Components/TypeProductDetail/TypeProductDetail";
 import Blogs from "./Components/Blogs/Blogs";
 import Account from "./Components/Account/Account";
-import Dashboard from "./Components/Admin/Dashboard/Dashboard";
+import Home from "./Components/Admin/Home/Home";
+import UserList from "./Components/Admin/UserList/UserList";
+import User from "./Components/Admin/User/User";
+import NewUser from "./Components/Admin/NewUser/NewUser";
+import ProductList from "./Components/Admin/ProductList/ProductList";
+import Product from "./Components/Admin/Product/Product";
+import NewProduct from "./Components/Admin/NewProduct/NewProduct";
 import { Provider } from "react-redux";
 import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
@@ -101,13 +107,34 @@ const router = createBrowserRouter([
         element: <OutfitDetail />,
       },
       {
-        path: "Dashboard",
-        element: <Dashboard />,
+        path: "Admin",
+        element: <Home />,
       },
       {
-        path: "Admin",
-        element: <Dashboard />,
+        path: "Admin/Users",
+        element: <UserList />,
       },
+      {
+        path: "Admin/User/:userId",
+        element: <User />,
+      },
+      {
+        path: "Admin/NewUser",
+        element: <NewUser />,
+      },
+      {
+        path:"Admin/Products",
+        element: <ProductList />,
+      },
+      {
+        path:"Admin/Product/:productId",
+        element: <Product />,
+      },
+      {
+        path:"Admin/NewProduct",
+        element: <NewProduct />,
+      }
+      
     ],
   },
 ]);

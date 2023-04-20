@@ -1,3 +1,7 @@
+.container-admin{
+    display: flex;
+    margin-top: 15px;
+}
 .home-admin{
     flex: 4;
 }

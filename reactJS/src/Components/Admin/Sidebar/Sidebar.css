@@ -5,6 +5,15 @@
     position: sticky;
     top: 50px;
 }
+.link-admin,
+.link-admin:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.otherspage{
+    flex: 4;
+}
 .sidebarWrapper{
     padding: 20px;
     color: #555;
