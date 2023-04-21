@@ -10,16 +10,12 @@ export default function Topbar() {
         <div className="topbarWrapper">
             <div className="topLeft">
                 <span className="logo">
-                    DTClothe
+                    DTCloth
                 </span>
             </div>
             <div className="topRight">
                 <div className="topbarIconsContainer">
                     <NotificationsNone/>
-                    <span className="topIconBag">2</span>
-                </div>
-                <div className="topbarIconsContainer">
-                    <Language/>
                     <span className="topIconBag">2</span>
                 </div>
                 <div className="topbarIconsContainer">

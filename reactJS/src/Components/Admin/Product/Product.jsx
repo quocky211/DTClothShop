@@ -15,10 +15,7 @@ export default function Product() {
         <Sidebar />
         <div className="product">
           <div className="productTitleContainer">
-            <h1 className="productTitle">Product</h1>
-            <Link to="/Admin/NewProduct">
-              <button className="productAddButton">Create</button>
-            </Link>
+            <h1 className="productTitle">Sản phẩm</h1>
           </div>
           <div className="productTop">
             <div className="productTopLeft">

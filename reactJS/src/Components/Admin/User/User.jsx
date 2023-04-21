@@ -3,7 +3,6 @@ import './User.css';
 import Topbar from '../Topbar/Topbar';
 import Sidebar from '../Sidebar/Sidebar';
 import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from '@mui/icons-material';
-import {Link} from 'react-router-dom'
 export default function User() {
   return (
     <div>
@@ -12,10 +11,7 @@ export default function User() {
           <Sidebar/>
             <div className="user">
                 <div className="userTitleContainer">
-                    <h1 className="userTitle">Edit User</h1>
-                    <Link to="/Admin/NewUser">
-                      <button className="userAddButton">Create</button>
-                    </Link>
+                    <h1 className="userTitle">Sửa thông tin người dùng</h1>
                 </div>
                 <div className="userContainer">
                   <div className="userShow">

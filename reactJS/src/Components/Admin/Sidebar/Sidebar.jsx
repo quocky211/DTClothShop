@@ -13,6 +13,14 @@ import {
   Timeline,
   TrendingUp,
   WorkOutline,
+  PersonAddAlt,
+  AddBusiness,
+  List,
+  CreditCard,
+  FormatAlignJustify,
+  Article,
+  EditNote
+
 } from "@mui/icons-material";
 import { Link } from  'react-router-dom';
 export default function Sidebar() {
@@ -25,75 +33,73 @@ export default function Sidebar() {
             <Link to="/Admin" className="link-admin">
               <li className="sidebarListItem active">
                 <LineStyle className="sidebarIcon" />
-                Home
+                Trang chủ
               </li>
             </Link>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
+              Thống kê
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitile">Quick Menu</h3>
+          <h3 className="sidebarTitile">Menu</h3>
           <ul className="sidebarList">
             <Link to="/Admin/Users" className="link-admin">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
-                User
+                Người dùng
+              </li>
+            </Link>
+            <Link to="/Admin/NewUser" className="link-admin">
+              <li className="sidebarListItem">
+                <PersonAddAlt className="sidebarIcon" />
+                Thêm người dùng
               </li>
             </Link>
             <Link to="/Admin/Products" className="link-admin">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Products
+                Sản phẩm
               </li>
             </Link>
+            <Link to="/Admin/NewProduct" className="link-admin">
+              <li className="sidebarListItem">
+                <AddBusiness className="sidebarIcon" />
+                Thêm sản phẩm
+              </li>
+            </Link>
+            <Link to="/Admin/Products" className="link-admin">
+              <li className="sidebarListItem">
+                <CreditCard className="sidebarIcon" />
+                Order
+              </li>
+            </Link>
+          </ul>
+        </div>
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitile">Catagory</h3>
+          <ul className="sidebarList">
             <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
+              <List className="sidebarIcon" />
+              Danh mục
             </li>
             <li className="sidebarListItem">
-              <Leaderboard className="sidebarIcon" />
-              Reports
+              <FormatAlignJustify className="sidebarIcon" />
+              Loại
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitile">Notifications</h3>
+          <h3 className="sidebarTitile">Blog</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
+              <Article className="sidebarIcon" />
+              Bài viết
             </li>
             <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitile">Staff</h3>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
-              Reports
+              <EditNote className="sidebarIcon" />
+              Thêm bài viết
             </li>
           </ul>
         </div>
