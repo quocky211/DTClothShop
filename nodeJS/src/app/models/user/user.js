@@ -10,7 +10,7 @@ const User = new Schema(
         name: { type: String, require: true },
         password: { type: String, require: true },
         avatar: { type: String, require: false },
-        level: { type: Boolean, require: true, default: false },
+        level: { type: Boolean, require: false, default: false },
     },
     {
         _id: false,

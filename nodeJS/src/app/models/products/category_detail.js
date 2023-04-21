@@ -7,6 +7,7 @@ const CategoryDetail = new Schema(
         _id: { type: Number },
         name: { type: String },
         category_id: { type: Number, ref: 'category' },
+        img_size: { type: String },
     },
     {
         _id: false,
