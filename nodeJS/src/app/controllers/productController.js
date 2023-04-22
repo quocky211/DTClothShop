@@ -26,15 +26,36 @@ class ProductController {
             .sort({ createdAt: -1 })
             .limit(10)
             .exec()
-            .then((product) => res.json(product));
+            .then((product) => res.json(product))
+            .catch(next);
     }
 
-    // GET /product/:id
-    ProductDetail(req, res, next) {
+    // GET /product
+    Product(req, res, next) {
         Product.find({ _id: req.params.id })
             .exec()
             .then((product) => res.json(product))
             .catch(next);
+    }
+
+    // GET /product/:id/product-detail
+    ProductDetail(req, res, next) {
+        if (req.query.color) {
+            ProductDetail.find({ product_id: req.params.id, color: req.query.color })
+                .exec()
+                .then((product) => res.json(product))
+                .catch(next);
+        } else {
+            ProductDetail.find({ product_id: req.params.id })
+                .exec()
+                .then((product) => res.json(product))
+                .catch(next);
+        }
+
+        // ProductDetail.find({ product_id: req.params.id })
+        //     .populate('product_id')
+        //     .exec()
+        //     .then((productDetail) => res.json(productDetail));
     }
 
     // GET /category/:id

@@ -8,6 +8,18 @@ GET http://localhost:3001/search?name=jean
 ### sản phẩm giảm giá: /product/discount
 GET http://localhost:3001/product/discount
 
+### lấy chi tiết sản phẩm dựa theo product_id
+### lấy size theo màu
+### /product/:id/product-detail?color:color
+### lưu ý là từ phía sau dấu "?" không có cũng không sao
+### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
+GET http://localhost:3001/product/5/product-detail?color=green
+###
+GET http://localhost:3001/product/5/product-detail
+
+### lấy sản phẩm dựa theo t_id /product/:id
+GET http://localhost:3001/product/5
+
 ### bán chạy: /product/top-selling
 GET http://localhost:3001/product/top-selling
 
@@ -41,11 +53,10 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "louis0dadtart0ggy@gmail.com",
+    "email": "lou011isdadtart0ggy@gmail.com",
     "password":"123456",
     "confirmPassword": "12456",
     "name": "Lê Minh Đại",
-    "avatar": "avatar",
     "level": true
 }
 
