@@ -1,8 +1,9 @@
 const httpError = require('http-errors');
-const User = require('../models/user/user');
 const { userValidate, loginValidate } = require('../../helpers/validation');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../helpers/jwt_service');
 const client = require('../../helpers/connection_redis');
+
+const User = require('../models/user/user');
 class UserController {
     async Register(req, res, next) {
         try {

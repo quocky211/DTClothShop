@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 // const mongooseDelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
@@ -10,6 +11,8 @@ const User = new Schema(
         name: { type: String, require: true },
         password: { type: String, require: true },
         avatar: { type: String, require: false },
+        gender: { type: String },
+        birthday: { type: Date },
         level: { type: Boolean, require: false, default: false },
     },
     {
@@ -46,6 +49,7 @@ User.methods.isCheckPassword = async function (password) {
 //     deletedAt: true,
 // });
 User.plugin(AutoIncrement, { id: 'user_id_counter' });
+User.plugin(mongoosePaginate);
 
 // mongoose.model('ModelName', mySchema);
 module.exports = mongoose.model('user', User);

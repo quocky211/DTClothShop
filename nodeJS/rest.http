@@ -1,6 +1,53 @@
 # trang admin:
 # list sản phẩm GET /admin/product?page=:page(có phân trang)
-GET http://localhost:3001/admin/product
+GET http://localhost:3001/admin/product?page=3
+
+### thêm sản phẩm: /admin/product/store
+POST http://localhost:3001/admin/product/store
+Content-Type: application/json
+
+{
+    "category_id": 3,
+    "category_detail_id": 1,
+    "name": "Test add productttttttttttt",
+    "description": "descriptiondescriptiondescriptiondescription",
+    "price": 100000,
+    "discount": 0.01,
+    "weight": 0.01,
+    "material": "materialmaterialmaterialmaterial",
+    "featured": false
+}
+
+### thêm chi tiết sản phẩm: /admin/product-detail/store
+POST http://localhost:3001/product-detail/store
+
+### sửa sản phẩm: /admin/product/edit/:id (chưa xong)
+PUT http://localhost:3001/admin/product/edit/:id
+
+### xóa sản phẩm: /admin/product/delete/:id (chưa xong)
+DELETE  http://localhost:3001/admin/product/delete/100
+
+### list user có level = false /user/
+### /admin/user/show?page=:page (có phân trang)
+GET http://localhost:3001/admin/user/show?page=1
+
+### thêm user /admin/user/store (chưa xong)
+POST http://localhost:3001/admin/user/store
+
+### sửa user /admin/user/edit/:id (chưa xong)
+PUT  http://localhost:3001/admin/user/edit/2
+
+### xóa user /admin/user/delete/:id
+DELETE http://localhost:3001/admin/user/delete/1
+
+
+### show order /admin/order/show/
+GET http://localhost:3001/admin/order/show/
+
+### show order-detail dựa vào order_id /admin/order/:id/order-detail
+GET http://localhost:3001/admin/order/4/order-detail
+
+
 
 ### search header GET /search?name=:name
 GET http://localhost:3001/search?name=jean

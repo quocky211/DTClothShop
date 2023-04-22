@@ -38,7 +38,7 @@ class ProductController {
             .catch(next);
     }
 
-    // GET /product/:id/product-detail
+    // GET /product/:id/product-detail?color=:slug
     ProductDetail(req, res, next) {
         if (req.query.color) {
             ProductDetail.find({ product_id: req.params.id, color: req.query.color })

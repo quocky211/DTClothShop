@@ -2,9 +2,22 @@ const express = require('express');
 const adminController = require('../app/controllers/adminController');
 const router = express.Router();
 
+// product
 router.get('/product', adminController.ShowProduct);
+router.get('/product/:id/product-detail', adminController.ShowProductDetail);
 router.post('/product/store', adminController.StoreProduct);
-router.put('/product/:id', adminController.UpdateProduct);
-router.delete('/product/:id', adminController.DestroyProduct);
+router.post('/product-detail/store', adminController.StoreProductDetail);
+router.put('/product/edit/:id', adminController.UpdateProduct);
+router.delete('/product/delete/:id', adminController.DestroyProduct);
+
+// user
+router.get('/user/show', adminController.ShowUser);
+router.post('/user/store', adminController.StoreUser);
+router.put('/user/edit/:id', adminController.EditUser);
+router.delete('/user/delete/:id', adminController.DestroyUser);
+
+// order /order/:id/order-detail
+router.get('/order/show', adminController.ShowOrder);
+router.get('/order/:id/order-detail', adminController.ShowOrderDetail);
 
 module.exports = router;
