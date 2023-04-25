@@ -2,15 +2,16 @@ const Order = require('../models/order/order');
 const OrderDetail = require('../models/order/order_detail');
 const Discount = require('../models/order/discount');
 const { multipleMongooseToObject } = require('../../util/mongoose');
+const https = require('https');
 
 class OrderController {
     // GET /product/discount
-    Discount(req, res, next) {
-        Product.find({ discount: { $ne: 0, $ne: null } })
-            .exec()
-            .then((product) => res.json(product))
-            .catch(next);
-    }
+    // Discount(req, res, next) {
+    //     Product.find({ discount: { $ne: 0, $ne: null } })
+    //         .exec()
+    //         .then((product) => res.json(product))
+    //         .catch(next);
+    // }
     // POST /order
     StoreOrder(req, res, next){
         const formDataOrder = {
@@ -21,7 +22,10 @@ class OrderController {
             pay_method: req.body.pay_method,
             discount_code: req.body.discount_code,
         };
-
+        if (req.body.pay_method = 'momo'){
+            const order = new Order(formDataOrder);
+            res.redirect('/order/checkout');
+        }
         const order = new Order(formDataOrder);
         order
             .save()
@@ -32,7 +36,8 @@ class OrderController {
     
 
     // GET /order/checkout
-    ShowCheckOut(res, req, next){
+    ShowCheckOut(){
+        // if req.body.paymethod = 'momo'
         var accessKey = 'w9gEg8bjA2AM2Cvr';
         var secretKey = 'mD9QAVi4cm9N844jh5Y2tqjWaaJoGVFM';
         var orderInfo = 'Thanh toán qua Ví MoMo';
@@ -82,7 +87,6 @@ class OrderController {
             signature : signature
         });
         //Create the HTTPS objects
-        const https = require('https');
         const options = {
             hostname: 'test-payment.momo.vn',
             port: 443,
@@ -94,7 +98,7 @@ class OrderController {
             }
         }
         //Send the request and get the response
-        const req = https.request(options, res => {
+        const re = https.request(options, res => {
             console.log(`Status: ${res.statusCode}`);
             console.log(`Headers: ${JSON.stringify(res.headers)}`);
             res.setEncoding('utf8');
@@ -109,13 +113,13 @@ class OrderController {
             });
         })
 
-        req.on('error', (e) => {
+        re.on('error', (e) => {
             console.log(`problem with request: ${e.message}`);
         });
         // write data to request body
         console.log("Sending....")
-        req.write(requestBody);
-        req.end();
+        re.write(requestBody);
+        re.end();
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
