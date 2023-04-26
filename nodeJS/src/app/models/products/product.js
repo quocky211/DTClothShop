@@ -12,7 +12,6 @@ const Product = new Schema(
         description: { type: String },
         price: { type: Number },
         discount: { type: Number },
-        weight: { type: Number },
         material: { type: String },
         featured: { type: Boolean, default: false, require: false },
     },

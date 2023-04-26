@@ -29,36 +29,13 @@ class AdminController {
 
     // POST /admin/product/store
     StoreProduct(req, res, next) {
-        // const formDataPro = {
-        //     category_id: req.body.category_id,
-        //     category_detail_id: req.body.category_detail_id,
-        //     name: req.body.name,
-        //     description: req.body.description,
-        //     price: req.body.price,
-        //     discount: req.body.discount,
-        //     weight: req.body.weight,
-        //     material: req.body.material,
-        //     featured: req.body.featured,
-        // };
+        // res.send(req.body);
 
-        // const product = new Product(req.body);
-        // product
-        //     .save()
-        //     .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNGGGG'))
-        //     .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
-
-        Product.create(req.body)
+        const product = new Product(req.body);
+        product
+            .save()
             .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNGGGG'))
             .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
-
-        // const producDetail = new ProductDetail(formDataProDetail);
-        // product.save.then(() => {
-        //     producDetail.save.then(() => res.send('thêm thành công'));
-        // });
-        // Product.find({}, 'name')
-        //     .populate('brand_id')
-        //     .exec()
-        //     .then((pro) => res.send(pro));
     }
 
     StoreProductDetail(req, res, next) {

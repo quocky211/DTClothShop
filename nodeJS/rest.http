@@ -1,25 +1,32 @@
 # trang admin:
 # list sản phẩm GET /admin/product?page=:page(có phân trang)
-GET http://localhost:3001/admin/product?page=3
+GET http://localhost:3001/admin/product?page=1
 
 ### thêm sản phẩm: /admin/product/store
 POST http://localhost:3001/admin/product/store
 Content-Type: application/json
 
 {
-    "category_id": 3,
-    "category_detail_id": 1,
-    "name": "Test add productttttttttttt",
-    "description": "descriptiondescriptiondescriptiondescription",
+    "category_id": 2,
+    "category_detail_id": 19,
+    "name": "Test add product",
+    "description": "descriptiondescriptiondescrip",
     "price": 100000,
     "discount": 0.01,
-    "weight": 0.01,
-    "material": "materialmaterialmaterialmaterial",
+    "material": "materialmaterial",
     "featured": false
 }
 
 ### thêm chi tiết sản phẩm: /admin/product-detail/store
-POST http://localhost:3001/product-detail/store
+POST http://localhost:3001/admin/product-detail/store
+Content-Type: application/json
+
+{
+    "product_id": 3,
+    "color": "greeeeeeeeeeeeeeeeeeeeen",
+    "size": "sizesizesizesizesizesizesizesizesizesizesizes",
+    "qty": 1000
+}
 
 ### sửa sản phẩm: /admin/product/edit/:id (chưa xong)
 PUT http://localhost:3001/admin/product/edit/:id
