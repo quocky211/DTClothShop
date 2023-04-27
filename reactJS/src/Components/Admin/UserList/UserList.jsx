@@ -12,7 +12,10 @@ export default function UserList() {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
-    setData(data.filter((item)=> item.id !== id))
+    if(window.confirm("Bạn có muốn xóa không?"))
+    {
+      setData(data.filter((item)=> item.id !== id))
+    }
   }
   
   const columns= [
@@ -40,7 +43,6 @@ export default function UserList() {
       )
     } },
   ];
-  
   
   return (
     <div>

@@ -1,26 +1,21 @@
 import React from "react";
-import "./NewProduct.css";
+import "./NewTypeProduct.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
-
-export default function NewProduct() {
+export default function NewTypeProduct() {
   return (
     <div>
       <Topbar />
       <div className="container-admin">
         <Sidebar />
-        <div className="newProduct">
-          <h1 className="newProductTitle">Thêm sản phẩm</h1>
-          <form className="newProductForm">
-            <div className="newProductItem">
-              <label>Image</label>
-              <input type="file" id="file" />
-            </div>
-            <div className="newProductItem">
+        <div className="newTypeProduct">
+          <h1 className="newTypeProductTitle">Thêm sản phẩm</h1>
+          <form className="newTypeProductForm">
+            <div className="newTypeProductItem">
               <label>Tên sản phẩm</label>
               <input type="text" placeholder="Áo thun DTCloth" />
             </div>
-            <div className="newProductItem">
+            <div className="newTypeProductItem">
               <label>Danh mục</label>
               <select>
                 <option value="">Áo</option>
@@ -28,7 +23,7 @@ export default function NewProduct() {
                 <option value="">Phụ kiện</option>
               </select>
             </div>
-            <div className="newProductItem">
+            <div className="newTypeProductItem">
               <label>Loại</label>
               <select>
                 <option value="">Áo thun</option>
@@ -37,23 +32,19 @@ export default function NewProduct() {
                 <option value="">Áo polo</option>
               </select>
             </div>
-            <div className="newProductItem">
-              <label>Màu sắc</label>
-              <input type="text" placeholder="Xanh" />
+            <div className="newTypeProductItem">
+              <label>Chất liệu</label>
+              <input type="text" placeholder="Vải Cotton" />
             </div>
-            <div className="newProductItem">
-              <label>Size</label>
-              <input type="text" placeholder="40" />
-            </div>
-            <div className="newProductItem">
+            <div className="newTypeProductItem">
               <label>Giá</label>
               <input type="text" placeholder="100.000đ" />
             </div>
-            <div className="newProductItem">
-              <label>Số lượng</label>
-              <input type="text" placeholder="100" />
+            <div className="newTypeProductItem">
+              <label>Mô tả</label>
+              <textarea cols="10" rows="5"></textarea>
             </div>
-            <button className="newProductButton">Create</button>
+            <button className="newTypeProductButton">Create</button>
           </form>
         </div>
       </div>

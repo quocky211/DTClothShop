@@ -1,5 +1,20 @@
 .productList{
     flex: 4;
+    padding: 20px;
+}
+.productListTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.productListButton{
+    padding: 5px 7px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }
 .productListItem{
     display: flex;

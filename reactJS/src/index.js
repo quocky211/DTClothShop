@@ -25,6 +25,9 @@ import NewUser from "./Components/Admin/NewUser/NewUser";
 import ProductList from "./Components/Admin/ProductList/ProductList";
 import Product from "./Components/Admin/Product/Product";
 import NewProduct from "./Components/Admin/NewProduct/NewProduct";
+import TypeProductList from "./Components/Admin/TypeProductList/TypeProductList";
+import TypeProductEdit from "./Components/Admin/TypeProductEdit/TypeProductEdit";
+import NewTypeProduct from "./Components/Admin/NewTypeProduct/NewTypeProduct";
 import { Provider } from "react-redux";
 import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
@@ -123,7 +126,19 @@ const router = createBrowserRouter([
         element: <NewUser />,
       },
       {
-        path:"Admin/Products",
+        path:"Admin/TypeProducts",
+        element: <TypeProductList />,
+      },
+      {
+        path:"Admin/TypeProduct/:typeProductId",
+        element: <TypeProductEdit />,
+      },
+      {
+        path:"Admin/NewTypeProduct",
+        element: <NewTypeProduct />,
+      },
+      {
+        path:"Admin/Products/:typeProductId",
         element: <ProductList />,
       },
       {

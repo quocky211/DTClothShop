@@ -1,4 +1,6 @@
 import ao from './Images/ao1.jpg'
+import halland from './Images/avatar.jpeg';
+
 export const userData = [
     {
         name: 'Jan',
@@ -70,17 +72,36 @@ export const userData = [
     },
   ];
 
+  export const typeProductData = [
+    {
+        name: 'Mar',
+        "Sales": 5000,
+    },
+    {
+        name: 'Apr',
+        "Sales": 2500,
+    },
+    {
+        name: 'May',
+        "Sales": 4000,
+    },
+    {
+        name: 'Jun',
+        "Sales": 6000,
+    },
+  ];
+
   export const userRows = [
-    { id: 1, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 2, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 3, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 4, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 5, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 6, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 7, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 8, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 9, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
-    { id: 10, avatar: 'https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX-MTwA5&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfD7soXL8aB8jrVinJ4ExtjDuQq-DFiv3i_UngEH70tj-A&oe=64443A63', userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 1, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 2, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 3, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 4, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 5, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 6, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 7, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 8, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 9, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
+    { id: 10, avatar: halland, userName: 'Nguyễn Quốc Kỳ', email: 'quockynguyen02@gmail.com', phone: '0972389257', transaction: '$12.9', status:'Active' },
   ];
 
   export const productRows = [

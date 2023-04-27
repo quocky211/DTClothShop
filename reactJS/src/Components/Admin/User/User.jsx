@@ -2,6 +2,7 @@ import React from 'react'
 import './User.css';
 import Topbar from '../Topbar/Topbar';
 import Sidebar from '../Sidebar/Sidebar';
+import avatar from '../Images/avatar.jpeg';
 import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from '@mui/icons-material';
 export default function User() {
   return (
@@ -16,7 +17,7 @@ export default function User() {
                 <div className="userContainer">
                   <div className="userShow">
                     <div className="userShowTop">
-                      <img src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX_a8sJL&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfA7Zi8gLnPXYOd387d1rUpOWFtOlgaNLH-OVJRHF1wGOg&oe=644634A3" alt="" className="userShowImg" />
+                      <img src={avatar} alt="" className="userShowImg" />
                       <div className="userShowTopTitle">
                         <span className="userShowUserName">Quoc Ky</span>
                         <span className="userShowUserTitle">Backend Dev</span>
@@ -74,7 +75,7 @@ export default function User() {
                       </div>
                       <div className="userUpdateRight">
                         <div className="userUpdateUpload">
-                          <img className='userUpdateImg' src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t39.30808-6/326711522_706011897851934_8382087031805852351_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=N-0Nwfv2VlQAX_a8sJL&_nc_ht=scontent.fsgn5-14.fna&oh=00_AfA7Zi8gLnPXYOd387d1rUpOWFtOlgaNLH-OVJRHF1wGOg&oe=644634A3" alt="" />
+                          <img className='userUpdateImg' src={avatar} alt="" />
                           <label htmlFor="file"> <Publish className='userUpdateIcon'/> </label>
                           <input type="file" id="file" style={{display:'none'}}/>
                         </div>

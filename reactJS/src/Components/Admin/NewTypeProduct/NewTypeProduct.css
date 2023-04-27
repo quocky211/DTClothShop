@@ -1,16 +1,13 @@
-.newuser{
+.newTypeProduct{
     flex: 4;
     padding: 20px;
 }
-.newUserTitle{
-
-}
-.newUserForm{
+.newTypeProductForm{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.newUserItem{
+.newTypeProductItem{
     width: 500px;
     display: flex;
     flex-direction: column;
@@ -18,33 +15,33 @@
     margin-top: 10px;
     text-align: left;
 }
-.newUserItem>label{
+.newTypeProductItem>label{
     margin-bottom: 10px;
     font-size: 16px;
     font-weight: 600;
     color: gray;
 }
-.newUserItem>input{
+.newTypeProductItem>input{
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
 }
-.newUserGender>input{
-    margin-top: 15px;
+.newTypeProductItem>select{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: gray;
 }
-.newUserItem>input[type="file"]{
+.newTypeProductItem>textarea{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.newTypeProductItem>input[type="file"]{
     border: none;
 }
-.newUserGender>label{
-    margin: 10px;
-    font-size: 18px;
-    color: #555;
-}
-.newUserSelect{
-    border-radius: 5px;
-    padding: 10px;
-}
-.newUserButton{
+.newTypeProductButton{
     width: 200px;
     border: none;
     background-color: darkblue;

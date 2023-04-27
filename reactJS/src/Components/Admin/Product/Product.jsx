@@ -15,7 +15,7 @@ export default function Product() {
         <Sidebar />
         <div className="product">
           <div className="productTitleContainer">
-            <h1 className="productTitle">Sản phẩm</h1>
+            <h1 className="productTitle">Chi tiết sản phẩm</h1>
           </div>
           <div className="productTop">
             <div className="productTopLeft">

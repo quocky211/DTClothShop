@@ -12,8 +12,8 @@ export default function NewUser() {
           <h1 className="newUserTitle">Thêm người dùng</h1>
           <form action="" className="newUserForm">
             <div className="newUserItem">
-              <label>Họ và tên</label>
-              <input type="text" placeholder="Nguyễn Văn A" />
+              <label>Avatar</label>
+              <input type="file" id="file" />
             </div>
             <div className="newUserItem">
               <label>Giới tính</label>
@@ -27,10 +27,14 @@ export default function NewUser() {
               </div>
             </div>
             <div className="newUserItem">
-              <label>Trạng thái</label>
+              <label>Họ và tên</label>
+              <input type="text" placeholder="Nguyễn Văn A" />
+            </div>
+            <div className="newUserItem">
+              <label>Kiểu người dùng</label>
               <select className="newUserSelect" name="active" id="active">
-                <option value="yes">Khả dụng</option>
-                <option value="no">Không khả dụng</option>
+                <option value="yes">Người dùng</option>
+                <option value="no">Admin</option>
               </select>
             </div>
             <div className="newUserItem">

@@ -57,13 +57,13 @@ export default function Sidebar() {
                 Thêm người dùng
               </li>
             </Link>
-            <Link to="/Admin/Products" className="link-admin">
+            <Link to="/Admin/TypeProducts" className="link-admin">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Sản phẩm
               </li>
             </Link>
-            <Link to="/Admin/NewProduct" className="link-admin">
+            <Link to="/Admin/NewTypeProduct" className="link-admin">
               <li className="sidebarListItem">
                 <AddBusiness className="sidebarIcon" />
                 Thêm sản phẩm

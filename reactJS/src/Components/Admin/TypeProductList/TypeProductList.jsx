@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import "./ProductList.css";
-import Topbar from "../Topbar/Topbar";
-import Sidebar from "../Sidebar/Sidebar";
-import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../dummyData";
-import { Link } from "react-router-dom";
+import React, {useState} from 'react'
+import './TypeProductList.css'
+import Topbar from '../Topbar/Topbar';
+import Sidebar from '../Sidebar/Sidebar';
+import { DataGrid } from '@mui/x-data-grid';
+import { Add, DeleteOutline, Edit } from '@mui/icons-material';
+import { productRows } from '../dummyData';
+import { Link } from 'react-router-dom';
 
-export default function ProductList() {
+export default function TypeProductList() {
+
+
   const [data, setData] = useState(productRows);
 
   const handleDelete = (id) => {
@@ -33,22 +35,21 @@ export default function ProductList() {
       },
     },
     { field: "type", headerName: "Loại", width: 100 },
-    { field: "color", headerName: "Màu sắc", width: 100 },
-    { field: "size", headerName: "Size", width: 100 },
-    { field: "price", headerName: "Giá", width: 100 },
-    { field: "quantity", headerName: "Số lượng", width: 100 },
     {
       field: "action",
       headerName: "Hành động",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/Admin/Product/" + params.row.id}>
-              <button className="productListEdit"> Edit </button>
+            <Link to={"/Admin/Products/" + params.row.id}>
+              <button className="typeProductLisAdd"> <Add/> </button>
+            </Link>
+            <Link to={"/Admin/TypeProduct/" + params.row.id}>
+              <button className="typeProductListEdit"> <Edit/> </button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="typeProductListDelete"
               onClick={() => handleDelete(params.row.id)}
             />
           </>
@@ -56,18 +57,13 @@ export default function ProductList() {
       },
     },
   ];
+
   return (
     <div>
       <Topbar />
       <div className="container-admin">
         <Sidebar />
-        <div className="productList" style={{ height: 800, width: "100%" }}>
-          <div className="productListTitle">
-            <h2>Chi tiết sản phẩm</h2>
-            <Link to="/Admin/NewProduct">
-              <button className="productListButton">Thêm</button>
-            </Link>
-          </div>
+        <div className="typeProductList" style={{ height: 800, width: '100%' }}>
           <DataGrid
             rows={data}
             disableRowSelectionOnClick
