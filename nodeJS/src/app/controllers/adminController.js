@@ -1,12 +1,14 @@
+const httpError = require('http-errors');
+
 const Product = require('../models/products/product');
 const ProductDetail = require('../models/products/product_detail');
 const User = require('../models/user/user');
 const Order = require('../models/order/order');
 const OrderDetail = require('../models/order/order_detail');
+const { userValidate } = require('../../helpers/validation');
 
 // const ProductDetail = require('../models/products/product_detail');
 // const CategoryDetail = require('../models/products/category_detail');
-const { multipleMongooseToObject } = require('../../util/mongoose');
 
 class AdminController {
     // GET /admin/product
@@ -72,7 +74,41 @@ class AdminController {
     }
 
     // POST /admin/user/store
-    StoreUser(req, res, next) {}
+    async StoreUser(req, res, next) {
+        try {
+            const { email } = req.body;
+            const { error } = userValidate(req.body);
+            if (error) {
+                throw httpError(error.details[0].message);
+            }
+            const isExistEmail = await User.findOne({ email: email });
+
+            if (isExistEmail) throw httpError.Conflict(`${email} đã được đăng ký!!`);
+
+            const formData = {
+                email: req.body.email,
+                gender: req.body.gender,
+                password: req.body.password,
+                birthday: req.body.birthday,
+                address: req.body.address,
+                name: req.body.name,
+                avatar: req.body.avatar,
+                level: req.body.level,
+            };
+            const user = new User(formData);
+            user.save()
+                .then(() => {
+                    // res.json({
+                    //     status: 'successfully',
+                    //     elements: user,
+                    // });
+                    res.send('Thêm người dùng thành công');
+                })
+                .catch(() => res.send('Thêm người dùng thất bại'));
+        } catch (error) {
+            next(error);
+        }
+    }
 
     // PUT /admin/user/edit/:id
     EditUser(req, res, next) {

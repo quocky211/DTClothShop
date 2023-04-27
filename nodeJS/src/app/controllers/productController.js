@@ -76,27 +76,33 @@ class ProductController {
     // GET /product/
     ProductShow(req, res, next) {
         const query = {};
+        // if (req.query.name) {
+        //     query.name = { $regex: req.query.name, $options: 'i' };
+        // }
         if (req.query.price) {
             if (req.query.price == 1) {
                 query.price = { $lt: 100000 };
             } // giá nhỏ hơn giá được truyền từ giao diện
             if (req.query.price == 2) {
-                query.price = { $lt: 300000, $gt: 100000 };
+                query.price = { $lt: 300000, $gte: 100000 };
             }
             if (req.query.price == 3) {
-                query.price = { $lt: 500000, $gt: 300000 };
+                query.price = { $lt: 500000, $gte: 300000 };
             }
             if (req.query.price == 4) {
-                query.price = { $gt: 500000 };
+                query.price = { $gte: 500000 };
             }
         }
         if (req.query.category_detail_id) {
             query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
         }
-        Product.find(query)
-            .exec()
-            .then((product) => res.json(product))
-            .catch(next);
+
+        const page = req.query.page || 1;
+        Product.paginate(query, { page: page, limit: 16 })
+            .then((product) => {
+                res.json(product);
+            })
+            .catch((err) => next(err));
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện

@@ -14,8 +14,8 @@ const userValidate = (data) => {
         birthday: Joi.date().required(),
         address: Joi.string().required(),
         name: Joi.string().min(3).max(30).required(),
-        avatar: Joi.string(),
-        level: Joi.bool(),
+        avatar: Joi.string().default(null),
+        level: Joi.bool().default(false),
         confirmPassword: Joi.string().valid(Joi.ref('password')),
         // .message({ 'any.only': 'password does not match' }),
     });

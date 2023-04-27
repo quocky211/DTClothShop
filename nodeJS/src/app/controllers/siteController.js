@@ -21,7 +21,7 @@ class SiteController {
 
     // GET /search
     search(req, res, next) {
-        Product.paginate({ name: { $regex: req.query.name, $options: 'i' } }, { page: 1, limit: 5 })
+        Product.paginate({ name: { $regex: req.query.name, $options: 'i' } }, { page: 1, limit: 16 })
             .then((product) => {
                 res.json(product);
             })

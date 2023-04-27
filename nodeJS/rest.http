@@ -52,12 +52,27 @@ GET http://localhost:3001/admin/user/show?page=1
 
 ### thêm user /admin/user/store (chưa xong)
 POST http://localhost:3001/admin/user/store
+Content-Type: application/json
 
-### sửa user /admin/user/edit/:id (chưa xong)
-PUT  http://localhost:3001/admin/user/edit/2
+{
+    "email": "588art0ggy@gmail.com",
+    "password":"123456",
+    "name": "Lê Minh Đại",
+    "gender":"Nam",
+    "address":"Long An",
+    "birthday": "2002-06-13"
+}
+
+### sửa user /admin/user/edit/:id
+PUT  http://localhost:3001/admin/user/edit/4
+Content-Type: application/json
+
+{
+    "name": "Đạiiiiiiiiiiiiiii"
+}
 
 ### xóa user /admin/user/delete/:id
-DELETE http://localhost:3001/admin/user/delete/1
+DELETE http://localhost:3001/admin/user/delete/2
 
 
 ### show order /admin/order/show/
@@ -66,7 +81,12 @@ GET http://localhost:3001/admin/order/show/
 ### show order-detail dựa vào order_id /admin/order/:id/order-detail
 GET http://localhost:3001/admin/order/4/order-detail
 
-
+### trang danh sách sản phẩm, có bộ lọc và phân trang
+### price=1 price < 100000
+### price=2 100000 <= price < 300000
+### price=3 300000 <= price < 500000
+### price=4 price >= 500000
+GET http://localhost:3001/product?price=3
 
 ### search header GET /search?name=:name
 GET http://localhost:3001/search?name=jean
@@ -119,11 +139,13 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "lou011isdadtart0ggy@gmail.com",
+    "email": "5mmart0ggy@gmail.com",
     "password":"123456",
-    "confirmPassword": "12456",
+    "confirmPassword": "123456",
     "name": "Lê Minh Đại",
-    "level": true
+    "gender":"Nam",
+    "address":"Long An",
+    "birthday": "2002-06-13"
 }
 
 ### login

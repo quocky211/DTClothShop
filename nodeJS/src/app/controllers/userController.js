@@ -17,8 +17,17 @@ class UserController {
             if (isExistEmail) throw httpError.Conflict(`${email} đã được đăng ký!!`);
 
             const formData = {
+                // email: req.body.email,
+                // password: req.body.password,
+                // name: req.body.name,
+                // avatar: req.body.avatar,
+                // level: req.body.level,
+
                 email: req.body.email,
+                gender: req.body.gender,
                 password: req.body.password,
+                birthday: req.body.birthday,
+                address: req.body.address,
                 name: req.body.name,
                 avatar: req.body.avatar,
                 level: req.body.level,
@@ -26,12 +35,14 @@ class UserController {
             const user = new User(formData);
             user.save()
                 .then(() => {
-                    res.json({
-                        status: 'successfully',
-                        elements: user,
-                    });
+                    // res.json({
+                    //     status: 'successfully',
+                    //     elements: user,
+                    // });
+
+                    res.send('Đăng ký tài khoản thành công');
                 })
-                .catch(next);
+                .catch(() => res.send('Đăng ký tài khoản thất bại'));
         } catch (error) {
             next(error);
         }
