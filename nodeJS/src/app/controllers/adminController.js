@@ -29,15 +29,14 @@ class AdminController {
 
     // POST /admin/product/store
     StoreProduct(req, res, next) {
-        // res.send(req.body);
-
         const product = new Product(req.body);
         product
             .save()
-            .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNGGGG'))
+            .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNG'))
             .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
     }
 
+    // POST /admin/product-detail/store
     StoreProductDetail(req, res, next) {
         const productDetail = new ProductDetail(req.body);
         productDetail
@@ -50,17 +49,16 @@ class AdminController {
     UpdateProduct(req, res, next) {
         Product.updateOne({ _id: req.params.id }, req.body)
             .exec()
-            // .then(() => res.redirect('/me/stored/courses'))
             .then(() => res.send('Update sản phẩm thành công'))
-            .catch((product) => next(product));
+            .catch(() => res.send('Update sản phẩm thất bại'));
     }
 
     // delete /admin/product/delete/:id
     DestroyProduct(req, res, next) {
         Product.deleteOne({ _id: req.params.id })
             .exec()
-            .then(() => res.redirect('back'))
-            .catch(next);
+            .then(() => res.send('Xóa sản phẩm thành công'))
+            .catch(() => res.send('Xóa sản phẩm thất bại'));
     }
 
     // GET /admin/user/show

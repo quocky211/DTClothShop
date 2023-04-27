@@ -14,7 +14,7 @@ class UserController {
             }
             const isExistEmail = await User.findOne({ email: email });
 
-            if (isExistEmail) throw httpError.Conflict(`${email} is already been registered!!`);
+            if (isExistEmail) throw httpError.Conflict(`${email} đã được đăng ký!!`);
 
             const formData = {
                 email: req.body.email,
@@ -65,7 +65,7 @@ class UserController {
 
             const user = await User.findOne({ email: req.body.email });
             if (!user) {
-                throw httpError.NotFound('User is not registered ');
+                throw httpError.NotFound(`${req.body.email} chưa được đăng ký!!`);
             }
 
             const isValidPassword = await user.isCheckPassword(req.body.password);

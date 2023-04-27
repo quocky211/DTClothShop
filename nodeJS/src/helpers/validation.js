@@ -4,14 +4,19 @@ const userValidate = (data) => {
     const userSchema = Joi.object({
         email: Joi.string()
             .email()
-            .pattern(new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)'))
+            .pattern(
+                new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)'),
+            )
             .lowercase()
             .required(),
         password: Joi.string().min(6).max(30).required(),
+        gender: Joi.string().required(),
+        birthday: Joi.date().required(),
+        address: Joi.string().required(),
         name: Joi.string().min(3).max(30).required(),
-        avatar: Joi.string().required(),
-        level: Joi.bool().required(),
-        confirmPassword: Joi.string().required().valid(Joi.ref('password')),
+        avatar: Joi.string(),
+        level: Joi.bool(),
+        confirmPassword: Joi.string().valid(Joi.ref('password')),
         // .message({ 'any.only': 'password does not match' }),
     });
 
@@ -22,7 +27,9 @@ const loginValidate = (data) => {
     const userLogin = Joi.object({
         email: Joi.string()
             .email()
-            .pattern(new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)'))
+            .pattern(
+                new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)'),
+            )
             .lowercase()
             .required(),
         password: Joi.string().min(6).max(30).required(),
