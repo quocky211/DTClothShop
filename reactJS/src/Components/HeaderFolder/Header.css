@@ -146,6 +146,7 @@
     background-color: #fff;
     transform: translateX(-100%);
     opacity: 0;
+    overflow-y: scroll;
 }
 ul.nav-mobile-list{
     margin-top: 20px;

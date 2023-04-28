@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import "./ProductDetails.css";
-import React, { useState } from "react";
 import { AddCart } from "../../actions";
 import { connect } from "react-redux";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -13,31 +12,80 @@ import likeicon from "../Images/likeicon.png";
 
 import { red } from "@mui/material/colors";
 import { Button } from "react-bootstrap";
+import ao from "../Images/fakedata/ao1.jpg";
 
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
-
+import { useEffect, useState } from "react";
+import ProductDataService from "../../services/products";
 
 export function ProductDetails(props) {
   const { productID } = useParams();
-  var product = FakeData[0].find(function (item) {
-    return item.masp === productID;
-  });
-  var typedetail = FakeData[3].find(function (item) {
-    return (item.matd = product.matd);
-  });
-  var type = FakeData[3].find(function (item) {
-    return (item.matype = typedetail.matype);
-  });
+  const [product, setProduct] = useState({});
+  const [productDetail, setProductDetail] = useState([]);
+  const [relatedProdutcs, setRelatedProducts] = useState([]);
   const [colorProduct, setColorProduct] = useState("");
   const [sizeProduct, setSizeProduct] = useState("");
   const [quantityProduct, setQuantityProduct] = useState(0);
   const [favoriteProduct, setFavoratiProduct] = useState(false);
+
+  // var product = FakeData[0].find(function (item) {
+  //   return item.masp === productID;
+  // });
+
+  // var typedetail = FakeData[3].find(function (item) {
+  //   return (item.matd = product.matd);
+  // });
+
+  // var type = FakeData[3].find(function (item) {
+  //   return (item.matype = typedetail.matype);
+  // });
+  useEffect(() => {
+    getProduct(productID);
+    getProductDetail(productID);
+  }, [productID]);
+
+  const getProduct = (productID) => {
+    ProductDataService.getProductById(productID)
+      .then((res) => {
+        console.log(res.data[0]);
+        setProduct(res.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const getProductDetail = (productID) => {
+    ProductDataService.getProductDetail(productID)
+      .then((res) => {
+        console.log(res.data);
+        setProductDetail(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getProductsByDetail();
+  }, []);
+
+  function getProductsByDetail() {
+    ProductDataService.getProductsByTypeDetailId(7)
+      .then((res) => {
+        console.log(res.data);
+        setRelatedProducts(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
   let settings = {
     arrows: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 4,
+    slidesToShow: 2,
     slidesToScroll: 1,
   };
   let settingsmobile = {
@@ -51,36 +99,34 @@ export function ProductDetails(props) {
     style: "currency",
     currency: "VND",
   });
+
   return (
     <div className="product-detail-container">
-      <Header/>
+      <Header />
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
         <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
-        <Breadcrumb.Item href=""> {type.name} </Breadcrumb.Item>
+        {/* <Breadcrumb.Item href=""> {type.name} </Breadcrumb.Item> */}
         <Breadcrumb.Item active>{product.name} </Breadcrumb.Item>
       </Breadcrumb>
       <div className="product-detail">
         <div className="product-detail-left">
-          <img
-            src={product.image}
-            alt={product.name}
-          />
+          <img src={ao} alt="img" />
         </div>
         <div className="product-detail-right">
           <h2>{product.name}</h2>
           <h2>{vnd.format(product.price)} </h2>
           <p>Màu sắc: {colorProduct}</p>
-          <div className="color">
+          {/* <div className="color">
             {product.color.map((color) => (
               <button
                 onClick={() => setColorProduct(color)}
                 style={{ backgroundColor: color }}
               ></button>
             ))}
-          </div>
+          </div> */}
           <p>Size: {sizeProduct}</p>
-          <div className="size">
+          {/* <div className="size">
             {product.size.map((size) => (
               <button
                 onClick={() => setSizeProduct(size)}
@@ -91,7 +137,7 @@ export function ProductDetails(props) {
                 Size {size}
               </button>
             ))}
-          </div>
+          </div> */}
 
           <div className="quantity-product">
             <p className="quantityMargin">Số lượng</p>
@@ -167,7 +213,7 @@ export function ProductDetails(props) {
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Thông tin sản phẩm</Accordion.Header>
-              <Accordion.Body>{product.infor}</Accordion.Body>
+              <Accordion.Body>{product.description}</Accordion.Body>
             </Accordion.Item>
             <hr />
             <Accordion.Item eventKey="1">
@@ -187,10 +233,7 @@ export function ProductDetails(props) {
                   <br></br>
                   Kích cỡ 4: Chiều cao trên 1m72, cân nặng dưới 95kg
                 </p>
-                <img
-                  src={size}
-                  alt="size"
-                />
+                <img src={size} alt="size" />
               </Accordion.Body>
             </Accordion.Item>
             <hr />
@@ -231,38 +274,30 @@ export function ProductDetails(props) {
         <h3>Có thể bạn sẽ thích</h3>
         <div className="non-mobile-related">
           <Slider {...settings}>
-            {FakeData[0].map(
-              (item) =>
-                productID !== item.masp &&
-                item.type === product.type && (
-                  <ContainerItem
-                    price={item.price}
-                    name={item.name}
-                    image={item.image}
-                    masp={item.masp}
-                  />
-                )
-            )}
+            {relatedProdutcs.map((item) => (
+              <ContainerItem
+                price={item.price}
+                name={item.name}
+                image={ao}
+                masp={item.masp}
+              />
+            ))}
           </Slider>
         </div>
         <div className="mobile-related">
           <Slider {...settingsmobile}>
-            {FakeData[0].map(
-              (item) =>
-                productID !== item.masp &&
-                item.type === product.type && (
+            {relatedProdutcs.map((item) =>
                   <ContainerItem
                     price={item.price}
                     name={item.name}
-                    image={item.image}
+                    image={ao}
                     masp={item.masp}
                   />
-                )
             )}
           </Slider>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

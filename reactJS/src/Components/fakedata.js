@@ -247,15 +247,15 @@ export const FakeData = [
   // Type
   [
     {
-      matype: "TP01",
+      matype: "1",
       name: "Áo",
     },
     {
-      matype: "TP02",
+      matype: "2",
       name: "Quần",
     },
     {
-      matype: "TP03",
+      matype: "3",
       name: "Phụ kiện",
     },
   ],

@@ -1,6 +1,6 @@
 # trang admin:
 # list sản phẩm GET /admin/product?page=:page(có phân trang)
-GET http://localhost:3001/admin/product?page=1
+GET http://localhost:3001/admin/product
 
 ### thêm sản phẩm: /admin/product/store
 POST http://localhost:3001/admin/product/store

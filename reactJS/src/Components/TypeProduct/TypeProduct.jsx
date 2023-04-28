@@ -1,38 +1,62 @@
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { useParams } from 'react-router-dom';
-import { FakeData } from "../fakedata";
 import ContainerItem from '../ContainerItem';
 import "./TypeProduct.css";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import { useEffect, useState } from 'react';
+import ProductDataService from '../../services/products';
+import CatagoryDataService from '../../services/catagories';
+import ao from '../Images/fakedata/ao1.jpg'
 function TypeProduct() {
     const { typeID } = useParams();
+    const [catagory, setCategory] = useState("");
+    const [typePoduct, setTypeProduct] = useState([]);
 
-    var type = FakeData[2].find(
-        function (item) {
-            return item.matype === typeID
-        }
-    );
-    var typedetails = FakeData[3].filter(
-        function (item) {
-            return item.matype === typeID
-        }
-    );
+    useEffect(()=>{
+        getProducts(typeID);
+        getCatagorys(typeID);
+    },[typeID]);
+
+    const getProducts = (typeID) => {
+        ProductDataService.getAllProductByTypeId(typeID)
+        .then(res=>{
+            console.log(res.data);
+            setTypeProduct(res.data);
+            
+        })
+        .catch(e=>{
+            console.log(e);
+        })
+    }
+
+    const getCatagorys = (typeID) => {
+        CatagoryDataService.getAll()
+        .then((res)=>{
+            console.log(res.data[0].name)
+            const data = res.data;
+            var name = data.map((item) => item.name)
+            setCategory(name[typeID-1]);
+        })
+        .catch(e=>{
+            console.log(e);
+        })
+    }
+
     return (
         <div className="type-product-container">
             <Header/>
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
-                <Breadcrumb.Item active>{type.name}</Breadcrumb.Item>
+                <Breadcrumb.Item active>{catagory}</Breadcrumb.Item>
             </Breadcrumb>
             <div className="list-product-type">
-                {FakeData[0].map((item) =>
-                    typedetails.map((typedetail) => typedetail.matd === item.matd
-                        &&
-                        <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />
+                {
+                    typePoduct.map((product) => 
+                        <ContainerItem price={product.price} name={product.name} image={ao} masp={product._id} />
                     )
-                )}
+                }
             </div>
             <Footer/>
         </div>
