@@ -13,8 +13,7 @@ const { userValidate } = require('../../helpers/validation');
 class AdminController {
     // GET /admin/product
     ShowProduct(req, res, next) {
-        const page = req.query.page || 1;
-        Product.paginate({}, { page: page, limit: 10 })
+        Product.find()
             .then((product) => {
                 res.json(product);
             })
@@ -65,8 +64,7 @@ class AdminController {
 
     // GET /admin/user/show
     ShowUser(req, res, next) {
-        const page = req.query.page || 1;
-        User.paginate({ level: false }, { page: page, limit: 10 })
+        User.find({ level: false })
             .then((user) => {
                 res.json(user);
             })
@@ -127,8 +125,7 @@ class AdminController {
     }
 
     ShowOrder(req, res, next) {
-        const page = req.query.page || 1;
-        Order.paginate({}, { page: page, limit: 10 })
+        Order.find()
             .then((order) => {
                 res.json(order);
             })
