@@ -2,6 +2,7 @@ const httpError = require('http-errors');
 
 const Product = require('../models/products/product');
 const ProductDetail = require('../models/products/product_detail');
+const ProductImage = require('../models/products/product_image');
 const User = require('../models/user/user');
 const Order = require('../models/order/order');
 const OrderDetail = require('../models/order/order_detail');
@@ -44,6 +45,25 @@ class AdminController {
             .save()
             .then(() => res.send('THÊM CHI TIẾT SẢN PHẨM THÀNH CÔNG'))
             .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
+    }
+
+    // POST /admin/product-image/store
+    StoreProductImage(req, res, next) {
+        const product_id = req.body.product_id;
+        const path = req.body.image;
+        const length = path.length;
+        var data = [];
+        for (var i = 0; i < length; i++) {
+            var ob = {
+                product_id,
+                path: path[i],
+            };
+            data.push(ob);
+        }
+
+        ProductImage.insertMany(data)
+            .then(() => res.send('Thêm hình ảnh sản phẩm thành công'))
+            .catch(() => res.send('Thêm thất bại'));
     }
 
     // PUT /admin/product/:id

@@ -7,6 +7,7 @@ router.get('/product', adminController.ShowProduct);
 router.get('/product/:id/product-detail', adminController.ShowProductDetail);
 router.post('/product/store', adminController.StoreProduct);
 router.post('/product-detail/store', adminController.StoreProductDetail);
+router.post('/product-image/store', adminController.StoreProductImage);
 router.put('/product/edit/:id', adminController.UpdateProduct);
 router.delete('/product/delete/:id', adminController.DestroyProduct);
 

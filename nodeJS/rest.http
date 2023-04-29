@@ -28,6 +28,9 @@ Content-Type: application/json
     "qty": 1000
 }
 
+### thêm hình ảnh sản phẩm: /admin/product-image/store
+POST http://localhost:3001/admin/product-image/store
+
 ### sửa sản phẩm: /admin/product/edit/:id
 PUT http://localhost:3001/admin/product/edit/91
 Content-Type: application/json
