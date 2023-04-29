@@ -3,17 +3,14 @@ import "./ProductDetails.css";
 import { AddCart } from "../../actions";
 import { connect } from "react-redux";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { FakeData } from "../fakedata";
 import Accordion from "react-bootstrap/Accordion";
 import size from "../Images/size.jpg";
 import Slider from "react-slick";
 import ContainerItem from "../ContainerItem";
 import likeicon from "../Images/likeicon.png";
-
 import { red } from "@mui/material/colors";
 import { Button } from "react-bootstrap";
 import ao from "../Images/fakedata/ao1.jpg";
-
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import { useEffect, useState } from "react";
@@ -23,33 +20,29 @@ export function ProductDetails(props) {
   const { productID } = useParams();
   const [product, setProduct] = useState({});
   const [productDetail, setProductDetail] = useState([]);
+
   const [relatedProdutcs, setRelatedProducts] = useState([]);
+
+  const [colorArr, setColorArr] = useState([]);
+  const [sizeArr, setSizeArr] = useState([]);
+
   const [colorProduct, setColorProduct] = useState("");
   const [sizeProduct, setSizeProduct] = useState("");
   const [quantityProduct, setQuantityProduct] = useState(0);
   const [favoriteProduct, setFavoratiProduct] = useState(false);
+  const [id, setID] = useState(0)
 
-  // var product = FakeData[0].find(function (item) {
-  //   return item.masp === productID;
-  // });
-
-  // var typedetail = FakeData[3].find(function (item) {
-  //   return (item.matd = product.matd);
-  // });
-
-  // var type = FakeData[3].find(function (item) {
-  //   return (item.matype = typedetail.matype);
-  // });
   useEffect(() => {
     getProduct(productID);
     getProductDetail(productID);
-  }, [productID]);
+    getProductsByDetail(id);
+  }, [product, relatedProdutcs, id]);
 
   const getProduct = (productID) => {
     ProductDataService.getProductById(productID)
       .then((res) => {
-        console.log(res.data[0]);
         setProduct(res.data[0]);
+        setID(product.category_detail_id)
       })
       .catch((e) => {
         console.log(e);
@@ -59,23 +52,22 @@ export function ProductDetails(props) {
   const getProductDetail = (productID) => {
     ProductDataService.getProductDetail(productID)
       .then((res) => {
-        console.log(res.data);
+        const data = res.data;
+        var colorArr = data.map((item)=> item.color)
+        setColorArr(colorArr);
+        var sizeArr = data.map((item)=> item.size)
+        setSizeArr(sizeArr);
         setProductDetail(res.data);
       })
       .catch((e) => {
         console.log(e);
       });
-  };
+  }
 
-  useEffect(() => {
-    getProductsByDetail();
-  }, []);
-
-  function getProductsByDetail() {
-    ProductDataService.getProductsByTypeDetailId(7)
+  function getProductsByDetail(typeDetailID) {
+    ProductDataService.getProductsByTypeDetailId(typeDetailID)
       .then((res) => {
-        console.log(res.data);
-        setRelatedProducts(res.data);
+        setRelatedProducts(Object.entries(res.data));
       })
       .catch((e) => {
         console.log(e);
@@ -85,7 +77,7 @@ export function ProductDetails(props) {
     arrows: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 2,
+    slidesToShow: 4,
     slidesToScroll: 1,
   };
   let settingsmobile = {
@@ -101,7 +93,8 @@ export function ProductDetails(props) {
   });
 
   return (
-    <div className="product-detail-container">
+    
+      product!==undefined &&<div className="product-detail-container">
       <Header />
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
@@ -117,27 +110,27 @@ export function ProductDetails(props) {
           <h2>{product.name}</h2>
           <h2>{vnd.format(product.price)} </h2>
           <p>Màu sắc: {colorProduct}</p>
-          {/* <div className="color">
-            {product.color.map((color) => (
+          <div className="color">
+            {colorArr.map((color) => (
               <button
                 onClick={() => setColorProduct(color)}
                 style={{ backgroundColor: color }}
               ></button>
             ))}
-          </div> */}
+          </div>
           <p>Size: {sizeProduct}</p>
-          {/* <div className="size">
-            {product.size.map((size) => (
+          <div className="size">
+            {sizeArr.map((size) => (
               <button
                 onClick={() => setSizeProduct(size)}
                 style={{
                   backgroundColor: sizeProduct == size && "antiquewhite",
                 }}
               >
-                Size {size}
+                {size}
               </button>
             ))}
-          </div> */}
+          </div>
 
           <div className="quantity-product">
             <p className="quantityMargin">Số lượng</p>
@@ -161,8 +154,7 @@ export function ProductDetails(props) {
             <button
               className="add"
               onClick={() => {
-                if (quantityProduct < product.quantity)
-                  setQuantityProduct(quantityProduct + 1);
+                setQuantityProduct((current)=>current + 1);
               }}
             >
               +
@@ -274,24 +266,27 @@ export function ProductDetails(props) {
         <h3>Có thể bạn sẽ thích</h3>
         <div className="non-mobile-related">
           <Slider {...settings}>
-            {relatedProdutcs.map((item) => (
-              <ContainerItem
-                price={item.price}
-                name={item.name}
+            {relatedProdutcs.length ===0 ? null : relatedProdutcs.map(
+              function(item){
+                return <ContainerItem
+                price={item[1].price}
+                name={item[1].name}
                 image={ao}
-                masp={item.masp}
+                masp={item[1]._id}
               />
-            ))}
+              } 
+              
+            )}
           </Slider>
         </div>
         <div className="mobile-related">
           <Slider {...settingsmobile}>
-            {relatedProdutcs.map((item) =>
+            {relatedProdutcs.length ===0 ? null : relatedProdutcs.map((item) =>
                   <ContainerItem
-                    price={item.price}
-                    name={item.name}
+                    price={item[1].price}
+                    name={item[1].name}
                     image={ao}
-                    masp={item.masp}
+                    masp={item[1]._id}
                   />
             )}
           </Slider>
@@ -299,6 +294,7 @@ export function ProductDetails(props) {
       </div>
       <Footer />
     </div>
+    
   );
 }
 const mapStateToProps = (state) => {
@@ -313,5 +309,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

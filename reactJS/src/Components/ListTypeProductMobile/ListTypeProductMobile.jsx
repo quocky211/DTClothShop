@@ -15,7 +15,6 @@ function ListTypeProductMobile(props) {
   useEffect(() => {
     CatagoryDataService.getAllDetail(props._id)
       .then((res) => {
-        console.log(res.data);
         setCategoryDetails(res.data);
       })
       .catch((e) => {
