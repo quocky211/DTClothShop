@@ -89,13 +89,13 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=2 100000 <= price < 300000
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
-GET http://localhost:3001/product?price=3
+GET http://localhost:3001/product?price=0
 
 ### search header GET /search?name=:name
 GET http://localhost:3001/search?name=jean
 
-### sản phẩm giảm giá: /product/discount
-GET http://localhost:3001/product/discount
+### sản phẩm giảm giá: /product/discount (D)
+GET http://localhost:3001/product/discount 
 
 ### lấy chi tiết sản phẩm dựa theo product_id
 ### lấy size theo màu
@@ -103,29 +103,30 @@ GET http://localhost:3001/product/discount
 ### lưu ý là từ phía sau dấu "?" không có cũng không sao
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
 GET http://localhost:3001/product/5/product-detail?color=green
-###
+
+###(D)
 GET http://localhost:3001/product/5/product-detail
 
-### lấy sản phẩm dựa theo t_id /product/:id
+### lấy sản phẩm dựa theo t_id /product/:id (D)
 GET http://localhost:3001/product/5
 
-### bán chạy: /product/top-selling
+### bán chạy: /product/top-selling (D)
 GET http://localhost:3001/product/top-selling
 
-### sản phẩm mới: /product/new
+### sản phẩm mới: /product/new (D)
 GET http://localhost:3001/product/new
 
-### lấy sản phẩm theo loại sản phẩm: /product/category/:id
+### lấy sản phẩm theo loại sản phẩm: /product/category/:id (D)
 GET http://localhost:3001/product/category/2
 
-### lấy sản phẩm theo chi tiết loại sản phẩm: /product/category-detail/:id
+### lấy sản phẩm theo chi tiết loại sản phẩm: /product/category-detail/:id (D)
 GET http://localhost:3001/product/category-detail/13
 
-### lấy category
-GET http://localhost:3001/category
+### lấy category (D)
+GET http://localhost:3001/category 
 
 ### lấy category-detail dựa vào category
-###GET http://localhost:3001/category/:id/category-detail
+###GET http://localhost:3001/category/:id/category-detail (D)
 GET http://localhost:3001/category/3/category-detail
 
 ###refresh-token

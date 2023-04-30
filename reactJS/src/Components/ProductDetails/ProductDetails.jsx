@@ -139,7 +139,7 @@ export function ProductDetails(props) {
             {colorArr.map((color) => (
               <button
                 onClick={() => setColorProduct(color)}
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: color , border:" 1px solid black"}}
               ></button>
             ))}
           </div>
@@ -149,7 +149,7 @@ export function ProductDetails(props) {
               <button
                 onClick={() => setSizeProduct(size)}
                 style={{
-                  backgroundColor: sizeProduct == size && "antiquewhite",
+                  backgroundColor: sizeProduct == size && "antiquewhite"
                 }}
               >
                 {size}

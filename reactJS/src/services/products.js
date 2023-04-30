@@ -9,6 +9,10 @@ class ProductDataService {
 
         return await axios.get(`http://localhost:3001/product/category-detail/${typeDetailID}`)
     }
+    async getAllProducts(price = 0) {
+
+        return await axios.get(`http://localhost:3001/product?price=${price}`)
+    }
     async getProductById(productID) {
 
         return await axios.get(`http://localhost:3001/product/${productID}`)
@@ -17,6 +21,18 @@ class ProductDataService {
     async getProductDetail(productID) {
 
         return await axios.get(`http://localhost:3001/product/${productID}/product-detail`)
+    }
+    async getProductDiscount() {
+
+        return await axios.get('http://localhost:3001/product/discount')
+    }
+    async getProductNew() {
+
+        return await axios.get('http://localhost:3001/product/new')
+    }
+    async getProductTopSelling() {
+
+        return await axios.get('http://localhost:3001/product/top-selling')
     }
 
 }

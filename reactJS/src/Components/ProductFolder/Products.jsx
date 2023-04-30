@@ -1,18 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Products.css";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { FakeData } from "../fakedata";
 import ContainerItem from "../ContainerItem";
 import filtericon from "../Images/filter-icon.png";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import ProductDataService from "../../services/products";
+import CatagoryDataService from "../../services/catagories";
+import ao from "../Images/fakedata/ao1.jpg";
+
 function Products() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [products, setProducts] = useState([]);
+    const [cataDetails, setCataDetails] = useState([]);
+
+    useEffect(() => {
+        getProducts();
+        getAllCataDetail()
+    }, []);
+
+    const getProducts = () =>{
+        ProductDataService.getAllProducts()
+        .then((res) => {
+            setProducts( res.data.docs)})
+        .catch(err => console.error(err))
+    };
+
+    const getAllCataDetail = () =>{
+        CatagoryDataService.getAll()
+        .then((res) => {
+            const data = res.data;
+            var arr = []
+            for(var i=0; i<data.length; i)
+            {
+                CatagoryDataService.getAllDetail(data[i]._id)
+                .then((response) => {
+                    arr = arr.concat([response.data]);
+                })
+                .catch(err => console.error(err))
+            }
+            data.forEach(element => {
+                CatagoryDataService.getAllDetail(element._id)
+                .then((response) => {
+                    arr = arr.concat([response.data]);
+                })
+                .catch(err => console.error(err))
+            },arr);
+            console.log(arr);
+            setCataDetails(arr);
+
+            })
+        .catch(err => console.error(err))
+    };
 
     return (
         <div>
@@ -107,7 +152,7 @@ function Products() {
                 </div>
             </div>
             <div className="all-product-store">
-                {FakeData[0].map((item, index) => <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                {products.map((item) => <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
             </div>
             <Footer/>
         </div>

@@ -9,27 +9,45 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { connect } from "react-redux"
 import { Off_Noti } from '../../actions';
-import { FakeData } from "../fakedata";
 import imgmobile from "../Images/banner/img-mobile.png"
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import ProductDataService from "../../services/products";
+import ao from "../Images/fakedata/ao1.jpg";
+
 
 function MainPage({ noti, Off_Noti }) {
 
-    const [list, setlist] = useState([]);
+    const [newProducts, setNewProducts] = useState([]);
+    const [discountProducts, setDiscountProducts] = useState([]);
+    const [topProducts, setTopProducts] = useState([]);
+
 
     useEffect(() => {
-        axios.get('http://localhost:3001/search?name=jean')
-            .then(res => { 
-                setlist(res.data); 
-                console.log(res.data) })
-            .catch(()=>{
-                console.log("hekk")
-            }
-            )
-            
-        // Off_Noti()
+        getNewProducts();
+        getDiscountProducts();
+        getTopProducts();
+
+        Off_Noti()
     }, []);
+
+    function getNewProducts(){
+        ProductDataService.getProductNew()
+        .then(res => setNewProducts( res.data))
+        .catch(err => console.error(err))
+    };
+
+    const getDiscountProducts = () =>{
+        ProductDataService.getProductDiscount()
+        .then(res => setDiscountProducts( res.data))
+        .catch(err => console.error(err))
+    };
+
+    const getTopProducts = () =>{
+        ProductDataService.getProductTopSelling()
+        .then(res => setTopProducts( res.data))
+        .catch(err => console.error(err))
+    };
 
     let settings = {
         arrows: true,
@@ -50,13 +68,13 @@ function MainPage({ noti, Off_Noti }) {
                     <h3 className="newProducts_name title-name title-name-first" >Sản phẩm mới</h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {FakeData[0].map((item) => (item.matd === "TD01" || item.matd === "TD02" || item.matd === "TD03" || item.matd === "TD04")
-                                && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                            {newProducts.map((item) => 
+                                 <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {FakeData[0].map((item) => (item.matd === "TD01" || item.matd === "TD02" || item.matd === "TD03" || item.matd === "TD04")
-                            && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                        {newProducts.map((item) => 
+                             <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                     </div>
                 </div>
             </div>
@@ -65,13 +83,13 @@ function MainPage({ noti, Off_Noti }) {
                     <h3 className="bestSeller_name title-name">Bán chạy</h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {FakeData[0].map((item, index) => (item.matd === "TD05" || item.matd === "TD06" || item.matd === "TD07" || item.matd === "TD08")
-                                && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                            {topProducts.map((item, index) => 
+                                <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {FakeData[0].map((item, index) => (item.matd === "TD05" || item.matd === "TD06" || item.matd === "TD07" || item.matd === "TD08")
-                            && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                        {topProducts.map((item, index) => 
+                            <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                     </div>
                 </div>
             </div>
@@ -80,13 +98,13 @@ function MainPage({ noti, Off_Noti }) {
                     <h3 className="onSale_name title-name">Giảm giá</h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {FakeData[0].map((item, index) => (item.matd === "TD09" || item.matd === "TD010" || item.matd === "TD011" || item.matd === "TD012")
-                                && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                            {discountProducts.map((item) => 
+                                 <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {FakeData[0].map((item, index) => (item.matd === "TD09" || item.matd === "TD010" || item.matd === "TD011" || item.matd === "TD012")
-                            && <ContainerItem price={item.price} name={item.name} image={item.image} masp={item.masp} />)}
+                        {discountProducts.map((item) => 
+                             <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
                     </div>
                 </div>
             </div>
