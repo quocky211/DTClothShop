@@ -13,8 +13,14 @@ import { Button } from "react-bootstrap";
 import ao from "../Images/fakedata/ao1.jpg";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductDataService from "../../services/products";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export function ProductDetails(props) {
   const { productID } = useParams();
@@ -31,12 +37,13 @@ export function ProductDetails(props) {
   const [quantityProduct, setQuantityProduct] = useState(0);
   const [favoriteProduct, setFavoratiProduct] = useState(false);
   const [id, setID] = useState(0)
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     getProduct(productID);
     getProductDetail(productID);
     getProductsByDetail(id);
-  }, [product, relatedProdutcs, id]);
+  }, [product, id]);
 
   const getProduct = (productID) => {
     ProductDataService.getProductById(productID)
@@ -52,10 +59,12 @@ export function ProductDetails(props) {
   const getProductDetail = (productID) => {
     ProductDataService.getProductDetail(productID)
       .then((res) => {
-        const data = res.data;
-        var colorArr = data.map((item)=> item.color)
+        const data = res.data
+        var colotArrs = data.map(item => item.color);
+        var colorArr = colotArrs.filter((item,index) => colotArrs.indexOf(item) === index)
         setColorArr(colorArr);
-        var sizeArr = data.map((item)=> item.size)
+        var sizeArrs = data.map((item)=> item.size)
+        var sizeArr = sizeArrs.filter((item,index) => sizeArrs.indexOf(item) === index)
         setSizeArr(sizeArr);
         setProductDetail(res.data);
       })
@@ -91,10 +100,26 @@ export function ProductDetails(props) {
     style: "currency",
     currency: "VND",
   });
+  const handleClick = () => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 100);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     
       product!==undefined &&<div className="product-detail-container">
+        <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Thêm vào giỏ hàng thành công!
+        </Alert>
+      </Snackbar>
       <Header />
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
@@ -163,6 +188,8 @@ export function ProductDetails(props) {
           <div className="addcart">
             <button
               onClick={() => {
+                handleClose();
+                handleClick();
                 props.AddCart(product);
               }}
             >
