@@ -73,6 +73,14 @@ class ProductController {
             .then((product) => res.json(product))
             .catch(next);
     }
+
+    // GET /category-detail
+    ShowCategoryDetail(req, res, next) {
+        CategoryDetail.find()
+            .exec()
+            .then((categoryDetail) => res.json(categoryDetail))
+            .catch(next);
+    }
     // GET /product/
     ProductShow(req, res, next) {
         const query = {};
