@@ -19,10 +19,13 @@ function Products() {
 
     const [products, setProducts] = useState([]);
     const [cataDetails, setCataDetails] = useState([]);
-
+    let one = false;
     useEffect(() => {
         getProducts();
-        getAllCataDetail()
+        if(!one){
+            one = true;
+            getAllCataDetail();
+        }
     }, []);
 
     const getProducts = () =>{
@@ -36,25 +39,12 @@ function Products() {
         CatagoryDataService.getAll()
         .then((res) => {
             const data = res.data;
-            var arr = []
-            for(var i=0; i<data.length; i)
-            {
-                CatagoryDataService.getAllDetail(data[i]._id)
-                .then((response) => {
-                    arr = arr.concat([response.data]);
-                })
-                .catch(err => console.error(err))
-            }
-            data.forEach(element => {
+            data.forEach(function(element) {
                 CatagoryDataService.getAllDetail(element._id)
                 .then((response) => {
-                    arr = arr.concat([response.data]);
-                })
-                .catch(err => console.error(err))
-            },arr);
-            console.log(arr);
-            setCataDetails(arr);
-
+                  setCataDetails(current => current.concat(response.data) )})
+                .catch((err) => console.error(err));
+            });
             })
         .catch(err => console.error(err))
     };
@@ -80,56 +70,30 @@ function Products() {
                             <form action="">
                                 <div className="container__products-nav">
                                     <p>Danh mục</p>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Áo thun </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Áo khoác </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Áo polo</label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Áo sơ mi </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Váy </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Quần ngắn </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Quần kaki </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Quần jean </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Nón </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Balo </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Thắt lưng / Dây nịt </label>
-                                    <br></br>
-                                    <input type="checkbox" name="type_product" id="" />
-                                    <label> Ví </label>
-                                    <br></br>
+                                    {
+                                        cataDetails.map( function(item){
+                                            return <div className="">
+                                                <label>
+                                                    <input type="checkbox" name="type_product" id="" /> 
+                                                    {item.name} 
+                                                </label>
+                                            </div>
+                                        })
+                                    }
                                 </div>
                                 <div className="find-product-price">
                                     <p>Lọc giá sản phẩm</p>
-                                    <input type="radio" name="price" id="" />
-                                    <label> Dưới 100.000 đ</label>
+                                    <input type="radio" name="price" id="1" />
+                                    <label htmlFor="1"> Dưới 100.000 đ</label>
                                     <br></br>
-                                    <input type="radio" name="price" id="" />
-                                    <label> 100.000 đ - 300.000 đ</label>
+                                    <input type="radio" name="price" id="2" />
+                                    <label htmlFor="2"> 100.000 đ - 300.000 đ</label>
                                     <br></br>
-                                    <input type="radio" name="price" id="" />
-                                    <label> 300.000 đ - 500.000 đ</label>
+                                    <input type="radio" name="price" id="3" />
+                                    <label htmlFor="3"> 300.000 đ - 500.000 đ</label>
                                     <br></br>
-                                    <input type="radio" name="price" id="" />
-                                    <label> Trên 500.000 đ</label>
+                                    <input type="radio" name="price" id="4" />
+                                    <label htmlFor="4"> Trên 500.000 đ</label>
                                     <br></br>
                                 </div>
                                 <div className="filter-button">
