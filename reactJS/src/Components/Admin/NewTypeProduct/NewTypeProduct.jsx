@@ -1,8 +1,78 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./NewTypeProduct.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
+
+import ProductDataService from "../../../services/products";
+import CatagoryDataService from "../../../services/catagories";
+
 export default function NewTypeProduct() {
+  let navigate = useNavigate();
+
+  const [catas, setCatas] = useState([]);
+  const [cataId, setCataId] = useState(1);
+  const [cataDetail, setCataDetail] = useState([]);
+
+  const [categoryDetailId, setCategoryDetailId] = useState(0);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [material, setMaterial] = useState("");
+  const [description, setDesciption] = useState("");
+
+  const [hasCreate, setHasCreate] = useState(false)
+
+  useEffect(() => {
+    getCatas();
+  }, [cataId]);
+
+  const getCatas = () => {
+    CatagoryDataService.getAll()
+      .then(function (res) {
+        getCataDetail();
+        setCatas(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getCataDetail = () => {
+    CatagoryDataService.getAllDetail(cataId)
+      .then(function (res) {
+        setCataDetail(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleCata = (e) => {
+    setCataId(e.target.value);
+  };
+  const handleCataDetail = (e) => {
+    setCategoryDetailId(e.target.value);
+  };
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    let newProduct = {
+      category_id: cataId,
+      category_detail_id: categoryDetailId,
+      name: name,
+      description: description,
+      price: price,
+      discount: discount,
+      material: material,
+      featured: false,
+    };
+    ProductDataService.createProducts(newProduct)
+      .then((response) => {
+        setHasCreate(true);
+        alert("Thêm mới sản phẩm thành công")
+        navigate("/Admin/NewTypeProduct");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div>
       <Topbar />
@@ -13,38 +83,66 @@ export default function NewTypeProduct() {
           <form className="newTypeProductForm">
             <div className="newTypeProductItem">
               <label>Tên sản phẩm</label>
-              <input type="text" placeholder="Áo thun DTCloth" />
+              <input
+                type="text"
+                placeholder="Áo thun DTCloth"
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div className="newTypeProductItem">
               <label>Danh mục</label>
-              <select>
-                <option value="">Áo</option>
-                <option value="">Quần</option>
-                <option value="">Phụ kiện</option>
+              <select onChange={(e) => handleCata(e)}>
+                {catas.map(function (item) {
+                  return <option value={item._id}>{item.name}</option>;
+                })}
               </select>
             </div>
             <div className="newTypeProductItem">
               <label>Loại</label>
-              <select>
-                <option value="">Áo thun</option>
-                <option value="">Áo khoác</option>
-                <option value="">Áo sơ mi</option>
-                <option value="">Áo polo</option>
+              <select onChange={(e) => handleCataDetail(e)}>
+                {cataDetail.map(function (item) {
+                  return <option value={item._id}>{item.name}</option>;
+                })}
               </select>
             </div>
             <div className="newTypeProductItem">
               <label>Chất liệu</label>
-              <input type="text" placeholder="Vải Cotton" />
+              <input
+                type="text"
+                placeholder="Vải Cotton"
+                onChange={(e) => setMaterial(e.target.value)}
+              />
             </div>
             <div className="newTypeProductItem">
               <label>Giá</label>
-              <input type="text" placeholder="100.000đ" />
+              <input
+                type="text"
+                placeholder="100.000đ"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div className="newTypeProductItem">
+              <label>Tỉ lệ giảm giá</label>
+              <input
+                type="text"
+                placeholder="15%"
+                onChange={(e) => setDiscount(e.target.value / 100)}
+              />
             </div>
             <div className="newTypeProductItem">
               <label>Mô tả</label>
-              <textarea cols="10" rows="5"></textarea>
+              <textarea
+                cols="10"
+                rows="5"
+                onChange={(e) => setDesciption(e.target.value)}
+              ></textarea>
             </div>
-            <button className="newTypeProductButton">Create</button>
+            <button
+              className="newTypeProductButton"
+              onClick={(e) => handleCreate(e)}
+            >
+              Create
+            </button>
           </form>
         </div>
       </div>

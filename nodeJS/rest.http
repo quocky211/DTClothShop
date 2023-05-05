@@ -104,10 +104,10 @@ GET http://localhost:3001/product/discount
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
 GET http://localhost:3001/product/5/product-detail?color=green
 
-###(D)
+### lấy chi tiết của 1 sản phẩm dựa theo product_id /product/:product_id/product-detail (D)
 GET http://localhost:3001/product/5/product-detail
 
-### lấy sản phẩm dựa theo t_id /product/:id (D)
+### lấy sản phẩm dựa theo _id /product/:id (D)
 GET http://localhost:3001/product/5
 
 ### bán chạy: /product/top-selling (D)
@@ -115,6 +115,9 @@ GET http://localhost:3001/product/top-selling
 
 ### sản phẩm mới: /product/new (D)
 GET http://localhost:3001/product/new
+
+### lấy chi tiết loại sản phẩm /product/category-detail
+GET http://localhost:3001/product/category-detail
 
 ### lấy sản phẩm theo loại sản phẩm: /product/category/:id (D)
 GET http://localhost:3001/product/category/2
@@ -128,6 +131,10 @@ GET http://localhost:3001/category
 ### lấy category-detail dựa vào category
 ###GET http://localhost:3001/category/:id/category-detail (D)
 GET http://localhost:3001/category/3/category-detail
+
+### lấy ra 1 category-detail dựa vào _id
+###GET http://localhost:3001/category-detail/:id
+GET http://localhost:3001/category-detail/2
 
 ###refresh-token
 POST  http://localhost:3001/user/refresh-token

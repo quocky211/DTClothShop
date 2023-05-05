@@ -12,8 +12,15 @@ class SiteController {
     }
 
     // GET /category/:id/category-detail
-    GetCategoryDetail(req, res, next) {
+    ShowCategoryDetail(req, res, next) {
         CategoryDetail.find({ category_id: req.params.id })
+            .exec()
+            .then((categoryDetail) => res.json(categoryDetail))
+            .catch(next);
+    }
+    // GET /category-detail/:id
+    GetCategoryDetail(req, res, next) {
+        CategoryDetail.find({ _id: req.params.id })
             .exec()
             .then((categoryDetail) => res.json(categoryDetail))
             .catch(next);

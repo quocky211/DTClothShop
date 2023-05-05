@@ -13,7 +13,6 @@ const Product = new Schema(
         price: { type: Number },
         discount: { type: Number },
         material: { type: String },
-        featured: { type: Boolean, default: false, require: false },
     },
     {
         _id: false,
