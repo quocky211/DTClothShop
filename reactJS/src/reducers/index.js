@@ -35,10 +35,10 @@ function todoProduct(state = initProduct, action) {
 
       if (state.numberCart === 0) {
         let cart = {
-          id: action.payload.maSp,
+          _id: action.payload._id,
           quantity: 1,
           name: action.payload.name,
-          image: action.payload.hinh,
+          image: action.payload.image,
           price: action.payload.price,
         };
         state.Carts.push(cart);
@@ -46,7 +46,8 @@ function todoProduct(state = initProduct, action) {
       } else {
         let check = false;
         state.Carts.map((item, key) => {
-          if (item.id === action.payload.maSp) {
+          if (item._id === action.payload._id) //đổi masp thành _id
+          {
             state.Carts[key].quantity++;
             check = true;
           }
@@ -54,10 +55,10 @@ function todoProduct(state = initProduct, action) {
         });
         if (!check) {
           let _cart = {
-            id: action.payload.maSp,
-            quantity: 1,
+            _id: action.payload._id,
+            quantity: 2,  // vấn đề số lượng khi thêm vào giỏ hàng ở đây
             name: action.payload.name,
-            image: action.payload.hinh,
+            image: action.payload.image,
             price: action.payload.price,
           };
           state.Carts.push(_cart);

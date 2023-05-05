@@ -18,7 +18,7 @@ export function ContainerItem(props) {
   });
   const priceVND = vnd.format(props.price);
   const item = {
-    masp: props.masp,
+    _id: props._id,// đổi masp thành _id
     price: props.price,
     name: props.name,
     image: props.image,
@@ -53,6 +53,7 @@ export function ContainerItem(props) {
           Thêm vào giỏ hàng thành công!
         </Alert>
       </Snackbar> */}
+      {/* // masp ở đây là cái éo gì mà đổi sang _id lại không chạyyyy */}
       <Link to={"/Products/" + props.masp}>
         <button onClick={() => refresh()}>
           <img src={props.image} alt="sanpham" className="ContainerItem_image" />

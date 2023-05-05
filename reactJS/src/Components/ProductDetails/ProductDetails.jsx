@@ -113,7 +113,7 @@ export function ProductDetails(props) {
   };
 
   return (
-    
+
       product!==undefined &&<div className="product-detail-container">
         <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
@@ -299,10 +299,10 @@ export function ProductDetails(props) {
                 price={item[1].price}
                 name={item[1].name}
                 image={ao}
-                masp={item[1]._id}
+                _id={item[1]._id}
               />
-              } 
-              
+              }
+
             )}
           </Slider>
         </div>
@@ -313,7 +313,7 @@ export function ProductDetails(props) {
                     price={item[1].price}
                     name={item[1].name}
                     image={ao}
-                    masp={item[1]._id}
+                    _id={item[1]._id}
                   />
             )}
           </Slider>
@@ -321,7 +321,7 @@ export function ProductDetails(props) {
       </div>
       <Footer />
     </div>
-    
+
   );
 }
 const mapStateToProps = (state) => {
