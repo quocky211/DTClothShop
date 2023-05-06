@@ -41,8 +41,13 @@ class ProductDataService {
     async createProducts(data) {
         return await axios.post("http://localhost:3001/admin/product/store", data)
         }
+    async editProduct(productId,data) {
+        return await axios.put(`http://localhost:3001/admin/product/edit/${productId}`, data)
+    }
     async createDetailProducts(data) {
         return await axios.post("http://localhost:3001/admin/product/store", data)
         }
+    
+    
 }
 export default new ProductDataService();
