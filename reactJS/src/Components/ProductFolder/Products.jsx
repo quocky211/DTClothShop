@@ -24,18 +24,14 @@ function Products() {
   const [price, setPrice] = useState(0);
   const [cataDetails, setCataDetails] = useState([]);
 
-  var one = false;
-  console.log(one)
-  useEffect(() => {
-    getProducts(price,currentPage);
-    if (one===false) {
-      one = true;
-      console.log(one)
-      getAllCataDetail();
-    }
-  }, [currentPage,price]);
 
-  const getProducts = (price,page) => {
+  useEffect(() => {
+    getProducts(price, currentPage);
+    getAllCataDetail();
+    
+  }, [currentPage, price]);
+
+  const getProducts = (price, page) => {
     ProductDataService.getAllProducts(price, page)
       .then((res) => {
         setProducts(res.data.docs);
@@ -45,33 +41,30 @@ function Products() {
   };
 
   const getAllCataDetail = () => {
-    CatagoryDataService.getAll()
+    CatagoryDataService.getAllCataDetail()
       .then((res) => {
-        const data = res.data;
-        data.forEach(function (element) {
-          CatagoryDataService.getAllDetail(element._id)
-            .then((response) => {
-              setCataDetails((current) => current.concat(response.data));
-            })
-            .catch((err) => console.error(err));
-        });
+        setCataDetails(res.data)
       })
       .catch((err) => console.error(err));
   };
 
-  const handleCurrPage = (event,number) =>{
+  const handleCurrPage = (event, number) => {
     setCurrentPage(number);
-  }
-  const handleFilter = (event) =>{
+  };
+  const handleFilter = (event) => {
     // console.log(event.target.value)
     // setPrice(event.target.value);
-  }
+  };
   let items = [];
   for (let number = 1; number <= totalPage; number++) {
     items.push(
-        <Pagination.Item key={number} active={number === currentPage} onClick={e => handleCurrPage(e,number)}>
-          {number}
-        </Pagination.Item>
+      <Pagination.Item
+        key={number}
+        active={number === currentPage}
+        onClick={(e) => handleCurrPage(e, number)}
+      >
+        {number}
+      </Pagination.Item>
     );
   }
   return (
@@ -110,20 +103,20 @@ function Products() {
                 <div className="find-product-price">
                   <p>Lọc giá sản phẩm</p>
                   <input type="radio" name="price" id="1" />
-                  <label htmlFor="1" > Dưới 100.000 đ</label>
+                  <label htmlFor="1"> Dưới 100.000 đ</label>
                   <br></br>
                   <input type="radio" name="price" id="2" />
-                  <label htmlFor="2" > 100.000 đ - 300.000 đ</label>
+                  <label htmlFor="2"> 100.000 đ - 300.000 đ</label>
                   <br></br>
                   <input type="radio" name="price" id="3" />
-                  <label htmlFor="3" > 300.000 đ - 500.000 đ</label>
+                  <label htmlFor="3"> 300.000 đ - 500.000 đ</label>
                   <br></br>
                   <input type="radio" name="price" id="4" />
-                  <label htmlFor="4" > Trên 500.000 đ</label>
+                  <label htmlFor="4"> Trên 500.000 đ</label>
                   <br></br>
                 </div>
                 <div className="filter-button">
-                  <input type="button" value="Áp dụng" onClick={handleFilter}/>
+                  <input type="button" value="Áp dụng" onClick={handleFilter} />
                 </div>
               </form>
             </Offcanvas.Body>

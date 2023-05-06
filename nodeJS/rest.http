@@ -1,8 +1,8 @@
 # trang admin:
-# list sản phẩm GET /admin/product?page=:page(có phân trang)
+# list sản phẩm GET /admin/product?page=:page(có phân trang) (D)
 GET http://localhost:3001/admin/product
 
-### thêm sản phẩm: /admin/product/store
+### thêm sản phẩm: /admin/product/store (D)
 POST http://localhost:3001/admin/product/store
 Content-Type: application/json
 
@@ -13,8 +13,8 @@ Content-Type: application/json
     "description": "descriptiondescriptiondescrip",
     "price": 100000,
     "discount": 0.01,
-    "material": "materialmaterial",
-    "featured": false
+    "material": "materialmaterial"
+   
 }
 
 ### thêm chi tiết sản phẩm: /admin/product-detail/store
@@ -43,7 +43,6 @@ Content-Type: application/json
     "price": 100000,
     "discount": 0.01,
     "material": "materialmaterial",
-    "featured": false
 }
 
 ### xóa sản phẩm: /admin/product/delete/:id
@@ -89,7 +88,7 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=2 100000 <= price < 300000
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
-GET http://localhost:3001/product?price=0&&page=1
+GET http://localhost:3001/product?price=0&&category_detail_id=1&&category_detail_id=2
 
 ### search header GET /search?name=:name
 GET http://localhost:3001/search?name=jean
@@ -102,7 +101,7 @@ GET http://localhost:3001/product/discount
 ### /product/:id/product-detail?color:color
 ### lưu ý là từ phía sau dấu "?" không có cũng không sao
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
-GET http://localhost:3001/product/5/product-detail?color=green
+GET http://localhost:3001/product/6/product-detail?color=black
 
 ### lấy chi tiết của 1 sản phẩm dựa theo product_id /product/:product_id/product-detail (D)
 GET http://localhost:3001/product/5/product-detail
@@ -133,7 +132,7 @@ GET http://localhost:3001/category
 GET http://localhost:3001/category/3/category-detail
 
 ### lấy ra 1 category-detail dựa vào _id
-###GET http://localhost:3001/category-detail/:id
+###GET http://localhost:3001/category-detail/:id (D)
 GET http://localhost:3001/category-detail/2
 
 ###refresh-token

@@ -41,5 +41,8 @@ class ProductDataService {
     async createProducts(data) {
         return await axios.post("http://localhost:3001/admin/product/store", data)
         }
+    async createDetailProducts(data) {
+        return await axios.post("http://localhost:3001/admin/product/store", data)
+        }
 }
 export default new ProductDataService();

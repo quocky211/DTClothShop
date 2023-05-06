@@ -14,7 +14,6 @@ export default function TypeProductList() {
   const [data, setData] = useState(productRows);
 
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     getProducts();
   }, []);
@@ -22,17 +21,11 @@ export default function TypeProductList() {
   const getProducts = () => {
     ProductDataService.adminGetProducts()
       .then(function (res) {
-
-        console.log(res.data[0].category_detail_id);
         setProducts(res.data);
 
       })
       .catch((err) => console.log(err));
   };
-
-  // const getNameofType = (typeDetail) => {
-  //   CatagoryDataService.getAllDetail()
-  // }
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có muốn xóa không?")) {
@@ -56,13 +49,11 @@ export default function TypeProductList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={ao} alt="" />
             {params.row.name}
           </div>
         );
       },
     },
-    { field: "category_detail_id", headerName: "Loại", width: 100 },
     { field: "marterial", headerName: "Chất liệu", width: 200 },
     {
       field: "action",

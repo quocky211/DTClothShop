@@ -60,14 +60,13 @@ export default function NewTypeProduct() {
       description: description,
       price: price,
       discount: discount,
-      material: material,
-      featured: false,
+      marterial: material,
     };
     ProductDataService.createProducts(newProduct)
       .then((response) => {
         setHasCreate(true);
         alert("Thêm mới sản phẩm thành công")
-        navigate("/Admin/NewTypeProduct");
+        navigate("/Admin/TypeProducts");
       })
       .catch((e) => {
         console.log(e);
