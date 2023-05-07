@@ -25,6 +25,7 @@ Content-Type: application/json
     "product_id": 1,
     "color": "green",
     "size": "sizesizesizesizesizesizesizesizesizesizesizes",
+    "path":"imagetest.png",
     "qty": 1000
 }
 
@@ -57,12 +58,13 @@ POST http://localhost:3001/admin/user/store
 Content-Type: application/json
 
 {
-    "email": "588art0ggy@gmail.com",
+    "email": "tqki0ggy@gmail.com",
     "password":"123456",
     "name": "Lê Minh Đại",
     "gender":"Nam",
     "address":"Long An",
-    "birthday": "2002-06-13"
+    "birthday": "2002-06-13",
+    "phone":"0387383583"
 }
 
 ### sửa user /admin/user/edit/:id
@@ -101,7 +103,7 @@ GET http://localhost:3001/product/discount
 ### /product/:id/product-detail?color:color
 ### lưu ý là từ phía sau dấu "?" không có cũng không sao
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
-GET http://localhost:3001/product/47/product-detail?color=#989898
+GET http://localhost:3001/product/47/product-detail?color=989898
 
 ### lấy chi tiết của 1 sản phẩm dựa theo product_id /product/:product_id/product-detail (D)
 GET http://localhost:3001/product/5/product-detail
@@ -149,12 +151,13 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "5mmart0ggy@gmail.com",
+    "email": "5b55jo9dv@gmail.com",
     "password":"123456",
     "confirmPassword": "123456",
     "name": "Lê Minh Đại",
     "gender":"Nam",
     "address":"Long An",
+    "phone":"0387383583",
     "birthday": "2002-06-13"
 }
 

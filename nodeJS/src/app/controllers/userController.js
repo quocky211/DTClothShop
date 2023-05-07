@@ -29,6 +29,7 @@ class UserController {
                 birthday: req.body.birthday,
                 address: req.body.address,
                 name: req.body.name,
+                phone: req.body.phone,
                 avatar: req.body.avatar,
                 level: req.body.level,
             };

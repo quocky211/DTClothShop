@@ -12,6 +12,7 @@ const User = new Schema(
         password: { type: String, require: true },
         avatar: { type: String, require: false },
         gender: { type: String },
+        phone: { type: String },
         address: { type: String },
         birthday: { type: Date },
         level: { type: Boolean, require: false, default: false },

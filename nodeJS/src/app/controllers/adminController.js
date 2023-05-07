@@ -14,7 +14,9 @@ const { userValidate } = require('../../helpers/validation');
 class AdminController {
     // GET /admin/product
     ShowProduct(req, res, next) {
-        Product.find()
+        Product.find({})
+            .populate({ path: 'category_detail_id', select: 'name' })
+            .exec()
             .then((product) => {
                 res.json(product);
             })
@@ -110,16 +112,13 @@ class AdminController {
                 birthday: req.body.birthday,
                 address: req.body.address,
                 name: req.body.name,
+                phone: req.body.phone,
                 avatar: req.body.avatar,
                 level: req.body.level,
             };
             const user = new User(formData);
             user.save()
                 .then(() => {
-                    // res.json({
-                    //     status: 'successfully',
-                    //     elements: user,
-                    // });
                     res.send('Thêm người dùng thành công');
                 })
                 .catch(() => res.send('Thêm người dùng thất bại'));

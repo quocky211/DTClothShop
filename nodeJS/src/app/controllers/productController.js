@@ -51,11 +51,6 @@ class ProductController {
                 .then((product) => res.json(product))
                 .catch(next);
         }
-
-        // ProductDetail.find({ product_id: req.params.id })
-        //     .populate('product_id')
-        //     .exec()
-        //     .then((productDetail) => res.json(productDetail));
     }
 
     // GET /category/:id

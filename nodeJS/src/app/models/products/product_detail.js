@@ -9,6 +9,7 @@ const ProductDetail = new Schema(
         color: { type: String },
         size: { type: String },
         qty: { type: Number },
+        path: { type: String },
     },
     {
         _id: false,
