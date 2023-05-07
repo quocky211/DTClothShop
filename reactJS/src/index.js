@@ -146,7 +146,7 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
-        path:"Admin/NewProduct",
+        path:"Admin/NewProduct/:typeProductId",
         element: <NewProduct />,
       }
       

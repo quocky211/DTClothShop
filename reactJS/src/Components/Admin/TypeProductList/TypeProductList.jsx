@@ -4,34 +4,34 @@ import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import { Add, DeleteOutline, Edit } from "@mui/icons-material";
-import { productRows } from "../dummyData";
 import { Link } from "react-router-dom";
 import ProductDataService from "../../../services/products";
-import CatagoryDataService from "../../../services/catagories";
-import ao from "../Images/ao1.jpg";
 
 export default function TypeProductList() {
-  const [data, setData] = useState(productRows);
-
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [products]);
 
   const getProducts = () => {
     ProductDataService.adminGetProducts()
       .then(function (res) {
         setProducts(res.data);
-
       })
       .catch((err) => console.log(err));
   };
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có muốn xóa không?")) {
-      setData(data.filter((item) => item.id !== id));
+      ProductDataService.deleteProduct(id)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
     }
   };
+  var vnd = Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
 
   const columns = [
     {
@@ -45,16 +45,21 @@ export default function TypeProductList() {
     {
       field: "product",
       headerName: "Sản phẩm",
-      width: 500,
+      width: 400,
       renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            {params.row.name}
-          </div>
-        );
+        return <div className="productListItem">{params.row.name}</div>;
       },
     },
+    { field: "category_detail_id", headerName: "Loại", width: 100 },
     { field: "marterial", headerName: "Chất liệu", width: 200 },
+    {
+      field: "gia",
+      headerName: "Giá",
+      width: 100,
+      renderCell: (params) => {
+        return <div className="productListItem">{vnd.format(params.row.price)}</div>;
+      },
+    },
     {
       field: "action",
       headerName: "Hành động",
@@ -100,7 +105,8 @@ export default function TypeProductList() {
               pagination: {
                 paginationModel: { pageSize: 25, page: 0 },
               },
-            }}     />
+            }}
+          />
         </div>
       </div>
     </div>

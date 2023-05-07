@@ -21,7 +21,6 @@ export default function NewTypeProduct() {
   const [material, setMaterial] = useState("");
   const [description, setDesciption] = useState("");
 
-  const [hasCreate, setHasCreate] = useState(false)
 
   useEffect(() => {
     getCatas();
@@ -64,11 +63,11 @@ export default function NewTypeProduct() {
     };
     ProductDataService.createProducts(newProduct)
       .then((response) => {
-        setHasCreate(true);
         alert("Thêm mới sản phẩm thành công")
         navigate("/Admin/TypeProducts");
       })
       .catch((e) => {
+        alert("Thêm không thành công")
         console.log(e);
       });
   };

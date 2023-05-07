@@ -84,8 +84,7 @@ export function ProductDetails(props) {
       });
   }
   // Get size by color
-  const handleSize = (e,color) => {
-    console.log(e.style.borderColor );
+  const handleSize = (color) => {
     setColorProduct(color);
     var sizeArr = productDetail.filter((item)=>item.color === color)
     setSizeArr(sizeArr);
@@ -148,7 +147,7 @@ export function ProductDetails(props) {
           <div className="color">
             {colorArr.map((color) => (
               <button
-                onClick={(e) => handleSize(e,color)}
+                onClick={() => handleSize(color)}
                 style={{ backgroundColor: color , border:" 1px solid black"}}
               ></button>
             ))}

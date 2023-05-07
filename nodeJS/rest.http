@@ -22,8 +22,8 @@ POST http://localhost:3001/admin/product-detail/store
 Content-Type: application/json
 
 {
-    "product_id": 3,
-    "color": "greeeeeeeeeeeeeeeeeeeeen",
+    "product_id": 1,
+    "color": "green",
     "size": "sizesizesizesizesizesizesizesizesizesizesizes",
     "qty": 1000
 }
@@ -45,12 +45,12 @@ Content-Type: application/json
     "material": "materialmaterial",
 }
 
-### xóa sản phẩm: /admin/product/delete/:id
-DELETE  http://localhost:3001/admin/product/delete/91
+### xóa sản phẩm: /admin/product/delete/:id (D)
+DELETE  http://localhost:3001/admin/product/delete/91 
 
 ### list user có level = false /user/
 ### /admin/user/show?page=:page (có phân trang)
-GET http://localhost:3001/admin/user/show?page=1
+GET http://localhost:3001/admin/user/show
 
 ### thêm user /admin/user/store (chưa xong)
 POST http://localhost:3001/admin/user/store
@@ -74,7 +74,7 @@ Content-Type: application/json
 }
 
 ### xóa user /admin/user/delete/:id
-DELETE http://localhost:3001/admin/user/delete/2
+DELETE http://localhost:3001/admin/user/delete/4
 
 
 ### show order /admin/order/show/

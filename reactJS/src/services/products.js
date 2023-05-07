@@ -22,10 +22,6 @@ class ProductDataService {
 
         return await axios.get(`http://localhost:3001/product/${productID}/product-detail`)
     }
-    async getProductDetailByColor(productID, color) {
-
-        return await axios.get(`http://localhost:3001/product/${productID}/product-detail?color=${color}`)
-    }
     async getProductDiscount() {
 
         return await axios.get('http://localhost:3001/product/discount')
@@ -48,10 +44,12 @@ class ProductDataService {
     async editProduct(productId,data) {
         return await axios.put(`http://localhost:3001/admin/product/edit/${productId}`, data)
     }
-    async createDetailProducts(data) {
-        return await axios.post("http://localhost:3001/admin/product/store", data)
-        }
-    
+    async deleteProduct(productId) {
+        return await axios.delete(`http://localhost:3001/admin/product/delete/${productId}`)
+    }
+    async createDetailProduct(data) {
+        return await axios.post("http://localhost:3001/admin/product-detail/store", data)
+    }
     
 }
 export default new ProductDataService();

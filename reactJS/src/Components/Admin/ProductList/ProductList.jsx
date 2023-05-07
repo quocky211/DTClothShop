@@ -1,42 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./ProductList.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../dummyData";
+import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import ao from '../Images/ao1.jpg'
+import ProductDataService from "../../../services/products";
+
 
 export default function ProductList() {
-  const [data, setData] = useState(productRows);
+  const { typeProductId } = useParams();
 
+  const [productDetails, setProductDetails] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = () => {
+    ProductDataService.getProductDetail(typeProductId)
+      .then(function(res){ 
+        console.log(res.data)
+        setProductDetails(res.data)})
+      .catch((err) => console.log(err));
+  };
   const handleDelete = (id) => {
-    if(window.confirm("Bạn có muốn xóa không?"))
-    {
-      setData(data.filter((item) => item.id !== id));
+    if (window.confirm("Bạn có muốn xóa không?")) {
+     
     }
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "_id", headerName: "ID", width: 70 },
     {
       field: "product",
       headerName: "Sản phẩm",
-      width: 200,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            <img className="productListImg" src={ao} alt="" />
           </div>
         );
       },
     },
-    { field: "type", headerName: "Loại", width: 100 },
     { field: "color", headerName: "Màu sắc", width: 100 },
     { field: "size", headerName: "Size", width: 100 },
-    { field: "price", headerName: "Giá", width: 100 },
-    { field: "quantity", headerName: "Số lượng", width: 100 },
+    { field: "qty", headerName: "Số lượng", width: 100 },
     {
       field: "action",
       headerName: "Hành động",
@@ -45,7 +57,11 @@ export default function ProductList() {
         return (
           <>
             <Link to={"/Admin/Product/" + params.row.id}>
-              <button className="productListEdit"> Edit </button>
+              <button className="productListEdit"> 
+                {" "}
+                <Edit />
+                {" "}
+              </button>
             </Link>
             <DeleteOutline
               className="productListDelete"
@@ -64,16 +80,21 @@ export default function ProductList() {
         <div className="productList" style={{ height: 800, width: "100%" }}>
           <div className="productListTitle">
             <h2>Chi tiết sản phẩm</h2>
-            <Link to="/Admin/NewProduct">
+            <Link to={"/Admin/NewProduct/" + typeProductId}>
               <button className="productListButton">Thêm</button>
             </Link>
           </div>
           <DataGrid
-            rows={data}
+            rows={productDetails}
+            getRowId={(row) => row._id}
             disableRowSelectionOnClick
             columns={columns}
-            pageSize={8}
             checkboxSelection
+            initialState={{
+              pagination: {
+                paginationModel: { pageSize: 25, page: 0 },
+              },
+            }} 
           />
         </div>
       </div>
