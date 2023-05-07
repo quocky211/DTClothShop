@@ -23,6 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export function ProductDetails(props) {
+
   const { productID } = useParams();
   const [product, setProduct] = useState({});
   const [productDetail, setProductDetail] = useState([]);
@@ -30,6 +31,7 @@ export function ProductDetails(props) {
   const [relatedProdutcs, setRelatedProducts] = useState([]);
 
   const [colorArr, setColorArr] = useState([]);
+  const [firsSizes, setFirsSizes] = useState([]);
   const [sizeArr, setSizeArr] = useState([]);
 
   const [colorProduct, setColorProduct] = useState("");
@@ -63,9 +65,8 @@ export function ProductDetails(props) {
         var colotArrs = data.map(item => item.color);
         var colorArr = colotArrs.filter((item,index) => colotArrs.indexOf(item) === index)
         setColorArr(colorArr);
-        var sizeArrs = data.map((item)=> item.size)
-        var sizeArr = sizeArrs.filter((item,index) => sizeArrs.indexOf(item) === index)
-        setSizeArr(sizeArr);
+        var firsSizes = data.filter((item)=>item.color===data[0].color)
+        setFirsSizes(firsSizes)
         setProductDetail(res.data);
       })
       .catch((e) => {
@@ -82,6 +83,15 @@ export function ProductDetails(props) {
         console.log(e);
       });
   }
+  // Get size by color
+  const handleSize = (e,color) => {
+    console.log(e.style.borderColor );
+    setColorProduct(color);
+    var sizeArr = productDetail.filter((item)=>item.color === color)
+    setSizeArr(sizeArr);
+
+  }
+
   let settings = {
     arrows: true,
     infinite: true,
@@ -138,7 +148,7 @@ export function ProductDetails(props) {
           <div className="color">
             {colorArr.map((color) => (
               <button
-                onClick={() => setColorProduct(color)}
+                onClick={(e) => handleSize(e,color)}
                 style={{ backgroundColor: color , border:" 1px solid black"}}
               ></button>
             ))}
@@ -147,12 +157,12 @@ export function ProductDetails(props) {
           <div className="size">
             {sizeArr.map((size) => (
               <button
-                onClick={() => setSizeProduct(size)}
+                onClick={() => setSizeProduct(size.size)}
                 style={{
                   backgroundColor: sizeProduct == size && "antiquewhite"
                 }}
               >
-                {size}
+                {size.size}
               </button>
             ))}
           </div>

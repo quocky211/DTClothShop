@@ -31,7 +31,7 @@ Content-Type: application/json
 ### thêm hình ảnh sản phẩm: /admin/product-image/store
 POST http://localhost:3001/admin/product-image/store
 
-### sửa sản phẩm: /admin/product/edit/:id
+### sửa sản phẩm: /admin/product/edit/:id (D)
 PUT http://localhost:3001/admin/product/edit/91
 Content-Type: application/json
 
@@ -101,7 +101,7 @@ GET http://localhost:3001/product/discount
 ### /product/:id/product-detail?color:color
 ### lưu ý là từ phía sau dấu "?" không có cũng không sao
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
-GET http://localhost:3001/product/6/product-detail?color=black
+GET http://localhost:3001/product/47/product-detail?color=#989898
 
 ### lấy chi tiết của 1 sản phẩm dựa theo product_id /product/:product_id/product-detail (D)
 GET http://localhost:3001/product/5/product-detail

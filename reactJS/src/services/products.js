@@ -22,6 +22,10 @@ class ProductDataService {
 
         return await axios.get(`http://localhost:3001/product/${productID}/product-detail`)
     }
+    async getProductDetailByColor(productID, color) {
+
+        return await axios.get(`http://localhost:3001/product/${productID}/product-detail?color=${color}`)
+    }
     async getProductDiscount() {
 
         return await axios.get('http://localhost:3001/product/discount')
