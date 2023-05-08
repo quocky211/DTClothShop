@@ -15,7 +15,6 @@ const userValidate = (data) => {
         birthday: Joi.date().required(),
         address: Joi.string().required(),
         name: Joi.string().min(3).max(30).required(),
-        avatar: Joi.string().default(null),
         level: Joi.bool().default(false),
         // phone: Joi.extend(require('joi-phone-number'))
         //     .string()
