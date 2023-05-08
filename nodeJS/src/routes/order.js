@@ -5,4 +5,6 @@ const router = express.Router();
 router.post('/create', orderController.StoreOrder);
 router.get('/momocheckout', orderController.ShowMoMoCheckOut);
 router.get('/vnpaycheckout', orderController.ShowVNPayCheckOut);
+router.get('/:id/order-detail', orderController.ShowOderDetailByOrder);
+router.get('/order-detail/:id', orderController.GetOrderDetail);
 module.exports = router;

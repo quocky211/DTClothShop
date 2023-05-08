@@ -2,6 +2,7 @@ const httpError = require('http-errors');
 const { userValidate, loginValidate } = require('../../helpers/validation');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../helpers/jwt_service');
 const client = require('../../helpers/connection_redis');
+const Order = require('../models/order/order');
 
 const User = require('../models/user/user');
 class UserController {
@@ -125,6 +126,22 @@ class UserController {
         ];
 
         res.json(list);
+    }
+
+    // GET /user/:id
+    GetUser(req, res, next) {
+        User.find({ _id: req.params.id }, 'email name gender address birthday phone')
+            .exec()
+            .then((user) => res.json(user))
+            .catch(next);
+    }
+
+    // GET /user/:id/order
+    GetOrder(req, res, next) {
+        Order.find({ user_id: req.params.id })
+            .exec()
+            .then((order) => res.json(order))
+            .catch(next);
     }
 }
 

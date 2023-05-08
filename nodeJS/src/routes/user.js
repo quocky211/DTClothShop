@@ -9,4 +9,7 @@ router.post('/login', userController.Login);
 router.delete('/logout', userController.Logout);
 router.get('/test-get-list-user', verifyAccessToken, userController.TestGetListUser);
 
+router.get('/:id', userController.GetUser);
+router.get('/:id/order', userController.GetOrder);
+
 module.exports = router;

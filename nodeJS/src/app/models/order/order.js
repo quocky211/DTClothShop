@@ -12,6 +12,7 @@ const Order = new Schema(
         note: { type: String, require: false },
         phone: { type: Number },
         pay_method: { type: Boolean },
+        total: Number,
         discount_code: { type: String, ref: 'discount', require: false },
     },
     {

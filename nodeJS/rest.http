@@ -142,6 +142,14 @@ Content-Type: application/json
     "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0LCJpYXQiOjE2ODE2MjI1NzMsImV4cCI6MTcxMzE4MDE3M30.HXsfA-MF4pDxJv5XJvQYh204Iuw0B0lpaMH8WiFx_Sk"
 }
 
+###Lấy ra 1 user qua _id /user/:id
+GET  http://localhost:3001/user/10
+
+###Lấy ra hóa đơn của 1 user qua user_id /user/:id/order
+GET  http://localhost:3001/user/10/order
+
+### lấy chi tiết hóa đơn qua order_id /order/:id/order-detail
+GET http://localhost:3001/order/10/order-detail
 
 ### resgister
 POST  http://localhost:3001/user/register
