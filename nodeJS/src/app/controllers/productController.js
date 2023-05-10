@@ -1,6 +1,9 @@
 const Product = require('../models/products/product');
 const ProductDetail = require('../models/products/product_detail');
 const CategoryDetail = require('../models/products/category_detail');
+const Outfit = require('../models/outfit/outfit');
+const OutfitDetail = require('../models/outfit/outfit_detail');
+
 const { multipleMongooseToObject } = require('../../util/mongoose');
 
 class ProductController {
@@ -106,6 +109,31 @@ class ProductController {
                 res.json(product);
             })
             .catch((err) => next(err));
+    }
+
+    // GET /product/outfit
+    ShowOutfit(req, res, next) {
+        Outfit.find()
+            .exec()
+            .then((outfit) => res.json(outfit))
+            .catch(next);
+    }
+
+    // GET /product/outfit/:id
+    GetOutfit(req, res, next) {
+        Outfit.find({ _id: req.params.id })
+            .exec()
+            .then((outfit) => res.json(outfit))
+            .catch(next);
+    }
+
+    // GET /product/outfit/:id/outfit-detail
+    ShowOutfitDetail(req, res, next) {
+        OutfitDetail.find({ outfit_id: req.params.id })
+            .populate({ path: 'product_id', select: 'name price' })
+            .exec()
+            .then((outfitDetail) => res.json(outfitDetail))
+            .catch(next);
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện

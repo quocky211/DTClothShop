@@ -134,6 +134,10 @@ GET http://localhost:3001/category/3/category-detail
 ###GET http://localhost:3001/category-detail/:id (D)
 GET http://localhost:3001/category-detail/2
 
+### lấy list outfit /product/outfit
+GET http://localhost:3001/product/outfit
+
+
 ###refresh-token
 POST  http://localhost:3001/user/refresh-token
 Content-Type: application/json
@@ -150,6 +154,9 @@ GET  http://localhost:3001/user/10/order
 
 ### lấy chi tiết hóa đơn qua order_id /order/:id/order-detail
 GET http://localhost:3001/order/10/order-detail
+
+### lấy ra 1 chi tiết hóa đơn /order/order-detail/:id
+GET http://localhost:3001/order/order-detail/1
 
 ### resgister
 POST  http://localhost:3001/user/register
