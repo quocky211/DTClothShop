@@ -17,8 +17,8 @@ Content-Type: application/json
    
 }
 
-### thêm chi tiết sản phẩm: /admin/product-detail/store
-POST http://localhost:3001/admin/product-detail/store
+### thêm chi tiết sản phẩm: /admin/product-detail/store (D)
+POST http://localhost:3001/admin/product-detail/store 
 Content-Type: application/json
 
 {
@@ -89,8 +89,8 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=4 price >= 500000
 GET http://localhost:3001/product?price=0&&category_detail_id=1&&category_detail_id=2
 
-### search header GET /search?name=:name
-GET http://localhost:3001/search?name=jean
+### search header GET /search?name=:name (D)
+GET http://localhost:3001/search?name=tee 
 
 ### sản phẩm giảm giá: /product/discount (D)
 GET http://localhost:3001/product/discount 

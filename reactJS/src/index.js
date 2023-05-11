@@ -17,6 +17,7 @@ import Outfits from "./Components/Outfits/Outfits";
 import TypeProduct from "./Components/TypeProduct/TypeProduct";
 import TypeProductDetail from "./Components/TypeProductDetail/TypeProductDetail";
 import Blogs from "./Components/Blogs/Blogs";
+import Search from "./Components/Search/Search";
 import Account from "./Components/Account/Account";
 import Home from "./Components/Admin/Home/Home";
 import UserList from "./Components/Admin/UserList/UserList";
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
         element: <OutfitDetail />,
       },
       {
+        path: "Search",
+        element: <Search />,
+      },
+      {
         path: "Admin",
         element: <Home />,
       },
@@ -148,7 +153,8 @@ const router = createBrowserRouter([
       {
         path:"Admin/NewProduct/:typeProductId",
         element: <NewProduct />,
-      }
+      },
+      
       
     ],
   },

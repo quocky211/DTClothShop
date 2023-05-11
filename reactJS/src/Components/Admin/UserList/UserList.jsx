@@ -96,8 +96,12 @@ export default function UserList() {
             getRowId={(row) => row._id}
             disableRowSelectionOnClick
             columns={columns}
-            pageSize={8}
             checkboxSelection
+            initialState={{
+              pagination: {
+                paginationModel: { pageSize: 25, page: 0 },
+              },
+            }}
           />
         </div>
       </div>

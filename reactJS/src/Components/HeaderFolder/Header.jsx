@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import CatagoryDataService from "../../services/catagories";
 import "./Header.css";
 import shoppingIcon from "../Images/shopping-icon.png";
-import Searchbar from "../Search/Searchbar";
 import { Log_out } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import ListTypeProduct from "../ListTypeProduct/ListTypeProduct";
@@ -39,13 +38,32 @@ function Header(props) {
   useEffect(() => {
     CatagoryDataService.getAll()
       .then((res) => {
-        console.log(res.data);
         setCategories(res.data);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = () =>{
+    navigate("/Search",{
+      state: {
+        search
+      }}
+      );
+  }
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+    navigate("/Search",{
+      state: {
+        search
+      }}
+      );
+    }
+  };
+
 
   return (
     <Navbar bg="light" expand="lg" fixed="top">
@@ -115,8 +133,9 @@ function Header(props) {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={(e)=> setSearch(e.target.value)}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success" onClick={handleSearch} >Search</Button>
           </Form>
         </div>
         <Navbar.Brand href="/">Shop quần áo</Navbar.Brand>
@@ -140,8 +159,10 @@ function Header(props) {
             placeholder="Search"
             className="me-2"
             aria-label="Search"
+            onChange={(e)=> setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
-          <Button variant="outline-success">Search</Button>
+          <Button variant="outline-success" onClick={handleSearch}>Search</Button>
         </Form>
         <Nav.Link className="lovelists" href={loveList}>
           {" "}

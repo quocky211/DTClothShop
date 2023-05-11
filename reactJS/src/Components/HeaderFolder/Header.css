@@ -107,6 +107,10 @@
 .cartandlogin{
     display: flex;
 }
+.cartandlogin button{
+    border: none;
+    background: none;
+}
 .cartandlogin .nav-link[href="/ShoppingCart"]
 {
     padding: 0;

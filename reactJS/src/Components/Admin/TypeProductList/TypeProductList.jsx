@@ -50,14 +50,25 @@ export default function TypeProductList() {
         return <div className="productListItem">{params.row.name}</div>;
       },
     },
-    { field: "category_detail_id", headerName: "Loại", width: 100 },
+    {
+      field: "type",
+      headerName: "Loại",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">{params.row.category_detail_id.name}</div>
+        );
+      },
+    },
     { field: "marterial", headerName: "Chất liệu", width: 200 },
     {
       field: "gia",
       headerName: "Giá",
       width: 100,
       renderCell: (params) => {
-        return <div className="productListItem">{vnd.format(params.row.price)}</div>;
+        return (
+          <div className="productListItem">{vnd.format(params.row.price)}</div>
+        );
       },
     },
     {

@@ -26,6 +26,10 @@ class ProductDataService {
 
         return await axios.get('http://localhost:3001/product/discount')
     }
+    async getProductsFromSearch(search) {
+
+        return await axios.get(`http://localhost:3001/search?name=${search}`)
+    }
     async getProductNew() {
 
         return await axios.get('http://localhost:3001/product/new')
