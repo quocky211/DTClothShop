@@ -113,8 +113,8 @@ class ProductController {
 
     // GET /product/outfit
     ShowOutfit(req, res, next) {
-        Outfit.find()
-            .exec()
+        const page = req.query.page || 1;
+        Outfit.paginate({}, { page: page, limit: 12 })
             .then((outfit) => res.json(outfit))
             .catch(next);
     }
@@ -129,11 +129,36 @@ class ProductController {
 
     // GET /product/outfit/:id/outfit-detail
     ShowOutfitDetail(req, res, next) {
+        var arr = [];
+        var item = {};
         OutfitDetail.find({ outfit_id: req.params.id })
             .populate({ path: 'product_id', select: 'name price' })
             .exec()
-            .then((outfitDetail) => res.json(outfitDetail))
+            .then((outfitDetails) => {
+                const data = outfitDetails.map(HandleAddProductDetail);
+                // console.log(data);
+            })
             .catch(next);
+        function HandleAddProductDetail(outfitDetail) {
+            ProductDetail.find({ product_id: outfitDetail.product_id._id })
+                .exec()
+                .then((productDetail) => {
+                    return (item = {
+                        _id: outfitDetail._id,
+                        outfit_id: outfitDetail.outfit_id,
+                        product_id: {
+                            _id: outfitDetail.product_id._id,
+                            name: outfitDetail.product_id.name,
+                            price: outfitDetail.product_id.price,
+                        },
+                        productDetail,
+                    });
+                    // console.log(item);
+                    // arr.push(item);
+                });
+            // console.log(item);
+        }
+        console.log(arr);
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện

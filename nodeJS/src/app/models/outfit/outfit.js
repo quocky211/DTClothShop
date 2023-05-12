@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongoosePaginate = require('mongoose-paginate-v2');
 // const mongooseDelete = require('mongoose-delete');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Outfit = new Schema(
@@ -20,6 +21,7 @@ const Outfit = new Schema(
 //     deletedAt: true,
 // });
 Outfit.plugin(AutoIncrement, { id: 'outfit_id_counter' });
+Outfit.plugin(mongoosePaginate);
 
 // mongoose.model('ModelName', mySchema);
 module.exports = mongoose.model('outfit', Outfit);

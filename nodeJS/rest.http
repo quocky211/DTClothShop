@@ -134,8 +134,14 @@ GET http://localhost:3001/category/3/category-detail
 ###GET http://localhost:3001/category-detail/:id (D)
 GET http://localhost:3001/category-detail/2
 
-### lấy list outfit /product/outfit
-GET http://localhost:3001/product/outfit
+### lấy list outfit /product/outfit có phân trang mỗi trang có 12 outfit
+GET http://localhost:3001/product/outfit?page=2
+
+### lấy 1 outfit bằng _id /product/outfit/:id
+GET http://localhost:3001/product/outfit/1
+
+### lấy chi tiết outfit bằng outfit_id /product/outfit/:id/outfit-detail (chưa xong)
+GET http://localhost:3001/product/outfit/1/outfit-detail
 
 
 ###refresh-token
