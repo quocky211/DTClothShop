@@ -34,7 +34,7 @@ function Products() {
   const getProducts = (price, page) => {
     ProductDataService.getAllProducts(price, page)
       .then((res) => {
-        setProducts(res.data.docs);
+        setProducts(res.data);
         setTotalPage(res.data.totalPages);
       })
       .catch((err) => console.error(err));
@@ -136,10 +136,10 @@ function Products() {
       <div className="all-product-store">
         {products.map((item) => (
           <ContainerItem
-            price={item.price}
-            name={item.name}
-            image={ao}
-            masp={item._id}
+            price={item.product.price}
+            name={item.product.name}
+            image={item.path}
+            masp={item.product._id}
           />
         ))}
       </div>

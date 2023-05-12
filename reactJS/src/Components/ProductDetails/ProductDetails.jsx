@@ -17,13 +17,15 @@ import React, { useEffect, useState } from "react";
 import ProductDataService from "../../services/products";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { useLocation } from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function ProductDetails(props) {
-
+  
+  const location = useLocation();
   const { productID } = useParams();
   const [product, setProduct] = useState({});
   const [productDetail, setProductDetail] = useState([]);
@@ -33,6 +35,8 @@ export function ProductDetails(props) {
   const [colorArr, setColorArr] = useState([]);
   const [firsSizes, setFirsSizes] = useState([]);
   const [sizeArr, setSizeArr] = useState([]);
+
+  const [path, setPath] = useState(location.state.image);
 
   const [colorProduct, setColorProduct] = useState("");
   const [sizeProduct, setSizeProduct] = useState("");
@@ -65,6 +69,7 @@ export function ProductDetails(props) {
         var colotArrs = data.map(item => item.color);
         var colorArr = colotArrs.filter((item,index) => colotArrs.indexOf(item) === index)
         setColorArr(colorArr);
+        // để hiển thị lần đầu truy cập
         var firsSizes = data.filter((item)=>item.color===data[0].color)
         setFirsSizes(firsSizes)
         setProductDetail(res.data);
@@ -122,8 +127,7 @@ export function ProductDetails(props) {
   };
 
   return (
-
-      product!==undefined &&<div className="product-detail-container">
+      <div className="product-detail-container">
         <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Thêm vào giỏ hàng thành công!
@@ -138,7 +142,7 @@ export function ProductDetails(props) {
       </Breadcrumb>
       <div className="product-detail">
         <div className="product-detail-left">
-          <img src={ao} alt="img" />
+          <img src={"../imgs/"+path} alt="img" />
         </div>
         <div className="product-detail-right">
           <h2>{product.name}</h2>

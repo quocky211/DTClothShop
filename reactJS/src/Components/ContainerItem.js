@@ -54,9 +54,9 @@ export function ContainerItem(props) {
         </Alert>
       </Snackbar> */}
       {/* // masp ở đây là cái éo gì mà đổi sang _id lại không chạyyyy */}
-      <Link to={"/Products/" + props.masp}>
+      <Link to={"/Products/" + props.masp} state={{image: props.image}} >
         <button onClick={() => refresh()}>
-          <img src={props.image} alt="sanpham" className="ContainerItem_image" />
+          <img src={"imgs/"+props.image} alt="sanpham" className="ContainerItem_image" />
           <div className="nameandprice">
             <p className="containerItem_name">{props.name}</p>
             <p className="containerItem_infor-price">{priceVND}</p>

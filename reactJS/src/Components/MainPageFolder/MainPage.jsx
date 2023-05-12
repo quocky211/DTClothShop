@@ -2,7 +2,6 @@ import "./MainPage.css";
 import ContainerItem from "../ContainerItem";
 import Slideshow from "../Slideshow/Slideshow";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +20,6 @@ function MainPage({ noti, Off_Noti }) {
     const [newProducts, setNewProducts] = useState([]);
     const [discountProducts, setDiscountProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
-
 
     useEffect(() => {
         getNewProducts();
