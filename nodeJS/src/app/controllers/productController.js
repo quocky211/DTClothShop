@@ -4,8 +4,6 @@ const CategoryDetail = require('../models/products/category_detail');
 const Outfit = require('../models/outfit/outfit');
 const OutfitDetail = require('../models/outfit/outfit_detail');
 
-const { multipleMongooseToObject } = require('../../util/mongoose');
-
 class ProductController {
     // GET /product/discount
     Discount(req, res, next) {
@@ -103,12 +101,36 @@ class ProductController {
             query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
         }
 
+        // const page = req.query.page || 1;
+        // Product.paginate(query, { page: page, limit: 16 })
+        //     // .populate({ path: 'category_detail_id', select: 'name' })
+        //     // .exec()
+        //     .then((products) => {
+        //         res.json(products);
+        //     });
+
         const page = req.query.page || 1;
-        Product.paginate(query, { page: page, limit: 16 })
-            .then((product) => {
-                res.json(product);
+        Product.paginate(query, { page: page, limit: 16, populate: { path: 'category_detail_id', select: 'name' } })
+            .then((products) => {
+                const data = products.docs.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
             })
-            .catch((err) => next(err));
+            .catch((err) => {
+                console.error(err);
+            });
+
+        function HandleAddImage(product) {
+            return ProductDetail.find({ product_id: product._id })
+                .exec()
+                .then((productDetails) => {
+                    return {
+                        product,
+                        path: productDetails[0].path,
+                    };
+                });
+        }
     }
 
     // GET /product/outfit

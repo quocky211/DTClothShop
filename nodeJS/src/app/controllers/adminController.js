@@ -16,10 +16,22 @@ class AdminController {
         Product.find({})
             .populate({ path: 'category_detail_id', select: 'name' })
             .exec()
-            .then((product) => {
-                res.json(product);
-            })
-            .catch((err) => next(err));
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            });
+        function HandleAddImage(product) {
+            return ProductDetail.find({ product_id: product._id })
+                .exec()
+                .then((productDetails) => {
+                    return {
+                        product,
+                        path: productDetails[0].path,
+                    };
+                });
+        }
     }
 
     // GET /admin/product/:id/product-detail
