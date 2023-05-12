@@ -129,21 +129,24 @@ class ProductController {
 
     // GET /product/outfit/:id/outfit-detail
     ShowOutfitDetail(req, res, next) {
-        var arr = [];
-        var item = {};
         OutfitDetail.find({ outfit_id: req.params.id })
             .populate({ path: 'product_id', select: 'name price' })
             .exec()
             .then((outfitDetails) => {
                 const data = outfitDetails.map(HandleAddProductDetail);
-                // console.log(data);
+                Promise.all(data)
+                    .then((results) => {
+                        res.json(results);
+                    })
+                    .catch(next);
             })
             .catch(next);
+
         function HandleAddProductDetail(outfitDetail) {
-            ProductDetail.find({ product_id: outfitDetail.product_id._id })
+            return ProductDetail.find({ product_id: outfitDetail.product_id._id })
                 .exec()
                 .then((productDetail) => {
-                    return (item = {
+                    return {
                         _id: outfitDetail._id,
                         outfit_id: outfitDetail.outfit_id,
                         product_id: {
@@ -152,13 +155,9 @@ class ProductController {
                             price: outfitDetail.product_id.price,
                         },
                         productDetail,
-                    });
-                    // console.log(item);
-                    // arr.push(item);
+                    };
                 });
-            // console.log(item);
         }
-        console.log(arr);
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
