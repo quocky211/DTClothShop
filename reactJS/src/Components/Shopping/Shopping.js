@@ -88,6 +88,8 @@ function Shopping() {
                                         <th>Tên sản phẩm</th>
                                         <th>Hình</th>
                                         <th>Giá</th>
+                                        <th>Màu sắc</th>
+                                        <th>Kích thước</th>
                                         <th>Số lượng</th>
                                         <th>Tổng tiền</th>
                                     </tr>
@@ -131,6 +133,8 @@ function Shopping() {
                                                         đ
                                                     </span>
                                                 </td>
+                                                <td>{item.color}</td>
+                                                <td>{item.size}</td>
                                                 <td>
                                                     <span
                                                         className="btn btn-primary"
