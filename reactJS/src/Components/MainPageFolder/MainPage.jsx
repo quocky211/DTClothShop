@@ -6,17 +6,15 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { connect } from "react-redux"
-import { Off_Noti } from '../../actions';
-import imgmobile from "../Images/banner/img-mobile.png"
+import { connect } from "react-redux";
+// import { Off_Noti } from '../../actions';
+import imgmobile from "../Images/banner/img-mobile.png";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
 import ao from "../Images/fakedata/ao1.jpg";
 
-
-function MainPage({ noti, Off_Noti }) {
-
+function MainPage() {
     const [newProducts, setNewProducts] = useState([]);
     const [discountProducts, setDiscountProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
@@ -25,26 +23,24 @@ function MainPage({ noti, Off_Noti }) {
         getNewProducts();
         getDiscountProducts();
         getTopProducts();
-
-        Off_Noti()
     }, []);
 
-    function getNewProducts(){
+    function getNewProducts() {
         ProductDataService.getProductNew()
-        .then(res => setNewProducts( res.data))
-        .catch(err => console.error(err))
-    };
+            .then((res) => setNewProducts(res.data))
+            .catch((err) => console.error(err));
+    }
 
-    const getDiscountProducts = () =>{
+    const getDiscountProducts = () => {
         ProductDataService.getProductDiscount()
-        .then(res => setDiscountProducts( res.data))
-        .catch(err => console.error(err))
+            .then((res) => setDiscountProducts(res.data))
+            .catch((err) => console.error(err));
     };
 
-    const getTopProducts = () =>{
+    const getTopProducts = () => {
         ProductDataService.getProductTopSelling()
-        .then(res => setTopProducts( res.data))
-        .catch(err => console.error(err))
+            .then((res) => setTopProducts(res.data))
+            .catch((err) => console.error(err));
     };
 
     let settings = {
@@ -56,23 +52,37 @@ function MainPage({ noti, Off_Noti }) {
     };
     return (
         <div className="mainPage">
-            <Header/>
+            <Header />
             <Slideshow />
             <div className="img-mobile">
                 <img src={imgmobile} alt="imgmobile" />
             </div>
             <div className="newProducts">
                 <div className="newProducts_product product">
-                    <h3 className="newProducts_name title-name title-name-first" >Sản phẩm mới</h3>
+                    <h3 className="newProducts_name title-name title-name-first">
+                        Sản phẩm mới
+                    </h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {newProducts.map((item) => 
-                                 <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                            {newProducts.map((item) => (
+                                <ContainerItem
+                                    price={item.price}
+                                    name={item.name}
+                                    image={ao}
+                                    masp={item._id}
+                                />
+                            ))}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {newProducts.map((item) => 
-                             <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                        {newProducts.map((item) => (
+                            <ContainerItem
+                                price={item.price}
+                                name={item.name}
+                                image={ao}
+                                masp={item._id}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -81,13 +91,25 @@ function MainPage({ noti, Off_Noti }) {
                     <h3 className="bestSeller_name title-name">Bán chạy</h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {topProducts.map((item, index) => 
-                                <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                            {topProducts.map((item, index) => (
+                                <ContainerItem
+                                    price={item.price}
+                                    name={item.name}
+                                    image={ao}
+                                    masp={item._id}
+                                />
+                            ))}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {topProducts.map((item, index) => 
-                            <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                        {topProducts.map((item, index) => (
+                            <ContainerItem
+                                price={item.price}
+                                name={item.name}
+                                image={ao}
+                                masp={item._id}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -96,25 +118,36 @@ function MainPage({ noti, Off_Noti }) {
                     <h3 className="onSale_name title-name">Giảm giá</h3>
                     <div className="non-mobile">
                         <Slider {...settings}>
-                            {discountProducts.map((item) => 
-                                 <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                            {discountProducts.map((item) => (
+                                <ContainerItem
+                                    price={item.price}
+                                    name={item.name}
+                                    image={ao}
+                                    masp={item._id}
+                                />
+                            ))}
                         </Slider>
                     </div>
                     <div className="mobile">
-                        {discountProducts.map((item) => 
-                             <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />)}
+                        {discountProducts.map((item) => (
+                            <ContainerItem
+                                price={item.price}
+                                name={item.name}
+                                image={ao}
+                                masp={item._id}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
-    )
+    );
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        noti: state._todoProduct.noti
-    }
-}
-export default connect(mapStateToProps, { Off_Noti })(MainPage)
-
-
+        // noti: state._todoProduct.noti
+    };
+};
+// export default connect(mapStateToProps, { Off_Noti })(MainPage)
+export default MainPage;

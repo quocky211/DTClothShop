@@ -18,6 +18,8 @@ import searchicon from "../Images/black-search-icon.png";
 import close from "../Images/close.webp";
 import arrowbottom from "../Images/arrow-bottom.png";
 
+import { useSelector }  from 'react-redux'
+
 function Header(props) {
   let navigate = useNavigate();
   var loveList = "/Login";
@@ -33,6 +35,8 @@ function Header(props) {
       navigate("/Login");
     }
   }
+
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
 
   const [catagories, setCategories] = useState([]);
   useEffect(() => {
@@ -171,7 +175,7 @@ function Header(props) {
         <div className="cartandlogin">
           <Nav.Link href="/ShoppingCart">
             <img src={shoppingIcon} alt="cart" />
-            <span>{props.numberCart}</span>
+            <span>{cartTotalQuantity}</span>
           </Nav.Link>
           <button onClick={LoginclickHandler} className="logIn-btn">
             <Nav.Link>
@@ -195,8 +199,8 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    numberCart: state._todoProduct.numberCart,
-    isLoggedin: state._todoProduct.isLoggedin,
+    // numberCart: state._todoProduct.numberCart,
+    // isLoggedin: state._todoProduct.isLoggedin,
   };
 };
 function mapDispatchToProps(dispatch) {

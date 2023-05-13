@@ -30,11 +30,13 @@ import TypeProductList from "./Components/Admin/TypeProductList/TypeProductList"
 import TypeProductEdit from "./Components/Admin/TypeProductEdit/TypeProductEdit";
 import NewTypeProduct from "./Components/Admin/NewTypeProduct/NewTypeProduct";
 import { Provider } from "react-redux";
-import stores from "./stores";
+// import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
 
 import Payment from "./Components/Payment/Payment";
 import FavoriteProduct from "./Components/FavoriteProduct/FavoriteProduct";
+// import store redux
+import { store } from './redux/store';
 
 const router = createBrowserRouter([
   {
@@ -154,14 +156,14 @@ const router = createBrowserRouter([
         path:"Admin/NewProduct/:typeProductId",
         element: <NewProduct />,
       },
-      
-      
+
+
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={stores}>
+  <Provider store={store}>
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>

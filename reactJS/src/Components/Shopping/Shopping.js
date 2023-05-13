@@ -1,26 +1,42 @@
 import "./Shopping.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink as Link, NavLink } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { IncreaseQuantity, DecreaseQuantity, DeleteCart } from "../../actions";
+// import { IncreaseQuantity, DecreaseQuantity, DeleteCart } from "../../actions";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    decreaseCart,
+    increaseCart,
+    getToTals,
+    removefromCart,
+    clearCart,
+} from "../../redux/cartSlide";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
-    let ListCart = [];
-    let TotalCart = 0;
+function Shopping() {
+    // let ListCart = [];
+    // let TotalCart = 0;
 
-    Object.keys(items.Carts).forEach(function (item) {
-        TotalCart += items.Carts[item].quantity * items.Carts[item].price;
-        ListCart.push(items.Carts[item]);
-    });
+    // Object.keys(items.Carts).forEach(function (item) {
+    //     TotalCart += items.Carts[item].quantity * items.Carts[item].price;
+    //     ListCart.push(items.Carts[item]);
+    // });
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart);
+
+    useEffect(() => {
+        dispatch(getToTals());
+    }, [cart, dispatch]);
+
     function TotalPrice(price, tonggia) {
         return Number(price * tonggia).toLocaleString("vi-VN");
     }
@@ -34,9 +50,26 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
         if (reason === "clickaway") {
             return;
         }
-
         setOpen(false);
     };
+
+    const handleRemoveFromCart = (item) => {
+        dispatch(removefromCart(item));
+        setOpen(true);
+    };
+
+    const handleDecreaseCart = (item) => {
+        dispatch(decreaseCart(item));
+    };
+
+    const handleIncreaseCart = (item) => {
+        dispatch(increaseCart(item));
+    };
+
+    // const handleClearCart = (item) => {
+    //     dispatch(clearCart());
+    // };
+
     return (
         <div className="main">
             <Header />
@@ -60,14 +93,16 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                     </tr>
                                 </thead>
                                 <tbody style={{ lineHeight: "85px" }}>
-                                    {ListCart.map((item, key) => {
+                                    {cart.cartItems?.map((item) => {
                                         return (
-                                            <tr key={key}>
+                                            <tr key={item._id}>
                                                 <td>
                                                     <i
                                                         className="badge badge-danger"
                                                         onClick={() => {
-                                                            DeleteCart(key);
+                                                            handleRemoveFromCart(
+                                                                item
+                                                            );
                                                             handleClick();
                                                         }}
                                                     >
@@ -78,8 +113,8 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                                 <td>{item.name}</td>
                                                 <td>
                                                     <img
-                                                        src={item.image}
-                                                        alt=""
+                                                        src={"../imgs/" + item.image}
+                                                        alt="img"
                                                         style={{
                                                             width: "100px",
                                                             height: "80px",
@@ -103,8 +138,8 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                                             margin: "2px",
                                                         }}
                                                         onClick={() =>
-                                                            DecreaseQuantity(
-                                                                key
+                                                            handleDecreaseCart(
+                                                                item
                                                             )
                                                         }
                                                     >
@@ -119,8 +154,8 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                                             margin: "2px",
                                                         }}
                                                         onClick={() =>
-                                                            IncreaseQuantity(
-                                                                key
+                                                            handleIncreaseCart(
+                                                                item
                                                             )
                                                         }
                                                     >
@@ -128,10 +163,7 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    {TotalPrice(
-                                                        item.price,
-                                                        item.quantity
-                                                    )}{" "}
+                                                    {TotalPrice(item.quantity, item.price )}{" "}
                                                     <span className="underline">
                                                         đ
                                                     </span>
@@ -142,9 +174,9 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                                     <tr>
                                         <td colSpan="5">Tổng tiền giỏ hàng</td>
                                         <td>
-                                            {Number(TotalCart).toLocaleString(
-                                                "vi-VN"
-                                            )}{" "}
+                                            {Number(
+                                                cart.cartTotalAmount
+                                            ).toLocaleString("vi-VN")}{" "}
                                             <span className="underline">đ</span>
                                         </td>
                                     </tr>
@@ -152,7 +184,7 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
                             </table>
                             <NavLink
                                 to="/ShipAddress"
-                                state={{ data: TotalCart }}
+                                state={{ data: cart.cartTotalAmount }}
                             >
                                 <button className="shopping-buy-btn">
                                     Mua hàng
@@ -182,12 +214,13 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
 const mapStateToProps = (state) => {
     //  console.log(state)
     return {
-        items: state._todoProduct,
+        // items: state._todoProduct,
     };
 };
 
-export default connect(mapStateToProps, {
-    IncreaseQuantity,
-    DecreaseQuantity,
-    DeleteCart,
-})(Shopping);
+// export default connect(mapStateToProps, {
+//     IncreaseQuantity,
+//     DecreaseQuantity,
+//     DeleteCart,
+// })(Shopping);
+export default Shopping;

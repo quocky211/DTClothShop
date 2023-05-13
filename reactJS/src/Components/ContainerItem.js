@@ -89,13 +89,13 @@ export function ContainerItem(props) {
 
 const mapStateToProps = (state) => {
   return {
-    _products: state._todoProduct,
-    isLoggedin: state._todoProduct.isLoggedin,
+    // _products: state._todoProduct,
+    // isLoggedin: state._todoProduct.isLoggedin,
   };
 };
 function mapDispatchToProps(dispatch) {
   return {
-    AddCart: (item) => dispatch(AddCart(item)),
+    // AddCart: (item) => dispatch(AddCart(item)),
   };
 }
 
