@@ -87,7 +87,7 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=2 100000 <= price < 300000
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
-GET http://localhost:3001/product?price=0
+GET http://localhost:3001/product?price=0&null
 
 ### search header GET /search?name=:name (D)
 GET http://localhost:3001/search?name=tee 

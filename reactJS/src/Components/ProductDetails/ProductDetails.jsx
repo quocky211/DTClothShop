@@ -82,6 +82,7 @@ export function ProductDetails(props) {
   function getProductsByDetail(typeDetailID) {
     ProductDataService.getProductsByTypeDetailId(typeDetailID)
       .then((res) => {
+        console.log(Object.entries(res.data));
         setRelatedProducts(Object.entries(res.data));
       })
       .catch((e) => {
@@ -137,7 +138,6 @@ export function ProductDetails(props) {
       <Breadcrumb>
         <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
         <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
-        {/* <Breadcrumb.Item href=""> {type.name} </Breadcrumb.Item> */}
         <Breadcrumb.Item active>{product.name} </Breadcrumb.Item>
       </Breadcrumb>
       <div className="product-detail">
@@ -147,7 +147,6 @@ export function ProductDetails(props) {
         <div className="product-detail-right">
           <h2>{product.name}</h2>
           <h2>{vnd.format(product.price)} </h2>
-          <p>Màu sắc: {colorProduct}</p>
           <div className="color">
             {colorArr.map((color) => (
               <button
@@ -156,7 +155,6 @@ export function ProductDetails(props) {
               ></button>
             ))}
           </div>
-          <p>Size: {sizeProduct}</p>
           <div className="size">
             {sizeArr.map((size) => (
               <button
