@@ -3,13 +3,18 @@ const ProductDetail = require('../models/products/product_detail');
 const CategoryDetail = require('../models/products/category_detail');
 const Outfit = require('../models/outfit/outfit');
 const OutfitDetail = require('../models/outfit/outfit_detail');
-
+const { HandleAddImage } = require('../../helpers/multifunction');
 class ProductController {
     // GET /product/discount
     Discount(req, res, next) {
         Product.find({ discount: { $ne: 0, $ne: null } })
             .exec()
-            .then((product) => res.json(product))
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            })
             .catch(next);
     }
 
@@ -17,7 +22,12 @@ class ProductController {
     TopSelling(req, res, next) {
         Product.aggregate([{ $sample: { size: 10 } }])
             .exec()
-            .then((product) => res.json(product))
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            })
             .catch(next);
     }
 
@@ -27,7 +37,12 @@ class ProductController {
             .sort({ createdAt: -1 })
             .limit(10)
             .exec()
-            .then((product) => res.json(product))
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            })
             .catch(next);
     }
 
@@ -58,7 +73,12 @@ class ProductController {
     Category(req, res, next) {
         Product.find({ category_id: req.params.id })
             .exec()
-            .then((product) => res.json(product))
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            })
             .catch(next);
     }
 
@@ -66,7 +86,12 @@ class ProductController {
     CategoryDetail(req, res, next) {
         Product.find({ category_detail_id: req.params.id })
             .exec()
-            .then((product) => res.json(product))
+            .then((products) => {
+                const data = products.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    res.json(result);
+                });
+            })
             .catch(next);
     }
 
@@ -101,36 +126,39 @@ class ProductController {
             query.category_detail_id = req.query.category_detail_id; // màu sắc phù hợp với màu được truyền từ giao diện
         }
 
-        // const page = req.query.page || 1;
-        // Product.paginate(query, { page: page, limit: 16 })
-        //     // .populate({ path: 'category_detail_id', select: 'name' })
-        //     // .exec()
-        //     .then((products) => {
-        //         res.json(products);
-        //     });
-
         const page = req.query.page || 1;
         Product.paginate(query, { page: page, limit: 16, populate: { path: 'category_detail_id', select: 'name' } })
             .then((products) => {
                 const data = products.docs.map(HandleAddImage);
                 Promise.all(data).then((result) => {
-                    res.json(result);
+                    res.json({
+                        result,
+                        totalDocs: products.totalDocs,
+                        limit: products.limit,
+                        totalPages: products.totalPages,
+                        page: products.page,
+                        pagingCounter: products.pagingCounter,
+                        hasPrevPage: products.hasPrevPage,
+                        hasNextPage: products.hasNextPage,
+                        prevPage: products.prevPage,
+                        nextPage: products.nextPage,
+                    });
                 });
             })
             .catch((err) => {
                 console.error(err);
             });
 
-        function HandleAddImage(product) {
-            return ProductDetail.find({ product_id: product._id })
-                .exec()
-                .then((productDetails) => {
-                    return {
-                        product,
-                        path: productDetails[0].path,
-                    };
-                });
-        }
+        // function HandleAddImage(product) {
+        //     return ProductDetail.find({ product_id: product._id })
+        //         .exec()
+        //         .then((productDetails) => {
+        //             return {
+        //                 product,
+        //                 path: productDetails[0].path,
+        //             };
+        //         });
+        // }
     }
 
     // GET /product/outfit
