@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import "./ProductDetails.css";
-import { AddCart } from "../../actions";
 import { connect } from "react-redux";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Accordion from "react-bootstrap/Accordion";
@@ -34,6 +33,7 @@ export function ProductDetails(props) {
     const [relatedProdutcs, setRelatedProducts] = useState([]);
 
     const [colorArr, setColorArr] = useState([]);
+    const [imageArr, setImageArr] = useState([]);
     const [firsSizes, setFirsSizes] = useState([]);
     const [sizeArr, setSizeArr] = useState([]);
 
@@ -65,13 +65,13 @@ export function ProductDetails(props) {
         getProduct(productID);
         getProductDetail(productID);
         getProductsByDetail(id);
-    }, [product, id]);
+    }, [product,id]);
 
     const getProduct = (productID) => {
         ProductDataService.getProductById(productID)
             .then((res) => {
                 setProduct(res.data[0]);
-                setID(product.category_detail_id);
+                setID(res.data[0].category_detail_id);
             })
             .catch((e) => {
                 console.log(e);
@@ -87,6 +87,12 @@ export function ProductDetails(props) {
                     (item, index) => colotArrs.indexOf(item) === index
                 );
                 setColorArr(colorArr);
+                // imgae
+                var imageArrs = data.map((item) =>item.path);
+                var imageArr = imageArrs.filter(
+                    (item, index) => imageArrs.indexOf(item) === index
+                );
+                setImageArr(imageArr)
                 // để hiển thị lần đầu truy cập
                 var firsSizes = data.filter(
                     (item) => item.color === data[0].color
@@ -102,18 +108,19 @@ export function ProductDetails(props) {
     function getProductsByDetail(typeDetailID) {
         ProductDataService.getProductsByTypeDetailId(typeDetailID)
             .then((res) => {
-                console.log(Object.entries(res.data));
-                setRelatedProducts(Object.entries(res.data));
+                setRelatedProducts(res.data);
             })
             .catch((e) => {
                 console.log(e);
             });
     }
     // Get size by color
-    const handleSize = (color) => {
+    const handleColor = (color, index) => {
         setColorProduct(color);
         var sizeArr = productDetail.filter((item) => item.color === color);
         setSizeArr(sizeArr);
+        //change image
+        setPath(imageArr[index]);
     };
 
     let settings = {
@@ -171,9 +178,9 @@ export function ProductDetails(props) {
                     <h2>{product.name}</h2>
                     <h2>{vnd.format(product.price)} </h2>
                     <div className="color">
-                        {colorArr.map((color) => (
+                        {colorArr.map((color,index) => (
                             <button
-                                onClick={() => handleSize(color)}
+                                onClick={() => handleColor(color,index)}
                                 style={{
                                     backgroundColor: color,
                                     border: " 1px solid black",
@@ -357,15 +364,13 @@ export function ProductDetails(props) {
                 <h3>Có thể bạn sẽ thích</h3>
                 <div className="non-mobile-related">
                     <Slider {...settings}>
-                        {relatedProdutcs.length === 0
-                            ? null
-                            : relatedProdutcs.map(function (item) {
+                        {relatedProdutcs.map(function (item) {
                                   return (
                                       <ContainerItem
-                                          price={item[1].price}
-                                          name={item[1].name}
-                                          image={ao}
-                                          _id={item[1]._id}
+                                          price={item.product.price}
+                                          name={item.product.name}
+                                          image={item.path}
+                                          masp={item.product._id}
                                       />
                                   );
                               })}
@@ -373,14 +378,12 @@ export function ProductDetails(props) {
                 </div>
                 <div className="mobile-related">
                     <Slider {...settingsmobile}>
-                        {relatedProdutcs.length === 0
-                            ? null
-                            : relatedProdutcs.map((item) => (
+                        {relatedProdutcs.map((item) => (
                                   <ContainerItem
-                                      price={item[1].price}
-                                      name={item[1].name}
-                                      image={ao}
-                                      _id={item[1]._id}
+                                      price={item.product.price}
+                                      name={item.product.name}
+                                      image={item.path}
+                                      masp={item.product._id}
                                   />
                               ))}
                     </Slider>
@@ -398,7 +401,7 @@ const mapStateToProps = (state) => {
 };
 function mapDispatchToProps(dispatch) {
     return {
-        AddCart: (item) => dispatch(AddCart(item)),
+    
     };
 }
 

@@ -21,7 +21,6 @@ function TypeProduct() {
     const getProducts = (typeID) => {
         ProductDataService.getAllProductByTypeId(typeID)
         .then(res=>{
-            console.log(res.data);
             setTypeProduct(res.data);
             
         })
@@ -33,7 +32,6 @@ function TypeProduct() {
     const getCatagorys = (typeID) => {
         CatagoryDataService.getAll()
         .then((res)=>{
-            console.log(res.data[0].name)
             const data = res.data;
             var name = data.map((item) => item.name)
             setCategory(name[typeID-1]);
@@ -53,8 +51,8 @@ function TypeProduct() {
             </Breadcrumb>
             <div className="list-product-type">
                 {
-                    typePoduct.map((product) => 
-                        <ContainerItem price={product.price} name={product.name} image={ao} masp={product._id} />
+                    typePoduct.map((item) => 
+                        <ContainerItem price={item.product.price} name={item.product.name} image={item.path} masp={item.product._id} />
                     )
                 }
             </div>

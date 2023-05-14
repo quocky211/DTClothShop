@@ -9,7 +9,6 @@ import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
 import CatagoryDataService from "../../services/catagories";
-import ao from "../Images/fakedata/ao1.jpg";
 import Pagination from "react-bootstrap/Pagination";
 
 function Products() {
@@ -34,7 +33,7 @@ function Products() {
   const getProducts = (price, page) => {
     ProductDataService.getAllProducts(price, page)
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.result);
         setTotalPage(res.data.totalPages);
       })
       .catch((err) => console.error(err));

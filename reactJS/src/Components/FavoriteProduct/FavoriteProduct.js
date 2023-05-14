@@ -3,7 +3,6 @@ import React from "react";
 import { NavLink as Link, NavLink } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { IncreaseQuantity, DecreaseQuantity, DeleteCart } from "../../actions";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -127,7 +126,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  IncreaseQuantity,
-  DecreaseQuantity,
-  DeleteCart,
+
 })(Shopping);

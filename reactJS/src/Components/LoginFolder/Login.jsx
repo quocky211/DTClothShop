@@ -2,7 +2,6 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../Images/logo.webp";
 import { Link } from "react-router-dom";
-import { Log_in } from "../../actions";
 import { connect } from "react-redux";
 import { useState } from "react";
 import fb from "../Images/fb.png";
@@ -31,7 +30,6 @@ function Login(props) {
       .then((res)=>{
         props.Log_in();
         navigate("/MainPage");
-        console.log(props.isLoggedin);
       })
       .catch((err) => {console.log("Error" + err);})
   };
@@ -81,13 +79,13 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedin: state._todoProduct.isLoggedin,
+   
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    Log_in: () => dispatch(Log_in()),
+    
   };
 }
 

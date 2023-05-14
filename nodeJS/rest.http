@@ -88,7 +88,7 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
 ### lọc cate_detail: category_detail_id=1
-GET http://localhost:3001/product?price=1
+GET http://localhost:3001/product?price=0
 
 ### search header GET /search?name=:name (D)
 GET http://localhost:3001/search?name=tee 
@@ -109,7 +109,7 @@ GET http://localhost:3001/product/47/product-detail?color=989898
 GET http://localhost:3001/product/5/product-detail
 
 ### lấy sản phẩm dựa theo _id /product/:id (D)
-GET http://localhost:3001/product/5
+GET http://localhost:3001/product/15
 
 ### bán chạy: /product/top-selling (D)
 GET http://localhost:3001/product/top-selling

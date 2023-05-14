@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import CatagoryDataService from "../../services/catagories";
 import "./Header.css";
 import shoppingIcon from "../Images/shopping-icon.png";
-import { Log_out } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import ListTypeProduct from "../ListTypeProduct/ListTypeProduct";
 import ListTypeProductMobile from "../ListTypeProductMobile/ListTypeProductMobile";
@@ -205,7 +204,7 @@ const mapStateToProps = (state) => {
 };
 function mapDispatchToProps(dispatch) {
   return {
-    Log_out: () => dispatch(Log_out()),
+   
   };
 }
 

@@ -43,7 +43,7 @@ function TypeProductDetail() {
             </Breadcrumb>
             <div className="list-product-typedetail">
                 {products.map((item) => 
-                    <ContainerItem price={item.price} name={item.name} image={ao} masp={item._id} />
+                    <ContainerItem price={item.product.price} name={item.product.name} image={item.path} masp={item.product._id} />
                 )}
             </div>
             <Footer/>

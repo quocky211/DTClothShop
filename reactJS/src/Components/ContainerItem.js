@@ -1,6 +1,5 @@
 import React from "react";
 import "./ContainerItem.css";
-import { AddCart } from "../actions";
 import { connect } from "react-redux";
 import whiteplus from "./Images/whiteplus.jpg";
 import { Link } from "react-router-dom";
@@ -17,12 +16,6 @@ export function ContainerItem(props) {
     currency: "VND",
   });
   const priceVND = vnd.format(props.price);
-  const item = {
-    _id: props._id,// đổi masp thành _id
-    price: props.price,
-    name: props.name,
-    image: props.image,
-  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -37,9 +30,7 @@ export function ContainerItem(props) {
       setOpen(true);
     }, 100);
   };
-  const refresh = () => {
-    window.location.refresh();
-  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -55,8 +46,8 @@ export function ContainerItem(props) {
       </Snackbar> */}
       {/* // masp ở đây là cái éo gì mà đổi sang _id lại không chạyyyy */}
       <Link to={"/Products/" + props.masp} state={{image: props.image}} >
-        <button onClick={() => refresh()}>
-          <img src={"imgs/"+props.image} alt="sanpham" className="ContainerItem_image" />
+        <button>
+          <img src={"../../imgs/"+props.image} alt="sanpham" className="ContainerItem_image" />
           <div className="nameandprice">
             <p className="containerItem_name">{props.name}</p>
             <p className="containerItem_infor-price">{priceVND}</p>
