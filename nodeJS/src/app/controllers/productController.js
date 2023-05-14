@@ -148,17 +148,6 @@ class ProductController {
             .catch((err) => {
                 console.error(err);
             });
-
-        // function HandleAddImage(product) {
-        //     return ProductDetail.find({ product_id: product._id })
-        //         .exec()
-        //         .then((productDetails) => {
-        //             return {
-        //                 product,
-        //                 path: productDetails[0].path,
-        //             };
-        //         });
-        // }
     }
 
     // GET /product/outfit
