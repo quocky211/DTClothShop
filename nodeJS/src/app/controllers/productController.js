@@ -46,11 +46,14 @@ class ProductController {
             .catch(next);
     }
 
-    // GET /product
-    Product(req, res, next) {
+    // GET /product/:id
+    GetProduct(req, res, next) {
         Product.find({ _id: req.params.id })
             .exec()
-            .then((product) => res.json(product))
+            .then((product) => {
+                const data = product.map(HandleAddImage);
+                Promise.all(data).then((result) => res.json(result));
+            })
             .catch(next);
     }
 

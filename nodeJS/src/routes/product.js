@@ -12,7 +12,7 @@ router.get('/outfit', productController.ShowOutfit);
 router.get('/outfit/:id', productController.GetOutfit);
 router.get('/outfit/:id/outfit-detail', productController.ShowOutfitDetail);
 router.get('/:id/product-detail', productController.ProductDetail);
-router.get('/:id', productController.Product);
+router.get('/:id', productController.GetProduct);
 router.get('/', productController.ProductShow);
 
 module.exports = router;
