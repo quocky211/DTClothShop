@@ -152,6 +152,12 @@
   padding-left: 6px;
   padding-top: 6px;
 }
+.non-mobile-related .slick-next{
+  right: 25px;
+}
+.non-mobile-related .slick-prev{
+  left: 25px;
+}
 @media only screen and (max-width: 46.1875em) {
   .product-detail {
     display: block;

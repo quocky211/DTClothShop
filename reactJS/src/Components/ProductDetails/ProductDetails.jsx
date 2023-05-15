@@ -27,7 +27,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export function ProductDetails(props) {
     const location = useLocation();
     const { productID } = useParams();
-    const [product, setProduct] = useState({});
+    const [product1, setProduct1] = useState([]);
     const [productDetail, setProductDetail] = useState([]);
 
     const [relatedProdutcs, setRelatedProducts] = useState([]);
@@ -36,7 +36,7 @@ export function ProductDetails(props) {
     const [imageArr, setImageArr] = useState([]);
     const [firsSizes, setFirsSizes] = useState([]);
     const [sizeArr, setSizeArr] = useState([]);
-
+//location.state.image
     const [path, setPath] = useState(location.state.image);
 
     const [colorProduct, setColorProduct] = useState("");
@@ -45,6 +45,8 @@ export function ProductDetails(props) {
     const [favoriteProduct, setFavoratiProduct] = useState(false);
     const [id, setID] = useState(0);
     const [open, setOpen] = React.useState(false);
+
+    
 
     const dispatch = useDispatch();
     const handleAddToCart = ({
@@ -60,18 +62,20 @@ export function ProductDetails(props) {
         handleClick();
         dispatch(addToCart({ _id, name, image, price, color, size, quantity }));
     };
+    // for change image when press related product
+    useEffect(() => {setPath(location.state.image)},[location.state.image])
 
     useEffect(() => {
         getProduct(productID);
         getProductDetail(productID);
         getProductsByDetail(id);
-    }, [product,id]);
+    }, [product1]);
 
     const getProduct = (productID) => {
         ProductDataService.getProductById(productID)
             .then((res) => {
-                setProduct(res.data[0]);
-                setID(res.data[0].category_detail_id);
+                setProduct1(res.data[0].product);
+                setID(res.data[0].product.category_detail_id);
             })
             .catch((e) => {
                 console.log(e);
@@ -168,15 +172,15 @@ export function ProductDetails(props) {
             <Breadcrumb>
                 <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
                 <Breadcrumb.Item href="/Products">Sản phẩm</Breadcrumb.Item>
-                <Breadcrumb.Item active>{product.name} </Breadcrumb.Item>
+                <Breadcrumb.Item active>{product1.name} </Breadcrumb.Item>
             </Breadcrumb>
             <div className="product-detail">
                 <div className="product-detail-left">
                     <img src={"../imgs/" + path} alt="img" />
                 </div>
                 <div className="product-detail-right">
-                    <h2>{product.name}</h2>
-                    <h2>{vnd.format(product.price)} </h2>
+                    <h2>{product1.name}</h2>
+                    <h2>{vnd.format(product1.price)} </h2>
                     <div className="color">
                         {colorArr.map((color,index) => (
                             <button
@@ -234,10 +238,10 @@ export function ProductDetails(props) {
                         <button
                             onClick={() => {
                                 handleAddToCart({
-                                  _id: product._id,
-                                  name: product.name,
+                                  _id: product1._id,
+                                  name: product1.name,
                                   image: path,
-                                  price: product.price,
+                                  price: product1.price,
                                   color: colorProduct,
                                   size: sizeProduct,
                                   quantity,
@@ -288,7 +292,7 @@ export function ProductDetails(props) {
                                 Thông tin sản phẩm
                             </Accordion.Header>
                             <Accordion.Body>
-                                {product.description}
+                                {product1.description}
                             </Accordion.Body>
                         </Accordion.Item>
                         <hr />
