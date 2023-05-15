@@ -9,7 +9,6 @@ import ContainerItem from "../ContainerItem";
 import likeicon from "../Images/likeicon.png";
 import { red } from "@mui/material/colors";
 import { Button } from "react-bootstrap";
-import ao from "../Images/fakedata/ao1.jpg";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import React, { useEffect, useState } from "react";

@@ -88,7 +88,7 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
 ### lọc cate_detail: category_detail_id=1
-GET http://localhost:3001/product?price=0
+GET http://localhost:3001/product?price=3&page=1&null
 
 ### search header GET /search?name=:name (D)
 GET http://localhost:3001/search?name=tee 
@@ -103,7 +103,7 @@ GET http://localhost:3001/product/discount
 ### /product/:id/product-detail?color:color
 ### lưu ý là từ phía sau dấu "?" không có cũng không sao
 ### ví dụ http://localhost:3001/product/5/product-detail vẫn chạy được
-GET http://localhost:3001/product/47/product-detail?color=989898
+GET http://localhost:3001/product/47/product-detail?color=#989898
 
 ### lấy chi tiết của 1 sản phẩm dựa theo product_id /product/:product_id/product-detail (D)
 GET http://localhost:3001/product/5/product-detail
@@ -138,7 +138,7 @@ GET http://localhost:3001/category/3/category-detail
 GET http://localhost:3001/category-detail/2
 
 ### lấy list outfit /product/outfit có phân trang mỗi trang có 12 outfit
-GET http://localhost:3001/product/outfit?page=2
+GET http://localhost:3001/product/outfit?page=1
 
 ### lấy 1 outfit bằng _id /product/outfit/:id
 GET http://localhost:3001/product/outfit/1
