@@ -17,11 +17,13 @@ import searchicon from "../Images/black-search-icon.png";
 import close from "../Images/close.webp";
 import arrowbottom from "../Images/arrow-bottom.png";
 
-import { useSelector, useDispatch }  from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { getToTals } from "../../redux/cartSlide";
-
+import { logout } from "../../redux/credentials";
 
 function Header(props) {
+  const tokens = JSON.parse(localStorage.getItem("JWT"));
+
   let navigate = useNavigate();
   var loveList = "/Login";
   if (props.isLoggedin) {
@@ -29,10 +31,7 @@ function Header(props) {
   }
 
   function LoginclickHandler() {
-    if (props.isLoggedin) {
-      props.Log_out();
-      navigate("/");
-    } else {
+    if (!tokens) {
       navigate("/Login");
     }
   }
@@ -41,8 +40,7 @@ function Header(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getToTals());
-}, [cart, dispatch]);
-
+  }, [cart, dispatch]);
 
   const [catagories, setCategories] = useState([]);
   useEffect(() => {
@@ -57,23 +55,27 @@ function Header(props) {
 
   const [search, setSearch] = useState("");
 
-  const handleSearch = () =>{
-    navigate("/Search",{
+  const handleSearch = () => {
+    navigate("/Search", {
       state: {
-        search
-      }}
-      );
-  }
+        search,
+      },
+    });
+  };
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-    navigate("/Search",{
-      state: {
-        search
-      }}
-      );
+    if (e.key === "Enter") {
+      navigate("/Search", {
+        state: {
+          search,
+        },
+      });
     }
   };
 
+  const Logout = (e) => {
+    window.localStorage.removeItem("JWT");
+    navigate("/Login");
+  };
 
   return (
     <Navbar bg="light" expand="lg" fixed="top">
@@ -143,9 +145,11 @@ function Header(props) {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-              onChange={(e)=> setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
             />
-            <Button variant="outline-success" onClick={handleSearch} >Search</Button>
+            <Button variant="outline-success" onClick={handleSearch}>
+              Search
+            </Button>
           </Form>
         </div>
         <Navbar.Brand href="/">Shop quần áo</Navbar.Brand>
@@ -169,10 +173,12 @@ function Header(props) {
             placeholder="Search"
             className="me-2"
             aria-label="Search"
-            onChange={(e)=> setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <Button variant="outline-success" onClick={handleSearch}>Search</Button>
+          <Button variant="outline-success" onClick={handleSearch}>
+            Search
+          </Button>
         </Form>
         <Nav.Link className="lovelists" href={loveList}>
           {" "}
@@ -187,16 +193,18 @@ function Header(props) {
             <Nav.Link>
               <img src={usericon} alt="User-icon" />{" "}
             </Nav.Link>
-            <ul className="list-infor-user">
-              <Nav.Link href="/Account">
-                {" "}
-                <li>Thông tin tài khoản</li>{" "}
-              </Nav.Link>
-              <Nav.Link href="/Logout">
-                {" "}
-                <li>Đăng xuất</li>{" "}
-              </Nav.Link>
-            </ul>
+            {tokens != null && (
+              <ul className="list-infor-user">
+                <Nav.Link href="/Account">
+                  {" "}
+                  <li>Thông tin tài khoản</li>{" "}
+                </Nav.Link>
+                <button className="nav-link" onClick={Logout}>
+                  {" "}
+                  <li>Đăng xuất</li>{" "}
+                </button>
+              </ul>
+            )}
           </button>
         </div>
       </Container>
@@ -210,9 +218,7 @@ const mapStateToProps = (state) => {
   };
 };
 function mapDispatchToProps(dispatch) {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

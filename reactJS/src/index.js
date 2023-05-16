@@ -36,7 +36,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Payment from "./Components/Payment/Payment";
 import FavoriteProduct from "./Components/FavoriteProduct/FavoriteProduct";
 // import store redux
-import { store } from './redux/store';
+import { store } from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -133,31 +133,29 @@ const router = createBrowserRouter([
         element: <NewUser />,
       },
       {
-        path:"Admin/TypeProducts",
+        path: "Admin/TypeProducts",
         element: <TypeProductList />,
       },
       {
-        path:"Admin/TypeProduct/:typeProductId",
+        path: "Admin/TypeProduct/:typeProductId",
         element: <TypeProductEdit />,
       },
       {
-        path:"Admin/NewTypeProduct",
+        path: "Admin/NewTypeProduct",
         element: <NewTypeProduct />,
       },
       {
-        path:"Admin/Products/:typeProductId",
+        path: "Admin/Products/:typeProductId",
         element: <ProductList />,
       },
       {
-        path:"Admin/Product/:productId",
+        path: "Admin/Product/:productId",
         element: <Product />,
       },
       {
-        path:"Admin/NewProduct/:typeProductId",
+        path: "Admin/NewProduct/:typeProductId",
         element: <NewProduct />,
       },
-
-
     ],
   },
 ]);

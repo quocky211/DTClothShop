@@ -9,84 +9,92 @@ import gg from "../Images/gg.png";
 import axios from "axios";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/credentials";
 
 function Login(props) {
   const [useremail, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
   let navigate = useNavigate();
 
-  const handleClick = async(e) => {
-      e.preventDefault();
-      let user = {
-        email: useremail,
-        password: password
-      }
-      let config = {
-        headers:{
-          "Content-Type": "application/json",
-        }
-      };
-      await axios.post('http://localhost:3001/user/login', user, config)
-      .then((res)=>{
-        props.Log_in();
-        navigate("/MainPage");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let user = {
+      email: useremail,
+      password: password,
+    };
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios
+      .post("http://localhost:3001/user/login", user, config)
+      .then((res) => {
+        window.localStorage.setItem("JWT", JSON.stringify(res.data));
+        if (res.data.level == true) navigate("/Admin");
+        else navigate("/");
       })
-      .catch((err) => {console.log("Error" + err);})
+      .catch((err) => {
+        console.log("Error" + err);
+      });
   };
   return (
     <div className="">
-            <Header/>
-<div className="loginmain">
-
-      <div className="logomain">
-        <img className="logo" alt="" src={logo}></img>
-        <p>TechieShop</p>
-      </div>
-
-      <div className="loginForm">
-        <h3>Đăng nhập</h3>
-        <form action="">
-          <input
-            value={useremail} onChange={(e)=>setEmail(e.target.value)} type="text"
-            name="username" placeholder="Email"
-            required
-          />
-          <input
-            onChange={(e) => setPassword(e.target.value)} type="password" value={password}
-            name="password" placeholder="Mật khẩu" required
-          />
-          <button name="submit" type="submit" onClick={() => handleClick()}>
-            Đăng nhập
-          </button>
-        </form>
-        <p>Hoặc</p>
-        <div className="fb-and-gg">
-          <img src={fb} alt="fb" />
-          <img src={gg} alt="fb" />
+      <Header />
+      <div className="loginmain">
+        <div className="logomain">
+          <img className="logo" alt="" src={logo}></img>
+          <p>TechieShop</p>
         </div>
-        <br></br>
-        <Link to="/Register">
-          <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
-        </Link>
-      </div>
 
+        <div className="loginForm">
+          <h3>Đăng nhập</h3>
+          <form action="POST" onSubmit={handleSubmit}>
+            <input
+              value={useremail}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              name="username"
+              placeholder="Email"
+              required
+            />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              value={password}
+              name="password"
+              placeholder="Mật khẩu"
+              required
+            />
+            <button name="submit" type="submit">
+              Đăng nhập
+            </button>
+          </form>
+          <p>Hoặc</p>
+          <div className="fb-and-gg">
+            <img src={fb} alt="fb" />
+            <img src={gg} alt="fb" />
+          </div>
+          <br></br>
+          <Link to="/Register">
+            <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
+          </Link>
+        </div>
+      </div>
+      <Footer />
     </div>
-    <Footer/>
-    </div>
-    
   );
 }
 
 const mapStateToProps = (state) => {
-  return {
-   
-  };
+  return {};
 };
 
 function mapDispatchToProps(dispatch) {
-  return {
-    
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -91,6 +91,7 @@ class UserController {
             res.json({
                 accessToken,
                 refreshToken,
+                level: user.level,
             });
         } catch (error) {
             next(error);
