@@ -1,11 +1,8 @@
 import "./Shopping.css";
 import React, { useEffect } from "react";
-import { NavLink as Link, NavLink } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { connect } from "react-redux";
-// import { IncreaseQuantity, DecreaseQuantity, DeleteCart } from "../../actions";
+import { NavLink } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import MuiAlert from "@mui/material/Alert";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
@@ -23,13 +20,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function Shopping() {
-    // let ListCart = [];
-    // let TotalCart = 0;
 
-    // Object.keys(items.Carts).forEach(function (item) {
-    //     TotalCart += items.Carts[item].quantity * items.Carts[item].price;
-    //     ListCart.push(items.Carts[item]);
-    // });
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
@@ -66,9 +57,9 @@ function Shopping() {
         dispatch(increaseCart(item));
     };
 
-    // const handleClearCart = (item) => {
-    //     dispatch(clearCart());
-    // };
+    const handleClearCart = (item) => {
+        dispatch(clearCart());
+    };
 
     return (
         <div className="main">
@@ -88,8 +79,7 @@ function Shopping() {
                                         <th>Tên sản phẩm</th>
                                         <th>Hình</th>
                                         <th>Giá</th>
-                                        <th>Màu sắc</th>
-                                        <th>Kích thước</th>
+
                                         <th>Số lượng</th>
                                         <th>Tổng tiền</th>
                                     </tr>
@@ -112,7 +102,7 @@ function Shopping() {
                                                     </i>
                                                 </td>
 
-                                                <td>{item.name}</td>
+                                                <td>{item.name}<br/>{item.size},{item.color}</td>
                                                 <td>
                                                     <img
                                                         src={"../imgs/" + item.image}
@@ -133,8 +123,7 @@ function Shopping() {
                                                         đ
                                                     </span>
                                                 </td>
-                                                <td>{item.color}</td>
-                                                <td>{item.size}</td>
+
                                                 <td>
                                                     <span
                                                         className="btn btn-primary"
@@ -186,6 +175,7 @@ function Shopping() {
                                     </tr>
                                 </tbody>
                             </table>
+                            <button className="shopping-clear-btn" onClick={()=> handleClearCart()}>Xóa giỏ hàng</button>
                             <NavLink
                                 to="/ShipAddress"
                                 state={{ data: cart.cartTotalAmount }}
@@ -194,6 +184,7 @@ function Shopping() {
                                     Mua hàng
                                 </button>
                             </NavLink>
+
                         </div>
                     </div>
                     <Snackbar
@@ -215,16 +206,5 @@ function Shopping() {
         </div>
     );
 }
-const mapStateToProps = (state) => {
-    //  console.log(state)
-    return {
-        // items: state._todoProduct,
-    };
-};
 
-// export default connect(mapStateToProps, {
-//     IncreaseQuantity,
-//     DecreaseQuantity,
-//     DeleteCart,
-// })(Shopping);
 export default Shopping;

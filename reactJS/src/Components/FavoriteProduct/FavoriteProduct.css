@@ -29,9 +29,10 @@
   /* width: fit-content; */
   color: white;
   padding: 15px;
-  border: #0b3296 2px solid;
+  border: #6851a8 2px solid;
   border-radius: 10px;
 }
 .shopping-buy-btn:hover {
   background-color: #5a82e7;
+  border: #5a82e7 2px solid;
 }

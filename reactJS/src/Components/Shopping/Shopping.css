@@ -25,13 +25,31 @@
 .shopping-buy-btn{
     text-align: center!;
     font-size: 18px;
-    background-color: #6851A8;
+    background-color: #6851a8;
     width: fit-content;
     color: white;
     padding: 15px;
-    border: #0b3296 2px solid;
+    border: #6851a8 2px solid;
     border-radius: 10px;
 }
 .shopping-buy-btn:hover{
     background-color: #5A82E7;
+    border: #5a82e7 2px solid;
+}
+
+.shopping-clear-btn {
+    text-align: center!;
+    font-size: 18px;
+    background-color: #e21414;
+    width: fit-content;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: #e21414 2px solid;
+    margin-right: 50px;
+}
+
+.shopping-clear-btn:hover {
+    background-color: #ff0000;
+    border: #ff0000 2px solid;
 }

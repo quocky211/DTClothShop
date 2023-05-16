@@ -16,7 +16,7 @@ const cartSlide = createSlice({
     reducers: {
         addToCart: (state, action) => {
             const existingIndex = state.cartItems.findIndex(
-                (item) => item._id === action.payload._id
+                (item) => item._id === action.payload._id && item.size === action.payload.size && item.color === action.payload.color
             );
             if (existingIndex >= 0) {
                 state.cartItems[existingIndex] = {
@@ -104,7 +104,7 @@ const cartSlide = createSlice({
             state.cartTotalAmount = total;
         },
 
-        clearCart: (state, action) => {
+        clearCart: (state) => {
             state.cartItems = [];
             // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
             toast.error("Đã xóa toàn bộ giỏ hàng!", {

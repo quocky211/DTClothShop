@@ -17,7 +17,9 @@ import searchicon from "../Images/black-search-icon.png";
 import close from "../Images/close.webp";
 import arrowbottom from "../Images/arrow-bottom.png";
 
-import { useSelector }  from 'react-redux'
+import { useSelector, useDispatch }  from 'react-redux'
+import { getToTals } from "../../redux/cartSlide";
+
 
 function Header(props) {
   let navigate = useNavigate();
@@ -35,7 +37,12 @@ function Header(props) {
     }
   }
 
-  const { cartTotalQuantity } = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getToTals());
+}, [cart, dispatch]);
+
 
   const [catagories, setCategories] = useState([]);
   useEffect(() => {
@@ -174,7 +181,7 @@ function Header(props) {
         <div className="cartandlogin">
           <Nav.Link href="/ShoppingCart">
             <img src={shoppingIcon} alt="cart" />
-            <span>{cartTotalQuantity}</span>
+            <span>{cart.cartTotalQuantity}</span>
           </Nav.Link>
           <button onClick={LoginclickHandler} className="logIn-btn">
             <Nav.Link>
@@ -204,7 +211,7 @@ const mapStateToProps = (state) => {
 };
 function mapDispatchToProps(dispatch) {
   return {
-   
+
   };
 }
 

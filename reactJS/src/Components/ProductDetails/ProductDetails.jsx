@@ -6,14 +6,14 @@ import Accordion from "react-bootstrap/Accordion";
 import size from "../Images/size.jpg";
 import Slider from "react-slick";
 import ContainerItem from "../ContainerItem";
-import likeicon from "../Images/likeicon.png";
-import { red } from "@mui/material/colors";
-import { Button } from "react-bootstrap";
+// import likeicon from "../Images/likeicon.png";
+// import { red } from "@mui/material/colors";
+// import { Button } from "react-bootstrap";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import React, { useEffect, useState } from "react";
 import ProductDataService from "../../services/products";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -45,7 +45,7 @@ export function ProductDetails(props) {
     const [id, setID] = useState(0);
     const [open, setOpen] = React.useState(false);
 
-    
+
 
     const dispatch = useDispatch();
     const handleAddToCart = ({
@@ -404,7 +404,7 @@ const mapStateToProps = (state) => {
 };
 function mapDispatchToProps(dispatch) {
     return {
-    
+
     };
 }
 
