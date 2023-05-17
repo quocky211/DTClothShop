@@ -12,7 +12,7 @@ function OutfitDetail() {
   const [outfitDetail, setOutfitDetail] = useState([]);
 
   const [colorArr, setColorArr] = useState([]);
-  const [sizeArr, setSizeArr] = useState([]);
+  const [sizeArrs, setSizeArrs] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const [sizeProduct, setSizeProduct] = useState("");
 
@@ -36,6 +36,7 @@ function OutfitDetail() {
         const data = res.data;
         var productDetails = data.map((item) => item.productDetail);
         setProductDetails(productDetails);
+        // arr color
         var colorArr = productDetails.map(function (item) {
           var colorArrs = item.map((details) => details.color);
           return colorArrs.filter(
@@ -43,6 +44,20 @@ function OutfitDetail() {
           );
         });
         setColorArr(colorArr);
+        // size
+        var sizeArrs = productDetails.map(function (item, index1) {
+          var color = colorArr[index1];
+          const initialValue = [];
+          const pushArr = (boTichLuy, phanTuHienTai) => {
+            var productdl = item.filter((item1)=>item1.color === phanTuHienTai);
+            var size = productdl.map((item2)=>item2.size)
+            boTichLuy.push(size)
+            return boTichLuy
+          };
+          var sizeArr = color.reduce(pushArr, initialValue);
+          return sizeArr;
+        });
+        setSizeArrs(sizeArrs);
       })
       .catch((err) => console.log(err));
   };
@@ -53,9 +68,9 @@ function OutfitDetail() {
   });
 
   const handleColor = (color, index) => {
-    var sizeArr = productDetails[index].filter((item) => item.color === color);
-    console.log(sizeArr);
-    setSizeArr(sizeArr);
+    // var sizeArr = productDetails[index].filter((item) => item.color === color);
+    // console.log(sizeArr);
+    // setSizeArr(sizeArr);
     //change image
     // setPath(imageArr[index]);
   };
@@ -86,30 +101,50 @@ function OutfitDetail() {
                 <div className="product-item-infor">
                   <h4>{item.product_id.name}</h4>
                   <h4>{vnd.format(item.product_id.price)}</h4>
-                  {colorArr[index].map(function (color) {
-                    return (
-                      <button
-                        onClick={() => handleColor(color, index)}
-                        style={{
-                          backgroundColor: color,
-                          border: " 1px solid black",
-                          padding: "12px",
-                        }}
-                      ></button>
-                    );
-                  })}
-                  <div className="size">
+                  <div className="color-outfitdetail">
+                    {colorArr[index].map(function (color, index2) {
+                      return (
+                        <div className="">
+                          <button
+                            onClick={() => handleColor(color, index)}
+                            style={{
+                              backgroundColor: color,
+                              border: " 1px solid black",
+                              padding: "12px",
+                              margin: "0 10px 0 0"
+                            }}
+                          ></button>
+                          {
+                            sizeArrs[index][index2].map((size) => (
+                              <button
+                                onClick={() => setSizeProduct(size.size)}
+                                style={{
+                                  backgroundColor:
+                                    sizeProduct === size && "antiquewhite",
+
+                                }}
+                              >
+                                {size}
+                              </button>
+                            ))
+                          }
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* <div className="size">
                     {sizeArr.map((size) => (
                       <button
                         onClick={() => setSizeProduct(size.size)}
                         style={{
-                          backgroundColor: sizeProduct === size &&"antiquewhite",
+                          backgroundColor:
+                            sizeProduct === size && "antiquewhite",
                         }}
                       >
                         {size.size}
                       </button>
                     ))}
-                  </div>
+                  </div> */}
                   <Link
                     to={"/Products/" + item.product_id._id}
                     state={{ image: item.productDetail[0].path }}
