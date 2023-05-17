@@ -13,79 +13,93 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-
-  const registerHandle = async(e) => {
-      e.preventDefault();
-      let newUser = 
-      { 
-        email:email,
-        password: password, 
-        confirmPassword: confirmPassword,
-        name: name, 
-        avatar: "avatar",
-        level: true
-      }
-      let config = {
-        headers:{
-          "Content-Type": "application/json",
-        }
-      };
-      await axios.post('http://localhost:3001/user/register', newUser, config)
-      .then((res)=>{
+  const registerHandle = async (e) => {
+    e.preventDefault();
+    let newUser = {
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+      name: name,
+      avatar: "avatar",
+      level: true,
+    };
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios
+      .post("http://localhost:3001/user/register", newUser, config)
+      .then((res) => {
         console.log(res);
-        if(res.data.status === "successfully")
-        {
+        if (res.data.status === "successfully") {
           navigate("/Login");
-          alert("Đăng ký thành công")
-        }
-        else{
+          alert("Đăng ký thành công");
+        } else {
           alert(res.data.message);
         }
       })
-      .catch(
-        (err)=>{
-          console.log("Error" + err);
-      }
-      )
+      .catch((err) => {
+        console.log("Error" + err);
+      });
   };
 
   return (
-    <div className="regismain">
-      <Header/>
-      <div className="logomain">
-        <img className="logo" src={logo} alt="logo"></img>
-        <p>TechieShop</p>
-      </div>
+    <div className="">
+      <Header />
+      <div className="regismain">
+        <div className="logomain">
+          <img className="logo" src={logo} alt="logo"></img>
+          <p>TechieShop</p>
+        </div>
+        <div className="regisForm-format">
+          <h3>Đăng ký</h3>
+          <form autoComplete="on">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              name="fullname"
+              placeholder="Họ và tên"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
 
-      <div className="regisForm-format">
-        <h3>Đăng ký</h3>
-        <form autoComplete="on">
-        <input
-            type="email" name="email" placeholder="Email" value={email}
-            onChange={(e) => setEmail(e.target.value)} required
-          />
-          <input    
-            type="text" name="fullname" placeholder="Họ và tên" value={name}
-            onChange={(e) => setName(e.target.value)} required
-          />
-          
-          <input type="password" name="password" placeholder="Mật khẩu" value={password}
-            onChange={(e) => setPassword(e.target.value)} pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" 
-            title="Mật khẩu tối thiểu 6 kí tự"
-            required
-          />
-          <input type="password" name="confirmpassword" placeholder="Nhập lại mật khẩu" value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)} required
-          />
-          <button onClick={registerHandle} type="submit" name="submit">
-            Đăng ký
-          </button>
-        </form>
-        <Link to="/Login">
-          <p>Bạn đã có tài khoản? Đăng nhập ngay </p>
-        </Link>
+            <input
+              type="password"
+              name="password"
+              placeholder="Mật khẩu"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+              title="Mật khẩu tối thiểu 6 kí tự"
+              required
+            />
+            <input
+              type="password"
+              name="confirmpassword"
+              placeholder="Nhập lại mật khẩu"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <button onClick={registerHandle} type="submit" name="submit">
+              Đăng ký
+            </button>
+          </form>
+          <Link to="/Login">
+            <p>Bạn đã có tài khoản? Đăng nhập ngay </p>
+          </Link>
+        </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

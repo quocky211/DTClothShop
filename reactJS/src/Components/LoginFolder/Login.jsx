@@ -34,7 +34,7 @@ function Login(props) {
       .post("http://localhost:3001/user/login", user, config)
       .then((res) => {
         window.localStorage.setItem("JWT", JSON.stringify(res.data));
-        if (res.data.level == true) navigate("/Admin");
+        if (res.data.level === true) navigate("/Admin");
         else navigate("/");
       })
       .catch((err) => {

@@ -172,14 +172,14 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "5b55jo9dv@gmail.com",
-    "password":"123456",
-    "confirmPassword": "123456",
-    "name": "Lê Minh Đại",
+    "email": "quockynguyen02@gmail.com",
+    "password":"1234567",
+    "confirmPassword": "1234567",
+    "name": "Nguyễn Quốc Kỳ",
     "gender":"Nam",
-    "address":"Long An",
-    "phone":"0387383583",
-    "birthday": "2002-06-13"
+    "address":"Bình Định",
+    "phone":"0972389257",
+    "birthday": "2002-11-02"
 }
 
 ### login
@@ -187,8 +187,8 @@ POST  http://localhost:3001/user/login
 Content-Type: application/json
 
 {
-    "email": "louistart0ggy@gmail.com",
-    "password":"123456g"
+    "email": "quockynguyen02@gmail.com",
+    "password":"1234567"
 }
 
 ###
