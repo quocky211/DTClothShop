@@ -30,7 +30,7 @@ import TypeProductList from "./Components/Admin/TypeProductList/TypeProductList"
 import TypeProductEdit from "./Components/Admin/TypeProductEdit/TypeProductEdit";
 import NewTypeProduct from "./Components/Admin/NewTypeProduct/NewTypeProduct";
 import OrderDetail from "./Components/OrderDetail/OrderDetail";
-
+import BlogDetail from "./Components/BlogDetail/BlogDetail";
 import { Provider } from "react-redux";
 // import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
@@ -93,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: "Blogs",
         element: <Blogs />,
+      },
+      {
+        path: "Blogs/:blogID",
+        element: <BlogDetail />,
       },
       {
         path: "Account",
