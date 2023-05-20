@@ -29,6 +29,8 @@ import NewProduct from "./Components/Admin/NewProduct/NewProduct";
 import TypeProductList from "./Components/Admin/TypeProductList/TypeProductList";
 import TypeProductEdit from "./Components/Admin/TypeProductEdit/TypeProductEdit";
 import NewTypeProduct from "./Components/Admin/NewTypeProduct/NewTypeProduct";
+import OrderDetail from "./Components/OrderDetail/OrderDetail";
+
 import { Provider } from "react-redux";
 // import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
@@ -111,6 +113,10 @@ const router = createBrowserRouter([
       {
         path: "Outfits/:outfitID",
         element: <OutfitDetail />,
+      },
+      {
+        path: "OrderDetail/:orderID",
+        element: <OrderDetail />,
       },
       {
         path: "Search",

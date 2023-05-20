@@ -172,14 +172,15 @@ POST  http://localhost:3001/user/register
 Content-Type: application/json
 
 {
-    "email": "quockynguyen02@gmail.com",
+    "email": "20521510@gm.uit.edu.vn",
     "password":"1234567",
     "confirmPassword": "1234567",
     "name": "Nguyễn Quốc Kỳ",
     "gender":"Nam",
     "address":"Bình Định",
     "phone":"0972389257",
-    "birthday": "2002-11-02"
+    "birthday": "2002-11-02",
+    "level": true
 }
 
 ### login
