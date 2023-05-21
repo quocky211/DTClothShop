@@ -11,7 +11,7 @@ const Order = new Schema(
         status: { type: String },
         note: { type: String, require: false },
         phone: { type: Number },
-        pay_method: { type: Boolean },
+        pay_method: { type: String },
         total: Number,
         discount_code: { type: String, ref: 'discount', require: false },
     },
