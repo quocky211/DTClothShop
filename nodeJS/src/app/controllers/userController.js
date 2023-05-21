@@ -91,7 +91,7 @@ class UserController {
             res.json({
                 accessToken,
                 refreshToken,
-                level: user.level,
+                user,
             });
         } catch (error) {
             next(error);
@@ -141,7 +141,7 @@ class UserController {
     GetOrder(req, res, next) {
         Order.find({ user_id: req.params.id })
             .exec()
-            .then((order) => res.json(order))
+            .then((order) => res.json(order.map((o) => ({ ...o.toObject(), _id: o._id }))))
             .catch(next);
     }
 }
