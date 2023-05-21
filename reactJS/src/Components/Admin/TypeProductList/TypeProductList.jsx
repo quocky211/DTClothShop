@@ -37,17 +37,17 @@ export default function TypeProductList() {
     {
       field: "_id",
       headerName: "ID",
-      width: 70,
+      width: 50,
       renderCell: (params) => {
-        return <p>{params.row._id}</p>;
+        return <p>{params.row.product._id}</p>;
       },
     },
     {
       field: "product",
       headerName: "Sản phẩm",
-      width: 400,
+      width: 350,
       renderCell: (params) => {
-        return <div className="productListItem">{params.row.name}</div>;
+        return <div className="productListItem">{params.row.product.name}</div>;
       },
     },
     {
@@ -56,35 +56,40 @@ export default function TypeProductList() {
       width: 120,
       renderCell: (params) => {
         return (
-          <div className="productListItem">{params.row.category_detail_id.name}</div>
+          <div className="productListItem">{params.row.product.category_detail_id.name}</div>
         );
       },
     },
-    { field: "marterial", headerName: "Chất liệu", width: 200 },
+    { field: "material", headerName: "Chất liệu", width: 200, 
+      renderCell: (params) => {
+      return (
+        <div className="productListItem">{params.row.product.marterial}</div>
+      );
+    },},
     {
       field: "gia",
       headerName: "Giá",
       width: 100,
       renderCell: (params) => {
         return (
-          <div className="productListItem">{vnd.format(params.row.price)}</div>
+          <div className="productListItem">{vnd.format(params.row.product.price)}</div>
         );
       },
     },
     {
       field: "action",
       headerName: "Hành động",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/Admin/Products/" + params.row._id}>
+            <Link to={"/Admin/Products/" + params.row.product._id}>
               <button className="typeProductLisAdd">
                 {" "}
                 <Add />{" "}
               </button>
             </Link>
-            <Link to={"/Admin/TypeProduct/" + params.row._id}>
+            <Link to={"/Admin/TypeProduct/" + params.row.product._id}>
               <button className="typeProductListEdit">
                 {" "}
                 <Edit />{" "}
@@ -92,7 +97,7 @@ export default function TypeProductList() {
             </Link>
             <DeleteOutline
               className="typeProductListDelete"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row.product._id)}
             />
           </>
         );
@@ -108,7 +113,7 @@ export default function TypeProductList() {
         <div className="typeProductList" style={{ height: 800, width: "100%" }}>
           <DataGrid
             rows={products}
-            getRowId={(row) => row._id}
+            getRowId={(row) => row.product._id}
             disableRowSelectionOnClick
             columns={columns}
             checkboxSelection

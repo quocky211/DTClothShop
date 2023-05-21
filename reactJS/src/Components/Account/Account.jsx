@@ -59,8 +59,8 @@ function Account() {
                 />
               </td>
             </tr>
-            <tr>
-              <td colSpan={2} align="center" className="button-submit">
+            <tr style={{textAlign:"center"}}>
+              <td colSpan={2} style={{textAlign:"center"}} className="button-submit">
                 <button type="submit">Cập nhật</button>
               </td>
             </tr>

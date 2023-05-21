@@ -52,3 +52,33 @@
 .buy-history{
     text-align: -webkit-center;
 }
+.buy-history button{
+    background: none;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    color: blueviolet;
+    cursor: pointer;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .account-info-container{
+        display: block;
+        margin-bottom: 30px;
+        margin-top: 100px;
+    }
+    .account-info table,
+    .buy-history table{
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 46.1875em)
+{
+    .account-info-container{
+        display: block;
+        margin-bottom: 30px;
+        margin-top: 100px;
+    }
+    .account-info table,
+    .buy-history table{
+        font-size: 16px;
+    }
+}

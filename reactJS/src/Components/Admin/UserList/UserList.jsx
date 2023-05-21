@@ -38,11 +38,10 @@ export default function UserList() {
     {
       field: "user",
       headerName: "Người dùng",
-      width: 200,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
             {params.row.name}
           </div>
         );
@@ -61,7 +60,6 @@ export default function UserList() {
         );
       },
     },
-    { field: "gender", headerName: "Giới tính", width: 100 },
     {
       field: "action",
       headerName: "Hành động",

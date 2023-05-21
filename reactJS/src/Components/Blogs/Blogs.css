@@ -56,3 +56,16 @@
     color: white;
     background-color: #47474c;
 }
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
+    
+}
+@media only screen and (max-width: 46.1875em)
+{
+    .blogDetail{
+        display: block;
+    }
+    .blogDetailItem{
+        margin: 15px 0;
+        font-size: 16px;
+    }
+}

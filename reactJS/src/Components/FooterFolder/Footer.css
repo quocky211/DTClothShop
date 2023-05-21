@@ -94,7 +94,7 @@
 .accordion-item:first-child .accordion-body{
     text-align: justify;
 }
-@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
     .footer_infor {
         grid-template-columns: repeat(2, 1fr);
     }
