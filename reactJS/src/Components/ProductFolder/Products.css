@@ -1,5 +1,3 @@
-
-
 .container__products {
     display: flex;
     width: 90%;
@@ -175,53 +173,85 @@
     border-color: white !important;
     margin-left: 15px;
 }
- .btn{
+.btn{
     font-size: 18px !important;
- }
- .all-product-store{
+}
+.all-product-store{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 60px;
+    column-gap: 15px;
     margin-bottom: 72px;
- }
- .btn .filter-img{
-    width: 28px;
-    height: 28px;
- }
- .btn:focus, 
- .btn.focus{
-    box-shadow: none !important;
- }
- .btn-primary:focus, 
- .btn-primary.focus{
-    box-shadow: none !important;
- }
- .filter-button{
-    text-align: end;
-    margin-right: 20px;
-    margin-bottom: 20px;
- }
- .filter-button input[type="button"]{
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #000;
-    border-radius: 5px;
+}
+.item .containerItem{
+    border: 2px solid transparent;
+    border-radius: 3px;
+}
+.item .containerItem:hover{
+    border: 2px solid #ccc;
+    border-radius: 3px;
+}
+.item:hover .containerItem .containerItem_infor-price,
+.item:hover .containerItem .containerItem_name{
+    color: #f07b00;
+}
+.item .containerItem .nameandprice{
+    display: inherit;
+    margin-top: 1rem;
+}
+.item .containerItem .ContainerItem_image{
+    width: 95%;
+    height: 95%;
+}
+.item .containerItem .containerItem_name{
     font-size: 18px;
-    padding: 10px 15px;
- }
- .page{
-    margin-left: 40%;
- }
- .visually-hidden{
-    display: none;
- }
- @media only screen and (min-width: 46.25em) and (max-width: 64em) {
-    .all-product-store{
-        grid-template-columns: 1fr 1fr;
-        row-gap: 50px;
-    }
- }
- @media only screen and (max-width: 46.1875em)
+    font-weight: bold;
+    color: #000;
+}
+.item .containerItem .containerItem_infor-price{
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+.btn .filter-img{
+width: 28px;
+height: 28px;
+}
+.btn:focus, 
+.btn.focus{
+box-shadow: none !important;
+}
+.btn-primary:focus, 
+.btn-primary.focus{
+box-shadow: none !important;
+}
+.filter-button{
+text-align: end;
+margin-right: 20px;
+margin-bottom: 20px;
+}
+.filter-button input[type="button"]{
+background-color: #000;
+color: #fff;
+border: 1px solid #000;
+border-radius: 5px;
+font-size: 18px;
+padding: 10px 15px;
+}
+.page{
+margin-left: 40%;
+}
+.visually-hidden{
+display: none;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 64em) {
+.all-product-store{
+    grid-template-columns: 1fr 1fr;
+    row-gap: 50px;
+}
+}
+@media only screen and (max-width: 46.1875em)
 {
     .all-product-store{
         grid-template-columns: 1fr 1fr;
