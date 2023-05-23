@@ -179,44 +179,45 @@
 .all-product-store{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 60px;
+    row-gap: 70px;
     column-gap: 15px;
-    margin-bottom: 72px;
+    margin-bottom: 80px;
 }
-.item .containerItem{
+.containerItem{
     border: 2px solid transparent;
     border-radius: 3px;
 }
-.item .containerItem:hover{
+.containerItem:hover{
     border: 2px solid #ccc;
     border-radius: 3px;
 }
-.item:hover .containerItem .containerItem_infor-price,
-.item:hover .containerItem .containerItem_name{
+.containerItem:hover .containerItem_infor-price,
+.containerItem:hover .containerItem_name{
     color: #f07b00;
 }
-.item .containerItem .nameandprice{
+.containerItem .nameandprice{
     display: inherit;
-    margin-top: 1rem;
+    margin: 5px 0;
 }
-.item .containerItem .ContainerItem_image{
-    width: 95%;
-    height: 95%;
-}
-.item .containerItem .containerItem_name{
+/* .containerItem .ContainerItem_image{
+    width: 90%;
+    height: 90%;
+} */
+.containerItem .containerItem_name{
     font-size: 18px;
     font-weight: bold;
     color: #000;
+    text-align: center;
 }
-.item .containerItem .containerItem_infor-price{
+.containerItem .containerItem_infor-price{
     font-size: 16px;
     font-weight: 600;
     color: #000;
     text-align: center;
 }
 .btn .filter-img{
-width: 28px;
-height: 28px;
+    width: 28px;
+    height: 28px;
 }
 .btn:focus, 
 .btn.focus{
@@ -224,12 +225,12 @@ box-shadow: none !important;
 }
 .btn-primary:focus, 
 .btn-primary.focus{
-box-shadow: none !important;
+    box-shadow: none !important;
 }
 .filter-button{
-text-align: end;
-margin-right: 20px;
-margin-bottom: 20px;
+    text-align: end;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 .filter-button input[type="button"]{
 background-color: #000;
@@ -240,27 +241,34 @@ font-size: 18px;
 padding: 10px 15px;
 }
 .page{
-margin-left: 40%;
+    margin-left: 40%;
 }
 .visually-hidden{
 display: none;
 }
 @media only screen and (min-width: 46.25em) and (max-width: 64em) {
-.all-product-store{
-    grid-template-columns: 1fr 1fr;
-    row-gap: 50px;
-}
+    .all-product-store{
+        grid-template-columns: 1fr 1fr;
+        row-gap: 50px;
+    }
+    .page {
+        margin-left: 40% !important;
+    }
 }
 @media only screen and (max-width: 46.1875em)
 {
     .all-product-store{
         grid-template-columns: 1fr 1fr;
-        row-gap: 48px;
+        row-gap: 60px;
+        padding-bottom: 2rem;
     }
     .offcanvas.offcanvas-start{
         right: 0;
         bottom: 0;
         top: 0;
         left: 0;
+    }
+    .page {
+        margin-left: 25% !important;
     }
 }

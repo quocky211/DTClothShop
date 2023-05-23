@@ -134,14 +134,12 @@ function Products() {
       </div>
       <div className="all-product-store">
         {products.map((item) => (
-          <div className="item">
-            <ContainerItem
-              price={item.product.price}
-              name={item.product.name}
-              image={item.path}
-              masp={item.product._id}
-            />
-          </div>
+          <ContainerItem
+            price={item.product.price}
+            name={item.product.name}
+            image={item.path}
+            masp={item.product._id}
+          />
         ))}
       </div>
       <div className="page">

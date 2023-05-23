@@ -1,19 +1,21 @@
 .list-product-typedetail{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 60px;
-    margin-bottom: 72px;
+    row-gap: 70px;
+    margin-bottom: 80px;
 }
 @media only screen and (min-width: 46.25em) and (max-width: 64em) {
     .list-product-typedetail{
         grid-template-columns: 1fr 1fr;
-        row-gap: 50px;
+        row-gap: 60px;
     }
  }
  @media only screen and (max-width: 46.1875em)
 {
     .list-product-typedetail{
         grid-template-columns: 1fr 1fr;
-        row-gap: 48px;
+        row-gap: 90px;
+        padding-top: 4rem;
+        padding-bottom: 2rem;
     }
 }
