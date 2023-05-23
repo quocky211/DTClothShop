@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import "./Footer.css";
-import logo from "../Images/logo.webp";
+import logo from "../Images/logo-pj.jpg";
 import fb from "../Images/icon/fb.png";
 import ins from "../Images/icon/ins.png";
 import yt from "../Images/icon/yt.png";
@@ -31,8 +31,8 @@ function Header() {
             <div className="footer_infor">
                 <div className="footer__infor-introduce">
                     <div className="footer__infor-introduce-name name">Về chúng tôi </div>
-                    <div className="footer__infor-introduce-infor infor">TechieShop&reg;
-                        là trang mua sắm của thương hiệu TechieShop&reg;,
+                    <div className="footer__infor-introduce-infor infor">DTCloth&reg; 
+                        là trang mua sắm của thương hiệu DTCloth&reg;,
                         chuyên các sản phẩm thời trang đẹp, thời thượng
                         giúp bạn tận hưởng cuộc sống thường nhật!</div>
                 </div>
@@ -40,7 +40,7 @@ function Header() {
                 <div className="footer__infor-link">
                     <div className="footer__infor-introduce-name name">Liên kết</div>
                     <div className="footer__infor-introduce-infor infor">
-                        TechieShop&reg; /SỰ KHỞI ĐẦU/<br />
+                        DTCloth&reg; /SỰ KHỞI ĐẦU/<br />
                         Chính sách bảo hành<br />
                         Phương thức thanh toán<br />
                         <a href="https://tinhte.vn/" target="_blank" rel="noreferrer">Tinhte.vn</a>
@@ -52,8 +52,8 @@ function Header() {
                     <div className="footer__infor-introduce-name name">Thông tin liên hệ</div>
                     <div className="footer__infor-introduce-infor infor">
                         Trường Đại học Công nghệ Thông tin- ĐHQG TPHCM<br />
-                        <b>Số điện thoại:</b> 0799684120<br />
-                        <b>Email:</b> DTClothe23@gmail.com
+                        <b style={{ fontWeight: 500 }}>Số điện thoại:</b> 0799684120<br />
+                        <b style={{ fontWeight: 500 }}>Email:</b> DTClothe23@gmail.com
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ function Header() {
                     <div className="logo-footer">
                         <Link to="/">
                             <img src={logo} alt="logo" />
-                            <h2>TechieShop</h2>
+                            <h2>&nbsp;DTClothShop</h2>
                         </Link>
                     </div>
                     <div className="name">Đăng ký nhận tin</div>
@@ -82,8 +82,8 @@ function Header() {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Về chúng tôi</Accordion.Header>
                         <Accordion.Body>
-                            TechieShop&reg;
-                            là trang mua sắm của thương hiệu TechieShop&reg;,
+                            DTCloth&reg;
+                            là trang mua sắm của thương hiệu DTCloth&reg;,
                             chuyên các sản phẩm thời trang đẹp, thời thượng
                             giúp bạn tận hưởng cuộc sống thường nhật!
                         </Accordion.Body>
@@ -93,8 +93,8 @@ function Header() {
                         <Accordion.Header>Thông tin liên hệ</Accordion.Header>
                         <Accordion.Body>
                             Trường Đại học Công nghệ Thông tin- ĐHQG TPHCM<br />
-                            <b>Số điện thoại: </b>0799684120<br />
-                            <b>Email: </b>DTClothe23@gmail.com
+                            <b style={{ fontWeight: 500 }}>Số điện thoại: </b>0799684120<br />
+                            <b style={{ fontWeight: 500 }}>Email: </b>DTClothe23@gmail.com
                         </Accordion.Body>
                     </Accordion.Item>
                     <hr />
@@ -116,7 +116,7 @@ function Header() {
                 </Accordion>
             </div>
             <div className="footer_copyright">
-                <p>Copyright &copy; 2022 TechieShop&reg;. Powered by TechieShop</p>
+                <p>Copyright &copy; 2022 DTCloth&reg;. Powered by DTCloth</p>
             </div>
         </div>
     );

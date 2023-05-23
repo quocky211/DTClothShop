@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CatagoryDataService from "../../services/catagories";
 import "./Header.css";
 import shoppingIcon from "../Images/shopping-icon.png";
+import Logo from "../Images/logo-pj.jpg";
 import { useNavigate } from "react-router-dom";
 import ListTypeProduct from "../ListTypeProduct/ListTypeProduct";
 import ListTypeProductMobile from "../ListTypeProductMobile/ListTypeProductMobile";
@@ -152,7 +153,9 @@ function Header(props) {
             </Button>
           </Form>
         </div>
-        <Navbar.Brand href="/">Shop quần áo</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src={Logo} alt="Shop quần áo" className="Logo"/>
+        </Navbar.Brand>
         <Nav className="" style={{ maxHeight: "100px" }}>
           <Nav.Link href="/">Trang chủ</Nav.Link>
           <div className="product-header">

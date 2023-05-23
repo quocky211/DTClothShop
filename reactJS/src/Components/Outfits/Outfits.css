@@ -5,7 +5,7 @@
 .outfits-product{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* margin-bottom: 72px; */
+    margin-bottom: 70px;
     /* grid-auto-rows: 50%; */
     padding: 0 16px;
     gap: 15px;

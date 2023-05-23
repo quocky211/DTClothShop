@@ -17,14 +17,14 @@ function About() {
       <div className="about-content">
         <div className="header-about-content">
           <h2>Giới thiệu</h2>
-          <h1>Levents® - Popular Streetwear brand</h1>
+          <h1>DTCloth® - Popular Streetwear brand</h1>
           <h3 >Chúng tôi là thương hiệu thời trang Đường phố nổi tiếng với định hướng <br></br>
             cung cấp sản phẩm có chất lượng cao, sành điệu với giá thành hợp lý.</h3>
         </div>
         <div className="main-about-content">
           <img src={about1} alt="about 1" />
           <h1>Chúng tôi là ai?</h1>
-          <p>Levents® là lựa chọn hàng đầu dành cho các tín đồ thời trang Đường phố sành điệu. Sứ mệnh của Levents® là trao quyền cho thế hệ trẻ toàn thế giới tự do thể hiện phong cách thông qua thời trang, thương hiệu vượt qua ranh giới của thời trang đường phố bằng cách không ngừng sáng tạo các trang phục với các bộ sưu tập độc đáo.</p>
+          <p>DTCloth® là lựa chọn hàng đầu dành cho các tín đồ thời trang Đường phố sành điệu. Sứ mệnh của DTCloth® là trao quyền cho thế hệ trẻ toàn thế giới tự do thể hiện phong cách thông qua thời trang, thương hiệu vượt qua ranh giới của thời trang đường phố bằng cách không ngừng sáng tạo các trang phục với các bộ sưu tập độc đáo.</p>
           <img src={about2} alt=" about2" />
           <h1>Chất lượng trải nghiệm vượt trội</h1>
           <p>Chúng tôi không ngừng nỗ lực, tập trung vào chất lượng sản phẩm và trải nghiệm mua sắm vượt trội nhất chưa từng có trước đây, các cửa hàng vật lý của chúng tôi, tối ưu hóa trải nghiệm, giúp người dùng mua sắm một sản phẩm cao cấp thật sự.
@@ -33,15 +33,15 @@ function About() {
           </p>
           <img src={about3} alt="about3" />
           <h1>Biểu tượng thời trang thời đại mới</h1>
-          <p>Tại Levents®, mỗi sản phẩm đều mang theo sự cá tính và sành điệu, đại diện cho hình ảnh giới trẻ hiện đại - biểu tượng cho sự dẫn đầu phong cách thời đại mới.</p>
-          <p>Quần áo có thể sẽ lỗi thời nhưng phong cách thời trang thì không. Tầm nhìn độc đáo của Levents® chính là để mỗi cá nhân tự do thể hiện phong cách khi khoác lên mình những sản phẩm được tạo nên từ sự đam mê, mang giá trị của thế hệ mới, đầy trẻ trung, năng động và luôn không ngừng khẳng định bản thân, hướng đến tương lai.</p>
-          <p>Sự đầu tư từ chất lượng đóng gói, bao bì sản phẩm đến mỗi thước phim, hình ảnh cho tới cách làm chủ được nghệ thuật sắc màu và chỉn chu trong từng chi tiết đã đưa Levents® trở thành một trong những thương hiệu thời trang Đường phố được giới trẻ yêu thích, tin dùng hàng đầu tại Việt Nam.</p>
+          <p>Tại DTCloth®, mỗi sản phẩm đều mang theo sự cá tính và sành điệu, đại diện cho hình ảnh giới trẻ hiện đại - biểu tượng cho sự dẫn đầu phong cách thời đại mới.</p>
+          <p>Quần áo có thể sẽ lỗi thời nhưng phong cách thời trang thì không. Tầm nhìn độc đáo của DTCloth® chính là để mỗi cá nhân tự do thể hiện phong cách khi khoác lên mình những sản phẩm được tạo nên từ sự đam mê, mang giá trị của thế hệ mới, đầy trẻ trung, năng động và luôn không ngừng khẳng định bản thân, hướng đến tương lai.</p>
+          <p>Sự đầu tư từ chất lượng đóng gói, bao bì sản phẩm đến mỗi thước phim, hình ảnh cho tới cách làm chủ được nghệ thuật sắc màu và chỉn chu trong từng chi tiết đã đưa DTCloth® trở thành một trong những thương hiệu thời trang Đường phố được giới trẻ yêu thích, tin dùng hàng đầu tại Việt Nam.</p>
           <div className="contact">
             <div className="contact_info">
               <div className="contact_address">
                 <h4>Thông tin liên hệ</h4>
                 <ul className="list_info">
-                  <li><strong>Cửa Hàng Bán Quần Áo DTClothes</strong></li>
+                  <li><strong>Cửa Hàng Bán Quần Áo DTCloth</strong></li>
                   <li><strong>Số điện thoại: </strong>0799684120</li>
                   <li><strong>Email: </strong>DTClothe23@gmail.com</li>
                   <li><strong>Địa chỉ: </strong>Trường Đại học Công nghệ Thông tin - ĐHQG TPHCM</li>

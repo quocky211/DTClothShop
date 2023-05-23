@@ -199,19 +199,19 @@
     display: inherit;
     margin: 5px 0;
 }
-/* .containerItem .ContainerItem_image{
-    width: 90%;
-    height: 90%;
-} */
+.containerItem .ContainerItem_image{
+    width: 95%;
+    height: 95%;
+}
 .containerItem .containerItem_name{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     color: #000;
     text-align: center;
 }
 .containerItem .containerItem_infor-price{
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: #000;
     text-align: center;
 }

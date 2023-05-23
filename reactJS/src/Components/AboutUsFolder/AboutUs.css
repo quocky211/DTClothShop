@@ -58,7 +58,7 @@
 }
 .contact .map iframe{
     z-index: 3;
-    height: 50vh;
+    height: 55vh;
     width: 100%;
     padding: 0px;
     border-width: 0px;
@@ -82,8 +82,10 @@
     list-style-type: square;
     text-align: left;
 }
-.main-about-content iframe{
-    
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em){
+    .contact .map iframe{
+        height: 35vh;
+    }
 }
 @media only screen and (max-width: 46.1875em) {
     .about-content h2{
@@ -111,5 +113,8 @@
     }
     .contact_info{
         font-size: 1rem;
+    }
+    .contact .map iframe{
+        height: 40vh;
     }
 }

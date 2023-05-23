@@ -15,7 +15,7 @@
     padding: 24px 24px 0 24px;
     margin-bottom: 0;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: bolder;
 }
 .slick-prev:before, .slick-next:before
 {
