@@ -36,7 +36,7 @@ export function ProductDetails(props) {
     const [imageArr, setImageArr] = useState([]);
     const [firsSizes, setFirsSizes] = useState([]);
     const [sizeArr, setSizeArr] = useState([]);
-//location.state.image
+    //location.state.image
     const [path, setPath] = useState(location.state.image);
 
     const [colorProduct, setColorProduct] = useState("");
@@ -46,7 +46,8 @@ export function ProductDetails(props) {
     const [id, setID] = useState(0);
     const [open, setOpen] = React.useState(false);
 
-
+    const [qty, setQty] = useState();
+    const [qtyArr, setQtyArr] = useState([]);
 
     const dispatch = useDispatch();
     const handleAddToCart = ({
@@ -57,13 +58,18 @@ export function ProductDetails(props) {
         color,
         size,
         quantity,
+        stock,
     }) => {
         handleClose();
         handleClick();
-        dispatch(addToCart({ _id, name, image, price, color, size, quantity }));
+        dispatch(
+            addToCart({ _id, name, image, price, color, size, quantity, stock })
+        );
     };
     // for change image when press related product
-    useEffect(() => {setPath(location.state.image)},[location.state.image])
+    useEffect(() => {
+        setPath(location.state.image);
+    }, [location.state.image]);
 
     useEffect(() => {
         getProduct(productID);
@@ -86,17 +92,22 @@ export function ProductDetails(props) {
         ProductDataService.getProductDetail(productID)
             .then((res) => {
                 const data = res.data;
+                let qtyArrs = data.map((item) => item.qty); // tạo mảng lưu tất cả qty
+                let qtyArr = qtyArrs.filter(
+                    (item, index) => qtyArrs.indexOf(item) === index
+                );
+                setQtyArr(qtyArr); // lưu mảng qty
                 var colotArrs = data.map((item) => item.color);
                 var colorArr = colotArrs.filter(
                     (item, index) => colotArrs.indexOf(item) === index
                 );
                 setColorArr(colorArr);
                 // imgae
-                var imageArrs = data.map((item) =>item.path);
+                var imageArrs = data.map((item) => item.path);
                 var imageArr = imageArrs.filter(
                     (item, index) => imageArrs.indexOf(item) === index
                 );
-                setImageArr(imageArr)
+                setImageArr(imageArr);
                 // để hiển thị lần đầu truy cập
                 var firsSizes = data.filter(
                     (item) => item.color === data[0].color
@@ -125,6 +136,7 @@ export function ProductDetails(props) {
         setSizeArr(sizeArr);
         //change image
         setPath(imageArr[index]);
+        setQty(qtyArr[index]); // lưu qty của product detail
     };
 
     let settings = {
@@ -157,6 +169,14 @@ export function ProductDetails(props) {
         setOpen(false);
     };
 
+    const handleDecreaseQuantity = (quantity) => {
+        quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
+    };
+
+    const handleIncreaseQuantity = (quantity) => {
+        quantity < qty ? setQuantity(quantity + 1) : setQuantity(qty);
+    };
+
     return (
         <div className="product-detail-container">
             <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
@@ -182,9 +202,9 @@ export function ProductDetails(props) {
                     <h2>{product1.name}</h2>
                     <h2>{vnd.format(product1.price)} </h2>
                     <div className="color">
-                        {colorArr.map((color,index) => (
+                        {colorArr.map((color, index) => (
                             <button
-                                onClick={() => handleColor(color,index)}
+                                onClick={() => handleColor(color, index)}
                                 style={{
                                     backgroundColor: color,
                                     border: " 1px solid black",
@@ -210,10 +230,7 @@ export function ProductDetails(props) {
                         <p className="quantityMargin">Số lượng</p>
                         <button
                             className="add margin"
-                            onClick={() => {
-                                if (quantity > 1)
-                                    setQuantity((prev) =>  prev  - 1);
-                            }}
+                            onClick={() => handleDecreaseQuantity(quantity)}
                         >
                             -
                         </button>
@@ -227,9 +244,7 @@ export function ProductDetails(props) {
                         <div className="quantity">{quantity}</div>
                         <button
                             className="add"
-                            onClick={() => {
-                                setQuantity((prev) => prev + 1);
-                            }}
+                            onClick={() => handleIncreaseQuantity(quantity)}
                         >
                             +
                         </button>
@@ -238,14 +253,15 @@ export function ProductDetails(props) {
                         <button
                             onClick={() => {
                                 handleAddToCart({
-                                  _id: product1._id,
-                                  name: product1.name,
-                                  image: path,
-                                  price: product1.price,
-                                  color: colorProduct,
-                                  size: sizeProduct,
-                                  quantity,
-                                })
+                                    _id: product1._id,
+                                    name: product1.name,
+                                    image: path,
+                                    price: product1.price,
+                                    color: colorProduct,
+                                    size: sizeProduct,
+                                    quantity,
+                                    stock: qty,
+                                });
                             }}
                         >
                             Thêm vào giỏ hàng
@@ -369,27 +385,27 @@ export function ProductDetails(props) {
                 <div className="non-mobile-related">
                     <Slider {...settings}>
                         {relatedProdutcs.map(function (item) {
-                                  return (
-                                      <ContainerItem
-                                          price={item.product.price}
-                                          name={item.product.name}
-                                          image={item.path}
-                                          masp={item.product._id}
-                                      />
-                                  );
-                              })}
+                            return (
+                                <ContainerItem
+                                    price={item.product.price}
+                                    name={item.product.name}
+                                    image={item.path}
+                                    masp={item.product._id}
+                                />
+                            );
+                        })}
                     </Slider>
                 </div>
                 <div className="mobile-related">
                     <Slider {...settingsmobile}>
                         {relatedProdutcs.map((item) => (
-                                  <ContainerItem
-                                      price={item.product.price}
-                                      name={item.product.name}
-                                      image={item.path}
-                                      masp={item.product._id}
-                                  />
-                              ))}
+                            <ContainerItem
+                                price={item.product.price}
+                                name={item.product.name}
+                                image={item.path}
+                                masp={item.product._id}
+                            />
+                        ))}
                     </Slider>
                 </div>
             </div>
@@ -404,9 +420,7 @@ const mapStateToProps = (state) => {
     };
 };
 function mapDispatchToProps(dispatch) {
-    return {
-
-    };
+    return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

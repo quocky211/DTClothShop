@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 const initialState = {
-    // cartItems: localStorage.getItem("cartItems")
-    //     ? JSON.parse(localStorage.getItem("cartItems"))
-    //     : [],
     cartItems: [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
@@ -16,19 +13,22 @@ const cartSlide = createSlice({
     reducers: {
         addToCart: (state, action) => {
             const existingIndex = state.cartItems.findIndex(
-                (item) => item._id === action.payload._id && item.size === action.payload.size && item.color === action.payload.color
+                (item) =>
+                    item._id === action.payload._id &&
+                    item.size === action.payload.size &&
+                    item.color === action.payload.color
             );
             if (existingIndex >= 0) {
                 state.cartItems[existingIndex] = {
                     ...state.cartItems[existingIndex],
                     quantity:
-                        state.cartItems[existingIndex].quantity + action.payload.quantity,
+                        state.cartItems[existingIndex].quantity +
+                        action.payload.quantity,
                 };
             } else {
                 let tempProductItem = { ...action.payload };
                 state.cartItems.push(tempProductItem);
             }
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
 
         decreaseCart: (state, action) => {
@@ -40,31 +40,23 @@ const cartSlide = createSlice({
                 toast.info("Giảm số lượng sản phẩm thành công!", {
                     position: "bottom-left",
                 });
-            } else if (state.cartItems[itemIndex].quantity === 1) {
-                const nextCartItem = state.cartItems.filter(
-                    (item) => item._id !== action.payload._id
-                );
-                state.cartItems = nextCartItem;
-                toast.error("Đã xóa sản phẩm khỏi giỏ hàng!", {
-                    position: "bottom-left",
-                });
             }
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
 
         increaseCart: (state, action) => {
             const indexItem = state.cartItems.findIndex(
                 (item) => item._id === action.payload._id
             );
-            state.cartItems[indexItem].quantity += 1;
-
-            // if (state.cartItems[indexItem].cartQuantity < action.payload.qty) {
-            // } else {s
-            //     toast.error("Không thể thêm sản phẩm vì số lượng có hạn!", {
-            //         position: "bottom-left",
-            //     });
-            // }
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+            if (
+                state.cartItems[indexItem].quantity <
+                state.cartItems[indexItem].stock
+            ) {
+                state.cartItems[indexItem].quantity += 1;
+            } else {
+                toast.error("Không thể thêm sản phẩm nữa!", {
+                    position: "bottom-left",
+                });
+            }
         },
 
         removefromCart: (state, action) => {
@@ -75,10 +67,7 @@ const cartSlide = createSlice({
                     );
                     state.cartItems = nextCartItems;
                 }
-                // localStorage.setItem(
-                //     "cartItems",
-                //     JSON.stringify(state.cartItems)
-                // );
+
                 return state;
             });
         },
@@ -106,7 +95,6 @@ const cartSlide = createSlice({
 
         clearCart: (state) => {
             state.cartItems = [];
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
             toast.error("Đã xóa toàn bộ giỏ hàng!", {
                 position: "bottom-left",
             });
