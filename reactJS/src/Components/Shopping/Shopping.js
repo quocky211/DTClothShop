@@ -57,7 +57,7 @@ function Shopping() {
         dispatch(increaseCart(item));
     };
 
-    const handleClearCart = (item) => {
+    const handleClearCart = () => {
         dispatch(clearCart());
     };
 
