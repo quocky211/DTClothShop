@@ -7,6 +7,9 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import { useDispatch, useSelector } from "react-redux";
+// import CartItem from "../CartItem/CartItem";
+import {DeleteOutline} from "@mui/icons-material";
+
 import {
     decreaseCart,
     increaseCart,
@@ -14,13 +17,13 @@ import {
     removefromCart,
     clearCart,
 } from "../../redux/cartSlide";
+import { red } from "@mui/material/colors";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function Shopping() {
-
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
 
@@ -70,7 +73,7 @@ function Shopping() {
             </Breadcrumb>
             <div className="main-container">
                 <div className="products">
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-md-12">
                             <table className="table">
                                 <thead>
@@ -186,7 +189,105 @@ function Shopping() {
                             </NavLink>
 
                         </div>
+                    </div> */}
+                    <div className="cart-heading grid grid-five-column">
+                        <p>Sản phẩm</p>
+                        <p className="cart-hide">Giá</p>
+                        <p>Số lượng</p>
+                        <p className="cart-hide">Tổng tiền</p>
+                        <p>Xóa</p>
                     </div>
+                    <hr />
+                    <div className="cart-item">
+                        {cart.cartItems?.map((item) => {
+                            return (
+                                <div className="grid grid-five-column">
+                                    <div className="cart-image-name">
+                                        <div>
+                                            <img
+                                                src={
+                                                    "../imgs/" +
+                                                    item.image
+                                                }
+                                                alt={item.name}
+                                                style={
+                                                    {
+                                                        width: 125,
+                                                        height: 100,
+                                                    }
+                                                }
+                                            ></img>
+                                        </div>
+                                        <div>
+                                            <p>{item.name}</p>
+                                            <div className="color-div">
+                                                <p>Color:</p>
+                                                <div className="color-style"
+                                                style={{backgroundColor: item.color, color: item.color }}></div>
+                                                <span>,</span>
+                                                <p>{item.size}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="cart-hide">
+                                        <p>
+                                            {Number(item.price).toLocaleString(
+                                                "vi-VN"
+                                            )}{" "}
+                                            <span>đ</span>
+                                        </p>
+                                    </div>
+                                    <div className="cart-btn-quantity">
+                                        <span
+                                            className="btn-quantity"
+                                            style={{ margin: "2px" }}
+                                            onClick={() =>
+                                                handleDecreaseCart(item)
+                                            }
+                                        >
+                                            -{" "}
+                                        </span>
+                                        <span>{item.quantity}</span>
+                                        <span
+                                            className="btn-quantity"
+                                            style={{ margin: "2px" }}
+                                            onClick={() =>
+                                                handleIncreaseCart(item)
+                                            }
+                                        >
+                                            {" "}
+                                            +{" "}
+                                        </span>
+                                    </div>
+                                    <div className="cart-hide">
+                                        {TotalPrice(item.quantity, item.price)}{" "}
+                                        <span>đ</span>
+                                    </div>
+                                    <div>
+                                        <DeleteOutline className="delete-btn" onClick={()=> handleRemoveFromCart(item)}></DeleteOutline>
+                                    </div>
+
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <hr/>
+                    <div className="cart-two-button">
+                        <button className="btn-clear" onClick={() => {handleClearCart()}}>Xóa giỏ hàng</button>
+                    <NavLink
+                                to="/ShipAddress"
+                                state={{ data: cart.cartTotalAmount }}
+                            >
+                                <button className="btn-pay">
+                                    {"Mua hàng"}<br/>{"("}{Number(
+                                                cart.cartTotalAmount
+                                            ).toLocaleString("vi-VN")}{" "}
+                                            <span>đ</span>{")"}
+                                </button>
+                            </NavLink>
+
+                    </div>
+
                     <Snackbar
                         open={open}
                         autoHideDuration={1500}
