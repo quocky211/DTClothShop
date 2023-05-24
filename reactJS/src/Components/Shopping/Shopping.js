@@ -212,6 +212,8 @@ function Shopping() {
                                                 alt={item.name}
                                                 style={
                                                     {
+                                                        // maxWidth:125,
+                                                        // maxHeight:100,
                                                         width: 125,
                                                         height: 100,
                                                     }
