@@ -9,6 +9,7 @@ import ContainerItem from "../ContainerItem";
 // import likeicon from "../Images/likeicon.png";
 // import { red } from "@mui/material/colors";
 // import { Button } from "react-bootstrap";
+import CommentAndComentList from "../CommentForm/CommentForm";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import React, { useEffect, useState } from "react";
@@ -361,8 +362,8 @@ export function ProductDetails(props) {
                 </div>
             </div>
             <br></br>
-            <br></br>
-            <hr />
+            <CommentAndComentList/>
+            <span>&nbsp;</span>
             <div className="related-product">
                 <h3>Có thể bạn sẽ thích</h3>
                 <div className="non-mobile-related">
