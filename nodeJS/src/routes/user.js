@@ -14,4 +14,7 @@ router.get('/:id/order', userController.GetOrder);
 
 router.patch('/:id', userController.EditUser);
 
+router.post('/:user_id/product/:product_id/comment', userController.StoreComment);
+router.get('/:user_id/product/:product_id/bought', userController.CheckUserBought);
+
 module.exports = router;
