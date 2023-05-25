@@ -158,6 +158,13 @@
 .non-mobile-related .slick-prev{
   left: 25px;
 }
+.non-mobile-related .slick-slide {
+  width: 319px !important;
+}
+.non-mobile-related .slick-slider .slick-list {
+  width: 90vw;
+  margin: auto;
+}
 @media only screen and (max-width: 46.1875em) {
   .product-detail {
     display: block;

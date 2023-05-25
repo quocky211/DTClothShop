@@ -140,7 +140,7 @@ const CommentForm = ({ onCommentSubmit }) => {
                       <MDBTextArea
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
-                        label="Bạn cảm thấy sản phẩm thế nào?"
+                        placeholder="Bạn cảm thấy sản phẩm thế nào?"
                         rows={4}
                         required
                       />

@@ -112,6 +112,9 @@
 .logIn-btn:hover .list-infor-user{
     display: block;
 }
+.logIn-btn .list-infor-user .nav-link{
+    width: 100% !important;
+}
 .logIn-btn .list-infor-user .nav-link:hover{
     background-color: #ccc;
 }
