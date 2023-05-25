@@ -204,3 +204,12 @@ Content-Type:  application/json
 {
     "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI0LCJpYXQiOjE2ODE4OTMxMTQsImV4cCI6MTcxMzQ1MDcxNH0.TnU-qXWsB6aVJQP1dm9MP1Y_rshM29Y8Jtxcky4rMDQ"
 }
+
+###edit user: /user/:id
+PATCH http://localhost:3001/user/10
+Content-Type:  application/json
+
+{
+    "phone": "0387383583"
+
+}

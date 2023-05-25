@@ -12,4 +12,6 @@ router.get('/test-get-list-user', verifyAccessToken, userController.TestGetListU
 router.get('/:id', userController.GetUser);
 router.get('/:id/order', userController.GetOrder);
 
+router.patch('/:id', userController.EditUser);
+
 module.exports = router;

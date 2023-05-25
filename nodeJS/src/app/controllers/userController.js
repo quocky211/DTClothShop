@@ -1,5 +1,5 @@
 const httpError = require('http-errors');
-const { userValidate, loginValidate } = require('../../helpers/validation');
+const { userValidate, loginValidate, phoneValidate } = require('../../helpers/validation');
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../helpers/jwt_service');
 const client = require('../../helpers/connection_redis');
 const Order = require('../models/order/order');
@@ -141,8 +141,25 @@ class UserController {
     GetOrder(req, res, next) {
         Order.find({ user_id: req.params.id })
             .exec()
-            .then((order) => res.json(order.map((o) => ({ ...o.toObject(), _id: o._id }))))
+            .then((order) => res.json(order))
             .catch(next);
+    }
+
+    // PATCH /user/:id
+    async EditUser(req, res, next) {
+        try {
+            const { error } = phoneValidate(req.body);
+
+            if (error) {
+                throw httpError.Conflict('Số điện thoại không hợp lệ');
+            }
+
+            await User.updateOne({ _id: req.params.id }, req.body)
+                .then(() => res.send('Cập nhật dữ liệu thành công'))
+                .catch(() => res.send('Cập nhật dữ liệu thất bại'));
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
