@@ -3,8 +3,9 @@ const { userValidate, loginValidate, phoneValidate } = require('../../helpers/va
 const { signAccessToken, signRefreshToken, verifyRefreshToken } = require('../../helpers/jwt_service');
 const client = require('../../helpers/connection_redis');
 const Order = require('../models/order/order');
-
+const OrderDetail = require('../models/order/order_detail');
 const User = require('../models/user/user');
+const ProductComment = require('../models/products/product_comment');
 class UserController {
     async Register(req, res, next) {
         try {
@@ -159,6 +160,43 @@ class UserController {
                 .catch(() => res.send('Cập nhật dữ liệu thất bại'));
         } catch (error) {
             next(error);
+        }
+    }
+
+    // POST /user/:user_id/product/:product_id
+    async StoreComment(req, res, next) {
+        try {
+            const formData = {
+                user_id: req.params.user_id,
+                product_id: req.params.product_id,
+                star: req.body.star,
+                message: req.body.message,
+            };
+
+            const productComment = new ProductComment(formData);
+            await productComment.save();
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    //GET /user/:user_id/product/:product_id/bought
+    CheckUserBought(req, res, next) {
+        const { user_id, product_id } = req.params;
+        Order.find({ user_id: user_id })
+            .exec()
+            .then((orders) => {
+                const data = orders.map(HandleFindProduct);
+                Promise.all(data).then((result) => res.json(result));
+            });
+
+        function HandleFindProduct(order) {
+            return OrderDetail.find({ order_id: order._id, product_id: product_id })
+                .exec()
+                .then((bought) => {
+                    if (bought.length > 0) return 1;
+                    return 0;
+                });
         }
     }
 }
