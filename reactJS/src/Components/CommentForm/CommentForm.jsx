@@ -1,23 +1,53 @@
-import React, { useState } from 'react';
-import { Form, FormControl, Button, Card, ListGroup } from 'react-bootstrap';
+import React, { useState } from "react";
 import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardImage,
-    MDBCol,
-    MDBContainer,
-    MDBIcon,
-    MDBRow,
-    MDBTextArea,
-    MDBTypography,
-  } from "mdb-react-ui-kit";
-import './CommentForm.css';
-import { Hidden } from '@mui/material';
+  Form,
+  FormControl,
+  Button,
+  Card,
+  ListGroup,
+  Alert,
+  Container,
+  Col,
+  Row,
+} from "react-bootstrap";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBRow,
+  MDBTextArea,
+  MDBTypography,
+} from "mdb-react-ui-kit";
+import "./CommentForm.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+
+//Dữ liệu fake
+const commentsFakeData = [
+  { name: "Minh Đại", comment: "Sản phẩm ok đó!", rating: 4 },
+  { name: "Chanh Chanh", comment: "Quá chất lượng!", rating: 5 },
+];
+
+const renderRatingStars = (rating) => {
+  const stars = [];
+
+  for (let i = 0; i < rating; i++) {
+    stars.push(<span key={i} className="fas fa-star" style={{ color: 'yellow' }}></span>);
+  }
+
+  for (let i = rating; i < 5; i++) {
+    stars.push(<span key={i} className="fas fa-star"></span>);
+  }
+
+  return stars;
+};
 
 const CommentForm = ({ onCommentSubmit }) => {
-  const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
 
   const handleRatingChange = (value) => {
@@ -28,7 +58,7 @@ const CommentForm = ({ onCommentSubmit }) => {
     e.preventDefault();
     onCommentSubmit({ comment, rating });
     // setName('');
-    setComment('');
+    setComment("");
     setRating(0);
   };
 
@@ -70,50 +100,62 @@ const CommentForm = ({ onCommentSubmit }) => {
     // </Form>
     <section className="vh-80" style={{ backgroundColor: "#ffff" }}>
       <Form onSubmit={handleSubmit}>
-          <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
-            <MDBRow className="justify-content-center">
-              <MDBCol md="10" lg="8" xl="6">
-                <MDBCard>
-                  <MDBCardBody className="p-4">
-                    <div className="d-flex flex-start w-100">
-                      <MDBCardImage
-                        className="rounded-circle shadow-1-strong me-3"
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
-                        alt="avatar"
-                        width="65"
-                        height="65"
-                      />
-                      <div className="w-100">
-                        <MDBTypography tag="h5">Viết bình luận</MDBTypography>
-                        <div>
-                            {[1, 2, 3, 4, 5].map((value) => (
-                                <span
-                                    key={value}
-                                    onClick={() => handleRatingChange(value)}
-                                    style={{ cursor: 'pointer', color: value <= rating ? 'gold' : 'gray', fontSize: '25px' }}
-                                    >
-                                    &#9733;
-                                </span>
-                            ))}
-                          {/* <a href="">
+        <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
+          <MDBRow className="justify-content-center">
+            <MDBCol md="10" lg="8" xl="6">
+              <MDBCard>
+                <MDBCardBody className="p-4">
+                  <div className="d-flex flex-start w-100">
+                    <MDBCardImage
+                      className="rounded-circle shadow-1-strong me-3"
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                      alt="avatar"
+                      width="65"
+                      height="65"
+                    />
+                    <div className="w-100">
+                      <MDBTypography tag="h5">Viết bình luận</MDBTypography>
+                      <div>
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <span
+                            key={value}
+                            onClick={() => handleRatingChange(value)}
+                            style={{
+                              cursor: "pointer",
+                              color: value <= rating ? "gold" : "gray",
+                              fontSize: "25px",
+                            }}
+                          >
+                            &#9733;
+                          </span>
+                        ))}
+                        {/* <a href="">
                             <MDBIcon far icon="star text-danger me-1" />
                             <MDBIcon far icon="star text-danger me-1" />
                             <MDBIcon far icon="star text-danger me-1" />
                             <MDBIcon far icon="star text-danger me-1" />
                             <MDBIcon far icon="star text-danger me-1" />
                           </a> */}
-                        </div>
-                        <MDBTextArea value={comment} onChange={(e) => setComment(e.target.  value)} label="Bạn cảm thấy sản phẩm thế nào?" rows={4} required/>
-                        <div className="float-right mt-3">
-                          <Button type="submit" variant="info">Gửi</Button>
-                        </div>
+                      </div>
+                      <MDBTextArea
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        label="Bạn cảm thấy sản phẩm thế nào?"
+                        rows={4}
+                        required
+                      />
+                      <div className="float-right mt-3">
+                        <Button type="submit" variant="info">
+                          Gửi
+                        </Button>
                       </div>
                     </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
+                  </div>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
       </Form>
     </section>
   );
@@ -157,106 +199,58 @@ const CommentList = ({ comments }) => {
             </div>
 
             <MDBCard className="mb-3">
-              <MDBCardBody>
-                <div className="d-flex flex-start">
-                  <MDBCardImage
-                    className="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp"
-                    alt="avatar"
-                    width="40"
-                    height="40"
-                  />
+              {commentsFakeData.map((comment, index) => (
+                <MDBCardBody>
+                  <div className="d-flex flex-start">
+                    <MDBCardImage
+                      className="rounded-circle shadow-1-strong me-3"
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                      alt="avatar"
+                      width="40"
+                      height="40"
+                    />
 
-                  <div className="w-100">
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                      <MDBTypography
-                        tag="h6"
-                        className="text-primary fw-bold mb-0"
-                      >
-                        &nbsp;&nbsp;Lý Ca&nbsp;
-                        <span className="text-dark ms-2">
-                          Quá chất lượng
-                        </span>
-                      </MDBTypography>
-                      <p className="mb-0">2 ngày trước</p>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <p className="small mb-0" style={{ color: "#aaa" }}>
-                        <a href="#!" className="link-grey">
-                          Remove
-                        </a>{" "}
-                        •
-                        <a href="#!" className="link-grey">
-                          Reply
-                        </a>{" "}
-                        •
-                        <a href="#!" className="link-grey">
-                          Translate
-                        </a>
-                      </p>
-                      <div className="d-flex flex-row">
-                        <MDBIcon fas icon="star text-warning me-2" />
-                        <MDBIcon
-                          far
-                          icon="check-circle"
-                          style={{ color: "#aaa" }}
-                        />
+                    <div className="w-100">
+                      <div className="d-flex justify-content-between align-items-center mb-0">
+                        <MDBTypography
+                          tag="h6"
+                          className="text-primary fw-bold mb-0"
+                        >
+                          &nbsp;&nbsp;{comment.name}&nbsp;
+                          <span className="text-dark ms-2">{comment.comment}</span>
+                        </MDBTypography>
+                        <p className="mb-0">2 ngày trước</p>
+                      </div>
+                      <div className="d-flex align-items-center starRating">
+                        &nbsp;&nbsp;{renderRatingStars(comment.rating)}
+                      </div>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <p className="small mb-0" style={{ color: "#aaa" }}>
+                          <a href="" className="link-grey">
+                            Remove
+                          </a>{" "}
+                          •
+                          <a href="" className="link-grey">
+                            Reply
+                          </a>{" "}
+                          •
+                          <a href="" className="link-grey">
+                            Translate
+                          </a>
+                        </p>
+                        {/* <div className="d-flex flex-row">
+                            <MDBIcon fas icon="star text-warning me-2" />
+                            <MDBIcon
+                              far
+                              icon="check-circle"
+                              style={{ color: "#aaa" }}
+                            />
+                        </div> */}
                       </div>
                     </div>
                   </div>
-                </div>
-              </MDBCardBody>
-            </MDBCard>
-
-            <MDBCard className="mb-3">
-              <MDBCardBody>
-                <div className="d-flex flex-start">
-                  <MDBCardImage
-                    className="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
-                    alt="avatar"
-                    width="40"
-                    height="40"
-                  />
-
-                  <div className="w-100">
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                      <MDBTypography
-                        tag="h6"
-                        className="text-primary fw-bold mb-0"
-                      >
-                        &nbsp;&nbsp;Chanh Chanh&nbsp;
-                        <span className="text-dark ms-2">
-                          Sản phẩm ok nha
-                        </span>
-                      </MDBTypography>
-                      <p className="mb-0">3 ngày trước</p>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <p className="small mb-0" style={{ color: "#aaa" }}>
-                        <a href="#!" className="link-grey">
-                          Remove
-                        </a>{" "}
-                        •
-                        <a href="#!" className="link-grey">
-                          Reply
-                        </a>{" "}
-                        •
-                        <a href="#!" className="link-grey">
-                          Translate
-                        </a>
-                      </p>
-                      <div className="d-flex flex-row">
-                        <MDBIcon
-                          far
-                          icon="check-circle text-primary"
-                          style={{ color: "#aaa" }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </MDBCardBody>
+                </MDBCardBody>
+              ))}
             </MDBCard>
           </MDBCol>
         </MDBRow>
@@ -266,6 +260,7 @@ const CommentList = ({ comments }) => {
 };
 
 const CommentAndComentList = () => {
+  const tokens = JSON.parse(localStorage.getItem("JWT"));
   const [comments, setComments] = useState([]);
 
   const handleCommentSubmit = (comment) => {
@@ -274,10 +269,25 @@ const CommentAndComentList = () => {
 
   return (
     <div>
-        <hr/>
-        <h3>Đánh giá</h3>
-        <CommentForm onCommentSubmit={handleCommentSubmit} />
-        <CommentList comments={comments} />
+      <hr />
+      <h3>Đánh giá</h3>
+      <span>&nbsp;</span>
+      <Container>
+        <Row className="justify-content-center">
+          {tokens == null && (
+            <Col md={6} xs={8} className="notify">
+              <Alert variant="warning">
+                Vui lòng đăng nhập để để lại đánh giá của bạn.
+              </Alert>
+            </Col>
+          )}
+        </Row>
+        {tokens != null && (
+          <CommentForm onCommentSubmit={handleCommentSubmit} />
+        )}
+      </Container>
+      <br />
+      <CommentList comments={comments} />
     </div>
   );
 };
