@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -24,12 +24,16 @@ import {
 } from "mdb-react-ui-kit";
 import "./CommentForm.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import UserDataService from '../../services/users';
 
 //Dữ liệu fake
 const commentsFakeData = [
   { name: "Minh Đại", comment: "Sản phẩm ok đó!", rating: 4 },
   { name: "Chanh Chanh", comment: "Quá chất lượng!", rating: 5 },
 ];
+
+//Kiểm tra trạng thái đăng nhập
+const tokens = JSON.parse(localStorage.getItem("JWT"));
 
 const renderRatingStars = (rating) => {
   const stars = [];
@@ -45,20 +49,39 @@ const renderRatingStars = (rating) => {
   return stars;
 };
 
-const CommentForm = ({ onCommentSubmit }) => {
+const CommentForm = ({onCommentSubmit, productId}) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+
+  // useEffect(() => {
+    
+  // }, []);
 
   const handleRatingChange = (value) => {
     setRating(value);
   };
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onCommentSubmit({ comment, rating });
-    // setName('');
-    setComment("");
+    
+    var data = {
+      star: rating,
+      message: comment,
+    };
+
+    UserDataService.createComment(productId, tokens.user._id, data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+    setComment('');
     setRating(0);
   };
 
@@ -259,14 +282,13 @@ const CommentList = ({ comments }) => {
   );
 };
 
-const CommentAndComentList = () => {
-  const tokens = JSON.parse(localStorage.getItem("JWT"));
+const CommentAndComentList = (props) => {
+  
   const [comments, setComments] = useState([]);
 
   const handleCommentSubmit = (comment) => {
     setComments([...comments, comment]);
   };
-
   return (
     <div>
       <hr />
@@ -283,7 +305,7 @@ const CommentAndComentList = () => {
           )}
         </Row>
         {tokens != null && (
-          <CommentForm onCommentSubmit={handleCommentSubmit} />
+          <CommentForm onCommentSubmit={handleCommentSubmit} productId={props.productId}/>
         )}
       </Container>
       <br />

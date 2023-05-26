@@ -13,6 +13,9 @@ class UserDataService {
     async deleteUser(userId) {
         return await axios.delete(`http://localhost:3001/admin/user/delete/${userId}`)
     }
+    async createComment(productId, userId, data){
+        return await axios.post(`http://localhost:3001/user/${userId}/product/${productId}/comment`, data)
+    }
 }
 
 export default new UserDataService();

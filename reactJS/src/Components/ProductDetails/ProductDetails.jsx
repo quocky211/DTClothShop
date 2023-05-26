@@ -378,7 +378,7 @@ export function ProductDetails(props) {
                 </div>
             </div>
             <br></br>
-            <CommentAndComentList/>
+            <CommentAndComentList productId={productID}/>
             <span>&nbsp;</span>
             <div className="related-product">
                 <h3>Có thể bạn sẽ thích</h3>
