@@ -3,6 +3,7 @@ const ProductDetail = require('../models/products/product_detail');
 const CategoryDetail = require('../models/products/category_detail');
 const Outfit = require('../models/outfit/outfit');
 const OutfitDetail = require('../models/outfit/outfit_detail');
+const ProductComment = require('../models/products/product_comment');
 const { HandleAddImage } = require('../../helpers/multifunction');
 class ProductController {
     // GET /product/discount
@@ -200,6 +201,14 @@ class ProductController {
                     };
                 });
         }
+    }
+
+    // GET /product/:id/comment
+    ShowComment(req, res, next) {
+        ProductComment.find({ product_id: req.params.id })
+            .populate({ path: 'user_id', select: 'name' })
+            .exec()
+            .then((productComments) => res.json(productComments));
     }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
