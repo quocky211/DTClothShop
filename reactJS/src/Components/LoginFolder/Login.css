@@ -55,8 +55,10 @@ margin-bottom: 15px;
     margin-top: 70px;
 }
 .logo {
-    width: 15vw;
-    height: 19vw;
+    width: 20vw;
+    height: 20vw;
+    border: 1px solid transparent;
+    border-radius: 10%;
 }
 
 .loginmain button {

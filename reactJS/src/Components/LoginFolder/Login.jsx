@@ -1,6 +1,6 @@
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../Images/logo.webp";
+import logo from "../Images/logo-pj.jpg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { useState } from "react";

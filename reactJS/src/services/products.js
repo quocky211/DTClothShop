@@ -54,6 +54,8 @@ class ProductDataService {
     async createDetailProduct(data) {
         return await axios.post("http://localhost:3001/admin/product-detail/store", data)
     }
-    
+    async getCommentsByProductId(productId){
+        return await axios.get(`http://localhost:3001/product/${productId}/comment`);
+    }
 }
 export default new ProductDataService();

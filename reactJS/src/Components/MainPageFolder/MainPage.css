@@ -2,7 +2,9 @@
     padding-bottom: 24px;
 }
 /* Banner */
-
+.slider .slide img{
+    object-fit: fill;
+}
 /* New Products */
 .newProducts,
 .bestSeller,

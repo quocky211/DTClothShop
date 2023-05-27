@@ -1,6 +1,6 @@
 import "./Register.css";
 import React, { useState } from "react";
-import logo from "../Images/logo.webp";
+import logo from "../Images/logo-pj.jpg";
 import { useNavigate } from "react-router-dom";
 import { NavLink as Link } from "react-router-dom";
 import axios from "axios";
@@ -50,7 +50,7 @@ function Register() {
       <div className="regismain">
         <div className="logomain">
           <img className="logo" src={logo} alt="logo"></img>
-          <p>TechieShop</p>
+          <p>DTClothShop</p>
         </div>
         <div className="regisForm-format">
           <h3>Đăng ký</h3>

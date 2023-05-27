@@ -43,8 +43,10 @@
 }
 
 .logo {
-    width: 15vw;
-    height: 19vw;
+    width: 20vw;
+    height: 20vw;
+    border: 1px solid transparent;
+    border-radius: 10%;
 }
 
 .regismain button {
