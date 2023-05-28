@@ -26,6 +26,8 @@ import "./CommentForm.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import UserDataService from "../../services/users";
 import ProductDataService from "../../services/products";
+import { formatDistanceToNow } from 'date-fns';
+import { vi } from 'date-fns/locale';
 
 //Dữ liệu fake
 // const commentsFakeData = [
@@ -183,7 +185,7 @@ const CommentForm = ({ onCommentSubmit, productId }) => {
   );
 };
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, productId }) => {
   return (
     // <Card>
     //   <Card.Body>
@@ -233,30 +235,32 @@ const CommentList = ({ comments }) => {
                               {comment.message}
                             </span>
                           </MDBTypography>
-                          <p className="mb-0">2 ngày trước</p>
+                          <p className="mb-0">{formatDistanceToNow(new Date(comment.createdAt), { locale: vi })} trước</p>
                         </div>
                         <div className="d-flex align-items-center starRating">
                           &nbsp;&nbsp;{renderRatingStars(comment.star)}
                         </div>
-                        <div className="d-flex justify-content-between align-items-center">
-                          <p className="small mb-0" style={{ color: "#aaa" }}>
-                            <a href="" className="link-grey">
-                              Xoá
-                            </a>
-                            &nbsp;•&nbsp;
-                            <a href="" className="link-grey">
-                              Chỉnh sửa
-                            </a>
-                          </p>
-                          {/* <div className="d-flex flex-row">
-                            <MDBIcon fas icon="star text-warning me-2" />
-                            <MDBIcon
-                              far
-                              icon="check-circle"
-                              style={{ color: "#aaa" }}
-                            />
-                        </div> */}
-                        </div>
+                        {comment.user_id._id == tokens.user._id && (
+                          <div className="d-flex justify-content-between align-items-center">
+                            <p className="small mb-0" style={{ color: "#aaa" }}>
+                              <a href="" className="link-grey">
+                                Xoá
+                              </a>
+                              &nbsp;•&nbsp;
+                              <a href="" className="link-grey">
+                                Chỉnh sửa
+                              </a>
+                            </p>
+                            {/* <div className="d-flex flex-row">
+                              <MDBIcon fas icon="star text-warning me-2" />
+                              <MDBIcon
+                                far
+                                icon="check-circle"
+                                style={{ color: "#aaa" }}
+                              />
+                            </div> */}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </MDBCardBody>
@@ -326,7 +330,7 @@ const CommentAndComentList = (props) => {
         )}
       </Container>
       <br />
-      <CommentList comments={comments} />
+      <CommentList comments={comments} productId={props.productId} />
     </div>
   );
 };

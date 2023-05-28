@@ -47,7 +47,7 @@ function Login(props) {
       <div className="loginmain">
         <div className="logomain">
           <img className="logo" alt="" src={logo}></img>
-          <p>TechieShop</p>
+          <p>DTClothShop</p>
         </div>
 
         <div className="loginForm">
