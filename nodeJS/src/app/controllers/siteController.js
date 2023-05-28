@@ -1,7 +1,7 @@
 const Product = require('../models/products/product');
 const Category = require('../models/products/category');
 const CategoryDetail = require('../models/products/category_detail');
-
+const { HandleAddImage } = require('../../helpers/multifunction');
 class SiteController {
     // GET /category
     GetCategory(req, res, next) {
@@ -28,9 +28,14 @@ class SiteController {
 
     // GET /search
     search(req, res, next) {
-        Product.paginate({ name: { $regex: req.query.name, $options: 'i' } }, { page: 1, limit: 16 })
-            .then((product) => {
-                res.json(product);
+        const page = req.query.page || 1;
+        Product.paginate({ name: { $regex: req.query.name, $options: 'i' } }, { page: page, limit: 16 })
+            .then((products) => {
+                const data = products.docs.map(HandleAddImage);
+                Promise.all(data).then((result) => {
+                    products.docs = result;
+                    res.json(products);
+                });
             })
             .catch(next);
     }
