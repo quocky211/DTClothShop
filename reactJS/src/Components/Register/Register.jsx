@@ -20,7 +20,6 @@ function Register() {
       password: password,
       confirmPassword: confirmPassword,
       name: name,
-      avatar: "avatar",
       level: true,
     };
     let config = {
