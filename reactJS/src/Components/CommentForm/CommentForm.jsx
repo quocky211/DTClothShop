@@ -240,7 +240,7 @@ const CommentList = ({ comments, productId }) => {
                         <div className="d-flex align-items-center starRating">
                           &nbsp;&nbsp;{renderRatingStars(comment.star)}
                         </div>
-                        {comment.user_id._id == tokens.user._id && (
+                        {tokens != null && comment.user_id._id == tokens.user._id && (
                           <div className="d-flex justify-content-between align-items-center">
                             <p className="small mb-0" style={{ color: "#aaa" }}>
                               <a href="" className="link-grey">
