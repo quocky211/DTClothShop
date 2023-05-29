@@ -38,6 +38,9 @@ import { vi } from 'date-fns/locale';
 //Kiểm tra trạng thái đăng nhập
 const tokens = JSON.parse(localStorage.getItem("JWT"));
 
+//Lấy thông tin người dùng đã đăng nhập
+const user = JSON.parse(localStorage.getItem("user"));
+
 const renderRatingStars = (rating) => {
   const stars = [];
 
@@ -57,10 +60,14 @@ const renderRatingStars = (rating) => {
 const CommentForm = ({ onCommentSubmit, productId }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [success, setSuccess] = useState("");
 
   // useEffect(() => {
-
-  // }, []);
+  //   setComment("");
+  //   setRating(0);
+  //   if(success != "") 
+  //     setSuccess("");
+  // }, [success]);
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -74,14 +81,15 @@ const CommentForm = ({ onCommentSubmit, productId }) => {
       message: comment,
     };
 
-    UserDataService.createComment(productId, tokens.user._id, data)
-      .then((res) => {
+    UserDataService.createComment(productId, user._id, data)
+      .then(res => {
         console.log(res.data);
       })
-      .catch((e) => {
+      .catch(e =>{
         console.log(e);
       });
 
+    //Chữa cháy bằng cách này thôi
     setComment("");
     setRating(0);
   };
@@ -240,7 +248,7 @@ const CommentList = ({ comments, productId }) => {
                         <div className="d-flex align-items-center starRating">
                           &nbsp;&nbsp;{renderRatingStars(comment.star)}
                         </div>
-                        {tokens != null && comment.user_id._id == tokens.user._id && (
+                        {user != null && comment.user_id._id == user._id && (
                           <div className="d-flex justify-content-between align-items-center">
                             <p className="small mb-0" style={{ color: "#aaa" }}>
                               <a href="" className="link-grey">
@@ -286,16 +294,28 @@ const CommentList = ({ comments, productId }) => {
 
 const CommentAndComentList = (props) => {
   const [comments, setComments] = useState([]);
-  // const [submitted, setSubmitted] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  //Thua kèo này t bày keo khác, hừm
+  
 
   useEffect(() => {
     retrieveComments();
   });
 
+  // useEffect(() => {
+  //   if(status){
+  //     setSubmitted(true);
+  //   }
+  //   else{
+  //     setSubmitted(false);
+  //   }
+  // }, [status]);
+
   const retrieveComments = () => {
     ProductDataService.getCommentsByProductId(props.productId)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setComments(res.data);
       })
       .catch((e) => {
@@ -305,6 +325,7 @@ const CommentAndComentList = (props) => {
 
   const handleCommentSubmit = (comment) => {
     console.log(comment);
+    // status = true // Cập nhật comments với comment mới
   };
 
   return (

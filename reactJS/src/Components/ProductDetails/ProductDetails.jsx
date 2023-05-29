@@ -179,6 +179,7 @@ export function ProductDetails(props) {
           top: 0,
           behavior: 'smooth'
         });
+        window.location.reload();
       };
     return (
         <div className="product-detail-container">
@@ -381,8 +382,7 @@ export function ProductDetails(props) {
                 </div>
             </div>
             <br></br>
-            <CommentAndComentList productId={productID}/>
-            <span>&nbsp;</span>
+            <hr />
             <div className="related-product">
                 <h3>Có thể bạn sẽ thích</h3>
                 <div className="non-mobile-related" onClick={handleTop}>
@@ -412,6 +412,8 @@ export function ProductDetails(props) {
                     </Slider>
                 </div>
             </div>
+            <span>&nbsp;</span>
+            <CommentAndComentList productId={productID}/>
             <Footer />
         </div>
     );
