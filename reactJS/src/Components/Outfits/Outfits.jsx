@@ -53,7 +53,7 @@ function Outfits() {
         {outfits.map((item) => (
           <div className="outfits-product-detail">
             <Link to={"/Outfits/" + item._id}>
-              <img src={"imgs/" + item.image} alt="Outfits" />
+              <img src={item.image} alt="Outfits" />
               <p>{item.name}</p>
             </Link>
           </div>
