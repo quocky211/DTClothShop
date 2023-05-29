@@ -229,6 +229,7 @@ Content-Type:  application/json
 
 ###kiểm tra xem user đã mua sản phẩm hay chưa /user/:user_id/product/:product_id/bought (chưa xong)
 GET http://localhost:3001/blog/blog-detail/1
-##
 
-GET http://localhost:3001/blog/
+##API
+
+GET http://localhost:3001/blog
