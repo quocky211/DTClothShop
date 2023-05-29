@@ -90,8 +90,8 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### lọc cate_detail: category_detail_id=1
 GET http://localhost:3001/product?price=3&page=1&null
 
-### search header GET /search?name=:name (D)
-GET http://localhost:3001/search?name=tee 
+### search header GET /search?name=:name (có phân trang) (D)
+GET http://localhost:3001/search?name=t&page=1
 
 ### sản phẩm giảm giá: /product/discount (D)
 GET http://localhost:3001/product/discount 
