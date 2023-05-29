@@ -20,7 +20,7 @@ function Register() {
       password: password,
       confirmPassword: confirmPassword,
       name: name,
-      level: true,
+      level: false,
     };
     let config = {
       headers: {

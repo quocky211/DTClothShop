@@ -17,8 +17,7 @@ function Blogs()
     const getBlogs = () => {
         BlogDataService.getAllBlog()
         .then((res) => {
-            console.log(res.data.docs);
-            setBlogs(res.data.docs);
+            setBlogs(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -38,12 +37,12 @@ function Blogs()
                 {blogs.map((item) => (
                     <div className="blogDetailItem">
                         <div className="blogDetailImg">
-                            <img src="" alt="img" />
+                            <img src={item.path} alt="img" />
                         </div>
                         <div className="blogDetailInfor">
-                            <p className='blogDetailTitle'></p>
-                            <p className="blogDetailDes"></p>
-                            <Link to={"/Blogs/BlogDetail/"+1}>
+                            <p className='blogDetailTitle'>{item.blog.title}</p>
+                            {/* <p className="blogDetailDes"></p> */}
+                            <Link to={"/Blogs/"+ item.blog._id}>
                                  <button>Xem chi tiết</button>
                             </Link>
                         </div>

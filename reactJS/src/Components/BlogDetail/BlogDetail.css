@@ -1,0 +1,10 @@
+.blogContent{
+    font-size: 18px;
+    padding: 20px;
+}
+.blogContentTitle{
+    font-size: 20px;
+}
+.blogContentPara{
+    text-align: justify;
+}
