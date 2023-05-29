@@ -199,7 +199,7 @@ export function ProductDetails(props) {
             </Breadcrumb>
             <div className="product-detail">
                 <div className="product-detail-left">
-                    <img src={"../imgs/" + path} alt="img" />
+                    <img src={path} alt="img" />
                 </div>
                 <div className="product-detail-right">
                     <h2>{product1.name}</h2>

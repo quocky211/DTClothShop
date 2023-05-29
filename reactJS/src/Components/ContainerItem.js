@@ -48,7 +48,7 @@ export function ContainerItem(props) {
       {/* // masp ở đây là cái éo gì mà đổi sang _id lại không chạyyyy */}
       <Link to={"/Products/" + props.masp} state={{image: props.image}} >
         <button>
-          <img src={"../../imgs/"+props.image} alt="sanpham" className="ContainerItem_image" />
+          <img src={props.image} alt="sanpham" className="ContainerItem_image" />
           <div className="nameandprice">
             <p className="containerItem_name">{props.name}</p>
             <p className="containerItem_infor-price">{priceVND}</p>
