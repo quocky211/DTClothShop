@@ -6,9 +6,6 @@ import Accordion from "react-bootstrap/Accordion";
 import size from "../Images/size.jpg";
 import Slider from "react-slick";
 import ContainerItem from "../ContainerItem";
-// import likeicon from "../Images/likeicon.png";
-// import { red } from "@mui/material/colors";
-// import { Button } from "react-bootstrap";
 import CommentAndComentList from "../CommentForm/CommentForm";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
@@ -176,7 +173,13 @@ export function ProductDetails(props) {
     const handleIncreaseQuantity = (quantity) => {
         quantity < qty ? setQuantity(quantity + 1) : setQuantity(qty);
     };
-
+    // Move to top
+    const handleTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      };
     return (
         <div className="product-detail-container">
             <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
@@ -382,7 +385,7 @@ export function ProductDetails(props) {
             <span>&nbsp;</span>
             <div className="related-product">
                 <h3>Có thể bạn sẽ thích</h3>
-                <div className="non-mobile-related">
+                <div className="non-mobile-related" onClick={handleTop}>
                     <Slider {...settings}>
                         {relatedProdutcs.map(function (item) {
                             return (
@@ -396,7 +399,7 @@ export function ProductDetails(props) {
                         })}
                     </Slider>
                 </div>
-                <div className="mobile-related">
+                <div className="mobile-related" onClick={handleTop}>
                     <Slider {...settingsmobile}>
                         {relatedProdutcs.map((item) => (
                             <ContainerItem

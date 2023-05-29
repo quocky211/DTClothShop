@@ -9,9 +9,9 @@ class ProductDataService {
 
         return await axios.get(`http://localhost:3001/product/category-detail/${typeDetailID}`)
     }
-    async getAllProducts(price = 0, page = 1) {
+    async getAllProducts(price = 0, category='', page = 1) {
 
-        return await axios.get(`http://localhost:3001/product?price=${price}&&page=${page}`)
+        return await axios.get(`http://localhost:3001/product?price=${price}&page=${page}&${category}`)
     }
     async getProductById(productID) {
 

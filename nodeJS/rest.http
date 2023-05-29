@@ -88,8 +88,7 @@ GET http://localhost:3001/admin/order/4/order-detail
 ### price=3 300000 <= price < 500000
 ### price=4 price >= 500000
 ### lọc cate_detail: category_detail_id=1
-GET http://localhost:3001/product?price=3&page=1&null
-
+GET http://localhost:3001/product?price=0&page=1&null
 ### search header GET /search?name=:name (có phân trang) (D)
 GET http://localhost:3001/search?name=t&page=1
 
