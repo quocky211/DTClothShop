@@ -101,50 +101,6 @@ function OutfitDetail() {
                 <div className="product-item-infor">
                   <h4>{item.product_id.name}</h4>
                   <h4>{vnd.format(item.product_id.price)}</h4>
-                  <div className="color-outfitdetail">
-                    {colorArr[index].map(function (color, index2) {
-                      return (
-                        <div className="">
-                          <button
-                            onClick={() => handleColor(color, index)}
-                            style={{
-                              backgroundColor: color,
-                              border: " 1px solid black",
-                              padding: "12px",
-                              margin: "0 10px 0 0"
-                            }}
-                          ></button>
-                          {
-                            sizeArrs[index][index2].map((size) => (
-                              <button
-                                onClick={() => setSizeProduct(size.size)}
-                                style={{
-                                  backgroundColor:
-                                    sizeProduct === size && "antiquewhite",
-
-                                }}
-                              >
-                                {size}
-                              </button>
-                            ))
-                          }
-                        </div>
-                      );
-                    })}
-                  </div>
-                  {/* <div className="size">
-                    {sizeArr.map((size) => (
-                      <button
-                        onClick={() => setSizeProduct(size.size)}
-                        style={{
-                          backgroundColor:
-                            sizeProduct === size && "antiquewhite",
-                        }}
-                      >
-                        {size.size}
-                      </button>
-                    ))}
-                  </div> */}
                   <Link
                     to={"/Products/" + item.product_id._id}
                     state={{ image: item.productDetail[0].path }}
@@ -156,9 +112,6 @@ function OutfitDetail() {
             ))}
           </div>
         </div>
-      </div>
-      <div className="add_all_to_cart">
-        <button>Thêm tất cả vào giỏ hàng</button>
       </div>
       <Footer />
     </div>

@@ -33,8 +33,10 @@ function Login(props) {
     await axios
       .post("http://localhost:3001/user/login", user, config)
       .then((res) => {
-        window.localStorage.setItem("JWT", JSON.stringify(res.data));
-        if (res.data.level === true) navigate("/Admin");
+        window.localStorage.setItem("JWT", JSON.stringify( res.data.accessToken));
+        window.localStorage.setItem("refreshToken",JSON.stringify( res.data.refreshToken));
+        window.localStorage.setItem("user", JSON.stringify( res.data.user));
+        if (res.data.user.level === true) navigate("/Admin");
         else navigate("/");
       })
       .catch((err) => {

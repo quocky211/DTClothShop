@@ -1,14 +1,31 @@
 import "./Account.css";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
-import { FakeData } from "../fakedata";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 function Account() {
-  var user = FakeData[4].find(function (item) {
-    return item.matk === "TK01";
-  });
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  useEffect(() => {
+    getInforUser();
+  },[])
 
+  const getInforUser = () =>{
+    const result = localStorage.getItem('user');
+    const user = JSON.parse(result);
+    setName(user.name)
+    setBirthday( moment(user.birthday).format('YYYY-MM-DD'));
+    setGender(user.gender)
+    setPhone(user.phone)
+    setEmail(user.email)
+    setAddress(user.address)
+  }
   return (
     <div className="">
       <Header />
@@ -19,33 +36,33 @@ function Account() {
             <tr>
               <td>Họ và tên</td>
               <td>
-                <input type="text" value={user.name} size={30} className="" />
+                <input type="text" value={name} size={30} onChange={(event) => setName(event.target.value)} />
               </td>
             </tr>
             <tr>
               <td>Giới tính</td>
               <td>
-                <input type="radio" name="gender" /> <label>Nam</label>
-                <input type="radio" name="gender" /> <label>Nữ</label>
-                <input type="radio" name="gender" /> <label>Khác</label>
+              <label><input type="radio" name="gender" value="Nam" checked={gender === 'Nam'} onChange={(event) => setGender(event.target.value)}/> Nam</label>
+              <label><input type="radio" name="gender" value="Nữ" checked={gender === 'Nữ'} onChange={(event) => setGender(event.target.value)}/> Nữ</label>
+              <label><input type="radio" name="gender" value="Khác"checked={gender === 'Khác'} onChange={(event) => setGender(event.target.value)}/> Khác</label>
               </td>
             </tr>
             <tr>
               <td>Ngày sinh</td>
               <td>
-                <input type="date" value={user.date} size={30} />
+                <input type="date" value={birthday} size={30} onChange={(event) => setBirthday(event.target.value)}/>
               </td>
             </tr>
             <tr>
               <td>Số điện thoại</td>
               <td>
-                <input type="tel" value={user.phone} size={30} />
+                <input type="tel" value={phone} size={30} onChange={(event) => setPhone(event.target.value)}/>
               </td>
             </tr>
             <tr>
               <td>Email</td>
               <td>
-                <input type="email" value={user.email} size={30} />
+                <input type="email" value={email} size={30} onChange={(event) => setEmail(event.target.value)}/>
               </td>
             </tr>
             <tr>
@@ -54,8 +71,8 @@ function Account() {
                 <input
                   type="text"
                   placeholder="Địa chỉ"
-                  value={user.address}
-                  size={30}
+                  value={address}
+                  size={30} onChange={(event) => setAddress(event.target.value)}
                 />
               </td>
             </tr>
