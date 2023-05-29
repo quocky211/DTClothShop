@@ -84,7 +84,7 @@ function OutfitDetail() {
       </Breadcrumb>
       <div className="outfit-detail">
         <div className="outfit-detail-left">
-          <img src={"../imgs/" + outfit.image} alt={outfit.name} />
+          <img src={outfit.image} alt={outfit.name} />
         </div>
         <div className="outfit-detail-right">
           <h2>{outfit.name}</h2>
@@ -94,7 +94,7 @@ function OutfitDetail() {
               <div className="list-product-item">
                 <div className="product-item-img">
                   <img
-                    src={"../imgs/" + item.productDetail[0].path}
+                    src={item.productDetail[0].path}
                     alt={item.product_id.name}
                   />
                 </div>
