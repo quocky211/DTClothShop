@@ -8,6 +8,7 @@ const OrderDetail = require('../models/order/order_detail');
 const { userValidate } = require('../../helpers/validation');
 const { TestGetListUser } = require('./userController');
 const client = require('../../helpers/connection_redis');
+const cloudinary = require('cloudinary').v2;
 
 // const ProductDetail = require('../models/products/product_detail');
 // const CategoryDetail = require('../models/products/category_detail');
@@ -67,12 +68,17 @@ class AdminController {
     }
 
     // POST /admin/product-detail/store
+    
     StoreProductDetail(req, res, next) {
-        const productDetail = new ProductDetail(req.body);
+        const fileData = req.file;
+        const productDetail = new ProductDetail({...req.body, path:fileData.path});
         productDetail
             .save()
             .then(() => res.send('THÊM CHI TIẾT SẢN PHẨM THÀNH CÔNG'))
-            .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
+            .catch(() => {
+                if(fileData) cloudinary.uploader.destroy(fileData.filename);
+                res.send('THÊM KHÔNG THÀNH CÔNG')
+            });
     }
 
     // PUT /admin/product/:id

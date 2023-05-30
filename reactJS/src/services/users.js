@@ -16,6 +16,9 @@ class UserDataService {
     async createComment(productId, userId, data){
         return await axios.post(`http://localhost:3001/user/${userId}/product/${productId}/comment`, data)
     }
+    async getOrdersByUser(userId){
+        return await axios.get(`http://localhost:3001/user/${userId}/order`)
+    }
 }
 
 export default new UserDataService();

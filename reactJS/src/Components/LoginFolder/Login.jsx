@@ -36,6 +36,7 @@ function Login(props) {
         window.localStorage.setItem("JWT", JSON.stringify( res.data.accessToken));
         window.localStorage.setItem("refreshToken",JSON.stringify( res.data.refreshToken));
         window.localStorage.setItem("user", JSON.stringify( res.data.user));
+        console.log(res.data.user.level)
         if (res.data.user.level === true) navigate("/Admin");
         else navigate("/");
       })
