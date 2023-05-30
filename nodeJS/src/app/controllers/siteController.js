@@ -1,6 +1,7 @@
 const Product = require('../models/products/product');
 const Category = require('../models/products/category');
 const CategoryDetail = require('../models/products/category_detail');
+const ProductFavorite = require('../models/products/product_favorite');
 const { HandleAddImage } = require('../../helpers/multifunction');
 const client = require('../../helpers/connection_redis');
 class SiteController {
@@ -31,8 +32,7 @@ class SiteController {
                         client.setex(cacheKey, 1800, JSON.stringify(category));
                         res.json(category);
                     })
-                    .
-                    catch(next);
+                    .catch(next);
             }
         });
     }
@@ -51,7 +51,111 @@ class SiteController {
             .then((categoryDetail) => res.json(categoryDetail))
             .catch(next);
     }
+    //GET /:email/favorite-product
+    GetFavoriteProduct(req, res, next) {
+        ProductFavorite.find({ email: req.params.email })
+            .populate({ path: 'product_id', select: 'name price' })
+            .exec()
+            .then((favoriteProduct) => res.json(favoriteProduct))
+            .catch(next);
+    }
 
+    //GET /:email/favorite-product/:id
+    GetFavoriteProductByID(req, res, next) {
+        ProductFavorite.findOne({ email: req.params.email, product_id: req.params.id })
+            .exec()
+            .then((favoriteProduct) => res.json(favoriteProduct))
+            .catch(next);
+    }
+    //POST /favorite-product/add
+    AddFavoriteProduct(req, res, next) {
+        try {
+            ProductFavorite.findOne({ email: req.body.email, product_id: req.body.product_id })
+                .then((result) => {
+                    if (result != null) {
+                        const data = {
+                            severity: 'error',
+                            message: 'Sản phẩm yêu thích đã tồn tại',
+                        };
+                        res.send(data);
+                    } else {
+                        const formData = {
+                            email: req.body.email,
+                            product_id: req.body.product_id,
+                            path: req.body.path,
+                        };
+                        const productFavorite = new ProductFavorite(formData);
+                        productFavorite
+                            .save()
+                            .then(() => {
+                                const data = {
+                                    severity: 'success',
+                                    message: 'Đã thêm vào danh sách sản phẩm yêu thích',
+                                };
+                                res.send(data);
+                            })
+                            .catch(() => {
+                                const data = {
+                                    severity: 'error',
+                                    message: 'thêm vào danh sách sản phẩm yêu thích thất bại',
+                                };
+                                res.send(data);
+                            });
+                    }
+                })
+                .catch(() => {
+                    const data = {
+                        severity: 'error',
+                        message: 'Kiểm tra sản phẩm thất bại',
+                    };
+                    res.send(data);
+                });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    //POST /favorite-product/delete
+    DestroyFavoriteProduct(req, res, next) {
+        try {
+            ProductFavorite.findOne({ email: req.body.email, product_id: req.body.product_id })
+                .then((result) => {
+                    if (result == null) {
+                        const data = {
+                            severity: 'error',
+                            message: 'Không tìm thấy sản phẩm yêu thích',
+                        };
+                        res.send(data);
+                    } else {
+                        ProductFavorite.deleteOne({ email: req.body.email, product_id: req.body.product_id })
+                            .exec()
+                            .then(() => {
+                                const data = {
+                                    severity: 'error',
+                                    message: 'Đã xóa khỏi danh sách yêu thích! ',
+                                };
+                                res.send(data);
+                            })
+                            .catch(() => {
+                                const data = {
+                                    severity: 'error',
+                                    message: 'Xóa sản phẩm yêu thích thất bại',
+                                };
+                                res.send(data);
+                            });
+                    }
+                })
+                .catch(() => {
+                    const data = {
+                        severity: 'error',
+                        message: 'Kiểm tra sản phẩm thất bại',
+                    };
+                    res.send(data);
+                });
+        } catch (error) {
+            next(error);
+        }
+    }
     // GET /search
     search(req, res, next) {
         const page = req.query.page || 1;

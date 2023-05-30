@@ -26,9 +26,9 @@ function Header(props) {
   const tokens = JSON.parse(localStorage.getItem("JWT"));
 
   let navigate = useNavigate();
-  var loveList = "/Login";
-  if (props.isLoggedin) {
-    loveList = "/LoveProducts";
+  var loveList = "/FavoriteProduct";
+  if (window.localStorage.getItem("Email") == null) {
+    loveList = "/Login";
   }
 
   function LoginclickHandler() {
@@ -75,18 +75,33 @@ function Header(props) {
 
   const Logout = (e) => {
     window.localStorage.removeItem("JWT");
+    window.localStorage.removeItem("Email");
+
     navigate("/Login");
   };
 
   return (
-    <Navbar bg="light" expand="lg" fixed="top">
+    <Navbar
+      bg="light"
+      expand="lg"
+      fixed="top"
+    >
       <Container fluid>
         <div className="sidebar-icon">
           <label htmlFor="nav-mobile-input">
-            <img src={sidebaricon} alt="sidebaricon" />
+            <img
+              src={sidebaricon}
+              alt="sidebaricon"
+            />
           </label>
-          <label htmlFor="search-input" className="searchicon">
-            <img src={searchicon} alt="searchicon" />
+          <label
+            htmlFor="search-input"
+            className="searchicon"
+          >
+            <img
+              src={searchicon}
+              alt="searchicon"
+            />
           </label>
         </div>
         <input
@@ -95,17 +110,29 @@ function Header(props) {
           className="nav-mobile-input"
           id="nav-mobile-input"
         />
-        <label htmlFor="nav-mobile-input" className="nav_overlay"></label>
+        <label
+          htmlFor="nav-mobile-input"
+          className="nav_overlay"
+        ></label>
         <input
           type="checkbox"
           name=""
           className="search-input"
           id="search-input"
         />
-        <label htmlFor="search-input" className="nav_overlay1"></label>
+        <label
+          htmlFor="search-input"
+          className="nav_overlay1"
+        ></label>
         <div className="nav-mobile">
-          <label htmlFor="nav-mobile-input" className="nav-mobile-close">
-            <img src={close} alt="close" />
+          <label
+            htmlFor="nav-mobile-input"
+            className="nav-mobile-close"
+          >
+            <img
+              src={close}
+              alt="close"
+            />
           </label>
           <ul className="nav-mobile-list">
             <Nav.Link href="/">Trang chủ</Nav.Link>
@@ -113,7 +140,10 @@ function Header(props) {
             <div className="mobile-product">
               <Nav.Link href="/Products">Sản phẩm</Nav.Link>
               <label htmlFor="product-list-mobile">
-                <img src={arrowbottom} alt="arrowbottom" />
+                <img
+                  src={arrowbottom}
+                  alt="arrowbottom"
+                />
               </label>
             </div>
             <input
@@ -123,7 +153,10 @@ function Header(props) {
             />
             <ul className="type-mobile-product">
               {catagories.map((item) => (
-                <ListTypeProductMobile _id={item._id} name={item.name} />
+                <ListTypeProductMobile
+                  _id={item._id}
+                  name={item.name}
+                />
               ))}
             </ul>
             <hr />
@@ -137,8 +170,14 @@ function Header(props) {
           </ul>
         </div>
         <div className="nav-mobile-search">
-          <label htmlFor="search-input" className="nav-mobile-close">
-            <img src={close} alt="close" />
+          <label
+            htmlFor="search-input"
+            className="nav-mobile-close"
+          >
+            <img
+              src={close}
+              alt="close"
+            />
           </label>
           <Form className="mobile-search">
             <Form.Control
@@ -148,21 +187,34 @@ function Header(props) {
               aria-label="Search"
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Button variant="outline-success" onClick={handleSearch}>
+            <Button
+              variant="outline-success"
+              onClick={handleSearch}
+            >
               Search
             </Button>
           </Form>
         </div>
         <Navbar.Brand href="/">
-          <img src={Logo} alt="Shop quần áo" className="Logo"/>
+          <img
+            src={Logo}
+            alt="Shop quần áo"
+            className="Logo"
+          />
         </Navbar.Brand>
-        <Nav className="" style={{ maxHeight: "100px" }}>
+        <Nav
+          className=""
+          style={{ maxHeight: "100px" }}
+        >
           <Nav.Link href="/">Trang chủ</Nav.Link>
           <div className="product-header">
             <Nav.Link href="/Products">Sản phẩm</Nav.Link>
             <ul className="type-product">
               {catagories.map((item) => (
-                <ListTypeProduct _id={item._id} name={item.name} />
+                <ListTypeProduct
+                  _id={item._id}
+                  name={item.name}
+                />
               ))}
             </ul>
           </div>
@@ -179,22 +231,37 @@ function Header(props) {
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <Button variant="outline-success" onClick={handleSearch}>
+          <Button
+            variant="outline-success"
+            onClick={handleSearch}
+          >
             Search
           </Button>
         </Form>
-        <Nav.Link className="lovelists" href={loveList}>
+        <Nav.Link
+          className="lovelists"
+          href={loveList}
+        >
           {" "}
           Sản phẩm yêu thích{" "}
         </Nav.Link>
         <div className="cartandlogin">
           <Nav.Link href="/ShoppingCart">
-            <img src={shoppingIcon} alt="cart" />
+            <img
+              src={shoppingIcon}
+              alt="cart"
+            />
             <span>{cart.cartTotalQuantity}</span>
           </Nav.Link>
-          <button onClick={LoginclickHandler} className="logIn-btn">
+          <button
+            onClick={LoginclickHandler}
+            className="logIn-btn"
+          >
             <Nav.Link>
-              <img src={usericon} alt="User-icon" />{" "}
+              <img
+                src={usericon}
+                alt="User-icon"
+              />{" "}
             </Nav.Link>
             {tokens != null && (
               <ul className="list-infor-user">
@@ -202,7 +269,10 @@ function Header(props) {
                   {" "}
                   <li>Thông tin tài khoản</li>{" "}
                 </Nav.Link>
-                <button className="nav-link" onClick={Logout}>
+                <button
+                  className="nav-link"
+                  onClick={Logout}
+                >
                   {" "}
                   <li>Đăng xuất</li>{" "}
                 </button>
