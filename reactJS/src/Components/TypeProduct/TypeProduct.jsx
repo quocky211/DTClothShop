@@ -7,7 +7,6 @@ import Footer from "../FooterFolder/Footer";
 import { useEffect, useState } from 'react';
 import ProductDataService from '../../services/products';
 import CatagoryDataService from '../../services/catagories';
-import ao from '../Images/fakedata/ao1.jpg'
 function TypeProduct() {
     const { typeID } = useParams();
     const [catagory, setCategory] = useState("");

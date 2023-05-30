@@ -5,7 +5,6 @@ import Footer from "../FooterFolder/Footer";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useLocation } from "react-router-dom";
 import ProductDataService from "../../services/products";
-import ao from '../Images/fakedata/ao1.jpg'
 import ContainerItem from '../ContainerItem';
 
 export default function Search(props) {
@@ -29,10 +28,10 @@ export default function Search(props) {
       <div className="search-list-products">
         {products.map((product) => (
           <ContainerItem
-            price={product.price}
-            name={product.name}
-            image={ao}
-            masp={product._id}
+            price={product.product.price}
+            name={product.product.name}
+            image={product.path}
+            masp={product.product._id}
           />
         ))}
       </div>

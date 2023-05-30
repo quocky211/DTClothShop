@@ -12,7 +12,6 @@ import imgmobile from "../Images/banner/img-mobile.png";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
-import ao from "../Images/fakedata/ao1.jpg";
 
 function MainPage() {
   const [newProducts, setNewProducts] = useState([]);

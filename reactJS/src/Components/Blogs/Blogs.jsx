@@ -2,7 +2,6 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import  "./Blogs.css";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
-import blog from "../Images/blogs.png";
 import BlogDataService from "../../services/blogs";
 
 import { useState, useEffect } from "react";

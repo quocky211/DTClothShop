@@ -1,7 +1,6 @@
 import React from "react";
 import "./ContainerItem.css";
 import { connect } from "react-redux";
-import whiteplus from "./Images/whiteplus.jpg";
 import { Link } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";

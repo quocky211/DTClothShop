@@ -3,7 +3,6 @@ import "./OrderDetail.css";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import { Link } from "react-router-dom";
-import ao from "../Images/fakedata/ao1.jpg";
 
 export default function OrderDetail() {
   return (
@@ -48,7 +47,7 @@ export default function OrderDetail() {
               <tr>
                 <td>
                   <div className="orderProductItem">
-                    <img src={ao} alt="Img" />
+                    <img src=" " alt="Img" />
                     <div className="orderProductInfor">
                       <p>Áo thun đến từ đại dương</p>
                       <p>
@@ -72,7 +71,7 @@ export default function OrderDetail() {
           </table>
           <div className="orderProductsTable-Mobile">
             <div className="orderItem-Mobile">
-              <img src={ao} alt="img" />
+              <img src=" " alt="img" />
               <div className="orderProduct-Mobile">
                 <p>Áo thun đến từ đại dương</p>
                 <p>

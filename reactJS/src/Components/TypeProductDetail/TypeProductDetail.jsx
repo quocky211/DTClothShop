@@ -6,7 +6,6 @@ import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
 import CatagoryDataService from "../../services/catagories";
-import ao from "../Images/fakedata/ao1.jpg";
 import { useState, useEffect } from "react";
 
 
