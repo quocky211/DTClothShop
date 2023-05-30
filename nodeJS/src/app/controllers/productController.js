@@ -210,6 +210,40 @@ class ProductController {
             .exec()
             .then((productComments) => res.json(productComments));
     }
+    // GET /product/:id/count-comment
+    CountComment(req, res, next) {
+        //     ProductComment.countDocuments({ product_id: req.params.id }).then((qty) => {
+        //         ProductComment.aggregate([{ $match: '$product_id' }], {
+        //             $group: {
+        //                 _id: null,
+        //                 avgStar: { $avg: '$star' },
+        //             },
+        //         })
+        //             .exec()
+        //             .then((avgStar) => {
+        //                 res.json({
+        //                     qty,
+        //                     avgStar,
+        //                 });
+        //             });
+        //     });
+        // }
+
+        ProductComment.find({ product_id: req.params.id })
+            .exec()
+            .then((comments) => {
+                const qtyCmt = comments.length;
+                let totalStar = 0;
+                for (let i = 0; i < qtyCmt; i++) {
+                    totalStar += comments[i].star;
+                }
+                const avgStar = totalStar / qtyCmt;
+                res.json({
+                    avgStar,
+                    qtyCmt,
+                });
+            });
+    }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
 // function sortProducts(sortOrder) {

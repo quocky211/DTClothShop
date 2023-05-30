@@ -13,6 +13,8 @@ router.get('/outfit/:id', productController.GetOutfit);
 router.get('/outfit/:id/outfit-detail', productController.ShowOutfitDetail);
 router.get('/:id/product-detail', productController.ProductDetail);
 router.get('/:id/comment', productController.ShowComment);
+router.get('/:id/count-and-starrating-comment', productController.CountComment);
+
 router.get('/:id', productController.GetProduct);
 router.get('/', productController.ProductShow);
 
