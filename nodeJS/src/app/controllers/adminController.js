@@ -6,6 +6,8 @@ const User = require('../models/user/user');
 const Order = require('../models/order/order');
 const OrderDetail = require('../models/order/order_detail');
 const { userValidate } = require('../../helpers/validation');
+const { TestGetListUser } = require('./userController');
+const client = require('../../helpers/connection_redis');
 
 // const ProductDetail = require('../models/products/product_detail');
 // const CategoryDetail = require('../models/products/category_detail');
@@ -44,11 +46,24 @@ class AdminController {
 
     // POST /admin/product/store
     StoreProduct(req, res, next) {
-        const product = new Product(req.body);
-        product
-            .save()
-            .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNG'))
-            .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
+        const cacheKey = 'newProducts';
+
+        // Clear the cached data for the updated product
+        client.del(cacheKey, (err, numRemoved) => {
+            if (err) {
+                console.error('Redis cache error:', err);
+            }
+            console.log(`Cleared cache for ${numRemoved} key(s)`);
+
+            // Proceed with updating the product
+            const product = new Product(req.body);
+            product
+                .save()
+                .then(() => {
+                    res.send('THÊM SẢN PHẨM THÀNH CÔNG');
+                })
+                .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
+        });
     }
 
     // POST /admin/product-detail/store
@@ -62,18 +77,42 @@ class AdminController {
 
     // PUT /admin/product/:id
     UpdateProduct(req, res, next) {
-        Product.updateOne({ _id: req.params.id }, req.body)
-            .exec()
-            .then(() => res.send('Update sản phẩm thành công'))
-            .catch(() => res.send('Update sản phẩm thất bại'));
+        const productId = req.params.id;
+        const cacheKey = `product:${productId}`;
+
+        // Clear the cached data for the updated product
+        client.del(cacheKey, (err, numRemoved) => {
+            if (err) {
+                console.error('Redis cache error:', err);
+            }
+            console.log(`Cleared cache for ${numRemoved} key(s)`);
+
+            // Proceed with updating the product
+            Product.updateOne({ _id: productId }, req.body)
+                .exec()
+                .then(() => res.send('Update sản phẩm thành công'))
+                .catch(() => res.send('Update sản phẩm thất bại'));
+        });
     }
 
     // delete /admin/product/delete/:id
     DestroyProduct(req, res, next) {
-        Product.deleteOne({ _id: req.params.id })
-            .exec()
-            .then(() => res.send('Xóa sản phẩm thành công'))
-            .catch(() => res.send('Xóa sản phẩm thất bại'));
+        const productId = req.params.id;
+        const cacheKey = `product:${productId}`;
+
+        // Clear the cached data for the updated product
+        client.del(cacheKey, (err, numRemoved) => {
+            if (err) {
+                console.error('Redis cache error:', err);
+            }
+            console.log(`Cleared cache for ${numRemoved} key(s)`);
+
+            // Proceed with updating the product
+            Product.deleteOne({ _id: productId })
+                .exec()
+                .then(() => res.send('Xóa sản phẩm thành công'))
+                .catch(() => res.send('Xóa sản phẩm thất bại'));
+        });
     }
 
     // GET /admin/user/show
@@ -121,18 +160,30 @@ class AdminController {
 
     // PUT /admin/user/edit/:id
     EditUser(req, res, next) {
-        User.updateOne({ _id: req.params.id }, req.body)
-            .exec()
-            .then(() => res.send('Update người dùng thành công'))
-            .catch(() => res.send('Update người dùng thất bại'));
+        const userId = req.params.id;
+        const cacheKey = `user:${userId}`;
+        client.del(cacheKey, (err, numRemoved) => {
+            if (err) throw err;
+            console.log(`Cleared cache for ${numRemoved} key(s)`);
+            User.updateOne({ _id: userId }, req.body)
+                .exec()
+                .then(() => res.send('Update người dùng thành công'))
+                .catch(() => res.send('Update người dùng thất bại'));
+        });
     }
 
     // DELETE /admin/user/delete/:id
     DestroyUser(req, res, next) {
-        User.deleteOne({ _id: req.params.id })
-            .exec()
-            .then(() => res.send('Xóa người dùng thành công!!'))
-            .catch(() => res.send('Xóa người dùng thất bại!!'));
+        const userId = req.params.id;
+        const cacheKey = `user:${userId}`;
+        client.del(cacheKey, (err, numRemoved) => {
+            if (err) throw err;
+            console.log(`Cleared cache for ${numRemoved} key(s)`);
+            User.deleteOne({ _id: userId })
+                .exec()
+                .then(() => res.send('Xóa người dùng thành công!!'))
+                .catch(() => res.send('Xóa người dùng thất bại!!'));
+        });
     }
 
     ShowOrder(req, res, next) {

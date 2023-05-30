@@ -2,13 +2,39 @@ const Product = require('../models/products/product');
 const Category = require('../models/products/category');
 const CategoryDetail = require('../models/products/category_detail');
 const { HandleAddImage } = require('../../helpers/multifunction');
+const client = require('../../helpers/connection_redis');
 class SiteController {
     // GET /category
+    // GetCategory(req, res, next) {
+    //     Category.find({})
+    //         .exec()
+    //         .then((category) => res.json(category))
+    //         .catch(next);
+    // }
+
     GetCategory(req, res, next) {
-        Category.find({})
-            .exec()
-            .then((category) => res.json(category))
-            .catch(next);
+        const cacheKey = 'categories';
+        client.get(cacheKey, async (err, category) => {
+            if (err) {
+                throw err;
+            }
+
+            if (category) {
+                console.log('Lấy danh sách danh mục sản phẩm từ Redis');
+                res.json(JSON.parse(category));
+            } else {
+                Category.find({})
+                    .exec()
+                    .then((category) => {
+                        console.log('Lưu danh sách danh mục vào Redis');
+                        // lưu dữ liệu vào cache với thời gian giống là 1800s
+                        client.setex(cacheKey, 1800, JSON.stringify(category));
+                        res.json(category);
+                    })
+                    .
+                    catch(next);
+            }
+        });
     }
 
     // GET /category/:id/category-detail

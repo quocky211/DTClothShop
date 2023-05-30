@@ -87,7 +87,7 @@ function Shopping() {
                                     <div className="cart-image-name">
                                         <div>
                                             <img
-                                                src={"../imgs/" + item.image}
+                                                src={item.image}
                                                 alt={item.name}
                                                 style={{
                                                     width: 125,
