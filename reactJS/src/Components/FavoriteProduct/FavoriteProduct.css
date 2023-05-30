@@ -11,6 +11,15 @@
 .main {
   margin-top: 70px;
 }
+
+.click-pointer {
+  cursor: pointer;
+}
+
+.min-table {
+  min-height: 11.5rem;
+}
+
 .main h1 {
   margin: 20px 0;
 }

@@ -33,9 +33,16 @@ function Login(props) {
     await axios
       .post("http://localhost:3001/user/login", user, config)
       .then((res) => {
-        window.localStorage.setItem("JWT", JSON.stringify( res.data.accessToken));
-        window.localStorage.setItem("refreshToken",JSON.stringify( res.data.refreshToken));
-        window.localStorage.setItem("user", JSON.stringify( res.data.user));
+        window.localStorage.setItem(
+          "JWT",
+          JSON.stringify(res.data.accessToken)
+        );
+        window.localStorage.setItem(
+          "refreshToken",
+          JSON.stringify(res.data.refreshToken)
+        );
+        window.localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.localStorage.setItem("Email", useremail);
         if (res.data.user.level === true) navigate("/Admin");
         else navigate("/");
       })
@@ -48,13 +55,20 @@ function Login(props) {
       <Header />
       <div className="loginmain">
         <div className="logomain">
-          <img className="logo" alt="" src={logo}></img>
+          <img
+            className="logo"
+            alt=""
+            src={logo}
+          ></img>
           <p>DTClothShop</p>
         </div>
 
         <div className="loginForm">
           <h3>Đăng nhập</h3>
-          <form action="POST" onSubmit={handleSubmit}>
+          <form
+            action="POST"
+            onSubmit={handleSubmit}
+          >
             <input
               value={useremail}
               onChange={(e) => setEmail(e.target.value)}
@@ -71,14 +85,23 @@ function Login(props) {
               placeholder="Mật khẩu"
               required
             />
-            <button name="submit" type="submit">
+            <button
+              name="submit"
+              type="submit"
+            >
               Đăng nhập
             </button>
           </form>
           <p>Hoặc</p>
           <div className="fb-and-gg">
-            <img src={fb} alt="fb" />
-            <img src={gg} alt="fb" />
+            <img
+              src={fb}
+              alt="fb"
+            />
+            <img
+              src={gg}
+              alt="fb"
+            />
           </div>
           <br></br>
           <Link to="/Register">
