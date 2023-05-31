@@ -15,7 +15,7 @@ require('./helpers/connection_redis');
 // morgan: bắn ra log khi gửi yêu cầu lên server
 // app.use(morgan('combined'));
 const corsOptions = {
-    origin: '*',
+    origin: 'http://localhost:3001/',
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };
@@ -31,7 +31,8 @@ app.use((req, res, next) => {
     // const error = new Error('Not found');
     // error.status = 500;
     // next(error);
-
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next(httpError.NotFound('This route does not exists.'));
 });
 

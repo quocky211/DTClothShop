@@ -29,26 +29,10 @@ class OrderController {
     // }
     // POST /order
     StoreOrder(req, res, next) {
-        const formDataOrder = {
-            user_id: req.body.user_id,
-            address: req.body.address,
-            note: req.body.note,
-            phone: req.body.phone,
-            pay_method: req.body.pay_method,
-            discount_code: req.body.discount_code,
-        };
-        if ((req.body.pay_method = 'momo')) {
-            const order = new Order(formDataOrder);
-            res.redirect('/order/momocheckout', formDataOrder);
-        } else if ((req.body.pay_method = 'vnpay')) {
-            const order = new Order(formDataOrder);
-            res.redirect('/order/vnpaycheckout', formDataOrder);
-        }
-        const order = new Order(formDataOrder);
-        order
-            .save()
-            .then(() => res.send('THÊM SẢN PHẨM THÀNH CÔNG'))
-            .catch(() => res.send('THÊM KHÔNG THÀNH CÔNG'));
+        const order = new Order(req.body)
+        order.save()
+        .then(() => res.send('ok'))
+        .catch()
     }
     // GET /product/
 

@@ -10,7 +10,7 @@ const Order = new Schema(
         address: { type: String },
         status: { type: String },
         note: { type: String, require: false },
-        phone: { type: Number },
+        phone: { type: String },
         pay_method: { type: String },
         total: Number,
         discount_code: { type: String, ref: 'discount', require: false },

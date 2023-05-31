@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import OrderDataService from "../../services/orders";
+
 function ShipAddress() {
     const location = useLocation();
     const data = location.state?.data;
@@ -17,7 +19,10 @@ function ShipAddress() {
     const [selectedDistrict, setselectedDistrict] = useState("");
     const [selectedWard, setselectedWard] = useState("");
     const [shipcost, setshipcost] = useState("");
+    const [method, setMethod] = useState("");
+    const [phone, setPhone] = useState("");
 
+    console.log(location);
     var vnd = Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -77,6 +82,26 @@ function ShipAddress() {
     }
     var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
 
+    const handleCreate = (e) => {
+        e.preventDefault();
+        let newOrder = {
+          user_id: 11,
+          address: address,
+          status: '0',
+          note: "",
+          phone: phone,
+          pay_method: method,
+          total: Number(data + shipcost),
+        };
+        OrderDataService.createOrders(newOrder)
+          .then((response) => {
+            alert("Thêm mới thành công");
+          })
+          .catch((e) => {
+            alert("Thêm không thành công")
+            console.log(e);
+          });
+      };
 
     return (
         <div className="main-container-ship">
@@ -90,11 +115,11 @@ function ShipAddress() {
                 <div className="container-ship-left">
                     <h2>Thông tin giao hàng</h2>
                     <div className="form-address-container">
-                        <form action="/Payment" className="form-address">
+                        <form className="form-address">
                             <input type="text" placeholder="Họ và tên" required />
                             <div className="mail-phone">
                                 <input type="email" placeholder="Email" />
-                                <input type="text" placeholder="Số điện thoại" pattern="[0]{1}[1-9]{1}[0-9]{8}" required />
+                                <input type="text" placeholder="Số điện thoại" onChange={(e)=> setPhone(e.target.value)} pattern="[0]{1}[1-9]{1}[0-9]{8}" required />
                             </div>
                             <div className="detail-address">
                                 <select name="" id="province" onChange={(e) => handleProvince(e)} >
@@ -158,38 +183,39 @@ function ShipAddress() {
                     </div>
                     <div>
                         <h2>Phương thức thanh toán</h2>
-                        <div className="payment-mothods">
-                            <div class="the-payment-mothod">
+                        <div className="payment-methods">
+                            <div class="the-payment-method">
                                 <label>
-                                    <input type="radio" readonly="" name="payment-method" value="cod" />
+                                    <input type="radio" readonly="" name="payment-method" value="cod" onChange={(e) => setMethod(e.target.value)}/>
                                     <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-cod.svg" width="32" height="32" alt="icon" />
                                     <span>Thanh toán tiền mặt khi nhận hàng</span>
                                 </label>
                             </div>
-                            <div class="the-payment-mothod">
+                            <div class="the-payment-method">
                                 <label>
-                                    <input type="radio" readonly="" name="payment-method" value="momo" />
+                                    <input type="radio" readonly="" name="payment-method" value="momo" onChange={(e) => setMethod(e.target.value)} />
                                     <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-momo.svg" width="32" height="32" alt="icon" />
                                     <span>Thanh toán bằng ví MOMO</span>
                                 </label>
                             </div>
-                            <div class="the-payment-mothod">
+                            <div class="the-payment-method">
                                 <label>
-                                    <input type="radio" readonly="" name="payment-method" value="vnpay" />
+                                    <input type="radio" readonly="" name="payment-method" value="vnpay" onChange={(e) => setMethod(e.target.value)} />
                                     <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-vnpay.png" width="32" height="32" alt="icon" />
                                     <span>Thanh toán bằng ví VNPay</span>
                                 </label>
                             </div>
-                            <div class="the-payment-mothod">
+                            <div class="the-payment-method">
                                 <label>
-                                    <input type="radio" readonly="" name="payment-method" value="atm" />
+                                    <input type="radio" readonly="" name="payment-method" value="atm" onChange={(e) => setMethod(e.target.value)} />
                                     <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-atm.svg" width="32" height="32" alt="icon" />
                                     <span>Thẻ ATM nội địa/ Internet Banking</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" name="submit" className="btn-Submit">Tiếp tục</button>
+                    <button type="submit" name="submit" className="btn-Submit"
+              onClick={(e) => handleCreate(e)}>Tiếp tục</button>
                 </div>
             </div>
             <Footer/>
