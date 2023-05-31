@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import './User.css';
 import Topbar from '../Topbar/Topbar';
 import Sidebar from '../Sidebar/Sidebar';
 import avatar from '../Images/avatar.jpeg';
+import { useNavigate } from "react-router-dom";
+
 import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from '@mui/icons-material';
 export default function User() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div>
         <Topbar />

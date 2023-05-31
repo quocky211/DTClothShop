@@ -208,16 +208,13 @@ export function ProductDetails(props) {
       if (!favoriteProduct) {
         ProductDataService.addFavoriteProduct(product_favorite)
           .then((response) => {
-            //console.log(response);
             setAlert({
               severity: response.data.severity,
               message: response.data.message,
             });
             setFavoratiProduct(!favoriteProduct);
-            //console.log(alert);
           })
           .catch((error) => {
-            //alert("Thêm không thành công");
             setAlert({
               severity: error.data.severity,
               message: error.data.message,

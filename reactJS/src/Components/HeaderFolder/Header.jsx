@@ -76,6 +76,8 @@ function Header(props) {
   const Logout = (e) => {
     window.localStorage.removeItem("JWT");
     window.localStorage.removeItem("Email");
+    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("refreshToken");
 
     navigate("/Login");
   };

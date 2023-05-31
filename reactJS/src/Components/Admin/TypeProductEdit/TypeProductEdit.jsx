@@ -11,8 +11,16 @@ import ProductDataService from "../../../services/products";
 import CatagoryDataService from "../../../services/catagories";
 
 export default function TypeProductEdit() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   const { typeProductId } = useParams();
 
   const [product, setProduct] = useState({});

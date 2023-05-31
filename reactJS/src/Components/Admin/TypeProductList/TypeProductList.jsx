@@ -6,8 +6,20 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Add, DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ProductDataService from "../../../services/products";
+import { useNavigate } from "react-router-dom";
 
 export default function TypeProductList() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
+  
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();

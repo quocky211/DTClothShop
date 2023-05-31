@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./NewUser.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
-import { useNavigate } from "react-router-dom";
 import UserDataService from "../../../services/users";
+import { useNavigate } from "react-router-dom";
 
 export default function NewUser() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");

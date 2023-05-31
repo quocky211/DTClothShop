@@ -12,11 +12,11 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
 
-  const tokens = JSON.parse(localStorage.getItem("JWT"));
-  useEffect((_) => {
-    if (!tokens) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
       navigate("/Login");
-    } else if (!tokens.level) {
+    } else if (!user.level) {
       navigate("/");
     }
   }, []);

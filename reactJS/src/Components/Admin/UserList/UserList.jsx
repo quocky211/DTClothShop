@@ -8,9 +8,21 @@ import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 import ao from "../Images/ao1.jpg";
 import UserDataService from "../../../services/users";
+import { useNavigate } from "react-router-dom";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
+
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     getUsers();

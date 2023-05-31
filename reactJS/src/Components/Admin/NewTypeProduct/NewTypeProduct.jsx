@@ -8,8 +8,16 @@ import ProductDataService from "../../../services/products";
 import CatagoryDataService from "../../../services/catagories";
 
 export default function NewTypeProduct() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   const [catas, setCatas] = useState([]);
   const [cataId, setCataId] = useState(1);
   const [cataDetail, setCataDetail] = useState([]);

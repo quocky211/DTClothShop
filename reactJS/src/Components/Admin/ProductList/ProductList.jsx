@@ -8,9 +8,20 @@ import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ao from '../Images/ao1.jpg'
 import ProductDataService from "../../../services/products";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ProductList() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   const { typeProductId } = useParams();
 
   const [productDetails, setProductDetails] = useState([]);

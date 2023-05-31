@@ -7,8 +7,16 @@ import { useNavigate } from "react-router-dom";
 import ProductDataService from "../../../services/products";
 
 export default function NewProduct() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   const { typeProductId } = useParams();
 
   const [image, setImg] = useState("");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Product.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
@@ -7,7 +7,19 @@ import Chart from "../Chart/Chart";
 import { productData } from "../dummyData";
 import ao from "../Images/ao1.jpg";
 import { Publish } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+
 export default function Product() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    } else if (!user.level) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div>
       <Topbar />
