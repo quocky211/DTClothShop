@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
+import { momoPayment } from '../../actions/orders'
 import OrderDataService from "../../services/orders";
+import { useNavigate } from 'react-router-dom';
 
 function ShipAddress() {
     const location = useLocation();
@@ -21,6 +23,7 @@ function ShipAddress() {
     const [shipcost, setshipcost] = useState("");
     const [method, setMethod] = useState("");
     const [phone, setPhone] = useState("");
+    const navigate = useNavigate();
 
     console.log(location);
     var vnd = Intl.NumberFormat("vi-VN", {
@@ -82,25 +85,38 @@ function ShipAddress() {
     }
     var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
 
-    const handleCreate = (e) => {
-        e.preventDefault();
-        let newOrder = {
-          user_id: 11,
-          address: address,
-          status: '0',
-          note: "",
-          phone: phone,
-          pay_method: method,
-          total: Number(data + shipcost),
-        };
-        OrderDataService.createOrders(newOrder)
-          .then((response) => {
-            alert("Thêm mới thành công");
-          })
-          .catch((e) => {
-            alert("Thêm không thành công")
+    const handleCreate = async () => {
+        let total = data + shipcost
+        try {
+            const res = await momoPayment(total)
+            if(!res) {
+                return;
+            }
+            // navigate(res?.payUrl);
+            console.log(res);
+        }
+        catch (e){
             console.log(e);
-          });
+        }
+        // e.preventDefault();
+
+        // let newOrder = {
+        //   user_id: 11,
+        //   address: address,
+        //   status: '0',
+        //   note: "",
+        //   phone: phone,
+        //   pay_method: method,
+        //   total: Number(data + shipcost),
+        // };
+        // OrderDataService.createOrders(newOrder)
+        //   .then((response) => {
+        //     alert("Thêm mới thành công");
+        //   })
+        //   .catch((e) => {
+        //     alert("Thêm không thành công")
+        //     console.log(e);
+        //   });
       };
 
     return (

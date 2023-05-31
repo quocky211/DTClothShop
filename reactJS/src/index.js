@@ -39,6 +39,7 @@ import Payment from "./Components/Payment/Payment";
 import FavoriteProduct from "./Components/FavoriteProduct/FavoriteProduct";
 // import store redux
 import { store } from "./redux/store";
+import  Redirect  from './Components/Redirect/Redirect';
 
 const router = createBrowserRouter([
   {
@@ -166,6 +167,10 @@ const router = createBrowserRouter([
         path: "Admin/NewProduct/:typeProductId",
         element: <NewProduct />,
       },
+      {
+        path: "/MOMO/Checkout/Redirect",
+        element: <Redirect />
+      }
     ],
   },
 ]);
