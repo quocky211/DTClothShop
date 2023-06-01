@@ -40,6 +40,7 @@ import FavoriteProduct from "./Components/FavoriteProduct/FavoriteProduct";
 // import store redux
 import { store } from "./redux/store";
 import  Redirect  from './Components/Redirect/Redirect';
+import  VnPayRedirect  from './Components/Redirect/VnPayRedirect';
 
 const router = createBrowserRouter([
   {
@@ -170,6 +171,10 @@ const router = createBrowserRouter([
       {
         path: "MOMO/Checkout/Redirect",
         element: <Redirect />
+      },
+      {
+        path: "VnPay/Checkout/Redirect",
+        element: <VnPayRedirect />
       }
     ],
   },

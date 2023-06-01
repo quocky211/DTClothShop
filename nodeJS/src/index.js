@@ -30,7 +30,6 @@ app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-route(app);
 
 db.connect();
 
@@ -40,9 +39,12 @@ app.use((req, res, next) => {
     // next(error);
     // res.header('Access-Control-Allow-Origin', '*');
     // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    console.log(req);
-    next(httpError.NotFound('This route does not exists.'));
+    // console.log(req);
+    // next(httpError.NotFound('This route does not exists.'));
+    next();
 });
+
+route(app);
 
 app.use((err, req, res, next) => {
     res.json({

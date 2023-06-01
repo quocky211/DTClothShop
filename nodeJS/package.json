@@ -22,6 +22,7 @@
         "http-errors": "^2.0.0",
         "joi": "^17.9.1",
         "jsonwebtoken": "^9.0.0",
+        "moment": "^2.29.4",
         "momo": "^0.0.130",
         "mongoose": "^6.9.2",
         "mongoose-paginate-v2": "^1.7.1",

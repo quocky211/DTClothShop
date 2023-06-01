@@ -16,13 +16,13 @@ exports.createPaymentUrl = catchAsync(async (req, res, next) => {
 
   let orderId = moment(date).format('DDHHmmss');
 
-  let price = req.body.ticketPrice;
+  let price = req.body.total;
   let amount = req.body.total;
   let bankCode = req.body?.bankCode || '';
   let locale = req.body?.language || 'vn';
-  let selectedSeat = req.body.selectedSeats;
-  let orderSeat = selectedSeat.map((s) => `${s.row}-${s.col}`);
-  let orderInfo = orderSeat;
+  // let selectedSeat = req.body.selectedSeats;
+  // let orderSeat = selectedSeat.map((s) => `${s.row}-${s.col}`);
+  let orderInfo = 'Thanh toán bằng VNPay';
   let currCode = 'VND';
   let vnp_Params = {};
   vnp_Params['vnp_Version'] = '2.1.0';
@@ -33,7 +33,7 @@ exports.createPaymentUrl = catchAsync(async (req, res, next) => {
   vnp_Params['vnp_TxnRef'] = orderId;
   vnp_Params['vnp_OrderInfo'] = orderInfo;
   vnp_Params['vnp_OrderType'] = 'other';
-  vnp_Params['vnp_Amount'] = amount * price * 100;
+  vnp_Params['vnp_Amount'] = amount * 100;
   vnp_Params['vnp_ReturnUrl'] = returnUrl;
   vnp_Params['vnp_IpAddr'] = ipAddr;
   vnp_Params['vnp_CreateDate'] = createDate;
@@ -56,12 +56,12 @@ exports.createPaymentUrl = catchAsync(async (req, res, next) => {
 exports.vnpStatusReturn = catchAsync(async (req, res, next) => {
   let vnp_Params = req.query;
   let secureHash = vnp_Params['vnp_SecureHash'];
-
+  
   delete vnp_Params['vnp_SecureHash'];
   delete vnp_Params['vnp_SecureHashType'];
 
   vnp_Params = sortObject(vnp_Params);
-
+  console.log('param:                                 ' + vnp_Params);
   let config = require('../../util/vnpay');
 
   let secretKey = config.vnp_HashSecret;
