@@ -87,12 +87,13 @@ function ShipAddress() {
 
     const handleCreate = async () => {
         let total = data + shipcost
+        console.log(total);
         try {
             const res = await momoPayment(total)
             if(!res) {
                 return;
             }
-            // navigate(res?.payUrl);
+            window.location.assign(res?.payUrl);
             console.log(res);
         }
         catch (e){

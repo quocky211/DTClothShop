@@ -168,7 +168,7 @@ const router = createBrowserRouter([
         element: <NewProduct />,
       },
       {
-        path: "/MOMO/Checkout/Redirect",
+        path: "MOMO/Checkout/Redirect",
         element: <Redirect />
       }
     ],

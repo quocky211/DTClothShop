@@ -8,22 +8,28 @@ const db = require('./config/db');
 const app = express();
 const port = 3001;
 const cors = require('cors');
-const orderRouter = require('./routes/order');
 require('dotenv').config();
 require('./helpers/connection_redis');
 
 // morgan: bắn ra log khi gửi yêu cầu lên server
-// app.use(morgan('combined'));
+app.use(morgan('dev'));
+app.use(
+    bodyParser.urlencoded({
+        extended: false,
+    })
+    );
+app.use(bodyParser.json())
+app.use(express.json())
+
 const corsOptions = {
     origin: '*',
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };
-app.use(cors()); // Use this after the variable declaration
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/order', orderRouter);
 route(app);
 
 db.connect();

@@ -40,7 +40,7 @@ const Redirect = () => {
   return (
     <div>
       {/* {loading && <Loading />} */}
-      <div>{status && status}</div>{' '}
+      <div>{status && status}Đã quá Pepsi ơi</div>{' '}
     </div>
   );
 };

@@ -32,7 +32,7 @@ import axios from 'axios';
 // };
 
 export const momoPayment = async (total) => {
-  const res = await axios.post('http://localhost:3001/order/momo_payment_url', total );
+  const res = await axios.post('http://localhost:3001/order/momo_payment_url', { total } );
   return res.data;
 };
 

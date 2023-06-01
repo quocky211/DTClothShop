@@ -15,7 +15,7 @@ const createPayment = async (data) => {
   let orderId = requestId;
   // let selectedSeat = data.selectedSeats;
   // let orderSeat = selectedSeat.map((s) => `${s.row}-${s.col}`).join(',');
-  // let orderInfo = `${orderSeat}`;
+  let orderInfo = 'Thanh toán bằng MOMO';
   let amount = data.total;
   let extraData = '';
 
@@ -32,8 +32,8 @@ const createPayment = async (data) => {
     ipnUrl +
     '&orderId=' +
     orderId +
-    // '&orderInfo=' +
-    // orderInfo +
+    '&orderInfo=' +
+    orderInfo +
     '&partnerCode=' +
     partnerCode +
     '&redirectUrl=' +
@@ -54,7 +54,7 @@ const createPayment = async (data) => {
     requestId: requestId,
     amount: amount,
     orderId: orderId,
-    // orderInfo: orderInfo,
+    orderInfo: orderInfo,
     redirectUrl: redirectUrl,
     ipnUrl: ipnUrl,
     extraData: extraData,
@@ -81,7 +81,7 @@ const verifyPayment = async ({
   orderId,
   requestId,
   amount,
-  // orderInfo,
+  orderInfo,
   orderType,
   transId,
   resultCode,
@@ -94,7 +94,7 @@ const verifyPayment = async ({
   let config = require('../../util/momo');
   let accessKey = config.accessKey;
   let secretKey = config.secretKey;
-  const signatureRaw = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&message=${message}&orderId=${orderId}&orderType=${orderType}&partnerCode=${partnerCode}&payType=${payType}&requestId=${requestId}&responseTime=${responseTime}&resultCode=${resultCode}&transId=${transId}`;
+  const signatureRaw = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&message=${message}&orderId=${orderId}&orderInfo=${orderInfo}&orderType=${orderType}&partnerCode=${partnerCode}&payType=${payType}&requestId=${requestId}&responseTime=${responseTime}&resultCode=${resultCode}&transId=${transId}`;
   const signatureValue = await crypto
     .createHmac('sha256', secretKey)
     .update(signatureRaw)
@@ -113,7 +113,7 @@ const verifyPayment = async ({
     orderId,
     requestId,
     amount,
-    // orderInfo,
+    orderInfo,
     orderType,
     transId,
     resultCode,
