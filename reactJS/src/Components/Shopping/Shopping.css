@@ -8,8 +8,6 @@
 
 .btn-quantity {
     font-size: 25px;
-    /* padding: 0 10px 0 10px;
-     */
      padding: 15px;
     margin-left: -30px;
     cursor: pointer;
@@ -41,8 +39,6 @@
 }
 
 img {
-    /* max-width: 5rem;
-    height: 5rem; */
     object-fit: contain;
     color: transparent;
   }
@@ -94,72 +90,46 @@ img {
 .btn-clear:hover {
     background-color: #ff0000;
 }
-
-/* @media only screen and (min-width: 768px) and (max-width: 1024px) {
-    .grid-five-column {
-      grid-template-columns: 1.5fr 1fr 0.5fr;
-    }
-    .cart-hide {
-      display: none;
-    }
-
-    .cart-two-button {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 2.2rem;
-    }
+.cartForMobile{
+  display: none;
+  border-radius: 4px;
+  box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
+}
+.cartItemInfor{
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+.cartItemTotal{
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+.cartItem-Mobile img{
+  width: 100px;
+  height: 100px;
+}
+.cartItemPriceTotal{
+  margin-top: 8px;
+}
+.cartForMobile span{
+  font-style: italic;
+  color: #ccc;
 }
 
-@media only screen and (min-width: 599px) and (max-width: 767px) {
-    .grid-five-column {
-      grid-template-columns: 1fr 0.5fr 0.5fr;
-    }
-    .cart-hide {
-      display: none;
-    }
-
-    .cart-two-button {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 2.2rem;
-
-    }
-    .cart-image-name {
-        align-items: center;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 0.4fr 0.6fr;
-    }
-
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
 
 }
+@media only screen and (max-width: 46.1875em)
+{
+  .cartForPC{
+    display: none;
+  }
+  .cartForMobile{
+    display: block;
+  }
+  .main-container {
+    width: 95% !important;
+  }
 
-@media only screen and (max-width: 598px) {
-    .grid-five-column {
-      grid-template-columns: 1.5fr 0.5fr 0.5fr;
-    }
-    .cart-hide {
-      display: none;
-    }
-
-    .cart-two-button {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 2.2rem;
-
-    }
-    .cart-image-name {
-        align-items: center;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 0.1fr 0.8fr;
-    }
-
-    .cart-image-name img {
-        width: 80px;
-        height: 60px;
-    }
-} */
+}
