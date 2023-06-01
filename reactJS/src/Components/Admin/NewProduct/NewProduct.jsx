@@ -19,7 +19,7 @@ export default function NewProduct() {
   }, []);
   const { typeProductId } = useParams();
 
-  const [image, setImg] = useState("");
+  const [image, setImg] = useState(null);
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [quantity, setQuantity] = useState(0);
@@ -54,7 +54,7 @@ export default function NewProduct() {
           <form className="newProductForm">
             <div className="newProductItem">
               <label>Image</label>
-              <input type="file" id="file" onChange={(e) => setImg(e.target.files[0].name)} />
+              <input type="file" id="file" onChange={(e) => setImg(URL.createObjectURL(e.target.files[0]))} />
             </div>
             <div className="newProductItem">
               <label>Màu sắc</label>

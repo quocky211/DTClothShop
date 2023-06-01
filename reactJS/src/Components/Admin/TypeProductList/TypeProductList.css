@@ -1,15 +1,19 @@
 .typeProductList{
     flex: 4;
 }
-.typeProductLisAdd{
+.typeProductListAdd{
     color: #3bb077;
     cursor: pointer;
     margin-right: 10px;
+    border: none;
+    background: none;
 }
 .typeProductListEdit{
     color: burlywood;
     cursor: pointer;
     margin-right: 10px;
+    border: none;
+    background: none;
 }
 .typeProductListDelete{
     color: red;

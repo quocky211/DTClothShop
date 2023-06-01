@@ -7,6 +7,9 @@ import { Add, DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ProductDataService from "../../../services/products";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "@mui/material/Tooltip";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function TypeProductList() {
   const navigate = useNavigate();
@@ -19,7 +22,7 @@ export default function TypeProductList() {
       navigate("/");
     }
   }, []);
-  
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProducts();
@@ -32,14 +35,19 @@ export default function TypeProductList() {
       })
       .catch((err) => console.log(err));
   };
-
+  // modal after click delete
   const handleDelete = (id) => {
-    if (window.confirm("Bạn có muốn xóa không?")) {
-      ProductDataService.deleteProduct(id)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
-    }
+    ProductDataService.deleteProduct(id)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
+  const [show, setShow] = useState(false);
+  const [id, setId] = useState(-1);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setId(id);
+  }
   var vnd = Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
@@ -68,23 +76,31 @@ export default function TypeProductList() {
       width: 120,
       renderCell: (params) => {
         return (
-          <div className="productListItem">{params.row.product.category_detail_id.name}</div>
+          <div className="productListItem">
+            {params.row.product.category_detail_id.name}
+          </div>
         );
       },
     },
-    { field: "material", headerName: "Chất liệu", width: 200, 
+    {
+      field: "material",
+      headerName: "Chất liệu",
+      width: 200,
       renderCell: (params) => {
-      return (
-        <div className="productListItem">{params.row.product.marterial}</div>
-      );
-    },},
+        return (
+          <div className="productListItem">{params.row.product.marterial}</div>
+        );
+      },
+    },
     {
       field: "gia",
       headerName: "Giá",
       width: 100,
       renderCell: (params) => {
         return (
-          <div className="productListItem">{vnd.format(params.row.product.price)}</div>
+          <div className="productListItem">
+            {vnd.format(params.row.product.price)}
+          </div>
         );
       },
     },
@@ -96,10 +112,12 @@ export default function TypeProductList() {
         return (
           <>
             <Link to={"/Admin/Products/" + params.row.product._id}>
-              <button className="typeProductLisAdd">
-                {" "}
-                <Add />{" "}
-              </button>
+              <Tooltip title="Thêm chi tiết sản phẩm">
+                <button className="typeProductListAdd">
+                  {" "}
+                  <Add />{" "}
+                </button>
+              </Tooltip>
             </Link>
             <Link to={"/Admin/TypeProduct/" + params.row.product._id}>
               <button className="typeProductListEdit">
@@ -107,10 +125,9 @@ export default function TypeProductList() {
                 <Edit />{" "}
               </button>
             </Link>
-            <DeleteOutline
-              className="typeProductListDelete"
-              onClick={() => handleDelete(params.row.product._id)}
-            />
+            <Button variant="primary" onClick={handleShow(params.row.product._id)}>
+              <DeleteOutline className="typeProductListDelete" />
+            </Button>
           </>
         );
       },
@@ -135,6 +152,20 @@ export default function TypeProductList() {
               },
             }}
           />
+          {/* <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thông báo</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleDelete(id)}>
+                Xóa
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Đóng
+              </Button>
+            </Modal.Footer>
+          </Modal> */}
         </div>
       </div>
     </div>

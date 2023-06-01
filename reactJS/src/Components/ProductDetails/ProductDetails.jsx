@@ -68,14 +68,26 @@ export function ProductDetails(props) {
     quantity,
     stock,
   }) => {
-    setAlert({
-      message: "Thêm vào giỏ hàng thành công",
-    });
-    handleClose();
-    handleClick();
-    dispatch(
-      addToCart({ _id, name, image, price, color, size, quantity, stock })
-    );
+    if(sizeProduct!=="")
+    {
+      setAlert({
+        message: "Thêm vào giỏ hàng thành công",
+      });
+      handleClose();
+      handleClick();
+      dispatch(
+        addToCart({ _id, name, image, price, color, size, quantity, stock })
+      );
+    }
+    else{
+      setAlert({
+        severity: "error",
+        message: "Vui lòng chọn size sản phẩm",
+      });
+      handleClose();
+      handleClick();
+    }
+    console.log(alert);
   };
   // for change image when press related product
   useEffect(() => {
@@ -136,7 +148,6 @@ export function ProductDetails(props) {
     } else {
       ProductDataService.getFavoriteProductById(emailUser, productID)
         .then((res) => {
-          //console.log(res);
           if (res.data != null) setFavoratiProduct(true);
           else setFavoratiProduct(false);
         })
@@ -242,11 +253,33 @@ export function ProductDetails(props) {
     }
   };
   const handleDecreaseQuantity = (quantity) => {
-    quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
+    if(sizeProduct==="")
+    {
+      setAlert({
+        severity: "error",
+        message: "Vui lòng chọn size sản phẩm",
+      });
+      handleClose();
+      handleClick();
+    }
+    else{
+      quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
+    }
   };
 
   const handleIncreaseQuantity = (quantity) => {
-    quantity < qty ? setQuantity(quantity + 1) : setQuantity(qty);
+    if(sizeProduct==="")
+    {
+      setAlert({
+        severity: "error",
+        message: "Vui lòng chọn size sản phẩm",
+      });
+      handleClose();
+      handleClick();
+    }
+    else{
+      quantity < qty ? setQuantity(quantity + 1) : setQuantity(qty);
+    }
   };
   // Move to top
   const handleTop = () => {

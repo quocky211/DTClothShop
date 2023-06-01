@@ -62,7 +62,7 @@ function Shopping() {
     const handleClearCart = () => {
         dispatch(clearCart());
     };
-    console.log(cart);
+
     return (
         <div className="main">
             <Header />
