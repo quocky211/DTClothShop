@@ -8,7 +8,7 @@ router.post('/create', orderController.StoreOrder);
 // router.get('/vnpaycheckout', orderController.ShowVNPayCheckOut);
 router.get('/:id/order-detail', orderController.ShowOderDetailByOrder);
 router.get('/order-detail/:id', orderController.GetOrderDetail);
-
+router.post('/order-detail', orderController.StoreOrderDetail);
 
 router.post('/momo_payment_url', momo.createPaymentUrl);
 router.get('/momo_return', momo.verifyPaymentUrl);

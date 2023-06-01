@@ -4,6 +4,7 @@ import { vnPayReturn, momoRedirect } from '../../actions/orders';
 // import Layout from '../../../components/layout';
 // import styles from '../../../styles/vnpay.module.scss';
 const Redirect = () => {
+  
 //   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('');
   useEffect(() => {
@@ -41,6 +42,7 @@ const Redirect = () => {
     <div>
       {/* {loading && <Loading />} */}
       <div>{status && status}Đã quá Pepsi ơi</div>{' '}
+      <a href='/'>Ấn vào đây để quay về trang hóa đơn</a>
     </div>
   );
 };

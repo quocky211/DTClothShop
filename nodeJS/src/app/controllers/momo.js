@@ -1,6 +1,7 @@
 const axios = require('axios');
 const crypto = require('crypto');
 const catchAsync = require('../../util/catchAsync');
+const Order = require('../models/order/order');
 
 const createPayment = async (data) => {
   let config = require('../../util/momo.js');
@@ -15,7 +16,7 @@ const createPayment = async (data) => {
   let orderId = requestId;
   // let selectedSeat = data.selectedSeats;
   // let orderSeat = selectedSeat.map((s) => `${s.row}-${s.col}`).join(',');
-  let orderInfo = 'Thanh toán bằng MOMO';
+  let orderInfo = data.order_id;
   let amount = data.total;
   let extraData = '';
 
@@ -108,6 +109,14 @@ const verifyPayment = async ({
       error: 'Process payment failed.',
     };
   }
+  Order.updateOne({ _id: orderInfo }, {status: "Đã thanh toán"})
+  .exec()
+  .then((result)=> {
+
+  })
+  .catch((e) => {
+    
+  })
   return {
     type: 'momo',
     orderId,

@@ -62,7 +62,7 @@ function Shopping() {
     const handleClearCart = () => {
         dispatch(clearCart());
     };
-
+    console.log(cart);
     return (
         <div className="main">
             <Header />
@@ -170,7 +170,8 @@ function Shopping() {
                         </button>
                         <NavLink
                             to="/ShipAddress"
-                            state={{ data: cart.cartTotalAmount }}
+                            state={{ data: cart.cartTotalAmount,
+                            items: cart.cartItems }}
                         >
                             <button className="btn-pay">
                                 {"Mua hàng"}

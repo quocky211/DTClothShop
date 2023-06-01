@@ -8,10 +8,10 @@ import Footer from "../FooterFolder/Footer";
 import { momoPayment } from '../../actions/orders'
 import OrderDataService from "../../services/orders";
 import { useNavigate } from 'react-router-dom';
-
 function ShipAddress() {
     const location = useLocation();
     const data = location.state?.data;
+    const items = location.state?.items;
     const [provinces, setProvince] = useState([]);
     const [provinceid, setProvinceId] = useState("");
     const [districts, setDistrict] = useState([]);
@@ -24,8 +24,8 @@ function ShipAddress() {
     const [method, setMethod] = useState("");
     const [phone, setPhone] = useState("");
     const navigate = useNavigate();
-
     console.log(location);
+    console.log(items);
     var vnd = Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -85,41 +85,66 @@ function ShipAddress() {
     }
     var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
 
-    const handleCreate = async () => {
+    const handleCreate = async (e) => {
+        
+        e.preventDefault();
+
+        let newOrder = {
+          user_id: 11,
+          address: address,
+          status: 'Chưa thanh toán',
+          note: "Không có",
+          phone: phone,
+          pay_method: method,
+          total: Number(data + shipcost),
+        };
+        
+        // console.log(newOrder);
         let total = data + shipcost
-        console.log(total);
-        try {
-            const res = await momoPayment(total)
-            if(!res) {
-                return;
+        OrderDataService.createOrders(newOrder)
+          .then(async (response) => {
+            const order_id = response.data;
+            alert("Thêm mới thành công");
+            items?.map((item) => {
+                let newOrderDetail = {
+                    order_id: order_id,
+                    product_id: item._id,
+                    amount: item.price,
+                    total: item.price*item.quantity,
+                    qty: item.quantity,
+                };
+                console.log(newOrderDetail);
+                OrderDataService.createOrderDetail(newOrderDetail).then().catch();
+              })
+
+            if (method == 'momo'){
+                try {
+                    console.log(order_id);
+        
+                    console.log(total);
+                    const res = await momoPayment(total, order_id)
+                    if(!res) {
+                        return;
+                    }
+                    window.location.assign(res?.payUrl);
+                    console.log(res);
+                }
+                catch (e){
+                    console.log(e);
+                }
             }
-            window.location.assign(res?.payUrl);
-            console.log(res);
-        }
-        catch (e){
+            
+          })
+          .catch((e) => {
+            alert("Thêm không thành công")
             console.log(e);
-        }
-        // e.preventDefault();
-
-        // let newOrder = {
-        //   user_id: 11,
-        //   address: address,
-        //   status: '0',
-        //   note: "",
-        //   phone: phone,
-        //   pay_method: method,
-        //   total: Number(data + shipcost),
-        // };
-        // OrderDataService.createOrders(newOrder)
-        //   .then((response) => {
-        //     alert("Thêm mới thành công");
-        //   })
-        //   .catch((e) => {
-        //     alert("Thêm không thành công")
-        //     console.log(e);
-        //   });
+          });
+        
+        
       };
-
+      items?.map((item) => {
+        console.log(item.name);
+      })
     return (
         <div className="main-container-ship">
             <Header/>
@@ -176,6 +201,15 @@ function ShipAddress() {
                         <div className="voucher">
                             <input type="text" placeholder="Nhập mã giảm giá" />
                             <button>Sử dụng</button>
+                        </div>
+                        <hr />
+
+                        <div className="">
+                            {
+                                items?.map((item) => (
+                                    <p>{item.name}x{item.quantity} </p>
+                                )) 
+                            }
                         </div>
                         <div className="price">
                             <div className="">
