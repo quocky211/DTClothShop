@@ -6,7 +6,6 @@ require('dotenv').config();
 const route = require('./routes');
 const db = require('./config/db');
 const app = express();
-const port = 3001;
 const cors = require('cors');
 require('dotenv').config();
 require('./helpers/connection_redis');
@@ -53,6 +52,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Example app listening on port ${process.env.PORT}`);
 });
