@@ -3,12 +3,12 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const httpError = require('http-errors');
 require('dotenv').config();
-const route = require('./routes');
-const db = require('./config/db');
+const route = require('./src/routes');
+const db = require('./src/config/db');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
-require('./helpers/connection_redis');
+require('./src/helpers/connection_redis');
 
 // morgan: bắn ra log khi gửi yêu cầu lên server
 app.use(morgan('dev'));
