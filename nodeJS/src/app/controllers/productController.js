@@ -426,43 +426,43 @@ class ProductController {
     }
 
     // GET /product/:id/comment
-    // ShowComment(req, res, next) {
-    //     ProductComment.find({ product_id: req.params.id })
-    //         .populate({ path: 'user_id', select: 'name' })
-    //         .exec()
-    //         .then((productComments) => res.json(productComments));
-    // }
     ShowComment(req, res, next) {
-        const productId = req.params.id;
-        const cacheKey = `comments_${productId}`;
-
-        // Check if the cached data exists
-        client.get(cacheKey, (err, cachedData) => {
-            if (err) {
-                console.error('Redis cache error:', err);
-                next();
-            }
-
-            // If cached data exists, return it
-            if (cachedData) {
-                console.log('Lấy dữ liệu từ Redis4');
-                const parsedData = JSON.parse(cachedData);
-                res.json(parsedData);
-            } else {
-                // If no cached data, query the database
-                ProductComment.find({ product_id: productId })
-                    .populate({ path: 'user_id', select: 'name' })
-                    .exec()
-                    .then((productComments) => {
-                        // Store the fetched data in cache
-                        console.log('Thêm dữ liệu vào Redis4');
-                        client.setex(cacheKey,600, JSON.stringify(productComments));
-                        res.json(productComments);
-                    })
-                    .catch(next);
-            }
-        });
+        ProductComment.find({ product_id: req.params.id })
+            .populate({ path: 'user_id', select: 'name' })
+            .exec()
+            .then((productComments) => res.json(productComments));
     }
+    // ShowComment(req, res, next) {
+    //     const productId = req.params.id;
+    //     const cacheKey = `comments_${productId}`;
+
+    //     // Check if the cached data exists
+    //     client.get(cacheKey, (err, cachedData) => {
+    //         if (err) {
+    //             console.error('Redis cache error:', err);
+    //             next();
+    //         }
+
+    //         // If cached data exists, return it
+    //         if (cachedData) {
+    //             console.log('Lấy dữ liệu từ Redis4');
+    //             const parsedData = JSON.parse(cachedData);
+    //             res.json(parsedData);
+    //         } else {
+    //             // If no cached data, query the database
+    //             ProductComment.find({ product_id: productId })
+    //                 .populate({ path: 'user_id', select: 'name' })
+    //                 .exec()
+    //                 .then((productComments) => {
+    //                     // Store the fetched data in cache
+    //                     console.log('Thêm dữ liệu vào Redis4');
+    //                     client.setex(cacheKey,600, JSON.stringify(productComments));
+    //                     res.json(productComments);
+    //                 })
+    //                 .catch(next);
+    //         }
+    //     });
+    // }
     // GET /product/:id/count-comment
     CountComment(req, res, next) {
         //     ProductComment.countDocuments({ product_id: req.params.id }).then((qty) => {
