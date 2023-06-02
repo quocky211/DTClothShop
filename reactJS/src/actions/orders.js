@@ -9,8 +9,8 @@ import axios from 'axios';
 // //     Authorization: `Bearer ${Cookies.get('token' || 'jwt')}`,
 // //   },
 // });
-export const vnpayPayment = async (total) => {
-  const res = await axios.post('http://localhost:3001/order/vnpay_url', { total });
+export const vnpayPayment = async (total, order_id) => {
+  const res = await axios.post('http://localhost:3001/order/vnpay_url', { total,  order_id });
   return res.data;
 };
 

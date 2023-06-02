@@ -1,5 +1,6 @@
 const catchAsync = require('../../util/catchAsync');
 const moment = require('moment');
+const Order = require('../models/order/order');
 
 
 exports.createPaymentUrl = catchAsync(async (req, res, next) => {
@@ -22,7 +23,7 @@ exports.createPaymentUrl = catchAsync(async (req, res, next) => {
   let locale = req.body?.language || 'vn';
   // let selectedSeat = req.body.selectedSeats;
   // let orderSeat = selectedSeat.map((s) => `${s.row}-${s.col}`);
-  let orderInfo = 'Thanh toán bằng VNPay';
+  let orderInfo = req.body.order_id;
   let currCode = 'VND';
   let vnp_Params = {};
   vnp_Params['vnp_Version'] = '2.1.0';
@@ -56,12 +57,11 @@ exports.createPaymentUrl = catchAsync(async (req, res, next) => {
 exports.vnpStatusReturn = catchAsync(async (req, res, next) => {
   let vnp_Params = req.query;
   let secureHash = vnp_Params['vnp_SecureHash'];
-  
+  let orderId = vnp_Params['vnp_OrderInfo']
   delete vnp_Params['vnp_SecureHash'];
   delete vnp_Params['vnp_SecureHashType'];
 
   vnp_Params = sortObject(vnp_Params);
-  console.log('param:                                 ' + vnp_Params);
   let config = require('../../util/vnpay');
 
   let secretKey = config.vnp_HashSecret;
@@ -73,6 +73,14 @@ exports.vnpStatusReturn = catchAsync(async (req, res, next) => {
 
   let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');
   if (secureHash === signed) {
+    Order.updateOne({ _id: orderId }, {status: "Đã thanh toán"})
+    .exec()
+    .then((result) => {
+
+    })
+    .catch((e) => {
+    
+    })
     res.status(200).json({
       type: 'vnpay',
       code: vnp_Params['vnp_ResponseCode'],

@@ -102,64 +102,62 @@ function ShipAddress() {
         
         // console.log(newOrder);
         let total = data + shipcost
-        // OrderDataService.createOrders(newOrder)
-        //   .then(async (response) => {
-        //     const order_id = response.data;
-        //     alert("Thêm mới thành công");
-        //     items?.map((item) => {
-        //         let newOrderDetail = {
-        //             order_id: order_id,
-        //             product_id: item._id,
-        //             amount: item.price,
-        //             total: item.price*item.quantity,
-        //             qty: item.quantity,
-        //         };
-        //         console.log(newOrderDetail);
-        //         OrderDataService.createOrderDetail(newOrderDetail).then().catch();
-        //       })
+        OrderDataService.createOrders(newOrder)
+          .then(async (response) => {
+            const order_id = response.data;
+            alert("Thêm mới thành công");
+            items?.map((item) => {
+                let newOrderDetail = {
+                    order_id: order_id,
+                    product_id: item._id,
+                    amount: item.price,
+                    total: item.price*item.quantity,
+                    qty: item.quantity,
+                };
+                console.log(newOrderDetail);
+                OrderDataService.createOrderDetail(newOrderDetail).then().catch();
+              })
 
-        //     if (method == 'momo'){
-        //         try {
-        //             console.log(order_id);
+            if (method == 'momo'){
+                try {
+                    console.log(order_id);
         
-        //             console.log(total);
-        //             const res = await momoPayment(total, order_id)
-        //             if(!res) {
-        //                 return;
-        //             }
-        //             window.location.assign(res?.payUrl);
-        //             console.log(res);
-        //         }
-        //         catch (e){
-        //             console.log(e);
-        //         }
-        //     }
+                    console.log(total);
+                    const res = await momoPayment(total, order_id)
+                    if(!res) {
+                        return;
+                    }
+                    window.location.assign(res?.payUrl);
+                    console.log(res);
+                }
+                catch (e){
+                    console.log(e);
+                }
+            }
+            if (method == 'vnpay'){
+                //vnpay
+                try {
+                const res = await vnpayPayment(
+                total, order_id
+                );
+                if (!res) {
+                    return; 
+                }
+                console.log(res);
+                window.location.assign(res?.paymentUrl);
+                } catch (e) {
+                console.log(e);
+                }
+
+            }
+
             
-        //   })
-        //   .catch((e) => {
-        //     alert("Thêm không thành công")
-        //     console.log(e);
-        //   });
+          })
+          .catch((e) => {
+            alert("Thêm không thành công")
+            console.log(e);
+          });
         
-        
-        //vnpay
-        try{
-            const res = await vnpayPayment(
-            // selectedSeats,
-            total,
-            // user,
-            // eventId,
-            // ticketPrice
-            );
-        if (!res) {
-            return;
-          }
-        console.log(res);
-        window.location.assign(res?.paymentUrl);
-
-        } catch (e) {
-          console.log(e);
-        }
       };
       items?.map((item) => {
         console.log(item.name);

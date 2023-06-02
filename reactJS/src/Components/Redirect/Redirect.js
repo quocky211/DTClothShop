@@ -41,8 +41,8 @@ const Redirect = () => {
   return (
     <div>
       {/* {loading && <Loading />} */}
-      <div>{status && status}Đã quá Pepsi ơi</div>{' '}
-      <a href='/'>Ấn vào đây để quay về trang hóa đơn</a>
+      <div>{status && status}Đã quá MOMO ơi</div>{' '}
+      <a href='/Account'>Ấn vào đây để quay về trang hóa đơn</a>
     </div>
   );
 };
