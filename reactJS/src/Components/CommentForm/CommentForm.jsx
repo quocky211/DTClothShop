@@ -41,22 +41,6 @@ const tokens = JSON.parse(localStorage.getItem("JWT"));
 //Lấy thông tin người dùng đã đăng nhập
 const user = JSON.parse(localStorage.getItem("user"));
 
-const renderRatingStars = (rating) => {
-  const stars = [];
-
-  for (let i = 0; i < rating; i++) {
-    stars.push(
-      <span key={i} className="fas fa-star" style={{ color: "yellow" }}></span>
-    );
-  }
-
-  for (let i = rating; i < 5; i++) {
-    stars.push(<span key={i} className="fas fa-star"></span>);
-  }
-
-  return stars;
-};
-
 const CommentForm = ({ onCommentSubmit, productId }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -95,41 +79,6 @@ const CommentForm = ({ onCommentSubmit, productId }) => {
   };
 
   return (
-    // <Form onSubmit={handleSubmit}>
-    //   <Form.Group>
-    //     <Form.Label>Tên:</Form.Label>
-    //     <FormControl
-    //       type="text"
-    //       value={name}
-    //       onChange={(e) => setName(e.target.value)}
-    //       required
-    //     />
-    //   </Form.Group>
-    //   <Form.Group>
-    //     <Form.Label>Bình luận:</Form.Label>
-    //     <FormControl
-    //       as="textarea"
-    //       value={comment}
-    //       onChange={(e) => setComment(e.target.value)}
-    //       required
-    //     />
-    //   </Form.Group>
-    //   <Form.Group>
-    //     <Form.Label>Đánh giá:</Form.Label>
-    //     <div>
-    //       {[1, 2, 3, 4, 5].map((value) => (
-    //         <span
-    //           key={value}
-    //           onClick={() => handleRatingChange(value)}
-    //           style={{ cursor: 'pointer', color: value <= rating ? 'gold' : 'gray' }}
-    //         >
-    //           &#9733;
-    //         </span>
-    //       ))}
-    //     </div>
-    //   </Form.Group>
-    //   <Button type="submit">Gửi</Button>
-    // </Form>
     <section className="vh-80" style={{ backgroundColor: "#ffff" }}>
       <Form onSubmit={handleSubmit}>
         <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
@@ -193,22 +142,35 @@ const CommentForm = ({ onCommentSubmit, productId }) => {
   );
 };
 
-const CommentList = ({ comments, productId }) => {
+const CommentList = ({ comments }) => {
+  const renderRatingStars = (rating) => {
+    const stars = [];
+  
+    for (let i = 0; i < rating; i++) {
+      stars.push(
+        <span key={i} className="fas fa-star" style={{ color: "yellow" }}></span>
+      );
+    }
+  
+    for (let i = rating; i < 5; i++) {
+      stars.push(<span key={i} className="fas fa-star"></span>);
+    }
+  
+    return stars;
+  };
+
+  const handleDeleteComment = (commentId) => {
+    console.log(commentId);
+    UserDataService.deleteComment(user._id, commentId)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   return (
-    // <Card>
-    //   <Card.Body>
-    //     <Card.Title>Bình luận</Card.Title>
-    //     <ListGroup variant="flush">
-    //       {comments.map((comment, index) => (
-    //         <ListGroup.Item key={index}>
-    //           <h5>{comment.name}</h5>
-    //           <p>{comment.comment}</p>
-    //           <p>Đánh giá: {comment.rating}/5</p>
-    //         </ListGroup.Item>
-    //       ))}
-    //     </ListGroup>
-    //   </Card.Body>
-    // </Card>
     <section style={{ backgroundColor: "#f7f6f6" }}>
       <MDBContainer className="py-5 text-dark" style={{ maxWidth: "1000px" }}>
         <MDBRow className="justify-content-center">
@@ -251,22 +213,14 @@ const CommentList = ({ comments, productId }) => {
                         {user != null && comment.user_id._id == user._id && (
                           <div className="d-flex justify-content-between align-items-center">
                             <p className="small mb-0" style={{ color: "#aaa" }}>
-                              <a href="" className="link-grey">
+                              <button className="link-grey" onClick={() => handleDeleteComment(comment._id)}>
                                 Xoá
-                              </a>
-                              &nbsp;•&nbsp;
-                              <a href="" className="link-grey">
+                              </button>
+                              •
+                              <button className="link-grey">
                                 Chỉnh sửa
-                              </a>
+                              </button>
                             </p>
-                            {/* <div className="d-flex flex-row">
-                              <MDBIcon fas icon="star text-warning me-2" />
-                              <MDBIcon
-                                far
-                                icon="check-circle"
-                                style={{ color: "#aaa" }}
-                              />
-                            </div> */}
                           </div>
                         )}
                       </div>
@@ -294,7 +248,8 @@ const CommentList = ({ comments, productId }) => {
 
 const CommentAndComentList = (props) => {
   const [comments, setComments] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+  const [isCommentSubmitted, setIsCommentSubmitted] = useState(false);
 
   //Thua kèo này t bày keo khác, hừm
   
@@ -325,7 +280,7 @@ const CommentAndComentList = (props) => {
 
   const handleCommentSubmit = (comment) => {
     console.log(comment);
-    // status = true // Cập nhật comments với comment mới
+    setIsCommentSubmitted(true); // Cập nhật comments với comment mới
   };
 
   return (
@@ -351,7 +306,7 @@ const CommentAndComentList = (props) => {
         )}
       </Container>
       <br />
-      <CommentList comments={comments} productId={props.productId} />
+      <CommentList comments={comments} />
     </div>
   );
 };

@@ -490,9 +490,9 @@ class ProductController {
                 for (let i = 0; i < qtyCmt; i++) {
                     totalStar += comments[i].star;
                 }
-                const avgStar = totalStar / qtyCmt;
+                const avgStar = (totalStar / qtyCmt).toFixed(2);;
                 res.json({
-                    avgStar,
+                    avgStar: parseFloat(avgStar),
                     qtyCmt,
                 });
             });
