@@ -31,7 +31,7 @@ class AdminController {
                 .then((productDetails) => {
                     return {
                         product,
-                        path: productDetails[0].path,
+                        path: productDetails[0]?.path,
                     };
                 });
         }
@@ -71,11 +71,20 @@ class AdminController {
     
     StoreProductDetail(req, res, next) {
         const fileData = req.file;
-        const productDetail = new ProductDetail({...req.body, path:fileData.path});
+        const data = {
+            product_id: Number(req.body.product_id),
+            color : req.body.color,
+            size : req.body.size,
+            qty : Number(req.body.qty)
+        };
+        console.log({...data, path:fileData.path});
+
+        const productDetail = new ProductDetail({...data, path:fileData.path});
         productDetail
             .save()
             .then(() => res.send('THÊM CHI TIẾT SẢN PHẨM THÀNH CÔNG'))
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
                 if(fileData) cloudinary.uploader.destroy(fileData.filename);
                 res.send('THÊM KHÔNG THÀNH CÔNG')
             });

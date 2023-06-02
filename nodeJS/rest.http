@@ -220,7 +220,7 @@ PATCH http://localhost:3001/user/10
 Content-Type:  application/json
 
 {
-    "phone": "0387383583"
+    "phone": "0972389257"
 
 }
 

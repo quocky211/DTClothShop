@@ -7,7 +7,7 @@ function HandleAddImage(product) {
         .then((productDetails) => {
             return {
                 product,
-                path: productDetails[0].path,
+                path: productDetails[0]?.path,
             };
         });
 }

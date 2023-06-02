@@ -6,7 +6,6 @@ import Sidebar from "../Sidebar/Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import ao from '../Images/ao1.jpg'
 import ProductDataService from "../../../services/products";
 import { useNavigate } from "react-router-dom";
 
@@ -52,7 +51,7 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={ao} alt="" />
+            <img className="productListImg" src={params.row.path} alt="" />
           </div>
         );
       },

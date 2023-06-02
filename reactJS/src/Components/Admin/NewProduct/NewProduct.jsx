@@ -26,14 +26,13 @@ export default function NewProduct() {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    let detail = {
-      product_id: typeProductId,
-      image: image,
-      color: color,
-      size: size,
-      qty: quantity,
-    };
-    ProductDataService.createDetailProduct(detail)
+    const formData = new FormData();
+    formData.append("path",image);
+    formData.append("product_id",Number(typeProductId));
+    formData.append("color",color);
+    formData.append("size",size);
+    formData.append("qty",Number(quantity));
+    ProductDataService.createDetailProduct(formData)
     .then((response) => {
       alert("Thêm mới chi tiết sản phẩm thành công")
       navigate("/Admin/Products/"+ typeProductId);
@@ -54,7 +53,7 @@ export default function NewProduct() {
           <form className="newProductForm">
             <div className="newProductItem">
               <label>Image</label>
-              <input type="file" id="file" onChange={(e) => setImg(URL.createObjectURL(e.target.files[0]))} />
+              <input type="file" id="file" onChange={(e) => setImg(e.target.files[0])} />
             </div>
             <div className="newProductItem">
               <label>Màu sắc</label>

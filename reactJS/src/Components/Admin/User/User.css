@@ -84,13 +84,19 @@
     font-weight: 600;
 }
 
-.userUpdateForm{
+/* .userUpdateForm{
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+} */
+.userUpdateLeft{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .userUpdateItem{
     display: flex;
+    width: 300px;
     flex-direction: column;
     margin-top: 20px;
     text-align: left;
@@ -127,9 +133,10 @@
     margin-right: 20px;
 }
 .userUpdateButton{
+    margin-top: 40px;
     border: none;
     border-radius: 5px;
-    padding: 5px;
+    padding: 15px;
     cursor: pointer;
     background-color: darkblue;
     color: white;

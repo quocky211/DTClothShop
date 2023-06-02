@@ -30,9 +30,9 @@ export default function Home() {
           <FeatureInfo />
           <Chart
             data={userData}
-            title="User Analytics"
+            title="Phân tích người dùng"
             grid
-            dataKey="Active User"
+            dataKey="Người dùng"
           />
           <div className="homeWidgets">
             <WidgetSm />

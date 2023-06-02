@@ -147,7 +147,7 @@ export default function NewTypeProduct() {
               className="newTypeProductButton"
               onClick={(e) => handleCreate(e)}
             >
-              Create
+              Tạo
             </button>
           </form>
         </div>

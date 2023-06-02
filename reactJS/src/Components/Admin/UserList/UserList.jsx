@@ -6,7 +6,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import Moment from 'react-moment';
-import ao from "../Images/ao1.jpg";
 import UserDataService from "../../../services/users";
 import { useNavigate } from "react-router-dom";
 
@@ -79,7 +78,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/Admin/User/" + params.row.id}>
+            <Link to={"/Admin/User/" + params.row._id}>
               <button className="userListEdit">
                 {" "}
                 <Edit />{" "}

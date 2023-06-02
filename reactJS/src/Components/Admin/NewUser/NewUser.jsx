@@ -16,7 +16,7 @@ export default function NewUser() {
       navigate("/");
     }
   }, []);
-  const [image, setImage] = useState("");
+  const [level, setLevel] = useState("false");
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [birth, setBirth] = useState("");
@@ -28,22 +28,23 @@ export default function NewUser() {
   const handleCreate = (e) => {
     e.preventDefault();
     let newUser = {
-      image:image,
       email: email,
       password: password,
       name: name,
       gender: gender,
       address: address,
       birthday: birth,
-      sdt: sdt,
+      phone: sdt,
+      level: level,
     };
     UserDataService.createUser(newUser)
       .then((response) => {
-        alert("Thêm mới người dùng thành công")
+        console.log(response);
+        alert("Thêm mới người dùng thành công");
         navigate("/Admin/Users");
       })
       .catch((e) => {
-        alert("Thêm không thành công")
+        alert("Thêm không thành công");
         console.log(e);
       });
   };
@@ -57,52 +58,100 @@ export default function NewUser() {
           <h1 className="newUserTitle">Thêm người dùng</h1>
           <form action="" className="newUserForm">
             <div className="newUserItem">
-              <label>Avatar</label>
-              <input type="file" id="file" onChange={(e) => setImage(e.target.files[0].name)}/>
+              <label>Họ và tên</label>
+              <input
+                type="text"
+                placeholder="Nguyễn Văn A"
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
             <div className="newUserItem">
               <label>Giới tính</label>
-              <div className="newUserGender" onChange={(e) => setGender(e.target.value)}>
-                <input type="radio" name="gender" id="male" value="Nam" />
-                <label htmlFor="male">Nam</label>
-                <input type="radio" name="gender" id="female" value="Nữ" />
-                <label htmlFor="female">Nữ</label>
-                <input type="radio" name="gender" id="others" value="Khác" />
-                <label htmlFor="others">Khác</label>
+              <div className="newUserGender">
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Nam"
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  {" "}Nam{" "}
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Nữ"
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  {" "} Nữ {" "}
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Khác"
+                    onChange={(e) => setGender(e.target.value)}
+                  />
+                  {" "}Khác
+                </label>
               </div>
             </div>
             <div className="newUserItem">
-              <label>Họ và tên</label>
-              <input type="text" placeholder="Nguyễn Văn A" onChange={(e) => setName(e.target.value)}/>
-            </div>
-            <div className="newUserItem">
               <label>Kiểu người dùng</label>
-              <select className="newUserSelect" name="active" id="active">
-                <option value="yes">Người dùng</option>
-                <option value="no">Admin</option>
+              <select
+                className="newUserSelect"
+                name="active"
+                id="active"
+                onChange={(e) => setLevel(e.target.value)}
+              >
+                <option value="false">Người dùng</option>
+                <option value="true">Admin</option>
               </select>
             </div>
             <div className="newUserItem">
               <label>Ngày sinh</label>
-              <input type="text" placeholder="01.01.2000" onChange={(e) => setBirth(e.target.value)}/>
+              <input
+                type="date"
+                placeholder="02/30/2000"
+                onChange={(e) => setBirth(e.target.value)}
+              />
             </div>
             <div className="newUserItem">
               <label>Số Điện Thoại</label>
-              <input type="text" placeholder="012 3456 789" onChange={(e) => setSDT(e.target.value)}/>
+              <input
+                type="text"
+                placeholder="012 3456 789"
+                onChange={(e) => setSDT(e.target.value)}
+              />
             </div>
             <div className="newUserItem">
               <label>Email</label>
-              <input type="text" placeholder="nguyenvan@gmail.com" onChange={(e) => setEmail(e.target.value)}/>
+              <input
+                type="text"
+                placeholder="nguyenvan@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="newUserItem">
               <label>Mặt khẩu</label>
-              <input type="text" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+              <input
+                type="text"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="newUserItem">
               <label>Địa chỉ</label>
-              <input type="text" placeholder="HCM" onChange={(e) => setAddress(e.target.value)}/>
+              <input
+                type="text"
+                placeholder="HCM"
+                onChange={(e) => setAddress(e.target.value)}
+              />
             </div>
-            <button className="newUserButton"  onClick={(e) => handleCreate(e)}>Create</button>
+            <button className="newUserButton" onClick={(e) => handleCreate(e)}>
+              Tạo
+            </button>
           </form>
         </div>
       </div>

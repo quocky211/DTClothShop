@@ -4,8 +4,11 @@ class UserDataService {
     async getAllUser() {
         return await axios.get("http://localhost:3001/admin/user/show")
     }
+    async getUserById(userId) {
+        return await axios.get(`http://localhost:3001/user/${userId}`)
+    }
     async createUser(data) {
-        return await axios.post("http://localhost:3001/admin/user/store",data)
+        return await axios.post("http://localhost:3001/user/register",data)
     }
     async editUser(userId, data) {
         return await axios.put(`http://localhost:3001/admin/user/edit/${userId}`, data)

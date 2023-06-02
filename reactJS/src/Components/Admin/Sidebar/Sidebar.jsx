@@ -1,25 +1,18 @@
 import React from "react";
 import './Sidebar.css'
 import {
-  ChatBubbleOutline,
-  AttachMoney,
-  Leaderboard,
-  DynamicFeed,
   LineStyle,
-  MailOutline,
   PermIdentity,
-  Report,
   Storefront,
   Timeline,
-  TrendingUp,
-  WorkOutline,
   PersonAddAlt,
   AddBusiness,
   List,
   CreditCard,
   FormatAlignJustify,
   Article,
-  EditNote
+  EditNote,
+  LocalAtm
 
 } from "@mui/icons-material";
 import { Link } from  'react-router-dom';
@@ -31,14 +24,14 @@ export default function Sidebar() {
           <h3 className="sidebarTitile">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/Admin" className="link-admin">
-              <li className="sidebarListItem active">
+              <li className="sidebarListItem">
                 <LineStyle className="sidebarIcon" />
                 Trang chủ
               </li>
             </Link>
             <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Thống kê
+              <LocalAtm className="sidebarIcon" />
+              Quản lý đơn hàng
             </li>
           </ul>
         </div>
