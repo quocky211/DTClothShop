@@ -497,6 +497,13 @@ class ProductController {
                 });
             });
     }
+    // DELETE /product/:id/comment
+    // DeleteComment(req, res, next) {
+    //     ProductComment.find({ product_id: req.params.id })
+    //         .populate({ path: 'user_id', select: 'name' })
+    //         .exec()
+    //         .then((productComments) => res.json(productComments));
+    // }
 }
 //đoạn code sắp xếp theo giá - sẽ chèn vào giao diện
 // function sortProducts(sortOrder) {

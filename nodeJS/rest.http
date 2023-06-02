@@ -243,3 +243,6 @@ GET http://localhost:3001/blog/blog-detail/1
 ##API
 
 GET http://localhost:3001/blog
+
+### xoá comment
+DELETE   http://localhost:3001/user/10/comment/123/delete

@@ -62,6 +62,11 @@ class ProductDataService {
       `http://localhost:3001/product/${productId}/comment`
     );
   }
+  async getCommentCountAndAvgRating(productId) {
+    return await axios.get(
+      `http://localhost:3001/product/${productId}/count-and-starrating-comment`
+    );
+  }
   async getAllFavoriteProduct(email) {
     return await axios.get(`http://localhost:3001/${email}/favorite-product`);
   }

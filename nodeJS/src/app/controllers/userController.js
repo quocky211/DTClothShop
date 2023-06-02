@@ -247,6 +247,15 @@ class UserController {
                 });
         }
     }
+
+    //DELETE /user/:user_id/comment/:comment_id/delete
+    DeleteComment(req, res, next) {
+        const { user_id, comment_id } = req.params;
+        ProductComment.deleteOne({ _id: comment_id,  user_id: user_id})
+            .exec()
+            .then(() => res.json({ status: "success"}))
+            .catch((e) => res.status(500).json({ error: e.message}));
+    }
 }
 
 module.exports = new UserController();

@@ -210,10 +210,22 @@
     text-align: center;
 }
 .containerItem .containerItem_infor-price{
+    width: 18vw;
+    margin: auto;
     font-size: 16px;
     font-weight: 500;
-    color: #000;
-    text-align: center;
+    color: #7f7f7f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.containerItem .containerItem_infor-price .containerItem_price{
+    order: 2;
+    /* margin-right: 10px; */
+}
+.containerItem .containerItem_infor-price .containerItem_reviews_AvgRating{
+    order: 1;
+    padding-bottom: 4px;
 }
 .btn .filter-img{
     width: 28px;
