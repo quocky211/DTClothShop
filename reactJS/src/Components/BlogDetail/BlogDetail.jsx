@@ -5,14 +5,19 @@ import Footer from "../FooterFolder/Footer";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useParams } from "react-router-dom";
 import BlogDataService from "../../services/blogs";
+import  { marked }  from "marked";
+function nl2br(text) {
+  text = String(text);
+  const lines = text.split('\n');
+  return lines.join('<br>');
+}
 
 export default function BlogDetail() {
-
     const { blogID } = useParams();
 
     const [blogDetail, setBlogDetail] = useState([])
     const [blogcmt, setBlogCmt] = useState([])
-
+    
     useEffect(() => {
       getBlogDetail();
       }, []);
@@ -26,7 +31,12 @@ export default function BlogDetail() {
             console.log(err);
         })
     }
-
+    
+    const htmlContent = marked.parse('<p>blogDetail.content</p>')
+    // console.log(typeof(convertedContent));
+    // console.log((convertedContent));
+    // document.getElementById("blogContent").innerHTML = htmlContent;
+    console.log(blogDetail);
   return (
     <div>
       <Header />
@@ -37,9 +47,13 @@ export default function BlogDetail() {
       </Breadcrumb>
       <div className="blogContent">
         <h2 className="blogContentTitle">{blogDetail.title}</h2>
-        <p className="blogContentPara">{blogDetail.content}</p>
+        <p className="user">Được đăng bởi <img src="https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg" alt="user" /> {blogDetail.user_id.name}</p>
+        <div className="blogContentPara" dangerouslySetInnerHTML={{ __html: nl2br(blogDetail.content) }}></div>
       </div>
       <Footer />
-    </div>
+      {
+      
+        }
+    </div>     
   );
 }

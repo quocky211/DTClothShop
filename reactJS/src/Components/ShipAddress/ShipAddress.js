@@ -221,7 +221,7 @@ function ShipAddress() {
                         </div>
                         <hr />
 
-                        <div className="">
+                        <div className="product-checkout-list">
                             {
                                 items?.map((item) => (
                                     <p>{item.name}x{item.quantity} </p>

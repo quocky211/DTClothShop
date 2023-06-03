@@ -101,23 +101,27 @@ textarea{
 .container-ship-right .price p{
     text-align: left;
 }
-.payment-mothods .the-payment-mothod{
+.payment-methods .the-payment-method{
     text-align: left;
     padding-left: 65px;
     margin: 15px 0;
 }
-.payment-mothods .the-payment-mothod label:hover{
+.payment-methods .the-payment-method label:hover{
     cursor: pointer;
 }
-.payment-mothods .the-payment-mothod input[type="radio"]{
+.payment-methods .the-payment-method input[type="radio"]{
     width: 18px;
     height: 18px;
 }
-.payment-mothods .the-payment-mothod img{
+.payment-methods .the-payment-method img{
     width: 32px;
     height: 32px;
     margin: 0 10px;
 }
-.payment-mothods .the-payment-mothod span{
+.payment-methods .the-payment-method span{
     font-size: 18px;
+}
+.product-checkout-list{
+    text-align: left;
+    padding: 0 65px;
 }

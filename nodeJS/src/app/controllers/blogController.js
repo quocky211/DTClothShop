@@ -5,6 +5,7 @@ class BlogController {
     // GET /blog
     ShowBlogs(req, res, next) {
         Blog.find({})
+            .populate({ path: 'user_id', select: 'name' })
             .exec()
             .then((blogs) => {
                 const data = blogs.map(HandleBlogImage);
@@ -18,6 +19,7 @@ class BlogController {
     // GET /blog/detail/:id
     ShowBlogDetail(req, res, next) {
         Blog.find({ _id: req.params.id })
+        .populate({ path: 'user_id', select: 'name' })
         .exec()
         .then((blogs) => {
             const data = blogs.map(HandleBlogComment);

@@ -22,7 +22,7 @@ function Blogs()
             console.log(err);
         })
     }
-
+    // console.log(blogs);
     return (
         <div className="">
             <Header/>
@@ -34,16 +34,22 @@ function Blogs()
                 <h2>Những bài viết hay về thời trang</h2>
                 <div className="blogDetail">
                 {blogs.map((item) => (
-                    <div className="blogDetailItem">
-                        <div className="blogDetailImg">
+                    <div className="card">
+                        <div className="card-header">
                             <img src={item.path} alt="img" />
                         </div>
-                        <div className="blogDetailInfor">
-                            <p className='blogDetailTitle'>{item.blog.title}</p>
-                            {/* <p className="blogDetailDes"></p> */}
+                        <div className="card-body">
+                        <span class="tag tag-teal">Fashion</span>
                             <Link to={"/Blogs/"+ item.blog._id}>
-                                 <button>Xem chi tiết</button>
+                            <h4>{item.blog.title}</h4>
                             </Link>
+                            <div class="user">
+                                <img src="https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg" alt="user" />
+                                <div class="user-info">
+                                <h5>{item.blog.user_id.name}</h5>
+                                <small>1w ago</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
