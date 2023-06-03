@@ -4,8 +4,12 @@ import Footer from "../FooterFolder/Footer";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import UserDataService from "../../services/users";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function Account() {
+  const [userId, setUserId] = useState(-1);
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [birthday, setBirthday] = useState('');
@@ -19,6 +23,7 @@ function Account() {
   const getInforUser = () =>{
     const result = localStorage.getItem('user');
     const user = JSON.parse(result);
+    setUserId(user._id);
     setName(user.name)
     setBirthday( moment(user.birthday).format('YYYY-MM-DD'));
     setGender(user.gender)
@@ -26,9 +31,46 @@ function Account() {
     setEmail(user.email)
     setAddress(user.address)
   }
+
+  const updateUser = () =>{
+    const data = {
+      name: name,
+      gender: gender,
+      birthday: birthday,
+      phone: phone,
+      address: address
+    }
+    UserDataService.editUser(userId,data)
+    .then(res=>{
+        handleClose();
+        handleClick();
+    })
+    .catch(err=>{console.log(err)});
+  }
+  const [open, setOpen] = useState(false)
+  const handleClick = () => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 100);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   return (
     <div className="">
       <Header />
+      <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Cập nhật tài khoản thành công
+        </Alert>
+      </Snackbar>
       <div className="account-info-container">
         <div className="account-info">
           <h3>Thông tin cá nhân</h3>
@@ -62,7 +104,7 @@ function Account() {
             <tr>
               <td>Email</td>
               <td>
-                <input type="email" value={email} size={30} onChange={(event) => setEmail(event.target.value)}/>
+                <input type="email" value={email} size={30}/>
               </td>
             </tr>
             <tr>
@@ -78,7 +120,7 @@ function Account() {
             </tr>
             <tr style={{textAlign:"center"}}>
               <td colSpan={2} style={{textAlign:"center"}} className="button-submit">
-                <button type="submit">Cập nhật</button>
+                <button type="submit" onClick={updateUser}>Cập nhật</button>
               </td>
             </tr>
           </table>

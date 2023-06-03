@@ -23,7 +23,7 @@ import { getToTals } from "../../redux/cartSlide";
 import { logout } from "../../redux/credentials";
 
 function Header(props) {
-  const tokens = JSON.parse(localStorage.getItem("JWT"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   let navigate = useNavigate();
   var loveList = "/FavoriteProduct";
@@ -32,7 +32,7 @@ function Header(props) {
   }
 
   function LoginclickHandler() {
-    if (!tokens) {
+    if (!user) {
       navigate("/Login");
     }
   }
@@ -265,7 +265,7 @@ function Header(props) {
                 alt="User-icon"
               />{" "}
             </Nav.Link>
-            {tokens != null && (
+            {user != null && (
               <ul className="list-infor-user">
                 <Nav.Link href="/Account">
                   {" "}

@@ -13,7 +13,6 @@ import {
   MailOutline,
   PermIdentity,
   PhoneAndroid,
-  Publish,
   Transgender,
 } from "@mui/icons-material";
 export default function User() {
@@ -40,7 +39,34 @@ export default function User() {
     });
   };
 
+  const [name, setName] = useState("");
   const [gender, setGender] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+
+  const updateUser = () => {
+
+    const data = {
+      name: name,
+      gender: gender,
+      birthday: birthday,
+      email: email,
+      phone: phone,
+      address: address,
+    };
+    UserDataService.editUser(userId, data)
+      .then((res) => {
+        console.log(res);
+        getInforUser(); // hiển thị thông tin sau khi cập nhật 
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <Topbar />
@@ -112,6 +138,8 @@ export default function User() {
                       name=""
                       placeholder="Quốc Kỳ"
                       className="userUpdateInput"
+                      required
+                      onChange={(event) => setName(event.target.value)}
                     />
                   </div>
                   <div className="userUpdateItem">
@@ -121,7 +149,7 @@ export default function User() {
                         <input
                           type="radio"
                           name="gender"
-                          value="Nam"
+                          value="Nam"    
                           onChange={(e) => setGender(e.target.value)}
                         />{" "}
                         Nam{"  "}
@@ -149,10 +177,11 @@ export default function User() {
                   <div className="userUpdateItem">
                     <label>Ngày sinh</label>
                     <input
-                      type="text"
-                      name=""
-                      placeholder="02.11.2002"
+                      type="date"
+                      placeholder="30/03/2002"
                       className="userUpdateInput"
+                      required
+                      onChange={(event) => setBirthday(event.target.value)}
                     />
                   </div>
                   <div className="userUpdateItem">
@@ -162,15 +191,18 @@ export default function User() {
                       name=""
                       placeholder="0972389257"
                       className="userUpdateInput"
+                      required
+                      onChange={(event) => setPhone(event.target.value)}
                     />
                   </div>
                   <div className="userUpdateItem">
                     <label>Email</label>
                     <input
                       type="text"
-                      name=""
+                      required
                       placeholder="quockynguyen02@gmail.com"
                       className="userUpdateInput"
+                      onChange={(event) => setEmail(event.target.value)}
                     />
                   </div>
                   <div className="userUpdateItem">
@@ -179,11 +211,15 @@ export default function User() {
                       type="text"
                       name=""
                       placeholder="TP HCM"
+                      required
                       className="userUpdateInput"
+                      onChange={(event) => setAddress(event.target.value)}
                     />
                   </div>
                 </div>
-                <button className="userUpdateButton">Cập nhật</button>
+                <button className="userUpdateButton" onClick={updateUser}>
+                  Cập nhật
+                </button>
               </form>
             </div>
           </div>

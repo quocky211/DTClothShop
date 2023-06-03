@@ -65,11 +65,11 @@ Content-Type: application/json
 }
 
 ### sửa user /admin/user/edit/:id
-PUT  http://localhost:3001/admin/user/edit/4
+PUT  http://localhost:3001/admin/user/edit/51
 Content-Type: application/json
 
 {
-    "name": "Đạiiiiiiiiiiiiiii"
+    "gender":"Nam"
 }
 
 ### xóa user /admin/user/delete/:id
