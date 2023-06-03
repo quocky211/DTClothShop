@@ -3,11 +3,11 @@ class BlogDataService {
 
     async getAllBlog() {
 
-        return await axios.get('http://localhost:3001/blog')
+        return await axios.get('https://thawing-hollows-39647.herokuapp.com/blog')
     }
     async getBlogById(blogID) {
 
-        return await axios.get(`http://localhost:3001/blog/blog-detail/${blogID}`)
+        return await axios.get(`https://thawing-hollows-39647.herokuapp.com/blog/blog-detail/${blogID}`)
     }
 
 }
