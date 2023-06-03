@@ -227,6 +227,9 @@ Content-Type:  application/json
 ###lấy comment của 1 sản phẩm /product/:id/comment
 GET http://localhost:3001/product/4/comment
 
+### đếm số comment trong 1 sản phẩm
+GET http://localhost:3001/product/4/count-and-starrating-comment
+
 
 ###thêm comment sản phẩm /user/:user_id/product/:product_id/comment
 POST http://localhost:3001/user/10/product/10/comment

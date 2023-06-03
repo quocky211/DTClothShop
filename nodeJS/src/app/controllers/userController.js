@@ -115,20 +115,6 @@ class UserController {
         }
     }
 
-    TestGetListUser(req, res, next) {
-        // console.log(req.headers);
-        const list = [
-            {
-                email: 'aaaaa@gmail.com',
-            },
-            {
-                email: 'aa565dadasdaaa@gmail.com',
-            },
-        ];
-
-        res.json(list);
-    }
-
     // GET /user/:id
     // GetUser(req, res, next) {
     //     User.find({ _id: req.params.id }, 'email name gender address birthday phone')
