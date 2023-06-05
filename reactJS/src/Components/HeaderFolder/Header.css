@@ -1,5 +1,10 @@
 .navbar{
     padding: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1; 
 }
 .navbar-light .navbar-nav .nav-link {
     color: black !important;
@@ -9,9 +14,6 @@
     display: block;
     transition: 0.2s linear; 
     border-bottom: 1px black;
-}
-.navbar {
-    position: relative;
 }
 .navbar-brand img{
     width: 64px;
@@ -123,7 +125,7 @@
 }
 .cartandlogin a[href="/ShoppingCart"]
 {
-    display: flex;
+    /* display: flex; */
     position: relative;
     cursor: pointer;
 

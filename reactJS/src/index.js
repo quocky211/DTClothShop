@@ -1,46 +1,64 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import Products from "./Components/ProductFolder/Products";
-import AboutUs from "./Components/AboutUsFolder/AboutUs";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import MainPage from "./Components/MainPageFolder/MainPage";
-import Shopping from "./Components/Shopping/Shopping";
-import Login from "./Components/LoginFolder/Login";
-import Register from "./Components/Register/Register";
-import ShipAddress from "./Components/ShipAddress/ShipAddress";
 import ErrorPage from "./Components/Error/error-page";
-import ProductDetails from "./Components/ProductDetails/ProductDetails";
-import OutfitDetail from "./Components/OutfitDetail/OutfitDetail";
-import Outfits from "./Components/Outfits/Outfits";
-import TypeProduct from "./Components/TypeProduct/TypeProduct";
-import TypeProductDetail from "./Components/TypeProductDetail/TypeProductDetail";
-import Blogs from "./Components/Blogs/Blogs";
-import Search from "./Components/Search/Search";
-import Account from "./Components/Account/Account";
-import Home from "./Components/Admin/Home/Home";
-import UserList from "./Components/Admin/UserList/UserList";
-import User from "./Components/Admin/User/User";
-import NewUser from "./Components/Admin/NewUser/NewUser";
-import ProductList from "./Components/Admin/ProductList/ProductList";
-import Product from "./Components/Admin/Product/Product";
-import NewProduct from "./Components/Admin/NewProduct/NewProduct";
-import TypeProductList from "./Components/Admin/TypeProductList/TypeProductList";
-import TypeProductEdit from "./Components/Admin/TypeProductEdit/TypeProductEdit";
-import NewTypeProduct from "./Components/Admin/NewTypeProduct/NewTypeProduct";
-import OrderDetail from "./Components/OrderDetail/OrderDetail";
-import BlogDetail from "./Components/BlogDetail/BlogDetail";
 import { Provider } from "react-redux";
 // import stores from "./stores";
 import "bootstrap/dist/css/bootstrap.css";
-
-import Payment from "./Components/Payment/Payment";
-import FavoriteProduct from "./Components/FavoriteProduct/FavoriteProduct";
 // import store redux
 import { store } from "./redux/store";
-import  Redirect  from './Components/Redirect/Redirect';
-import  VnPayRedirect  from './Components/Redirect/VnPayRedirect';
+import Redirect from "./Components/Redirect/Redirect";
+import VnPayRedirect from "./Components/Redirect/VnPayRedirect";
+// lazy
+const MainPage = lazy(() => import("./Components/MainPageFolder/MainPage"));
+const Products = lazy(() => import("./Components/ProductFolder/Products"));
+const AboutUs = lazy(() => import("./Components/AboutUsFolder/AboutUs"));
+const Shopping = lazy(() => import("./Components/Shopping/Shopping"));
+const Login = lazy(() => import("./Components/LoginFolder/Login"));
+const Register = lazy(() => import("./Components/Register/Register"));
+const ShipAddress = lazy(() => import("./Components/ShipAddress/ShipAddress"));
+const ProductDetails = lazy(() =>
+  import("./Components/ProductDetails/ProductDetails")
+);
+const OutfitDetail = lazy(() =>
+  import("./Components/OutfitDetail/OutfitDetail")
+);
+const Outfits = lazy(() => import("./Components/Outfits/Outfits"));
+const TypeProduct = lazy(() => import("./Components/TypeProduct/TypeProduct"));
+const TypeProductDetail = lazy(() =>
+  import("./Components/TypeProductDetail/TypeProductDetail")
+);
+const Blogs = lazy(() => import("./Components/Blogs/Blogs"));
+const Search = lazy(() => import("./Components/Search/Search"));
+const Account = lazy(() => import("./Components/Account/Account"));
+const Home = lazy(() => import("./Components/Admin/Home/Home"));
+const UserList = lazy(() => import("./Components/Admin/UserList/UserList"));
+const User = lazy(() => import("./Components/Admin/User/User"));
+const NewUser = lazy(() => import("./Components/Admin/NewUser/NewUser"));
+const ProductList = lazy(() =>
+  import("./Components/Admin/ProductList/ProductList")
+);
+const Product = lazy(() => import("./Components/Admin/Product/Product"));
+const NewProduct = lazy(() =>
+  import("./Components/Admin/NewProduct/NewProduct")
+);
+const TypeProductList = lazy(() =>
+  import("./Components/Admin/TypeProductList/TypeProductList")
+);
+const TypeProductEdit = lazy(() =>
+  import("./Components/Admin/TypeProductEdit/TypeProductEdit")
+);
+const NewTypeProduct = lazy(() =>
+  import("./Components/Admin/NewTypeProduct/NewTypeProduct")
+);
+const OrderDetail = lazy(() => import("./Components/OrderDetail/OrderDetail"));
+const BlogDetail = lazy(() => import("./Components/BlogDetail/BlogDetail"));
+const Payment = lazy(() => import("./Components/Payment/Payment"));
+const FavoriteProduct = lazy(() =>
+  import("./Components/FavoriteProduct/FavoriteProduct")
+);
 
 const router = createBrowserRouter([
   {
@@ -50,132 +68,252 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <MainPage />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <MainPage />
+          </Suspense>
+        ),
       },
       {
         path: "MainPage",
-        element: <MainPage />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <MainPage />
+          </Suspense>
+        ),
       },
       {
         path: "Products",
-        element: <Products />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Products />,
+          </Suspense>
+        ),
       },
       {
         path: "AboutUs",
-        element: <AboutUs />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <AboutUs />
+          </Suspense>
+        ),
       },
       {
         path: "ShoppingCart",
-        element: <Shopping />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Shopping />
+          </Suspense>
+        ),
       },
       {
         path: "FavoriteProduct",
-        element: <FavoriteProduct />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <FavoriteProduct />
+          </Suspense>
+        ),
       },
       {
         path: "Login",
-        element: <Login />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Login />
+          </Suspense>
+        ),
       },
       {
         path: "Register",
-        element: <Register />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Register />
+          </Suspense>
+        ),
       },
       {
         path: "ShipAddress",
-        element: <ShipAddress />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ShipAddress />
+          </Suspense>
+        ),
       },
       {
         path: "Payment",
-        element: <Payment />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Payment />
+          </Suspense>
+        ),
       },
       {
         path: "Outfits",
-        element: <Outfits />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Outfits />
+          </Suspense>
+        ),
       },
       {
         path: "Blogs",
-        element: <Blogs />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Blogs />
+          </Suspense>
+        ),
       },
       {
         path: "Blogs/:blogID",
-        element: <BlogDetail />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <BlogDetail />
+          </Suspense>
+        ),
       },
       {
         path: "Account",
-        element: <Account />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Account />
+          </Suspense>
+        ),
       },
       {
         path: "Products/:productID",
-        element: <ProductDetails />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ProductDetails />
+          </Suspense>
+        ),
       },
       {
         path: "Products/Type/:typeID",
-        element: <TypeProduct />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <TypeProduct />
+          </Suspense>
+        ),
       },
       {
         path: "Products/TypeDetail/:typedetailID",
-        element: <TypeProductDetail />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <TypeProductDetail />
+          </Suspense>
+        ),
       },
       {
         path: "Outfits/:outfitID",
-        element: <OutfitDetail />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <OutfitDetail />
+          </Suspense>
+        ),
       },
       {
         path: "OrderDetail/:orderID",
-        element: <OrderDetail />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <OrderDetail />
+          </Suspense>
+        ),
       },
       {
         path: "Search",
-        element: <Search />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Search />
+          </Suspense>
+        ),
       },
       {
         path: "Admin",
-        element: <Home />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/Users",
-        element: <UserList />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <UserList />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/User/:userId",
-        element: <User />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <User />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/NewUser",
-        element: <NewUser />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <NewUser />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/TypeProducts",
-        element: <TypeProductList />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <TypeProductList />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/TypeProduct/:typeProductId",
-        element: <TypeProductEdit />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <TypeProductEdit />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/NewTypeProduct",
-        element: <NewTypeProduct />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <NewTypeProduct />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/Products/:typeProductId",
-        element: <ProductList />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ProductList />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/Product/:productId",
-        element: <Product />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <Product />
+          </Suspense>
+        ),
       },
       {
         path: "Admin/NewProduct/:typeProductId",
-        element: <NewProduct />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <NewProduct />
+          </Suspense>
+        ),
       },
       {
         path: "MOMO/Checkout/Redirect",
-        element: <Redirect />
+        element: <Redirect />,
       },
       {
         path: "VnPay/Checkout/Redirect",
-        element: <VnPayRedirect />
-      }
+        element: <VnPayRedirect />,
+      },
     ],
   },
 ]);

@@ -1,6 +1,18 @@
+.breadcrumb{
+    margin-top: 70px;
+    padding: 15px 15px;
+    font-size: 18px;
+  }
+  .breadcrumb a{
+    color: black;
+  }
+
 .outfits-container{
     margin-top: 70px;
 }
+.visually-hidden{
+    display: none;
+    }
 
 .outfits-product{
     display: grid;
