@@ -176,6 +176,10 @@
 .btn{
     font-size: 18px !important;
 }
+.pagination{
+    padding-top: 45px;
+    text-align: center;
+}
 .all-product-store{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

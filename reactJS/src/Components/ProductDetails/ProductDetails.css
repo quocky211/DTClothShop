@@ -165,6 +165,7 @@
   width: 90vw;
   margin: auto;
 }
+
 @media only screen and (min-width: 46.25em) and (max-width: 63.9375em){
   .non-mobile-related {
     display: none;
@@ -204,6 +205,6 @@
     font-size: 14px;
   }
   .mobile-related {
-    display: block;
+    display: flex;
   }
 }

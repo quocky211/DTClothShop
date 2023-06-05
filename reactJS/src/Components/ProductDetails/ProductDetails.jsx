@@ -16,6 +16,8 @@ import Snackbar from "@mui/material/Snackbar";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlide";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return (

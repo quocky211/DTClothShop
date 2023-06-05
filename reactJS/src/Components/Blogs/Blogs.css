@@ -11,6 +11,8 @@
     margin: 20px 0;
 }
 .blogs-container h2{
+    /* margin-top: 60px; */
+    padding-top: 20px;
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 600;

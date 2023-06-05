@@ -1,4 +1,11 @@
-
+.breadcrumb{
+  margin-top: 70px;
+  padding: 15px 15px;
+  font-size: 18px;
+}
+.breadcrumb a{
+  color: black;
+}
 .grid-five-column {
     display: grid;
     grid-template-columns: repeat(4, 1fr) 0.3fr;
@@ -68,7 +75,8 @@ img {
 .cart-two-button {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    margin-bottom: 15px;
   }
 .btn-pay {
     padding: 15px;

@@ -2,16 +2,21 @@
     font-size: 22px;
     padding: 20px;
 }
-
+.blogContent .user{
+    text-align: right;
+    font-style: italic;
+}
+.blogContentTitle{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 22px;
+}
 .blogContentPara{
     text-align: justify;
+    font-size: 20px;
 }
 img{
     width: 100%;
-}
-h2{
-    text-align: left;
-    font-size: 40px !important;
 }
 .user img {
     border-radius: 50%;

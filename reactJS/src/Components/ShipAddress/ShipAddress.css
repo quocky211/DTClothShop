@@ -1,3 +1,11 @@
+.breadcrumb{
+    margin-top: 70px;
+    padding: 15px 15px;
+    font-size: 18px;
+  }
+  .breadcrumb a{
+    color: black;
+  }
 .main-container-ship{
     font-size: 18px;
     margin-top: 70px;
