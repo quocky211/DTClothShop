@@ -31,7 +31,7 @@ function Login(props) {
       },
     };
     await axios
-      .post("http://localhost:3001/user/login", user, config)
+      .post("https://thawing-hollows-39647.herokuapp.com/user/login", user, config)
       .then((res) => {
         window.localStorage.setItem(
           "JWT",

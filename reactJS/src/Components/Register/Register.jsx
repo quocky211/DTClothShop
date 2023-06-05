@@ -28,7 +28,7 @@ function Register() {
       },
     };
     await axios
-      .post("http://localhost:3001/user/register", newUser, config)
+      .post("https://thawing-hollows-39647.herokuapp.com/user/register", newUser, config)
       .then((res) => {
         console.log(res);
         if (res.data.status === "successfully") {

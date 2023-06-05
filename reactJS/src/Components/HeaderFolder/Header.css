@@ -121,6 +121,27 @@
 .cartandlogin{
     display: flex;
 }
+.cartandlogin a[href="/ShoppingCart"]
+{
+    display: flex;
+    position: relative;
+    cursor: pointer;
+
+}
+.cartandlogin a[href="/ShoppingCart"] span{
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 15px;
+    right: -10px;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
 .cartandlogin button{
     border: none;
     background: none;
