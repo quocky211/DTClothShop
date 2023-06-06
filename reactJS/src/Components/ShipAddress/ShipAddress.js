@@ -105,7 +105,6 @@ function ShipAddress() {
         OrderDataService.createOrders(newOrder)
           .then(async (response) => {
             const order_id = response.data;
-            alert("Thêm mới thành công");
             items?.map((item) => {
                 let newOrderDetail = {
                     order_id: order_id,
@@ -117,7 +116,11 @@ function ShipAddress() {
                 console.log(newOrderDetail);
                 OrderDataService.createOrderDetail(newOrderDetail).then().catch();
               })
-
+              if(method == 'cod'){
+                alert('Mua hàng thành công!')
+                navigate('/Account', {replace : true})
+                
+              }
             if (method == 'momo'){
                 try {
                     console.log(order_id);
@@ -127,7 +130,7 @@ function ShipAddress() {
                     if(!res) {
                         return;
                     }
-                    window.location.assign(res?.payUrl);
+                    // window.location.assign(res?.payUrl);
                     console.log(res);
                 }
                 catch (e){
@@ -150,7 +153,9 @@ function ShipAddress() {
                 }
 
             }
-
+            if(method == 'atm'){
+                
+            }
             
           })
           .catch((e) => {
