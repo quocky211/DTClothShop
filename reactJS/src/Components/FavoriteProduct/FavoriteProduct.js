@@ -11,6 +11,10 @@ import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
 import { DeleteOutline } from "@mui/icons-material";
 
+const MessengerComponent = React.lazy(() =>
+    import("../MessengerComponent/MessengerComponent")
+);
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return (
     <MuiAlert
@@ -154,6 +158,7 @@ function Shopping({ items, IncreaseQuantity, DecreaseQuantity, DeleteCart }) {
           </Snackbar>
         </div>
       </div>
+      <MessengerComponent/>
       <Footer />
     </div>
   );

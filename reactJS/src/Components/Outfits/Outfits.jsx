@@ -6,6 +6,11 @@ import Footer from "../FooterFolder/Footer";
 import OutfitDataService from "../../services/outfits";
 import { useState, useEffect } from "react";
 import Pagination from "react-bootstrap/Pagination";
+import React from "react";
+
+const MessengerComponent = React.lazy(() =>
+    import("../MessengerComponent/MessengerComponent")
+);
 
 function Outfits() {
   const [outfits, setOutfits] = useState([]);
@@ -62,6 +67,7 @@ function Outfits() {
       <div className="page">
         <Pagination>{items}</Pagination>
       </div>
+      <MessengerComponent/>
       <Footer />
     </div>
   );

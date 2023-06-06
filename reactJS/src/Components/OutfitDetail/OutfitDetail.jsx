@@ -5,6 +5,11 @@ import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import OutfitDataService from "../../services/outfits";
 import { useState, useEffect } from "react";
+import React from "react";
+
+const MessengerComponent = React.lazy(() =>
+    import("../MessengerComponent/MessengerComponent")
+);
 
 function OutfitDetail() {
   const { outfitID } = useParams();
@@ -113,6 +118,7 @@ function OutfitDetail() {
           </div>
         </div>
       </div>
+      <MessengerComponent/>
       <Footer />
     </div>
   );

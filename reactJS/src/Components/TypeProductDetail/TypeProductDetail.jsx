@@ -7,6 +7,12 @@ import Footer from "../FooterFolder/Footer";
 import ProductDataService from "../../services/products";
 import CatagoryDataService from "../../services/catagories";
 import { useState, useEffect } from "react";
+import React from 'react';
+
+const MessengerComponent = React.lazy(() =>
+    import("../MessengerComponent/MessengerComponent")
+);
+
 
 
 function TypeProductDetail() {
@@ -41,10 +47,11 @@ function TypeProductDetail() {
                 <Breadcrumb.Item active>{cataDetail}</Breadcrumb.Item>
             </Breadcrumb>
             <div className="list-product-typedetail">
-                {products.map((item) => 
+                {products.map((item) =>
                     <ContainerItem price={item.product.price} name={item.product.name} image={item.path} masp={item.product._id} />
                 )}
             </div>
+            <MessengerComponent/>
             <Footer/>
         </div>
     );

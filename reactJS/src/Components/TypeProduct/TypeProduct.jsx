@@ -7,6 +7,12 @@ import Footer from "../FooterFolder/Footer";
 import { useEffect, useState } from 'react';
 import ProductDataService from '../../services/products';
 import CatagoryDataService from '../../services/catagories';
+import React from 'react';
+
+const MessengerComponent = React.lazy(() =>
+    import("../MessengerComponent/MessengerComponent")
+);
+
 function TypeProduct() {
     const { typeID } = useParams();
     const [catagory, setCategory] = useState("");
@@ -21,7 +27,7 @@ function TypeProduct() {
         ProductDataService.getAllProductByTypeId(typeID)
         .then(res=>{
             setTypeProduct(res.data);
-            
+
         })
         .catch(e=>{
             console.log(e);
@@ -50,11 +56,12 @@ function TypeProduct() {
             </Breadcrumb>
             <div className="list-product-type">
                 {
-                    typePoduct.map((item) => 
+                    typePoduct.map((item) =>
                         <ContainerItem price={item.product.price} name={item.product.name} image={item.path} masp={item.product._id} />
                     )
                 }
             </div>
+            <MessengerComponent/>
             <Footer/>
         </div>
     );
