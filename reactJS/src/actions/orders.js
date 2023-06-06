@@ -30,6 +30,6 @@ export const momoRedirect = async () => {
 };
 
 export const getDiscount = async () => {
-  const res = await axios.get("https://thawing-hollows-39647.herokuapp.com/order/discount");
+  const res = await axios.get("http://localhost:3001/order/discount");
   return res.data;
   };
