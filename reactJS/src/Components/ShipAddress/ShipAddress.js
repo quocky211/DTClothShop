@@ -1,5 +1,6 @@
 import "./ShipAddress.css";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Alert from "react-bootstrap/Alert";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../HeaderFolder/Header";
@@ -32,13 +33,27 @@ function ShipAddress() {
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [mail, setMail] = useState("");
-
   const [discount, setDiscount] = useState("");
+
+  const [showFailAlert, setShowFailAlert] = useState(false)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const navigate = useNavigate();
   var vnd = Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
   });
+
+  
+  useEffect(() => {
+        let timeout;
+        if (showFailAlert) {
+          timeout = setTimeout(() => {
+            setShowFailAlert(false);
+          }, 3000);
+        }
+        return () => clearTimeout(timeout);
+      }, [showFailAlert]);
+
 
   useEffect(() => {
     getInforUser();
@@ -105,10 +120,7 @@ function ShipAddress() {
   };
   var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
 
-  const checkDiscount = async (e) => {
-    const resDiscount = await getDiscount();
-    console.log(resDiscount);
-  };
+ 
   // show model
   const [show, setShow] = useState(false);
 
@@ -127,6 +139,37 @@ function ShipAddress() {
   const handleShow1 = () => {
     setShow1(true);
 }
+const [nameDiscount, setNameDiscount] = useState("");
+const [percentDiscount, setPercentDiscount] = useState(0);
+const checkDiscount = async (e) => {
+    e.preventDefault();
+    const resDiscount = await getDiscount();
+    console.log(resDiscount);
+    console.log(discount);
+    var count = 0;
+    var percent = 0;
+    var namediscount = "";
+    resDiscount?.map((item) => {
+        if(item.code == discount && item.is_used == false){ 
+            count = 1; 
+        percent = item.discount;
+        namediscount = item.name;
+        }
+      })
+    if (count == 0){
+        setShowFailAlert(true);
+        setShowSuccessAlert(false)
+        setPercentDiscount(0)
+    }
+    if (count == 1){
+        setShowSuccessAlert(true)
+        setShowFailAlert(false);
+        setPercentDiscount(percent);
+        setNameDiscount(namediscount);
+
+    }
+}
+
 
   // hander click
   const handleCreate = async (e) => {
@@ -140,9 +183,9 @@ function ShipAddress() {
       note: note,
       phone: phone,
       pay_method: method,
-      total: Number(data + shipcost),
+      total: Number(data - data*percentDiscount + shipcost),
     };
-    let total = data + shipcost;
+    let total = data - data*percentDiscount + shipcost;
     OrderDataService.createOrders(newOrder)
       .then(async (response) => {
         const order_id = response.data;
@@ -286,16 +329,17 @@ function ShipAddress() {
           <div className="listPrice">
             <h2>Mã giảm giá</h2>
             <div className="voucher">
-              <input
-                type="text"
-                placeholder="Nhập mã giảm giá"
-                onChange={(e) => {
-                  setDiscount(e.target.value);
-                  checkDiscount(e.target.value);
-                }}
-              />
-              <button>Sử dụng</button>
-            </div>
+                            <input type="text" placeholder="Nhập mã giảm giá" 
+                            onChange={(e) => setDiscount(e.target.value)}/>
+                            <button onClick={(e) => checkDiscount(e)}>Sử dụng</button>
+                        </div>
+                        {showFailAlert && (<Alert key="danger" variant="danger" onClose={() => setShowFailAlert(false)}>
+                            CODE không hợp lệ!
+                            </Alert>)}
+                        {showSuccessAlert && (<Alert key="success" variant="success" onClose={() => setShowSuccessAlert(false)}>
+                            Đã áp dụng mã giảm giá {nameDiscount}!
+                            </Alert>)}
+
             <hr />
 
             <div className="product-checkout-list">
@@ -318,12 +362,20 @@ function ShipAddress() {
                   <span>{Number(shipcost).toLocaleString("vi-VN")} đ</span>
                 </p>
               </div>
+              { showSuccessAlert &&
+                            (<div className="">
+                                <p >Discount: <span>{Number(percentDiscount*100).toLocaleString("vi-VN")}{"% - "} {percentDiscount*data} đ</span>
+                                </p>
+                            </div>)
+                            }
+
+
               <hr />
               <div className="">
                 <p>
                   Tổng:{" "}
                   <span>
-                    {Number(data + shipcost).toLocaleString("vi-VN")} đ
+                  {Number(data - data*percentDiscount + shipcost).toLocaleString("vi-VN")}{" "} đ
                   </span>
                 </p>
               </div>
