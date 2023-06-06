@@ -7,7 +7,7 @@ router.post('/register', userController.Register);
 router.post('/refresh-token', userController.RefreshToken);
 router.post('/login', userController.Login);
 router.delete('/logout', userController.Logout);
-router.get('/test-get-list-user', verifyAccessToken, userController.TestGetListUser);
+// router.get('/test-get-list-user', verifyAccessToken, userController.TestGetListUser);
 
 router.get('/:id', userController.GetUser);
 router.get('/:id/order', userController.GetOrder);

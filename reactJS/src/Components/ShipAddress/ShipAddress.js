@@ -25,8 +25,6 @@ function ShipAddress() {
     const [method, setMethod] = useState("");
     const [phone, setPhone] = useState("");
     const navigate = useNavigate();
-    console.log(location);
-    console.log(items);
     var vnd = Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -74,7 +72,6 @@ function ShipAddress() {
         const getWard = async () => {
             const resWard = await fetch(`https://provinces.open-api.vn/api/d/${districtid}?depth=2`);
             const response = await resWard.json();
-            console.log(response['wards']);
             setWards(await response['wards']);
         }
         getWard();
@@ -105,6 +102,7 @@ function ShipAddress() {
         OrderDataService.createOrders(newOrder)
           .then(async (response) => {
             const order_id = response.data;
+            console.log(response.data);
             items?.map((item) => {
                 let newOrderDetail = {
                     order_id: order_id,
