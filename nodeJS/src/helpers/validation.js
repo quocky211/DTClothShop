@@ -6,7 +6,9 @@ const userValidate = (data) => {
         email: Joi.string()
             .email()
             .pattern(
-                new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)'),
+                new RegExp(
+                    '(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)|@hcmussh.edu.vn',
+                ),
             )
             .lowercase()
             .required(),
@@ -40,7 +42,9 @@ const loginValidate = (data) => {
         email: Joi.string()
             .email()
             .pattern(
-                new RegExp('(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)'),
+                new RegExp(
+                    '(@gmail.com$)|(@gm.uit.edu.vn$)|(@uit.edu.vn)|(@gmail.com.vn$)|(@yahoo.com$)|(@gmail.vn$)|@hcmussh.edu.vn',
+                ),
             )
             .lowercase()
             .required(),
