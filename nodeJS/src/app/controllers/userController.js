@@ -147,31 +147,31 @@ class UserController {
     }
 
     // GET /user/:id/order
-    // GetOrder(req, res, next) {
-    //     Order.find({ user_id: req.params.id })
-    //         .exec()
-    //         .then((order) => res.json(order))
-    //         .catch(next);
-    // }
     GetOrder(req, res, next) {
-        const userId = req.params.id;
-        client.get(`order:${userId}`, (err, order) => {
-            if (err) throw err;
-            if (order) {
-                console.log('Lấy danh sách order của người dùng từ Redis');
-                res.json(JSON.parse(order));
-            } else {
-                Order.find({ user_id: userId })
-                    .exec()
-                    .then((order) => {
-                        console.log('Lưu thông tin order vào Redis');
-                        client.setex(`order:${userId}`, 1800, JSON.stringify(order));
-                        res.json(order);
-                    })
-                    .catch(next);
-            }
-        });
+        Order.find({ user_id: req.params.id })
+            .exec()
+            .then((order) => res.json(order))
+            .catch(next);
     }
+    // GetOrder(req, res, next) {
+    //     const userId = req.params.id;
+    //     client.get(`order:${userId}`, (err, order) => {
+    //         if (err) throw err;
+    //         if (order) {
+    //             console.log('Lấy danh sách order của người dùng từ Redis');
+    //             res.json(JSON.parse(order));
+    //         } else {
+    //             Order.find({ user_id: userId })
+    //                 .exec()
+    //                 .then((order) => {
+    //                     console.log('Lưu thông tin order vào Redis');
+    //                     client.setex(`order:${userId}`, 1800, JSON.stringify(order));
+    //                     res.json(order);
+    //                 })
+    //                 .catch(next);
+    //         }
+    //     });
+    // }
 
     // PATCH /user/:id
     async EditUser(req, res, next) {

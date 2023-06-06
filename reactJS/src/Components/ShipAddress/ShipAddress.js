@@ -190,9 +190,14 @@ const checkDiscount = async (e) => {
       .then(async (response) => {
         const order_id = response.data;
         items?.map((item) => {
+          console.log(item);
           let newOrderDetail = {
             order_id: order_id,
             product_id: item._id,
+            name: item.name,
+            color: item.color,
+            size: item.size,
+            path: item.image,
             amount: item.price,
             total: item.price * item.quantity,
             qty: item.quantity,
@@ -202,7 +207,6 @@ const checkDiscount = async (e) => {
         });
         if (method == "cod") {
             handleShow();
-         
         }
         if (method == "momo") {
           try {

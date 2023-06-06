@@ -169,7 +169,7 @@ Content-Type: application/json
 GET  http://localhost:3001/user/10
 
 ###Lấy ra hóa đơn của 1 user qua user_id /user/:id/order
-GET  http://localhost:3001/user/11/order
+GET  http://localhost:3001/user/42/order
 
 ### lấy chi tiết hóa đơn qua order_id /order/:id/order-detail
 GET http://localhost:3001/order/69/order-detail

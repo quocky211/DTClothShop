@@ -20,6 +20,11 @@
     text-transform: uppercase;
     font-weight: 500;
 }
+.orderInforDetail span{
+    font-style: italic;
+    color:rgb(120, 120, 120);
+    margin-right: 12px;
+}
 .orderInforItem .orderInforDetail p{
     margin: 5px 0;
 }
