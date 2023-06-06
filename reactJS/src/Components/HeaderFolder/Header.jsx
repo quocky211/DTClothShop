@@ -80,7 +80,7 @@ function Header(props) {
  
     navigate("/Login");
   };
-  setTimeout(Logout, 1800000)
+  // setTimeout(Logout, 1800000)
 
   return (
     <Navbar

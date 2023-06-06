@@ -7,12 +7,14 @@ const Order = new Schema(
     {
         _id: { type: Number },
         user_id: { type: Number, ref: 'user' },
+        name : { type: String },
         address: { type: String },
         status: { type: String },
+        gmail: { type: String, require: false},
         note: { type: String, require: false },
         phone: { type: String },
         pay_method: { type: String },
-        total: Number,
+        total: { type: Number},
         discount_code: { type: String, ref: 'discount', require: false },
     },
     {
