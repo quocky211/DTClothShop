@@ -165,6 +165,9 @@
   width: 90vw;
   margin: auto;
 }
+.slick-prev:before, .slick-next:before {
+  color: black !important;
+}
 
 @media only screen and (min-width: 46.25em) and (max-width: 63.9375em){
   .non-mobile-related {

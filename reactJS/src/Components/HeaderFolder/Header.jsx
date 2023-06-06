@@ -72,15 +72,15 @@ function Header(props) {
       });
     }
   };
-
-  const Logout = (e) => {
+  const Logout = () => {
     window.localStorage.removeItem("JWT");
     window.localStorage.removeItem("Email");
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("refreshToken");
-
+ 
     navigate("/Login");
   };
+  // setTimeout(Logout, 1800000)
 
   return (
     <Navbar

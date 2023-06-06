@@ -16,18 +16,11 @@ import Snackbar from "@mui/material/Snackbar";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlide";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "../../../node_modules/slick-carousel/slick/slick.css";
+import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return (
-    <MuiAlert
-      elevation={6}
-      ref={ref}
-      variant="filled"
-      {...props}
-    />
-  );
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function ProductDetails(props) {
@@ -70,8 +63,7 @@ export function ProductDetails(props) {
     quantity,
     stock,
   }) => {
-    if(sizeProduct!=="")
-    {
+    if (sizeProduct !== "") {
       setAlert({
         message: "Thêm vào giỏ hàng thành công",
       });
@@ -80,8 +72,7 @@ export function ProductDetails(props) {
       dispatch(
         addToCart({ _id, name, image, price, color, size, quantity, stock })
       );
-    }
-    else{
+    } else {
       setAlert({
         severity: "error",
         message: "Vui lòng chọn size sản phẩm",
@@ -181,8 +172,9 @@ export function ProductDetails(props) {
   let settings = {
     arrows: true,
     infinite: true,
+    autoplay: true,
     speed: 1000,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
   let settingsmobile = {
@@ -255,31 +247,27 @@ export function ProductDetails(props) {
     }
   };
   const handleDecreaseQuantity = (quantity) => {
-    if(sizeProduct==="")
-    {
+    if (sizeProduct === "") {
       setAlert({
         severity: "error",
         message: "Vui lòng chọn size sản phẩm",
       });
       handleClose();
       handleClick();
-    }
-    else{
+    } else {
       quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
     }
   };
 
   const handleIncreaseQuantity = (quantity) => {
-    if(sizeProduct==="")
-    {
+    if (sizeProduct === "") {
       setAlert({
         severity: "error",
         message: "Vui lòng chọn size sản phẩm",
       });
       handleClose();
       handleClick();
-    }
-    else{
+    } else {
       quantity < qty ? setQuantity(quantity + 1) : setQuantity(qty);
     }
   };
@@ -293,11 +281,7 @@ export function ProductDetails(props) {
   };
   return (
     <div className="product-detail-container">
-      <Snackbar
-        open={open}
-        autoHideDuration={1500}
-        onClose={handleClose}
-      >
+      <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert
           onClose={handleClose}
           severity={alert.severity}
@@ -314,10 +298,7 @@ export function ProductDetails(props) {
       </Breadcrumb>
       <div className="product-detail">
         <div className="product-detail-left">
-          <img
-            src={path}
-            alt="img"
-          />
+          <img src={path} alt="img" />
         </div>
         <div className="product-detail-right">
           <h2>{product1.name}</h2>
@@ -386,10 +367,7 @@ export function ProductDetails(props) {
             >
               Thêm vào giỏ hàng
             </button>
-            <div
-              className="like-icon"
-              onClick={handleFavorateProduct}
-            >
+            <div className="like-icon" onClick={handleFavorateProduct}>
               {favoriteProduct ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -441,10 +419,7 @@ export function ProductDetails(props) {
                   <br></br>
                   Kích cỡ 4: Chiều cao trên 1m72, cân nặng dưới 95kg
                 </p>
-                <img
-                  src={size}
-                  alt="size"
-                />
+                <img src={size} alt="size" />
               </Accordion.Body>
             </Accordion.Item>
             <hr />
@@ -483,27 +458,23 @@ export function ProductDetails(props) {
       <hr />
       <div className="related-product">
         <h3>Có thể bạn sẽ thích</h3>
-        <div
-          className="non-mobile-related"
-          onClick={handleTop}
-        >
+        <div className="non-mobile-related" onClick={handleTop}>
           <Slider {...settings}>
             {relatedProdutcs.map(function (item) {
               return (
-                <ContainerItem
-                  price={item.product.price}
-                  name={item.product.name}
-                  image={item.path}
-                  masp={item.product._id}
-                />
+                <div className="">
+                  <ContainerItem
+                    price={item.product.price}
+                    name={item.product.name}
+                    image={item.path}
+                    masp={item.product._id}
+                  />
+                </div>
               );
             })}
           </Slider>
         </div>
-        <div
-          className="mobile-related"
-          onClick={handleTop}
-        >
+        <div className="mobile-related" onClick={handleTop}>
           <Slider {...settingsmobile}>
             {relatedProdutcs.map((item) => (
               <ContainerItem
