@@ -20,11 +20,11 @@ export const vnPayReturn = async () => {
 };
 
 export const momoPayment = async (total, order_id) => {
-  const res = await axios.post('http://localhost:3001/order/momo_payment_url', { total, order_id } );
+  const res = await axios.post('https://thawing-hollows-39647.herokuapp.com/order/momo_payment_url', { total, order_id } );
   return res.data;
 };
 
 export const momoRedirect = async () => {
-  const res = await axios.get(`http://localhost:3001/order/momo_return${window.location.search}`);
+  const res = await axios.get(`https://thawing-hollows-39647.herokuapp.com/order/momo_return${window.location.search}`);
   return res.data;
 };
