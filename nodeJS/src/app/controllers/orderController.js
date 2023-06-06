@@ -34,8 +34,13 @@ class OrderController {
         .then(() => res.json(order._id))
         .catch()
     }
-    // GET /product/
-
+    // GET /discount/
+    ShowDiscount(req, res, next) {
+        Discount.find({})
+            .exec()
+            .then((discount) => res.json(product))
+            .catch(next)
+    }
     // GET /order/checkout
     
     ShowVNPayCheckOut(req, res, next) {

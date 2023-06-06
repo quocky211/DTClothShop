@@ -7,6 +7,7 @@ import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import { momoPayment } from '../../actions/orders'
 import { vnpayPayment } from '../../actions/orders'
+import { getDiscount } from '../../actions/orders'
 import OrderDataService from "../../services/orders";
 import { useNavigate } from 'react-router-dom';
 function ShipAddress() {
@@ -24,6 +25,7 @@ function ShipAddress() {
     const [shipcost, setshipcost] = useState("");
     const [method, setMethod] = useState("");
     const [phone, setPhone] = useState("");
+    const [discount, setDiscount] = useState("")
     const navigate = useNavigate();
     var vnd = Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -52,6 +54,7 @@ function ShipAddress() {
         }
         console.log(shipcost);
     }
+
 
     useEffect(() => {
         const getDistrict = async () => {
@@ -82,6 +85,11 @@ function ShipAddress() {
         setselectedWard(event.nativeEvent.target[index].text);
     }
     var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
+
+    const checkDiscount = async(e) => {
+        const resDiscount = await getDiscount();
+        console.log(resDiscount);
+    }
 
     const handleCreate = async (e) => {
         
@@ -128,7 +136,7 @@ function ShipAddress() {
                     if(!res) {
                         return;
                     }
-                    // window.location.assign(res?.payUrl);
+                    window.location.assign(res?.payUrl);
                     console.log(res);
                 }
                 catch (e){
@@ -152,7 +160,8 @@ function ShipAddress() {
 
             }
             if(method == 'atm'){
-                
+                alert('Yêu cầu mua hàng của bạn đã được gửi!')
+                navigate('/Account', {replace : true})
             }
             
           })
@@ -165,6 +174,10 @@ function ShipAddress() {
       items?.map((item) => {
         console.log(item.name);
       })
+      function payInfoToggle(){
+        var atm = document.getElementById('pay-atm-info');
+        atm.classList.toggle('atm-none')
+      }
     return (
         <div className="main-container-ship">
             <Header/>
@@ -219,7 +232,10 @@ function ShipAddress() {
                     <div className="listPrice">
                         <h2>Mã giảm giá</h2>
                         <div className="voucher">
-                            <input type="text" placeholder="Nhập mã giảm giá" />
+                            <input type="text" placeholder="Nhập mã giảm giá" 
+                            onChange={(e) => {setDiscount(e.target.value);
+                             checkDiscount(e.target.value);
+                             }}/>
                             <button>Sử dụng</button>
                         </div>
                         <hr />
@@ -275,10 +291,13 @@ function ShipAddress() {
                             </div>
                             <div class="the-payment-method">
                                 <label>
-                                    <input type="radio" readonly="" name="payment-method" value="atm" onChange={(e) => setMethod(e.target.value)} />
+                                    <input type="radio" readonly="" name="payment-method" value="atm" onChange={(e) => {setMethod(e.target.value)}} />
                                     <img class="method-icon" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-atm.svg" width="32" height="32" alt="icon" />
                                     <span>Thẻ ATM nội địa/ Internet Banking</span>
                                 </label>
+                            </div>
+                            <div className="atm-pay-info atm-none" id="atm-pay-info">
+                                abcd
                             </div>
                         </div>
                     </div>
