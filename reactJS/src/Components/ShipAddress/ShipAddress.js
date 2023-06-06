@@ -213,7 +213,7 @@ function ShipAddress() {
                     </div>
                 </div>
                 <div className="container-ship-right">
-                    <div>
+                    <div className="listPrice">
                         <h2>Mã giảm giá</h2>
                         <div className="voucher">
                             <input type="text" placeholder="Nhập mã giảm giá" />
@@ -231,25 +231,22 @@ function ShipAddress() {
                         <div className="price">
                             <div className="">
                                 <p>
-                                    Tạm tính: <span>{Number(data).toLocaleString("vi-VN")}{" "}</span>
-                                    <span className="underline">đ</span>
+                                    Tạm tính: <span>{Number(data).toLocaleString("vi-VN")}{" "} đ</span>
                                 </p>
                             </div>
                             <div className="">
-                                <p >Phí vận chuyển: <span>{Number(shipcost).toLocaleString("vi-VN")}{" "}</span>
-                                    <span className="underline">đ</span>
+                                <p >Phí vận chuyển: <span>{Number(shipcost).toLocaleString("vi-VN")}{" "} đ</span>
                                 </p>
                             </div>
                             <hr />
                             <div className="">
                                 <p>
-                                    Tổng: <span>{Number(data + shipcost).toLocaleString("vi-VN")}{" "}</span>
-                                    <span className="underline">đ</span>
+                                    Tổng: <span>{Number(data + shipcost).toLocaleString("vi-VN")}{" "} đ</span>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="choosePayment">
                         <h2>Phương thức thanh toán</h2>
                         <div className="payment-methods">
                             <div class="the-payment-method">

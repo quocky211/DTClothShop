@@ -133,3 +133,41 @@ textarea{
     text-align: left;
     padding: 0 65px;
 }
+.price span{
+    background-color: #e5faf2;
+    color: red;
+    border-radius: 10px;
+    border: none;
+    padding: 7px 5px;
+    font-weight: 600;
+}
+@media only screen and (min-width: 46.25em) and (max-width: 64.2em) {
+    .container-ship{
+        display: block;
+    }
+    .container-ship-right{
+        display: inline-block;
+    }
+    .listPrice{
+        margin: 20px 0;
+    }
+    .choosePayment{
+        margin-top: 50px;
+    }
+
+}
+@media only screen and (max-width: 46.1875em)
+{
+    .container-ship{
+        display: block;
+    }
+    .container-ship-right{
+        display: inline-block;
+    }
+    .listPrice{
+        margin: 20px 0;
+    }
+    .choosePayment{
+        margin-top: 50px;
+    }
+}
