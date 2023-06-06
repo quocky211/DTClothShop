@@ -15,4 +15,5 @@ router.get('/momo_return', momo.verifyPaymentUrl);
 router.post('/vnpay_url', vnpay.createPaymentUrl);
 router.get('/vnpay_return', vnpay.vnpStatusReturn);
 
+router.get('/discount', orderController.ShowDiscount);
 module.exports = router;
