@@ -7,6 +7,8 @@ const route = require('./src/routes');
 const db = require('./src/config/db');
 const app = express();
 const cors = require('cors');
+
+const path = require('path');
 require('dotenv').config();
 require('./src/helpers/connection_redis');
 
@@ -15,10 +17,10 @@ app.use(morgan('dev'));
 app.use(
     bodyParser.urlencoded({
         extended: false,
-    })
-    );
-app.use(bodyParser.json())
-app.use(express.json())
+    }),
+);
+app.use(bodyParser.json());
+app.use(express.json());
 
 const corsOptions = {
     origin: '*',
@@ -29,6 +31,13 @@ app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+const buildPath = path.join(__dirname, 'reactJS', 'build');
+const cacheOptions = {
+    maxAge: '1h',
+};
+
+app.use(express.static(buildPath, cacheOptions));
 
 db.connect();
 
