@@ -94,16 +94,20 @@ export default function OrderDetail() {
                       <div className="orderProductInfor">
                         <p>{product.name}</p>
                         <p>
-                          <span style={{marginRight:"10px"}}>Màu:</span>
-                          <span style={{backgroundColor: product.color, 
-                            borderRadius:"50%", 
-                            border:"1px solid black",
-                            padding:"0 0 0px 20px "}}></span>
+                          <span style={{ marginRight: "10px" }}>Màu:</span>
+                          <span
+                            style={{
+                              backgroundColor: product.color,
+                              borderRadius: "50%",
+                              border: "1px solid black",
+                              padding: "0 0 0px 20px ",
+                            }}
+                          ></span>
                         </p>
                         <p>
                           <span>Size: {product.size}</span>
                         </p>
-                        <Link to={"/Products/"+product.product_id}>
+                        <Link to={"/Products/" + product.product_id}>
                           <button>Xem chi tiết</button>
                         </Link>
                       </div>
@@ -118,31 +122,33 @@ export default function OrderDetail() {
             </tbody>
           </table>
           <div className="orderProductsTable-Mobile">
-            <div className="orderItem-Mobile">
-              <img src=" " alt="img" />
-              <div className="orderProduct-Mobile">
-                <p>Áo thun đến từ đại dương</p>
-                <p>
-                  <span>Màu: </span>
-                  <span
-                    className=""
-                    style={{ background: "black", padding: "2px 7px" }}
-                  ></span>
-                  <span> | Size:</span>
-                  36
-                </p>
-                <p>
-                  <span>Số lượng: </span>
-                  {1}
-                  <span> | Giá: </span>330.000đ
-                </p>
+            {products.map((product) => (
+              <div className="orderItem-Mobile">
+                <img src={product.path} alt="img" />
+                <div className="orderProduct-Mobile">
+                  <p>{product.name}</p>
+                  <p>
+                    <span>Màu: </span>
+                    <span
+                      className=""
+                      style={{ background: product.color, padding: "2px 7px" }}
+                    ></span>
+                    <span> | Size:</span>
+                    {product.size}
+                  </p>
+                  <p>
+                    <span>Số lượng: </span>
+                    {product.qty}
+                    <span> | Giá: </span>{Number(product.total).toLocaleString("vi-VN")} đ
+                  </p>
+                </div>
+                <div className="buttonDetail">
+                  <Link to={"/Products/" + product.product_id}>
+                    <button> Xem chi tiết </button>
+                  </Link>
+                </div>
               </div>
-              <div className="buttonDetail">
-                <Link>
-                  <button> Xem chi tiết </button>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

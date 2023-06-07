@@ -1,5 +1,5 @@
 import React from "react";
-import './Sidebar.css'
+import "./Sidebar.css";
 import {
   LineStyle,
   PermIdentity,
@@ -12,10 +12,9 @@ import {
   FormatAlignJustify,
   Article,
   EditNote,
-  LocalAtm
-
+  LocalAtm,
 } from "@mui/icons-material";
-import { Link } from  'react-router-dom';
+import { Link } from "react-router-dom";
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -29,10 +28,12 @@ export default function Sidebar() {
                 Trang chủ
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <LocalAtm className="sidebarIcon" />
-              Quản lý đơn hàng
-            </li>
+            <Link to="/Admin/Orders" className="link-admin">
+              <li className="sidebarListItem">
+                <LocalAtm className="sidebarIcon" />
+                Quản lý đơn hàng
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -60,12 +61,6 @@ export default function Sidebar() {
               <li className="sidebarListItem">
                 <AddBusiness className="sidebarIcon" />
                 Thêm sản phẩm
-              </li>
-            </Link>
-            <Link to="/Admin/Products" className="link-admin">
-              <li className="sidebarListItem">
-                <CreditCard className="sidebarIcon" />
-                Order
               </li>
             </Link>
           </ul>

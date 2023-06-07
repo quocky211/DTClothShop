@@ -1,0 +1,7 @@
+.container-admin{
+    display: flex;
+    margin-top: 15px;
+}
+.orderList{
+    flex: 4;
+}
