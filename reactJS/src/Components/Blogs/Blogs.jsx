@@ -46,7 +46,7 @@ function Blogs()
                             <div class="user">
                                 <img src="https://png.pngtree.com/png-vector/20210128/ourlarge/pngtree-flat-default-avatar-png-image_2848906.jpg" alt="user" />
                                 <div class="user-info">
-                                <h5>{item.blog.user_id.name}</h5>
+                                <h5>{item.blog.user_id?.name}</h5>
                                 <small>1w ago</small>
                                 </div>
                             </div>
