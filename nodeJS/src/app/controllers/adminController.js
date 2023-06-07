@@ -68,34 +68,34 @@ class AdminController {
     }
 
     // POST /admin/product-detail/store
-    
+
     StoreProductDetail(req, res, next) {
         const fileData = req.file;
         const data = {
             product_id: Number(req.body.product_id),
-            color : req.body.color,
-            size : req.body.size,
-            qty : Number(req.body.qty)
+            color: req.body.color,
+            size: req.body.size,
+            qty: Number(req.body.qty),
         };
-        console.log({...data, path:fileData.path});
+        console.log({ ...data, path: fileData.path });
 
-        const productDetail = new ProductDetail({...data, path:fileData.path});
+        const productDetail = new ProductDetail({ ...data, path: fileData.path });
         productDetail
             .save()
             .then(() => res.send('THÊM CHI TIẾT SẢN PHẨM THÀNH CÔNG'))
             .catch((err) => {
                 console.log(err);
-                if(fileData) cloudinary.uploader.destroy(fileData.filename);
-                res.send('THÊM KHÔNG THÀNH CÔNG')
+                if (fileData) cloudinary.uploader.destroy(fileData.filename);
+                res.send('THÊM KHÔNG THÀNH CÔNG');
             });
     }
     // Delete ProductDetail
-    DeleteProductDetail(req, res, next){
+    DeleteProductDetail(req, res, next) {
         const productDetailID = req.params.id;
-        console.log(productDetailID)
+        console.log(productDetailID);
         ProductDetail.deleteOne({ _id: productDetailID })
-                .then(() => res.send('Xóa chi tiết sản phẩm thành công'))
-                .catch(() => res.send('Xóa chi tiết sản phẩm thất bại'));
+            .then(() => res.send('Xóa chi tiết sản phẩm thành công'))
+            .catch(() => res.send('Xóa chi tiết sản phẩm thất bại'));
     }
 
     // PUT /admin/product/:id
@@ -222,6 +222,46 @@ class AdminController {
             .exec()
             .then((orderDetail) => res.json(orderDetail))
             .catch(next);
+    }
+
+    // PUT /admin/order/:id/change-status
+    async ChangeStatusOrder(req, res) {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        try {
+            const order = await Order.findById(id);
+            if (!order)
+                res.status(404).json({
+                    error: 'Không tìm thấy hóa đơn',
+                });
+
+            order.status = status;
+            await order.save();
+
+            res.status(200).json({ message: 'Successfully!' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                error: 'Lỗi server',
+            });
+        }
+    }
+
+    // DELETE /admin/order/:id/delete
+    async DeleteOrder(req, res) {
+        const { id } = req.params;
+        const order = await Order.findById(id);
+        if (!order) res.status(404).json({ error: 'Không tìm thấy hóa đơn' });
+
+        try {
+            await OrderDetail.deleteMany({ order_id: order._id });
+            await order.remove();
+            res.status(200).json({ message: 'Successfully!' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Lỗi server' });
+        }
     }
 }
 

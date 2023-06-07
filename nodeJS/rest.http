@@ -86,6 +86,17 @@ GET http://localhost:3001/admin/order/show/
 ### show order-detail dựa vào order_id /admin/order/:id/order-detail
 GET http://localhost:3001/admin/order/89/order-detail
 
+### thay đổi trạng thái đơn hàng /admin/order/:id/change-status
+PUT http://localhost:3001/admin/order/81/change-status
+Content-Type:  application/json
+
+{
+    "status": "Đã xác nhậnn"
+}
+
+### xóa đơn đơn hàng /admin/order/:id/delete
+DELETE http://localhost:3001/admin/order/81/change-status
+
 ### trang danh sách sản phẩm, có bộ lọc và phân trang
 ### price=1 price < 100000
 ### price=2 100000 <= price < 300000
