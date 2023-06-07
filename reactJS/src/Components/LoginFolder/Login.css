@@ -78,14 +78,25 @@ margin-bottom: 15px;
 }
 .fb-and-gg{
     display: inline-flex;
+    padding: 15px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    margin-bottom: 15px;
 }
 .fb-and-gg img{
-    width: 60px;
-    height: 60px;
+    width: 20px;
+    height: 20px;
     margin: 0 24px;
 }
 .fb-and-gg img:hover{
     cursor: pointer;
+}
+.fb-and-gg p{
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
 }
 .loginForm p{
     margin: 16px 0;

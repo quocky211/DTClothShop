@@ -93,16 +93,14 @@ function Login(props) {
               Đăng nhập
             </button>
           </form>
-          <p>Hoặc</p>
+          <p>HOẶC</p>
           <div className="fb-and-gg">
-            <img
-              src={fb}
-              alt="fb"
-            />
+
             <img
               src={gg}
               alt="fb"
             />
+            <p>Đăng nhập với Google</p>
           </div>
           <br></br>
           <Link to="/Register">
