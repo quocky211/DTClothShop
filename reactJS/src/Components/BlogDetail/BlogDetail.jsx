@@ -47,7 +47,9 @@ export default function BlogDetail() {
       </Breadcrumb>
       <div className="blogContent">
         <h2 className="blogContentTitle">{blogDetail.title}</h2>
-        <p className="user">Được đăng bởi: Nguyễn Tuấn Kha</p>
+        {blogDetail.user_id &&
+        (<p className="user">Được đăng bởi: {blogDetail.user_id.name}</p>)
+        }
         <div className="blogContentPara" dangerouslySetInnerHTML={{ __html: nl2br(blogDetail.content) }}></div>
       </div>
       <Footer />

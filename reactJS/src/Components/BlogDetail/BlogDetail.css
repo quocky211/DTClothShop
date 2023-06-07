@@ -24,3 +24,15 @@ img{
     height: 40px;
     margin-right: 10px;
   }
+.blogContent .blogImage {
+    text-align: center;
+    font-style: italic;
+}
+.blogContent .blogImage img {
+    max-width: 70%;
+    max-height: 70%;
+}
+.blogContent .img-desc{
+    text-align: center;
+    font-style: italic;
+}
