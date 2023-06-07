@@ -5,3 +5,52 @@
 .orderList{
     flex: 4;
 }
+.orderList h2{
+    text-transform: uppercase;
+    font-size: 22px;
+}
+.tableOrderList{
+    margin: 30px 0;
+    padding: 0 20px;
+}
+.tableOrderList .orderPrice{
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+.tableOrderList .orderPayMethod{
+    text-transform: uppercase;
+    font-style: italic;
+    background-color: #ebf1fe;
+    border-radius: 10px;
+    color: yellowgreen; 
+    padding: 10px 15px;
+    text-align: center;
+}
+.tableOrderList .orderStatus{
+    background-color: #e5faf2;
+    color:#3bb077;
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+.tableOrderList .orderDate{
+    background-color: #e5faf2;
+    color:#317554;
+    padding: 10px 5px;
+    border-radius: 10px;
+}
+.tableOrderList .orderDisplayBtn{
+    background:none;
+    border: none;
+    background-color: #eeeef7;
+    color: #555;
+    border-radius: 5px;
+}
+.tableOrderList .orderDeleteBtn{
+    color: red;
+}
+.tableOrderList .btn-primary{
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}

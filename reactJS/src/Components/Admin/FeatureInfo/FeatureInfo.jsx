@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './FeatureInfo.css'
-import { ArrowDownward, ArrowUpward } from '@mui/icons-material'
+import { ArrowDownward, ArrowUpward } from '@mui/icons-material';
+import OrderDataService from '../../../services/orders'
 
 export default function FeatureInfo() {
+
+  const [revenue, setRevenue] = useState([]);
+
+  useEffect(()=>{
+    OrderDataService.getRevenue(2023)
+    .then(res=>{
+      console.log(res.data);
+      setRevenue(res.data);
+    })
+    .catch(err => console.error(err));
+  },[])
+
+
   return (
     <div className='featured'>
       <div className="featuredItem">

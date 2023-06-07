@@ -70,7 +70,19 @@ export default function ProductList() {
         );
       },
     },
-    { field: "color", headerName: "Màu sắc", width: 100 },
+    { field: "color", headerName: "Màu sắc", width: 100,
+    renderCell: (params) => {
+      return (
+        <div>
+          <span style={{
+            backgroundColor: params.row.color,
+            borderRadius: "50%",
+            border: "1px solid black",
+            padding: "0 0 0px 20px ",
+          }} src={params.row.color} alt="" />
+        </div>
+      );
+    }, },
     { field: "size", headerName: "Size", width: 100 },
     { field: "qty", headerName: "Số lượng", width: 100 },
     {
@@ -80,7 +92,7 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/Admin/Product/" + params.row._id}>
+            <Link to={"/Admin/Product/" + params.row._id} state={{product: params.row}}>
               <button className="productListEdit">
                 {" "}
                 <Edit />{" "}

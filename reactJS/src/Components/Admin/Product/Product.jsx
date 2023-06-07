@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Product.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
-import { Link } from "react-router-dom";
 import Chart from "../Chart/Chart";
 import { productData } from "../dummyData";
-import ao from "../Images/ao1.jpg";
 import { Publish } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
+import ProductDataService from "../../../services/products"
 export default function Product() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const user = JSON.parse(localStorage.getItem("user"));
+  const[typeProduct, setTypeProduct]= useState([])
   useEffect(() => {
     if (!user) {
       navigate("/Login");
@@ -20,6 +19,19 @@ export default function Product() {
       navigate("/");
     }
   }, []);
+
+  useEffect(()=>{
+    getProduct();
+  },[])
+
+  const getProduct = () =>{
+    ProductDataService.getProductById(location.state.product.product_id)
+    .then(res=>{
+      console.log(res.data[0].product)
+      setTypeProduct(res.data[0].product)
+    })
+    .catch(err=>console.error(err))
+  }
   return (
     <div>
       <Topbar />
@@ -27,45 +39,56 @@ export default function Product() {
         <Sidebar />
         <div className="product">
           <div className="productTitleContainer">
-            <h1 className="productTitle">Chi tiết sản phẩm</h1>
+            <h2 className="productTitle">Chi tiết sản phẩm</h2>
           </div>
           <div className="productTop">
             <div className="productTopLeft">
-              <Chart
-                data={productData}
-                dataKey="Sales"
-                title="Sale Performance"
-              />
+              <Chart data={productData} dataKey="Sales" title="Doanh thu" />
             </div>
             <div className="productTopRight">
               <div className="productInfoTop">
-                <img src={ao} alt="" className="productInfoImg" />
-                <span className="productName">T-Shirt DTCloth</span>
+                <img
+                  src={location.state.product.path}
+                  alt=""
+                  className="productInfoImg"
+                />
+                <span className="productName">
+                  {typeProduct.name}
+                </span>
               </div>
               <div className="productInfoBottom">
                 <div className="productInfoItem">
-                  <span className="productInfoKey">id:</span>
-                  <span className="productInfoValue">123</span>
-                </div>
-                <div className="productInfoItem">
-                  <span className="productInfoKey">Loại</span>
-                  <span className="productInfoValue">Áo thun</span>
+                  <span className="productInfoKey">Chất liệu: </span>
+                  <span className="productInfoValue">{typeProduct.marterial}</span>
                 </div>
                 <div className="productInfoItem">
                   <span className="productInfoKey">Màu sắc:</span>
-                  <span className="productInfoValue">Xanh</span>
+                  <span
+                    className="productInfoValue"
+                    style={{
+                      backgroundColor: location.state.product.color,
+                      borderRadius: "50%",
+                      border: "1px solid black",
+                      padding: "0 0 0px 20px ",
+                    }}
+                  >
+                  </span>
                 </div>
                 <div className="productInfoItem">
                   <span className="productInfoKey">Size:</span>
-                  <span className="productInfoValue">38</span>
+                  <span className="productInfoValue">
+                    {location.state.product.size}
+                  </span>
                 </div>
                 <div className="productInfoItem">
                   <span className="productInfoKey">Giá:</span>
-                  <span className="productInfoValue">100.000đ</span>
+                  <span className="productInfoValue">{Number(typeProduct.price).toLocaleString("vi-VN")} đ</span>
                 </div>
                 <div className="productInfoItem">
                   <span className="productInfoKey">Số lượng còn lại:</span>
-                  <span className="productInfoValue">80</span>
+                  <span className="productInfoValue">
+                    {location.state.product.qty}
+                  </span>
                 </div>
               </div>
             </div>
@@ -105,13 +128,17 @@ export default function Product() {
               </div>
               <div className="productFormRight">
                 <div className="productUpload">
-                  <img src={ao} alt="" className="productUploadImg" />
+                  <img
+                    src={location.state.product.path}
+                    alt=""
+                    className="productUploadImg"
+                  />
                   <label for="file">
                     <Publish style={{ cursor: "pointer" }} />
                   </label>
                   <input type="file" id="file" style={{ display: "none" }} />
                 </div>
-                <button className="productButton">Update</button>
+                <button className="productButton">Sửa</button>
               </div>
             </form>
           </div>

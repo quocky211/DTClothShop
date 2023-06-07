@@ -23,5 +23,20 @@ class OrderDataService {
       'https://thawing-hollows-39647.herokuapp.com/admin/order/show/'
     );
   }
+  async deleteOrder(orderId) {
+    return await axios.delete(
+      `https://thawing-hollows-39647.herokuapp.com/admin/order/${orderId}/delete`
+    );
+  }
+  async editOrder(orderId, data) {
+    return await axios.put(
+      `https://thawing-hollows-39647.herokuapp.com/admin/order/${orderId}/change-status`, data
+    );
+  }
+  async getRevenue(year) {
+    return await axios.get(
+      `https://thawing-hollows-39647.herokuapp.com/revenue?year=${year}`
+    );
+  }
 }
 export default new OrderDataService();

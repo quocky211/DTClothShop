@@ -44,7 +44,7 @@
     height: 60px;
 }
 .widgetLgUser{
-    /* display: flex; */
-    align-items: center;
+    padding-left: 50px;
+    text-align: left;
     font-weight: 600;
 }

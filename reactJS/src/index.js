@@ -42,6 +42,7 @@ const ProductList = lazy(() =>
 );
 const Product = lazy(() => import("./Components/Admin/Product/Product"));
 const Orders = lazy(() => import("./Components/Admin/Orders/Orders"));
+const OrderDetailAdmin = lazy(() => import("./Components/Admin/OrderDetailAdmin/OrderDetailAdmin"));
 const NewProduct = lazy(() =>
   import("./Components/Admin/NewProduct/NewProduct")
 );
@@ -264,6 +265,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<p>Loading...</p>}>
             <Orders />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Admin/Orders/:orderId",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <OrderDetailAdmin />
           </Suspense>
         ),
       },

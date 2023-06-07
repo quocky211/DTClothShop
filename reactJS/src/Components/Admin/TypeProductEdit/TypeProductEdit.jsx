@@ -48,9 +48,9 @@ export default function TypeProductEdit() {
   const getProduct = () => {
     ProductDataService.getProductById(typeProductId)
       .then(function (res) {
-        getCata(res.data[0].category_detail_id);
-        getCataName(res.data[0].category_id);
-        setProduct(res.data[0]);
+        getCata(res.data[0].product.category_detail_id);
+        getCataName(res.data[0].product.category_id);
+        setProduct(res.data[0].product);
       })
       .catch((err) => console.log(err));
   };
@@ -142,14 +142,14 @@ export default function TypeProductEdit() {
         <Sidebar />
         <div className="typeProductEdit">
           <div className="typeProductTitleContainer">
-            <h1 className="typeProductTitle">Sản phẩm</h1>
+            <h2 className="typeProductTitle">Sản phẩm</h2>
           </div>
           <div className="typeProductTop">
             <div className="typeProductTopLeft">
               <Chart
                 data={typeProductData}
                 dataKey="Sales"
-                title="Sale Performance"
+                title="Doanh thu"
               />
             </div>
             <div className="typeProductTopRight">
@@ -254,7 +254,7 @@ export default function TypeProductEdit() {
                   className="typeProductButton"
                   onClick={(e) => handleUpdate(e)}
                 >
-                  Update
+                   Cập nhật
                 </button>
               </div>
             </form>

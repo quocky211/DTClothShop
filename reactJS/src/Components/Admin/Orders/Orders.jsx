@@ -3,6 +3,13 @@ import "./Orders.css";
 import Topbar from "../Topbar/Topbar";
 import Sidebar from "../Sidebar/Sidebar";
 import OrderDataService from "../../../services/orders";
+import Moment from "react-moment";
+import { DataGrid } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import {Visibility,  DeleteOutline } from "@mui/icons-material";
+
 export default function Orders() {
   const [orders, setOrders] = useState([]);
 
@@ -14,6 +21,110 @@ export default function Orders() {
       setOrders(res.data);
     });
   };
+
+  const [show, setShow] = useState(false);
+  const [orderID, setOrderID] = useState(-1);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setOrderID(id);
+  };
+
+  const handleDelete = (id) =>{
+    handleClose();
+    OrderDataService.deleteOrder(id)
+    .then(res=>window.location.reload())
+    .catch(err=>console.log(err));
+
+  }
+  const columns = [
+    {
+      field: "id",
+      headerName: "STT",
+      width: 50,
+    },
+    {
+      field: "name",
+      headerName: "Tên",
+      width: 180,
+    },
+    {
+      field: "address",
+      headerName: "Địa chỉ",
+      width: 300,
+    },
+    {
+        field: "total",
+        headerName: "Tổng",
+        width: 100,
+        renderCell: (params) => {
+          return (
+            <div className="orderPrice">
+              {Number(params.row.total).toLocaleString("vi-VN")} đ
+            </div>
+          );
+        },
+      },
+    {
+      field: "pay_method",
+      headerName: "Thanh toán",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div className="orderPayMethod">{params.row.pay_method}</div>
+        );
+      },
+    },
+    {
+      field: "status",
+      headerName: "Tình trạng",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div className="orderStatus">
+            {params.row.status}
+          </div>
+        );
+      },
+    },
+    {
+        field: "createdAt",
+        headerName: "Ngày đặt",
+        width: 100,
+        renderCell: (params) => {
+          return (
+            <div className="orderDate">
+              <Moment format="DD/MM/YYYY">{params.createdAt}</Moment>
+            </div>
+          );
+        },
+      },
+    {
+      field: "action",
+      headerName: "Hành động",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/Admin/Orders/" + params.row._id} state={{order: params.row}}>
+              <button className="orderDisplayBtn">
+                {" "}
+                <Visibility />{" "}
+              </button>
+            </Link>
+            <Button variant="primary" onClick={(e)=>handleShow(params.row._id)}>
+              <DeleteOutline className="orderDeleteBtn" />
+            </Button>
+          </>
+        );
+      },
+    },
+  ];
+  // get STT
+  const getRowId = (row, index) => {
+    return index + 1; // Trả về số thứ tự từ 1
+  };
+  const rowsWithIds = orders.map((row, index) => ({ ...row, id: getRowId(row, index) }));
   return (
     <div>
       <Topbar />
@@ -21,34 +132,34 @@ export default function Orders() {
         <Sidebar />
         <div className="orderList">
           <h2>Quản lý đơn hàng</h2>
-          <div className="tableOrderList">
-            <table className="orderProductsTable">
-              <thead>
-                <tr>
-                  <th>STT</th>
-                  <th> Tên khách hàng </th>
-                  <th> Địa chỉ </th>
-                  <th>Tổng tiền</th>
-                  <th>Phương thức thanh toán</th>
-                  <th> Tình trạng</th>
-                  <th> Ngày đặt</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order, index)=>(
-                    <tr>
-                        <td>{index}</td>
-                        <td>{order.name}</td>
-                        <td>{order.address}</td>
-                        <td>{Number(order.total).toLocaleString("vi-VN")} đ</td>
-                        <td>{order.pay_method}</td>
-                        <td>{order.status}</td>
-                        <td>{order.createdAt}</td>
-                    </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="tableOrderList" style={{ height: 800, width: "100%" }}>
+          <DataGrid
+            rows={rowsWithIds}
+            getRowId={(row) => row.id}
+            disableRowSelectionOnClick
+            columns={columns}
+            checkboxSelection
+            initialState={{
+              pagination: {
+                paginationModel: { pageSize: 25, page: 0 },
+              },
+            }}
+          />
           </div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thông báo</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={(e)=>handleDelete(orderID)}>
+                Xóa
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Đóng
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>

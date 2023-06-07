@@ -94,7 +94,7 @@ export default function NewTypeProduct() {
       <div className="container-admin">
         <Sidebar />
         <div className="newTypeProduct">
-          <h1 className="newTypeProductTitle">Thêm sản phẩm</h1>
+          <h2 className="newTypeProductTitle">Thêm sản phẩm</h2>
           <form className="newTypeProductForm">
             <div className="newTypeProductItem">
               <label>Tên sản phẩm</label>
