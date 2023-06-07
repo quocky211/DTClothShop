@@ -19,4 +19,9 @@
     color: red;
     cursor: pointer;
     margin-right: 10px;
+    background: none;
+}
+.typeProductList .btn-primary{
+    background: none;
+    border: none;
 }

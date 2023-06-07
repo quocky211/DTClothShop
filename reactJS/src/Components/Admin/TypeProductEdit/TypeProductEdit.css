@@ -1,7 +1,10 @@
+.container-admin{
+    display: flex;
+    margin-top: 15px;
+}
 .typeProductEdit{
     flex: 4;
     padding: 20px;
-
 }
 .typeProductTitleContainer{
     display: flex;

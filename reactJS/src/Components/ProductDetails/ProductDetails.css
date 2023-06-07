@@ -63,6 +63,7 @@
   position: absolute;
   margin-top: 30px;
   transition: 0.3s ease;
+  cursor: pointer;
 }
 .product-detail-right .accordion-item:last-child h2 {
   padding-bottom: 0 !important;

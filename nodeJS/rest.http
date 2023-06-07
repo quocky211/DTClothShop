@@ -29,6 +29,10 @@ Content-Type: application/json
     "qty": 1000
 }
 
+### xoa chi tiet
+
+DELETE http://localhost:3001/admin/product-detail/delete/1002
+
 ### sửa sản phẩm: /admin/product/edit/:id (D)
 PUT http://localhost:3001/admin/product/edit/91
 Content-Type: application/json
@@ -80,7 +84,7 @@ DELETE http://localhost:3001/admin/user/delete/4
 GET http://localhost:3001/admin/order/show/
 
 ### show order-detail dựa vào order_id /admin/order/:id/order-detail
-GET http://localhost:3001/admin/order/4/order-detail
+GET http://localhost:3001/admin/order/89/order-detail
 
 ### trang danh sách sản phẩm, có bộ lọc và phân trang
 ### price=1 price < 100000

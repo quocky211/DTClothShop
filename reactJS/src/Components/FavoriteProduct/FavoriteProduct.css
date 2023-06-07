@@ -1,3 +1,11 @@
+.breadcrumb{
+  margin-top: 70px;
+  padding: 15px 15px;
+  font-size: 18px;
+}
+.breadcrumb a{
+  color: black;
+}
 .main-container {
   width: 80%;
   padding: 24px 8px;

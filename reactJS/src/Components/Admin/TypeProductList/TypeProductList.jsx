@@ -36,18 +36,20 @@ export default function TypeProductList() {
       .catch((err) => console.log(err));
   };
   // modal after click delete
+  
+  const [show, setShow] = useState(false);
+  const [productId, setProductId] = useState(-1);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setProductId(id);
+  }
   const handleDelete = (id) => {
+    handleClose()
     ProductDataService.deleteProduct(id)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
-  const [show, setShow] = useState(false);
-  const [id, setId] = useState(-1);
-  const handleClose = () => setShow(false);
-  const handleShow = (id) => {
-    setShow(true);
-    setId(id);
-  }
   var vnd = Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
@@ -125,7 +127,7 @@ export default function TypeProductList() {
                 <Edit />{" "}
               </button>
             </Link>
-            <Button variant="primary" onClick={handleShow(params.row.product._id)}>
+            <Button variant="primary" onClick={(e)=>handleShow(params.row.product._id)}>
               <DeleteOutline className="typeProductListDelete" />
             </Button>
           </>
@@ -152,20 +154,20 @@ export default function TypeProductList() {
               },
             }}
           />
-          {/* <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Thông báo</Modal.Title>
             </Modal.Header>
             <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleDelete(id)}>
+              <Button variant="secondary" onClick={(e)=>handleDelete(productId)}>
                 Xóa
               </Button>
               <Button variant="primary" onClick={handleClose}>
                 Đóng
               </Button>
             </Modal.Footer>
-          </Modal> */}
+          </Modal>
         </div>
       </div>
     </div>

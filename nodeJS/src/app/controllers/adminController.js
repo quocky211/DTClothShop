@@ -89,6 +89,14 @@ class AdminController {
                 res.send('THÊM KHÔNG THÀNH CÔNG')
             });
     }
+    // Delete ProductDetail
+    DeleteProductDetail(req, res, next){
+        const productDetailID = req.params.id;
+        console.log(productDetailID)
+        ProductDetail.deleteOne({ _id: productDetailID })
+                .then(() => res.send('Xóa chi tiết sản phẩm thành công'))
+                .catch(() => res.send('Xóa chi tiết sản phẩm thất bại'));
+    }
 
     // PUT /admin/product/:id
     UpdateProduct(req, res, next) {

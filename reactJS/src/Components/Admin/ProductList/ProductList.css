@@ -1,3 +1,8 @@
+
+.container-admin{
+    display: flex;
+    margin-top: 15px;
+}
 .productList{
     flex: 4;
     padding: 20px;
@@ -15,6 +20,8 @@
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    padding: 15px 20px;
+    font-weight: bold;
 }
 .productListItem{
     display: flex;

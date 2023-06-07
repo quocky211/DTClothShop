@@ -35,25 +35,23 @@ function ShipAddress() {
   const [mail, setMail] = useState("");
   const [discount, setDiscount] = useState("");
 
-  const [showFailAlert, setShowFailAlert] = useState(false)
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [showFailAlert, setShowFailAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const navigate = useNavigate();
   var vnd = Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
   });
 
-  
   useEffect(() => {
-        let timeout;
-        if (showFailAlert) {
-          timeout = setTimeout(() => {
-            setShowFailAlert(false);
-          }, 3000);
-        }
-        return () => clearTimeout(timeout);
-      }, [showFailAlert]);
-
+    let timeout;
+    if (showFailAlert) {
+      timeout = setTimeout(() => {
+        setShowFailAlert(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showFailAlert]);
 
   useEffect(() => {
     getInforUser();
@@ -61,8 +59,12 @@ function ShipAddress() {
 
   const getInforUser = () => {
     const result = localStorage.getItem("user");
-    const user = JSON.parse(result);
-    setUserId(user._id);
+    if (result) {
+      const user = JSON.parse(result);
+      setUserId(user._id);
+    }else{
+      setUserId(0);
+    }
   };
   useEffect(() => {
     const getProvince = async () => {
@@ -120,28 +122,27 @@ function ShipAddress() {
   };
   var address = `${selectedWard}, ${selectedDistrict}, ${selectedProvince}`;
 
- 
   // show model
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
-    setShow(false)
-    navigate("/Account", { replace: true });
-};
+    setShow(false);
+    navigate("/", { replace: true });
+  };
   const handleShow = () => setShow(true);
   // show modal 2
   const [show1, setShow1] = useState(false);
 
   const handleClose1 = () => {
-    setShow1(false)
-    navigate("/Account", { replace: true });
-};
+    setShow1(false);
+    navigate("/", { replace: true });
+  };
   const handleShow1 = () => {
     setShow1(true);
-}
-const [nameDiscount, setNameDiscount] = useState("");
-const [percentDiscount, setPercentDiscount] = useState(0);
-const checkDiscount = async (e) => {
+  };
+  const [nameDiscount, setNameDiscount] = useState("");
+  const [percentDiscount, setPercentDiscount] = useState(0);
+  const checkDiscount = async (e) => {
     e.preventDefault();
     const resDiscount = await getDiscount();
     console.log(resDiscount);
@@ -150,26 +151,24 @@ const checkDiscount = async (e) => {
     var percent = 0;
     var namediscount = "";
     resDiscount?.map((item) => {
-        if(item.code == discount && item.is_used == false){ 
-            count = 1; 
+      if (item.code == discount && item.is_used == false) {
+        count = 1;
         percent = item.discount;
         namediscount = item.name;
-        }
-      })
-    if (count == 0){
-        setShowFailAlert(true);
-        setShowSuccessAlert(false)
-        setPercentDiscount(0)
+      }
+    });
+    if (count == 0) {
+      setShowFailAlert(true);
+      setShowSuccessAlert(false);
+      setPercentDiscount(0);
     }
-    if (count == 1){
-        setShowSuccessAlert(true)
-        setShowFailAlert(false);
-        setPercentDiscount(percent);
-        setNameDiscount(namediscount);
-
+    if (count == 1) {
+      setShowSuccessAlert(true);
+      setShowFailAlert(false);
+      setPercentDiscount(percent);
+      setNameDiscount(namediscount);
     }
-}
-
+  };
 
   // hander click
   const handleCreate = async (e) => {
@@ -183,9 +182,9 @@ const checkDiscount = async (e) => {
       note: note,
       phone: phone,
       pay_method: method,
-      total: Number(data - data*percentDiscount + shipcost),
+      total: Number(data - data * percentDiscount + shipcost),
     };
-    let total = data - data*percentDiscount + shipcost;
+    let total = data - data * percentDiscount + shipcost;
     OrderDataService.createOrders(newOrder)
       .then(async (response) => {
         const order_id = response.data;
@@ -206,7 +205,7 @@ const checkDiscount = async (e) => {
           OrderDataService.createOrderDetail(newOrderDetail).then().catch();
         });
         if (method == "cod") {
-            handleShow();
+          handleShow();
         }
         if (method == "momo") {
           try {
@@ -233,7 +232,7 @@ const checkDiscount = async (e) => {
           }
         }
         if (method == "atm") {
-            handleShow1();
+          handleShow1();
         }
       })
       .catch((e) => {
@@ -244,10 +243,10 @@ const checkDiscount = async (e) => {
   //   items?.map((item) => {
   //     console.log(item.name);
   //   })
-//   function payInfoToggle() {
-//     var atm = document.getElementById("pay-atm-info");
-//     atm.classList.toggle("atm-none");
-//   }
+  //   function payInfoToggle() {
+  //     var atm = document.getElementById("pay-atm-info");
+  //     atm.classList.toggle("atm-none");
+  //   }
   return (
     <div className="main-container-ship">
       <Header />
@@ -285,7 +284,7 @@ const checkDiscount = async (e) => {
                 <select
                   name=""
                   id="province"
-                  onChange={(e) => handleProvince(e)}
+                  onChange={(e) => handleProvince(e)} required
                 >
                   <option value="-1">Tỉnh/TP</option>
                   {provinces.map((getpro, index) => (
@@ -297,7 +296,7 @@ const checkDiscount = async (e) => {
                 <select
                   name=""
                   id="district"
-                  onChange={(e) => handleDistrict(e)}
+                  onChange={(e) => handleDistrict(e)} required
                 >
                   <option value="-1">Quận/Huyện</option>
                   {districts?.map((getdis, index) => (
@@ -306,7 +305,7 @@ const checkDiscount = async (e) => {
                     </option>
                   ))}
                 </select>
-                <select name="" id="ward" onChange={(e) => handleWard(e)}>
+                <select name="" id="ward" onChange={(e) => handleWard(e)} required>
                   <option value="-1">Phường/Xã</option>
                   {wards?.map((getward, index) => (
                     <option key={index} value={getward.code}>
@@ -333,16 +332,31 @@ const checkDiscount = async (e) => {
           <div className="listPrice">
             <h2>Mã giảm giá</h2>
             <div className="voucher">
-                            <input type="text" placeholder="Nhập mã giảm giá" 
-                            onChange={(e) => setDiscount(e.target.value)}/>
-                            <button onClick={(e) => checkDiscount(e)}>Sử dụng</button>
-                        </div>
-                        {showFailAlert && (<Alert key="danger" variant="danger" onClose={() => setShowFailAlert(false)}>
-                            CODE không hợp lệ!
-                            </Alert>)}
-                        {showSuccessAlert && (<Alert key="success" variant="success" onClose={() => setShowSuccessAlert(false)}>
-                            Đã áp dụng mã giảm giá {nameDiscount}!
-                            </Alert>)}
+              <input
+                type="text"
+                placeholder="Nhập mã giảm giá"
+                onChange={(e) => setDiscount(e.target.value)}
+              />
+              <button onClick={(e) => checkDiscount(e)}>Sử dụng</button>
+            </div>
+            {showFailAlert && (
+              <Alert
+                key="danger"
+                variant="danger"
+                onClose={() => setShowFailAlert(false)}
+              >
+                CODE không hợp lệ!
+              </Alert>
+            )}
+            {showSuccessAlert && (
+              <Alert
+                key="success"
+                variant="success"
+                onClose={() => setShowSuccessAlert(false)}
+              >
+                Đã áp dụng mã giảm giá {nameDiscount}!
+              </Alert>
+            )}
 
             <hr />
 
@@ -366,20 +380,27 @@ const checkDiscount = async (e) => {
                   <span>{Number(shipcost).toLocaleString("vi-VN")} đ</span>
                 </p>
               </div>
-              { showSuccessAlert &&
-                            (<div className="">
-                                <p >Discount: <span>{Number(percentDiscount*100).toLocaleString("vi-VN")}{"% - "} {percentDiscount*data} đ</span>
-                                </p>
-                            </div>)
-                            }
-
+              {showSuccessAlert && (
+                <div className="">
+                  <p>
+                    Discount:{" "}
+                    <span>
+                      {Number(percentDiscount * 100).toLocaleString("vi-VN")}
+                      {"% - "} {percentDiscount * data} đ
+                    </span>
+                  </p>
+                </div>
+              )}
 
               <hr />
               <div className="">
                 <p>
                   Tổng:{" "}
                   <span>
-                  {Number(data - data*percentDiscount + shipcost).toLocaleString("vi-VN")}{" "} đ
+                    {Number(
+                      data - data * percentDiscount + shipcost
+                    ).toLocaleString("vi-VN")}{" "}
+                    đ
                   </span>
                 </p>
               </div>
@@ -494,10 +515,13 @@ const checkDiscount = async (e) => {
           <Modal.Title>Thông báo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Ngân hàng VietComBank</p>
-            <p>Số tài khoản: 10153476</p>
-            <p>Vui lòng kiểm tra thông tin trước khi chuyển khoản</p>
-            <p>Sau khi nhận được tiền, nhân viên sẽ gọi điện và xác nhận đơn hàng !!!</p>
+          <p>Ngân hàng VietComBank</p>
+          <p>Số tài khoản: 10153476</p>
+          <p>Vui lòng kiểm tra thông tin trước khi chuyển khoản</p>
+          <p>
+            Sau khi nhận được tiền, nhân viên sẽ gọi điện và xác nhận đơn hàng
+            !!!
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose1}>

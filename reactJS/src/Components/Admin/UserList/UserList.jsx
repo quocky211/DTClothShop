@@ -5,9 +5,11 @@ import Sidebar from "../Sidebar/Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import Moment from 'react-moment';
+import Moment from "react-moment";
 import UserDataService from "../../../services/users";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
@@ -34,14 +36,19 @@ export default function UserList() {
       })
       .catch((err) => console.log(err));
   };
-
+  // delete
+  const [show, setShow] = useState(false);
+  const [userId, setUserId] = useState(-1);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setUserId(id);
+  };
   const handleDelete = (id) => {
-    console.log(id);
-    if (window.confirm("Bạn có muốn xóa không?")) {
-      UserDataService.deleteUser(id)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    }
+    handleClose();
+    UserDataService.deleteUser(id)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   const columns = [
@@ -51,11 +58,7 @@ export default function UserList() {
       headerName: "Người dùng",
       width: 100,
       renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            {params.row.name}
-          </div>
-        );
+        return <div className="userListUser">{params.row.name}</div>;
       },
     },
     { field: "email", headerName: "Email", width: 250 },
@@ -66,9 +69,7 @@ export default function UserList() {
       headerName: "Ngày sinh",
       width: 150,
       renderCell: (params) => {
-        return (
-          <Moment format="DD/MM/YYYY" >{(params.row.birthday) }</Moment>
-        );
+        return <Moment format="DD/MM/YYYY">{params.row.birthday}</Moment>;
       },
     },
     {
@@ -86,7 +87,7 @@ export default function UserList() {
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleShow(params.row._id)}
             />
           </>
         );
@@ -113,6 +114,20 @@ export default function UserList() {
             }}
           />
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Thông báo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={(e) => handleDelete(userId)}>
+              Xóa
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Đóng
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

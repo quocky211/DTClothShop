@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import ProductDataService from "../../../services/products";
 import CatagoryDataService from "../../../services/catagories";
 
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
 export default function NewTypeProduct() {
   const navigate = useNavigate();
 
@@ -71,13 +74,19 @@ export default function NewTypeProduct() {
     };
     ProductDataService.createProducts(newProduct)
       .then((response) => {
-        alert("Thêm mới sản phẩm thành công")
-        navigate("/Admin/TypeProducts");
+        handleShow();
       })
       .catch((e) => {
         alert("Thêm không thành công")
         console.log(e);
       });
+  };
+  // modal after click 
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
   };
   return (
     <div>
@@ -151,6 +160,17 @@ export default function NewTypeProduct() {
             </button>
           </form>
         </div>
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thông báo</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Thêm thành công</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={(e)=> navigate("/Admin/TypeProducts")}>
+                Đóng
+              </Button>
+            </Modal.Footer>
+          </Modal>
       </div>
     </div>
   );

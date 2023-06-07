@@ -43,16 +43,7 @@
     padding: 16px 0 16px 52px;
 
 }
-.sort-product{
-    text-align: end;
-    margin: 20px 0;
-}
-.sort-product select{
-    margin-right: 8px;
-    font-size: 18px;
-    border-radius: 15px;
-    border: 1px solid black;
-}
+
 .container__products-products {
     text-align: justify;
 }

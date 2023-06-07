@@ -9,6 +9,7 @@ router.post('/product/store', adminController.StoreProduct);
 router.post('/product-detail/store',uploadCloud.single('path'), adminController.StoreProductDetail);
 router.put('/product/edit/:id', adminController.UpdateProduct);
 router.delete('/product/delete/:id', adminController.DestroyProduct);
+router.delete('/product-detail/delete/:id', adminController.DeleteProductDetail);
 
 // user
 router.get('/user/show', adminController.ShowUser);

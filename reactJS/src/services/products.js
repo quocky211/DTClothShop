@@ -22,6 +22,11 @@ class ProductDataService {
       `https://thawing-hollows-39647.herokuapp.com/product/${productID}/product-detail`
     );
   }
+  async deleteProductDetail(productDetailID) {
+    return await axios.delete(
+      `https://thawing-hollows-39647.herokuapp.com/admin/product-detail/delete/${productDetailID}`
+    );
+  }
   async getProductDiscount() {
     return await axios.get("https://thawing-hollows-39647.herokuapp.com/product/discount");
   }

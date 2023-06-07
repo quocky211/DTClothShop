@@ -8,7 +8,8 @@ import { DeleteOutline, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ProductDataService from "../../../services/products";
 import { useNavigate } from "react-router-dom";
-
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 export default function ProductList() {
   const navigate = useNavigate();
@@ -31,15 +32,28 @@ export default function ProductList() {
 
   const getProducts = () => {
     ProductDataService.getProductDetail(typeProductId)
-      .then(function(res){ 
-        console.log(res.data)
-        setProductDetails(res.data)})
+      .then(function (res) {
+        console.log(res.data);
+        setProductDetails(res.data);
+      })
       .catch((err) => console.log(err));
   };
+
+  // modal after click delete
+
+  const [show, setShow] = useState(false);
+  const [productDetailId, setProductDetailId] = useState(-1);
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true);
+    setProductDetailId(id);
+  };
+
   const handleDelete = (id) => {
-    if (window.confirm("Bạn có muốn xóa không?")) {
-     
-    }
+    handleClose()
+    ProductDataService.deleteProductDetail(id)
+      .then((response) => window.location.reload())
+      .catch((err) => console.log(err));
   };
 
   const columns = [
@@ -66,16 +80,15 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/Admin/Product/" + params.row.id}>
-              <button className="productListEdit"> 
+            <Link to={"/Admin/Product/" + params.row._id}>
+              <button className="productListEdit">
                 {" "}
-                <Edit />
-                {" "}
+                <Edit />{" "}
               </button>
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleShow(params.row._id)}
             />
           </>
         );
@@ -104,8 +117,22 @@ export default function ProductList() {
               pagination: {
                 paginationModel: { pageSize: 25, page: 0 },
               },
-            }} 
+            }}
           />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thông báo</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Bạn có muốn xóa không?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={(e)=>handleDelete(productDetailId)}>
+                Xóa
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Đóng
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>

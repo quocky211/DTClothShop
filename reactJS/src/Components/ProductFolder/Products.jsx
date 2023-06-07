@@ -198,16 +198,6 @@ function Products() {
                         </Offcanvas.Body>
                     </Offcanvas>
                 </>
-
-                <div className="sort-product">
-                    <select name="" id="">
-                        <option value="">Chọn</option>
-                        <option value="">Giá từ thấp đến cao</option>
-                        <option value="">Giá từ cao đến thấp</option>
-                        <option value="">Từ A - Z</option>
-                        <option value="">Từ Z - A</option>
-                    </select>
-                </div>
             </div>
             <div className="all-product-store">
                 {products.map((item) => (
