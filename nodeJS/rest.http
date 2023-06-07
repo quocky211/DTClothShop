@@ -84,7 +84,7 @@ DELETE http://localhost:3001/admin/user/delete/4
 GET http://localhost:3001/admin/order/show/
 
 ### show order-detail dựa vào order_id /admin/order/:id/order-detail
-GET http://localhost:3001/admin/order/89/order-detail
+GET http://localhost:3001/admin/order/82/order-detail
 
 ### thay đổi trạng thái đơn hàng /admin/order/:id/change-status
 PUT http://localhost:3001/admin/order/81/change-status
@@ -94,8 +94,11 @@ Content-Type:  application/json
     "status": "Đã xác nhậnn"
 }
 
+### lấy doanh thu theo năm
+GET http://localhost:3001/admin/revenue?year=2023
+
 ### xóa đơn đơn hàng /admin/order/:id/delete
-DELETE http://localhost:3001/admin/order/81/change-status
+DELETE http://localhost:3001/admin/order/82/delete
 
 ### trang danh sách sản phẩm, có bộ lọc và phân trang
 ### price=1 price < 100000

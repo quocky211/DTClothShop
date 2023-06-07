@@ -22,5 +22,6 @@ router.get('/order/show', adminController.ShowOrder);
 router.get('/order/:id/order-detail', adminController.ShowOrderDetail);
 router.put('/order/:id/change-status', adminController.ChangeStatusOrder);
 router.delete('/order/:id/delete', adminController.DeleteOrder);
+router.get('/revenue', adminController.Revenue);
 
 module.exports = router;

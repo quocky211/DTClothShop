@@ -263,6 +263,34 @@ class AdminController {
             res.status(500).json({ error: 'Lỗi server' });
         }
     }
+
+    async Revenue(req, res) {
+        try {
+            const year = req.query.year || 2023; // Năm cần lấy doanh thu
+            const pipeline = [
+                {
+                    $match: {
+                        createdAt: {
+                            $gte: new Date(year, 0, 1), // Ngày bắt đầu của năm
+                            $lt: new Date(parseInt(year) + 1, 0, 1), // Ngày bắt đầu của năm tiếp theo
+                        },
+                    },
+                },
+                {
+                    $group: {
+                        _id: { month: { $month: '$createdAt' } },
+                        revenue: { $sum: '$total' },
+                    },
+                },
+            ];
+
+            const result = await Order.aggregate(pipeline);
+            res.json(result);
+        } catch (error) {
+            console.error(error);
+            req.status(500).json({ error: 'Lỗi server' });
+        }
+    }
 }
 
 module.exports = new AdminController();
