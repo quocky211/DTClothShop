@@ -28,10 +28,14 @@ function Register() {
       },
     };
     await axios
-      .post("https://thawing-hollows-39647.herokuapp.com/user/register", newUser, config)
+      .post(
+        "https://thawing-hollows-39647.herokuapp.com/user/register",
+        newUser,
+        config
+      )
       .then((res) => {
         console.log(res);
-        if (res.data.status === "successfully") {
+        if (res.status === 200) {
           navigate("/Login");
           alert("Đăng ký thành công");
         } else {

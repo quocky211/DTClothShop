@@ -31,7 +31,11 @@ function Login(props) {
       },
     };
     await axios
-      .post("https://thawing-hollows-39647.herokuapp.com/user/login", user, config)
+      .post(
+        "https://thawing-hollows-39647.herokuapp.com/user/login",
+        user,
+        config
+      )
       .then((res) => {
         window.localStorage.setItem(
           "JWT",
@@ -56,20 +60,13 @@ function Login(props) {
       <Header />
       <div className="loginmain">
         <div className="logomain">
-          <img
-            className="logo"
-            alt=""
-            src={logo}
-          ></img>
+          <img className="logo" alt="" src={logo}></img>
           <p>DTClothShop</p>
         </div>
 
         <div className="loginForm">
           <h3>Đăng nhập</h3>
-          <form
-            action="POST"
-            onSubmit={handleSubmit}
-          >
+          <form action="POST" onSubmit={handleSubmit}>
             <input
               value={useremail}
               onChange={(e) => setEmail(e.target.value)}
@@ -86,22 +83,19 @@ function Login(props) {
               placeholder="Mật khẩu"
               required
             />
-            <button
-              name="submit"
-              type="submit"
-            >
+            <button name="submit" type="submit">
               Đăng nhập
             </button>
           </form>
-          <p>HOẶC</p>
-          <div className="fb-and-gg">
+          {/* <p>HOẶC</p> */}
+          {/* <div className="fb-and-gg">
 
             <img
               src={gg}
               alt="fb"
             />
             <p>Đăng nhập với Google</p>
-          </div>
+          </div> */}
           <br></br>
           <Link to="/Register">
             <p>Bạn chưa có tài khoản? Đăng ký ngay</p>
