@@ -37,12 +37,10 @@ class UserController {
             const user = new User(formData);
             user.save()
                 .then(() => {
-                    // res.json({
-                    //     status: 'successfully',
-                    //     elements: user,
-                    // });
-
-                    res.send('Đăng ký tài khoản thành công');
+                    res.json({
+                        status: 'successfully',
+                        // elements: user,
+                    });
                 })
                 .catch(() => res.send('Đăng ký tài khoản thất bại'));
         } catch (error) {
@@ -237,10 +235,10 @@ class UserController {
     //DELETE /user/:user_id/comment/:comment_id/delete
     DeleteComment(req, res, next) {
         const { user_id, comment_id } = req.params;
-        ProductComment.deleteOne({ _id: comment_id,  user_id: user_id})
+        ProductComment.deleteOne({ _id: comment_id, user_id: user_id })
             .exec()
-            .then(() => res.json({ status: "success"}))
-            .catch((e) => res.status(500).json({ error: e.message}));
+            .then(() => res.json({ status: 'success' }))
+            .catch((e) => res.status(500).json({ error: e.message }));
     }
 }
 
