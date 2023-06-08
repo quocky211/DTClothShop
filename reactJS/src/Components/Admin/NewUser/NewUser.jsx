@@ -62,7 +62,7 @@ export default function NewUser() {
       <div className="container-admin">
         <Sidebar />
         <div className="newuser">
-          <h1 className="newUserTitle">Thêm người dùng</h1>
+          <h2 className="newUserTitle">Thêm người dùng</h2>
           <form action=" " className="">
             <div className="newUserForm">
               <div className="newUserItem">

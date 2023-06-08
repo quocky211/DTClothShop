@@ -7,9 +7,7 @@
     padding: 20px;
 }
 .userTitleContainer{
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
+    text-align: center;
 }
 
 .userAddButton{
@@ -59,7 +57,11 @@
 .userShowUserTitle{
     font-weight: 300;
 }
-
+.userTitle{
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 .userShowBottom{
     margin-top: 20px;
     text-align: left;

@@ -11,7 +11,7 @@ export default function FeatureInfo() {
     OrderDataService.getRevenue(2023)
     .then(res=>{
       console.log(res.data);
-      setRevenue(res.data);
+      setRevenue(res.data[0].revenue);
     })
     .catch(err => console.error(err));
   },[])
@@ -22,7 +22,7 @@ export default function FeatureInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Doanh thu</span>
         <div className="featuredMoneyContainer">
-            <span className="featuredMoney">101.438.000 đ</span>
+            <span className="featuredMoney">{Number(revenue).toLocaleString("vi-VN")} đ</span>
             <span className="featuredMoneyRate">
                 -11.4 <ArrowDownward className='featuredIcon negative'/>
             </span>
@@ -32,7 +32,7 @@ export default function FeatureInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Lợi nhuận</span>
         <div className="featuredMoneyContainer">
-            <span className="featuredMoney">65.998.000 đ</span>
+            <span className="featuredMoney">{Number(revenue*0.6).toLocaleString("vi-VN")} đ</span>
             <span className="featuredMoneyRate">
                 -1.4 <ArrowDownward className='featuredIcon negative'/>
             </span>

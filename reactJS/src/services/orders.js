@@ -35,7 +35,7 @@ class OrderDataService {
   }
   async getRevenue(year) {
     return await axios.get(
-      `https://thawing-hollows-39647.herokuapp.com/revenue?year=${year}`
+      `http://thawing-hollows-39647.herokuapp.com/admin/revenue?year=${year}`
     );
   }
 }

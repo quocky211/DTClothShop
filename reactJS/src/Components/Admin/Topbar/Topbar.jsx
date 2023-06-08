@@ -10,7 +10,7 @@ export default function Topbar() {
         <div className="topbarWrapper">
             <div className="topLeft">
                 <span className="logo">
-                    DTCloth
+                    DTClothShop
                 </span>
             </div>
             <div className="topRight">
