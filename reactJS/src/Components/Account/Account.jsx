@@ -25,13 +25,18 @@ function Account() {
   const getInforUser = () => {
     const result = localStorage.getItem("user");
     const user = JSON.parse(result);
-    setUserId(user._id);
-    setName(user.name);
-    setBirthday(moment(user.birthday).format("YYYY-MM-DD"));
-    setGender(user.gender);
-    setPhone(user.phone);
-    setEmail(user.email);
-    setAddress(user.address);
+    UserDataService.getUserById(user._id)
+    .then(res=>{
+      setUserId(res.data[0]._id);
+      setName(res.data[0].name);
+      setBirthday(moment(res.data[0].birthday).format("YYYY-MM-DD"));
+      setGender(res.data[0].gender);
+      setPhone(res.data[0].phone);
+      setEmail(res.data[0].email);
+      setAddress(res.data[0].address);
+    })
+    .catch(err => console.log(err));
+    
   };
 
   const updateUser = () => {
