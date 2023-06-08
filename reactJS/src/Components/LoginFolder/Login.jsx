@@ -11,6 +11,8 @@ import Header from "../HeaderFolder/Header";
 import Footer from "../FooterFolder/Footer";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/credentials";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 function Login(props) {
   const [useremail, setEmail] = useState("");
@@ -18,7 +20,13 @@ function Login(props) {
   const dispatch = useDispatch();
 
   let navigate = useNavigate();
+// show model
+const [show, setShow] = useState(false);
 
+const handleClose = () => {
+    setShow(false);
+};
+const handleShow = () => setShow(true);
   const handleSubmit = async (e) => {
     e.preventDefault();
     let user = {
@@ -37,16 +45,23 @@ function Login(props) {
         config
       )
       .then((res) => {
-        window.localStorage.setItem(
-          "JWT",
-          JSON.stringify(res.data.accessToken)
-        );
-        window.localStorage.setItem(
-          "refreshToken",
-          JSON.stringify(res.data.refreshToken)
-        );
-        window.localStorage.setItem("user", JSON.stringify(res.data.user));
-        window.localStorage.setItem("Email", useremail);
+        if(res.data.accessToken)
+        {
+          window.localStorage.setItem(
+            "JWT",
+            JSON.stringify(res.data.accessToken)
+          );
+          window.localStorage.setItem(
+            "refreshToken",
+            JSON.stringify(res.data.refreshToken)
+          );
+          window.localStorage.setItem("user", JSON.stringify(res.data.user));
+          window.localStorage.setItem("Email", useremail);
+        }
+        else{
+          handleShow()
+        }
+        
         //console.log(res.data.user.level)
         if (res.data.user.level === true) navigate("/Admin");
         else navigate("/");
@@ -102,6 +117,17 @@ function Login(props) {
           </Link>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Thông báo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Đăng nhập thất bại</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Đóng
+                    </Button>
+                </Modal.Footer>
+            </Modal>
       <Footer />
     </div>
   );
