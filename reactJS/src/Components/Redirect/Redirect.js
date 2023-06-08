@@ -1,6 +1,4 @@
-import "./Redirect.css";
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import { vnPayReturn, momoRedirect } from '../../actions/orders';
 // import Loading from '../../../components/loading';
 // import Layout from '../../../components/layout';
@@ -43,8 +41,8 @@ const Redirect = () => {
   return (
     <div>
       {/* {loading && <Loading />} */}
-      <div>{status && status} - Thanh toán thành công</div>{' '}
-      <Button variant="primary"><a href='/Account'>Ấn vào đây để quay về trang hóa đơn</a></Button>
+      <div>{status && status}Đã quá MOMO ơi</div>{' '}
+      <a href='/Account'>Ấn vào đây để quay về trang hóa đơn</a>
     </div>
   );
 };
